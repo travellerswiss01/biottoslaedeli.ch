@@ -136,9 +136,19 @@ var dict={"Jetzt bestellen":"Jetzt bstelle","Vorheriger Korb":"Vorige Gschänksh
 "Für grössere Mengen":"Für grössere Menge",
 "Bis 10 Körbe online · grössere Bestellungen gern direkt anfragen":"Bis 10 Gschänksharass online · grössere Bestellige gern direkt aafrage"
 };
-var reverse={};Object.keys(dict).forEach(function(k){reverse[dict[k]]=k});
-function translateTextNode(n,on){var v=n.nodeValue;if(!v||!v.trim())return;var map=on?dict:reverse;if(map[v.trim()])n.nodeValue=v.replace(v.trim(),map[v.trim()])}
-function applyLang(){var on=lang==="ch";document.documentElement.lang=on?"gsw-CH":"de";document.querySelectorAll("*").forEach(function(el){if(el.id==="langSwitch")return;el.childNodes.forEach(function(n){if(n.nodeType===3)translateTextNode(n,on)});["aria-label","placeholder","alt","title"].forEach(function(a){if(el.hasAttribute(a)){var v=el.getAttribute(a);var map=on?dict:reverse;if(map[v])el.setAttribute(a,map[v])}})});var b=document.getElementById("langSwitch");if(b){b.classList.toggle("is-ch",on);b.setAttribute("aria-pressed",String(on));b.setAttribute("aria-label",on?"Sproch wechsle – aktuell Schwiizerdütsch, Deutsch aazeige":"Sprache wechseln – aktuell Deutsch, Schwiizerdütsch anzeigen")}}
+Object.assign(dict,{
+"Menü öffnen":"Menü öffne","Menü schliessen":"Menü schliesse",
+"Vorherige Abholwoche":"Vorigi Abholwuche","Vorheriger Schritt":"Vorige Schritt","Nächster Schritt":"Nächste Schritt",
+"Anzahl ändern":"Aazahl ändere","← Anzahl ändern":"← Aazahl ändere",
+"Vor- und Nachname":"Vor- und Nachname","Wird übermittelt …":"Wird übermittlet …",
+"Die Übermittlung konnte nicht bestätigt werden.":"D Übermittlig het nöd chöne bestätigt werde.",
+"Ihre Angaben bleiben erhalten. Falls Sie unsicher sind, fragen Sie vor einer erneuten Bestellung bei uns nach.":"Eui Aagabe bliibed erhalte. Wenn Sie unsicher sind, fröged Sie vor ere neue Bestellig bi üs noch.",
+"Bitte Name und Kontaktangaben prüfen.":"Bitte Name und Kontaktaagabe prüefe.",
+"Bitte einen gültigen Korb, Abholtermin, eine Uhrzeit und eine Anzahl von 1 bis 10 wählen.":"Bitte en gültige Gschänksharass, Abholtermin, e Uhrziit und e Aazahl vo 1 bis 10 wähle."
+});
+var originalNodes=new WeakMap(),originalAttrs=new WeakMap();
+function translateTextNode(n,on){var v=n.nodeValue;if(!v||!v.trim())return;var saved=originalNodes.get(n);if(!saved||v!==saved.output)saved={original:v,output:v};var original=saved.original,key=original.trim();saved.output=on&&dict[key]?original.replace(key,dict[key]):original;n.nodeValue=saved.output;originalNodes.set(n,saved)}
+function applyLang(){var on=lang==="ch";document.documentElement.lang=on?"gsw-CH":"de";document.querySelectorAll("*").forEach(function(el){if(el.id==="langSwitch")return;el.childNodes.forEach(function(n){if(n.nodeType===3)translateTextNode(n,on)});["aria-label","placeholder","alt","title"].forEach(function(a){if(el.hasAttribute(a)){var v=el.getAttribute(a),saved=originalAttrs.get(el)||{},item=saved[a];if(!item||v!==item.output)item={original:v,output:v};item.output=on&&dict[item.original]?dict[item.original]:item.original;el.setAttribute(a,item.output);saved[a]=item;originalAttrs.set(el,saved)}})});var b=document.getElementById("langSwitch");if(b){b.classList.toggle("is-ch",on);b.setAttribute("aria-pressed",String(on));b.setAttribute("aria-label",on?"Sproch wechsle – aktuell Schwiizerdütsch, Deutsch aazeige":"Sprache wechseln – aktuell Deutsch, Schwiizerdütsch anzeigen")}}
 try{lang=localStorage.getItem(LANG_KEY)||"de"}catch(e){}
 document.addEventListener("click",function(e){var b=e.target.closest("#langSwitch");if(!b)return;lang=lang==="de"?"ch":"de";try{localStorage.setItem(LANG_KEY,lang)}catch(e){}applyLang()});
 window.applyBiottosLanguage=applyLang;
@@ -146,23 +156,23 @@ setTimeout(applyLang,0);
 })();
 (function(){
 var heroStoryData=[
-{img:"img/obstbäume.jpeg",alt:"Obstbäume im Garten bei Biottos",kicker:"Apfelbaum",title:"Wo alles beginnt.",text:"Im Herbst beginnt unsere Süssmost-Geschichte im Obstgarten – mit reifen Äpfeln, die wir von Hand auflesen."},
+{img:"img/aepfel-ernte.jpg",alt:"Obstgarten mit geernteten Äpfeln bei Biottos",kicker:"Apfelbaum",title:"Wo alles beginnt.",text:"Im Herbst beginnt unsere Süssmost-Geschichte im Obstgarten – mit reifen Äpfeln, die wir von Hand auflesen."},
 {img:"img/aepfel-ernte.jpg",alt:"Geerntete Äpfel bei Biottos",kicker:"Ernte",title:"Von Hand aufgelesen.",text:"Wir sammeln die Äpfel sorgfältig ein und achten darauf, dass nur schöne, reife Früchte in die Ernte kommen."},
-{img:"img/laden-fruechte.jpg",alt:"Früchte aus dem Obstgarten bei Biottos",kicker:"33 Sorten",title:"Jede Sorte bringt ihren Charakter mit.",text:"Süsse, milde, säuerliche und würzige Äpfel kommen zusammen – diese Mischung macht unseren Süssmost besonders."},
-{img:"img/laedeli-angebot.jpg",alt:"Auswahl aus dem Lädeli bei Biottos",kicker:"Pressen",title:"Aus Äpfeln wird Süssmost.",text:"Wir pressen die Äpfel naturtrüb und ohne Zusätze. So bleibt der Geschmack der Ernte direkt im Saft erhalten."},
-{img:"img/Mostaufstuhl.jpeg",alt:"Süssmost in Glasflaschen bei Biottos",kicker:"Süssmost",title:"Ein Stück Herbst im Glas.",text:"Frisch gepresst, naturtrüb und bereit zum Geniessen – die Ernte kommt direkt ins Glas."}
+{img:"img/aepfel-ernte.jpg",alt:"Geerntete Äpfel im Obstgarten bei Biottos",kicker:"33 Sorten",title:"Jede Sorte bringt ihren Charakter mit.",text:"Süsse, milde, säuerliche und würzige Äpfel kommen zusammen – diese Mischung macht unseren Süssmost besonders."},
+{img:"img/aepfel-ernte.jpg",alt:"Geerntete Äpfel vor der Verarbeitung zu Süssmost",kicker:"Pressen",title:"Aus Äpfeln wird Süssmost.",text:"Wir pressen die Äpfel naturtrüb und ohne Zusätze. So bleibt der Geschmack der Ernte direkt im Saft erhalten."},
+{img:"img/aepfel-ernte.jpg",alt:"Äpfel aus der Ernte für Biottos Süssmost",kicker:"Süssmost",title:"Ein Stück Herbst im Glas.",text:"Frisch gepresst, naturtrüb und bereit zum Geniessen – die Ernte kommt direkt ins Glas."}
 ];
 var heroStoryIndex=0;
 function renderHeroStory(i){
 var root=document.getElementById("heroStory");if(!root)return;
 heroStoryIndex=Math.max(0,Math.min(heroStoryData.length-1,i));
 var d=heroStoryData[heroStoryIndex],img=root.querySelector(".hero-photo-target");
-if(img){img.src=d.img;img.alt=d.alt}
+if(img){img.src=d.img;img.alt=d.alt;img.width=1200;img.height=900}
 root.querySelector("#heroStoryKicker").textContent=d.kicker;
 root.querySelector("#heroStoryTitle").textContent=d.title;
 root.querySelector("#heroStoryText").textContent=d.text;
 root.querySelectorAll(".hero-story-step").forEach(function(b,n){b.classList.toggle("active",n===heroStoryIndex);b.setAttribute("aria-current",n===heroStoryIndex?"step":"false")});
-var mark=root.querySelector(".hero-story-mark");if(mark)mark.textContent=("0"+(heroStoryIndex+1)).slice(-2)+" / 05";var pos=root.querySelector("#heroStoryPosition");if(pos)pos.textContent=("0"+(heroStoryIndex+1)).slice(-2)+" / 05";var prev=root.querySelector("#heroStoryPrev"),next=root.querySelector("#heroStoryNext");if(prev)prev.disabled=heroStoryIndex===0;if(next)next.disabled=heroStoryIndex===heroStoryData.length-1;
+var mark=root.querySelector(".hero-story-mark");if(mark)mark.textContent=("0"+(heroStoryIndex+1)).slice(-2)+" / 05";var pos=root.querySelector("#heroStoryPosition");if(pos)pos.textContent=("0"+(heroStoryIndex+1)).slice(-2)+" / 05";var prev=root.querySelector("#heroStoryPrev"),next=root.querySelector("#heroStoryNext");if(prev)prev.disabled=heroStoryIndex===0;if(next)next.disabled=heroStoryIndex===heroStoryData.length-1;if(window.applyBiottosLanguage)window.applyBiottosLanguage();
 }
 document.querySelectorAll(".hero-story-step").forEach(function(b){b.addEventListener("click",function(){renderHeroStory(Number(b.dataset.heroStory))})});var storyRoot=document.getElementById("heroStory");if(storyRoot){var prev=storyRoot.querySelector("#heroStoryPrev"),next=storyRoot.querySelector("#heroStoryNext");if(prev)prev.addEventListener("click",function(){renderHeroStory(heroStoryIndex-1)});if(next)next.addEventListener("click",function(){renderHeroStory(heroStoryIndex+1)})}
 renderHeroStory(0);
@@ -171,12 +181,12 @@ renderHeroStory(0);
 var NR="41762552256",$=function(x){return document.querySelector(x)};
 var K=[{id:"gross",n:"Gross & Guet",p:49.95},{id:"fein",n:"Fein & Guet",p:29.95},{id:"chili",n:"Chli & Fii",p:19.95}];
 var ZEITEN=[];(function(){for(var m=8*60;m<=18*60;m+=30){ZEITEN.push(("0"+Math.floor(m/60)).slice(-2)+":"+("0"+m%60).slice(-2))}})();
-function nextT(){var n=new Date(),m=Math.ceil((n.getHours()*60+n.getMinutes()+1)/30)*30;if(m<8*60||m>18*60)m=8*60;return ("0"+Math.floor(m/60)).slice(-2)+":"+("0"+m%60).slice(-2)}
-var st={k:K[0].id,n:1,d:"",t:nextT(),step:"k",week:0};
-var lastOrderTrigger=null;
+var st={k:K[0].id,n:1,d:"",t:"",step:"k",week:0};
+var lastOrderTrigger=null,submitting=false,lockedControls=[];
+function setSubmitting(busy){submitting=busy;if(busy){lockedControls=Array.from(document.querySelectorAll("#ov button,#ov input")).filter(function(el){return !el.disabled});lockedControls.forEach(function(el){el.disabled=true})}else{lockedControls.forEach(function(el){el.disabled=false});lockedControls=[]}}
 var views=["start","koerbe","gartenprodukte","traubensaft","suessmost","essig","doerrfruechte","tee","ueber-uns","laedeli","lucia-kocht","otto-garten","abholung","faq","kontakt"];
 var siteNav=$("#siteNav"),menuToggle=$("#menuToggle");
-function setMenuOpen(open){if(!siteNav||!menuToggle)return;siteNav.classList.toggle("is-open",open);menuToggle.setAttribute("aria-expanded",String(open));menuToggle.setAttribute("aria-label",open?"Menü schliessen":"Menü öffnen")}
+function setMenuOpen(open){if(!siteNav||!menuToggle)return;siteNav.classList.toggle("is-open",open);menuToggle.setAttribute("aria-expanded",String(open));menuToggle.setAttribute("aria-label",open?"Menü schliessen":"Menü öffnen");if(window.applyBiottosLanguage)window.applyBiottosLanguage()}
 if(menuToggle)menuToggle.addEventListener("click",function(){setMenuOpen(menuToggle.getAttribute("aria-expanded")!=="true")});
 if(siteNav)siteNav.addEventListener("click",function(e){if(e.target.closest("a"))setMenuOpen(false)});
 document.addEventListener("keydown",function(e){if(e.key==="Escape")setMenuOpen(false)});
@@ -198,10 +208,14 @@ track.addEventListener("scroll",update,{passive:true});window.addEventListener("
 })();
 function fmt(x){return "CHF "+x.toFixed(2)}
 function chips(el,name,items,cur){el.innerHTML=items.map(function(i){return '<label><input type="radio" name="'+name+'" value="'+i.v+'"'+(String(i.v)===String(cur)?" checked":"")+'><span>'+i.l+"</span></label>"}).join("")}
+function zurichToday(){var parts=new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Zurich",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date()),v={};parts.forEach(function(p){v[p.type]=p.value});return new Date(Number(v.year),Number(v.month)-1,Number(v.day),12)}
 var days=[];
-(function(){var b=new Date(),end=new Date(b.getFullYear(),b.getMonth()+3,b.getDate());for(var i=1;;i++){var x=new Date(b.getFullYear(),b.getMonth(),b.getDate()+i);if(x>end)break;if(x.getDay()!==0){var dd=("0"+x.getDate()).slice(-2)+"."+("0"+(x.getMonth()+1)).slice(-2)+".";days.push({date:x,v:["So","Mo","Di","Mi","Do","Fr","Sa"][x.getDay()]+", "+dd+x.getFullYear(),l:(i===1?"Morgen<br>":["So","Mo","Di","Mi","Do","Fr","Sa"][x.getDay()]+"<br>")+dd})}}})();
+function refreshDays(){days=[];var b=zurichToday(),end=new Date(b.getFullYear(),b.getMonth()+4,0,12);end.setDate(Math.min(b.getDate(),end.getDate()));for(var i=1;;i++){var x=new Date(b.getFullYear(),b.getMonth(),b.getDate()+i,12);if(x>end)break;if(x.getDay()!==0){var dd=("0"+x.getDate()).slice(-2)+"."+("0"+(x.getMonth()+1)).slice(-2)+".";days.push({date:x,v:["So","Mo","Di","Mi","Do","Fr","Sa"][x.getDay()]+", "+dd+x.getFullYear(),l:(i===1?"Morgen<br>":["So","Mo","Di","Mi","Do","Fr","Sa"][x.getDay()]+"<br>")+dd})}}}
+refreshDays();
 var dWeek=0,weekBuckets=[];
-(function(){var map={};days.forEach(function(x){var dt=x.date,mon=new Date(dt.getFullYear(),dt.getMonth(),dt.getDate()-(dt.getDay()||7)+1),key=mon.getFullYear()+"-"+mon.getMonth()+"-"+mon.getDate();if(!map[key]){map[key]=[];weekBuckets.push(map[key])}map[key].push(x)})})();
+function refreshWeeks(){weekBuckets=[];var map={};days.forEach(function(x){var dt=x.date,mon=new Date(dt.getFullYear(),dt.getMonth(),dt.getDate()-(dt.getDay()||7)+1),key=mon.getFullYear()+"-"+mon.getMonth()+"-"+mon.getDate();if(!map[key]){map[key]=[];weekBuckets.push(map[key])}map[key].push(x)})}
+refreshWeeks();
+
 function weekItems(){return weekBuckets[dWeek]||[]}
 function updatePickupBadge(){
   var label=document.getElementById("nextPickupLabel"),date=document.getElementById("nextPickupDate");
@@ -219,6 +233,7 @@ function updateCheckoutSummary(){
 }
 function setStep(s){st.step=s;render()}
 function render(){
+refreshDays();refreshWeeks();dWeek=Math.max(0,Math.min(dWeek,weekBuckets.length-1));
 chips($("#cK"),"k",K.map(function(o){return{v:o.id,l:"<b style='font-weight:600'>"+o.n.replace("&","&amp;")+"</b><b style='font-weight:600;color:inherit'>"+fmt(o.p)+"</b>"}}),st.k);
 chips($("#cN"),"n",Array.from({length:10},function(_,i){var n=i+1;return{v:n,l:n}}),st.n);
 var wi=weekItems();
@@ -247,7 +262,7 @@ upd();if(window.applyBiottosLanguage)window.applyBiottosLanguage()
 function upd(){
 var o=K.filter(function(x){return x.id===st.k})[0],tot=o.p*st.n;
 $("#tot").textContent=fmt(tot);
-var im=document.querySelector(".k"+(K.indexOf(o)+1)+" .foto img");if(im){$("#sp").src=im.src;$("#sp").alt=im.alt}
+var im=document.querySelector(".k"+(K.indexOf(o)+1)+" .foto img");if(im){$("#sp").src=im.src;$("#sp").alt=im.alt;$("#sp").setAttribute("aria-label",im.alt)}
 $("#sn").textContent=st.n+" × "+o.n;
 var ok=st.d&&st.t;
 var text="Hallo Biottos Lädeli, ich möchte gerne bestellen:\n\n"+st.n+" x Geschenkskorb "+o.n+" ("+fmt(tot)+")\nAbholung: "+st.d+", "+st.t+" Uhr\n\nBesten Dank!";
@@ -279,7 +294,8 @@ $("#cK").addEventListener("click",function(e){
 });
 $("#ov").addEventListener("change",function(e){
 var n=e.target.name;if(!n)return;
-st[n]=e.target.value;
+st[n]=n==="n"?Number(e.target.value):e.target.value;
+if(submitting)return;
 if(n==="k"){st.step="d";dWeek=0}
 else if(n==="d"){st.step="t"}
 else if(n==="t"){st.step="n"}
@@ -294,7 +310,9 @@ function syncContactMethod(){
   $("#emailField").hidden=!email;
   $("#phoneField").hidden=email;
   $("#customerEmail").required=email;
+  $("#customerEmail").disabled=!email;
   $("#customerPhone").required=!email;
+  $("#customerPhone").disabled=email;
 }
 document.querySelectorAll('input[name="contactMethod"]').forEach(function(input){
   input.addEventListener("change",syncContactMethod);
@@ -304,6 +322,17 @@ syncContactMethod();
 $("#directForm").addEventListener("submit",function(e){
   e.preventDefault();
   var form=this;
+  if(submitting)return;
+  refreshDays();
+  var quantity=Number(st.n),basket=K.find(function(x){return x.id===st.k});
+  if(!basket||!Number.isInteger(quantity)||quantity<1||quantity>10||!days.some(function(x){return x.v===st.d})||ZEITEN.indexOf(st.t)<0){
+    showOrderError("Bitte einen gültigen Korb, Abholtermin, eine Uhrzeit und eine Anzahl von 1 bis 10 wählen.");return;
+  }
+  st.n=quantity;
+  $("#customerName").value=$("#customerName").value.trim();
+  $("#customerEmail").value=$("#customerEmail").value.trim();
+  $("#customerPhone").value=$("#customerPhone").value.trim();
+  if(!form.reportValidity()){showOrderError("Bitte Name und Kontaktangaben prüfen.");return;}
   var method=document.querySelector('input[name="contactMethod"]:checked').value;
   var contact=method==="email"?$("#customerEmail").value.trim():$("#customerPhone").value.trim();
   if(!contact){
@@ -317,23 +346,32 @@ $("#directForm").addEventListener("submit",function(e){
     "Kontaktart: "+(method==="email"?"E-Mail":"Telefon / WhatsApp")+"\n"+
     "Kontakt: "+contact;
   var button=form.querySelector("button[type=submit]");
+  var formData=new FormData(form);
+  setSubmitting(true);
+  form.setAttribute("aria-busy","true");
+  $("#directConfirm").hidden=true;
+  var controller=new AbortController(),timeout=setTimeout(function(){controller.abort()},20000);
   button.disabled=true;
   button.textContent="Wird übermittelt …";
   fetch(form.action,{
     method:"POST",
-    body:new FormData(form),
+    signal:controller.signal,
+    body:formData,
     headers:{Accept:"application/json"}
   }).then(function(res){
     if(!res.ok) throw new Error("submit");
+    clearTimeout(timeout);setSubmitting(false);form.removeAttribute("aria-busy");
     showSuccess(o,contact,method);
   }).catch(function(){
+    clearTimeout(timeout);setSubmitting(false);form.removeAttribute("aria-busy");
     button.disabled=false;
     button.textContent="Bestellung verbindlich senden";
     $("#directConfirm").hidden=false;
-    $("#directConfirm").innerHTML="<strong>Die Bestellung konnte gerade nicht übermittelt werden.</strong><p>Bitte versuchen Sie es nochmals. Ihre Angaben bleiben hier erhalten.</p>";
-    $("#directConfirm").focus();
+    $("#directConfirm").innerHTML="<strong>Die Übermittlung konnte nicht bestätigt werden.</strong><p>Ihre Angaben bleiben erhalten. Falls Sie unsicher sind, fragen Sie vor einer erneuten Bestellung bei uns nach.</p>";
+    $("#directConfirm").focus();if(window.applyBiottosLanguage)window.applyBiottosLanguage();
   });
 });
+function showOrderError(message){var box=$("#directConfirm");box.hidden=false;box.textContent=message;box.focus();if(window.applyBiottosLanguage)window.applyBiottosLanguage()}
 function showSuccess(o,contact,method){
   $("#directForm").hidden=true;
   $("#directConfirm").hidden=true;
@@ -352,6 +390,7 @@ function showSuccess(o,contact,method){
   scene.classList.remove("play");
   void scene.offsetWidth;
   scene.classList.add("play");
+  $("#successClose").focus();if(window.applyBiottosLanguage)window.applyBiottosLanguage();
   var conf=$("#successConfetti");
   conf.innerHTML="";
   for(var i=0;i<22;i++){
@@ -369,6 +408,7 @@ $("#successClose").addEventListener("click",function(){
 });
 
 document.addEventListener("click",function(e){
+if(submitting&&e.target.closest("#ov, [data-open]"))return;
 if(e.target.closest(".korb-card-more"))return;
 var a=e.target.closest("[data-open]");if(a){e.preventDefault();lastOrderTrigger=a;open(a.dataset.open);return}
 var b=e.target.closest("[data-step-back]");if(b){e.preventDefault();st.step=b.dataset.stepBack;render();requestAnimationFrame(function(){var target=st.step==="k"?"#cK input[name='k']":st.step==="d"?"#cD input[name='d']":st.step==="t"?".time-chip":"#cN input[name='n']:checked";var el=document.querySelector(target);if(el){el.focus()}});return}
@@ -385,8 +425,9 @@ function resetOrderState(){
   if(form){form.reset();syncContactMethod();form.hidden=true;var button=form.querySelector("button[type=submit]");if(button){button.disabled=false;button.textContent="Bestellung verbindlich senden"}}
   var back=document.querySelector("[data-step-back='n']");if(back)back.hidden=false;
 }
-function open(k){st.k=k||st.k;resetOrderState();var photoMap={gross:["img/gross-vorne.jpg","img/gross-oben.jpg"],fein:["img/fein-vorne.jpg","img/fein-oben.jpg"],chili:["img/chili-vorne.jpg","img/chili-oben.jpg"]};var pm=photoMap[st.k]||photoMap.gross;var sp=document.getElementById("sp"),sp2=document.getElementById("sp2");if(sp){sp.src=pm[0];sp.alt=K.find(function(o){return o.id===st.k}).n}if(sp2){sp2.src=pm[1];sp2.alt=K.find(function(o){return o.id===st.k}).n+" – zweite Ansicht";sp2.hidden=false}st.step="d";dWeek=0;render();$("#ov").classList.add("on");$("#ov").setAttribute("aria-hidden","false");document.body.style.overflow="hidden";requestAnimationFrame(function(){$("#x").focus()})}
+function open(k){if(submitting)return;refreshDays();refreshWeeks();st.k=K.some(function(o){return o.id===k})?k:st.k;resetOrderState();var photoMap={gross:["img/gross-vorne.jpg","img/gross-oben.jpg"],fein:["img/fein-vorne.jpg","img/fein-oben.jpg"],chili:["img/chili-vorne.jpg","img/chili-oben.jpg"]};var pm=photoMap[st.k]||photoMap.gross;var sp=document.getElementById("sp"),sp2=document.getElementById("sp2");if(sp){sp.src=pm[0];sp.alt=K.find(function(o){return o.id===st.k}).n}if(sp2){sp2.src=pm[1];sp2.alt=K.find(function(o){return o.id===st.k}).n+" – zweite Ansicht";sp2.hidden=false}st.step="d";dWeek=0;render();$("#ov").classList.add("on");$("#ov").setAttribute("aria-hidden","false");document.body.style.overflow="hidden";requestAnimationFrame(function(){$("#x").focus()})}
 function close(){
+  if(submitting||!$("#ov").classList.contains("on"))return;
   $("#ov").classList.remove("on");$("#ov").setAttribute("aria-hidden","true");document.body.style.overflow="";
   resetOrderState();render();
   if(lastOrderTrigger&&document.contains(lastOrderTrigger)){lastOrderTrigger.focus()}
@@ -394,10 +435,10 @@ function close(){
 $("#x").addEventListener("click",close);
 $("#ov").addEventListener("click",function(e){if(e.target.id==="ov")close()});
 document.addEventListener("keydown",function(e){
-  if(e.key==="Escape"){close();return}
-  if(e.key!=="Tab"||!$("#ov").classList.contains("on"))return;
+  if(e.key==="Escape"){if($("#lb").classList.contains("on")||$("#lg").classList.contains("on"))return;close();return}
+  if(e.key!=="Tab"||!$("#ov").classList.contains("on")||$("#lb").classList.contains("on"))return;
   var dialog=$("#ov .sheet");if(!dialog)return;
-  var focusable=dialog.querySelectorAll('button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),a[href],[tabindex]:not([tabindex="-1"])');
+  var focusable=Array.from(dialog.querySelectorAll('button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),a[href],[tabindex]:not([tabindex="-1"])')).filter(function(el){return !el.closest("[hidden]")&&getComputedStyle(el).display!=="none"&&getComputedStyle(el).visibility!=="hidden"&&el.getClientRects().length});
   if(!focusable.length)return;
   var first=focusable[0],last=focusable[focusable.length-1];
   if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
@@ -405,18 +446,19 @@ document.addEventListener("keydown",function(e){
 });
 })();
 
-(function(){var lb=document.getElementById("lb"),li=document.getElementById("li");
-function close(){lb.classList.remove("on","z");lb.setAttribute("aria-hidden","true");document.body.style.overflow=""}
-document.addEventListener("click",function(e){var i=e.target.closest(".foto img, #sp, #sp2");if(i){li.src=i.src;li.alt=i.alt;lb.scrollTop=0;lb.scrollLeft=0;lb.classList.add("on");lb.classList.remove("z");lb.setAttribute("aria-hidden","false");document.body.style.overflow="hidden"}});
+(function(){var lb=document.getElementById("lb"),li=document.getElementById("li"),lastPhoto=null;
+document.querySelectorAll(".foto img,#sp,#sp2").forEach(function(img){img.tabIndex=0;img.setAttribute("role","button");img.setAttribute("aria-label",img.alt||"Korb-Foto vergrössern")});
+function close(){if(!lb.classList.contains("on"))return;lb.classList.remove("on","z");lb.setAttribute("aria-hidden","true");document.body.style.overflow=document.querySelector(".ov.on")?"hidden":"";if(lastPhoto)lastPhoto.focus()}
+document.addEventListener("click",function(e){var i=e.target.closest(".foto img, #sp, #sp2");if(i){lastPhoto=i;li.src=i.src;li.alt=i.alt;lb.scrollTop=0;lb.scrollLeft=0;lb.classList.add("on");lb.classList.remove("z");lb.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";document.getElementById("lx").focus()}});
 li.addEventListener("click",function(e){e.stopPropagation();var z=lb.classList.toggle("z");if(z){var r=li.getBoundingClientRect();lb.scrollLeft=(lb.scrollWidth-lb.clientWidth)/2;lb.scrollTop=Math.max(0,(e.clientY-r.top)/Math.max(r.height,1)*lb.scrollHeight-lb.clientHeight/2)}else{lb.scrollTop=0;lb.scrollLeft=0}});
 lb.addEventListener("click",function(e){if(e.target===lb)close()});
 document.getElementById("lx").addEventListener("click",close);
-document.addEventListener("keydown",function(e){if(e.key==="Escape")close()});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")close();if(lb.classList.contains("on")&&e.key==="Tab"){e.preventDefault();document.getElementById("lx").focus()}else if((e.key==="Enter"||e.key===" ")&&e.target.matches(".foto img,#sp,#sp2")){e.preventDefault();e.target.click()}});
 })();
-(function(){var lg=document.getElementById("lg");
-function close(){lg.classList.remove("on");lg.setAttribute("aria-hidden","true");document.body.style.overflow=""}
-document.addEventListener("click",function(e){var a=e.target.closest("[data-legal]");if(a){e.preventDefault();["impressum","datenschutz"].forEach(function(k){document.getElementById("l-"+k).hidden=(k!==a.dataset.legal)});lg.classList.add("on");lg.setAttribute("aria-hidden","false");document.body.style.overflow="hidden"}});
+(function(){var lg=document.getElementById("lg"),lastLegal=null;
+function close(){if(!lg.classList.contains("on"))return;lg.classList.remove("on");lg.setAttribute("aria-hidden","true");document.body.style.overflow=document.querySelector(".ov.on,.lb.on")?"hidden":"";if(lastLegal)lastLegal.focus()}
+document.addEventListener("click",function(e){var a=e.target.closest("[data-legal]");if(a){e.preventDefault();lastLegal=a;["impressum","datenschutz"].forEach(function(k){document.getElementById("l-"+k).hidden=(k!==a.dataset.legal)});lg.classList.add("on");lg.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";document.getElementById("lgx").focus()}});
 document.getElementById("lgx").addEventListener("click",close);
 lg.addEventListener("click",function(e){if(e.target===lg)close()});
-document.addEventListener("keydown",function(e){if(e.key==="Escape")close()});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")close();if(e.key==="Tab"&&lg.classList.contains("on")){var items=Array.from(lg.querySelectorAll("button,a[href]")).filter(function(el){return el.getClientRects().length&&!el.closest("[hidden]")}),first=items[0],last=items[items.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}});
 })();

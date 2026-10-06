@@ -3,7 +3,7 @@ name: Static site checks
 on:
   push:
     branches:
-      - chore/add-static-site-checks
+      - fix/website-quality
       - main
   pull_request:
 
@@ -20,7 +20,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
 
       - name: Run static site checks
         run: npm test

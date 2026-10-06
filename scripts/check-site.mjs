@@ -1,121 +1,167 @@
-import fs from "node:fs";
-import path from "node:path";
-import { spawnSync } from "node:child_process";
-import { fileURLToPath } from "node:url";
-
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const ignored = new Set([".git", "node_modules", ".vercel"]);
-const errors = [];
-const htmlFiles = [];
-const jsFiles = [];
-
-function walk(directory) {
-  for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
-    if (entry.isDirectory() && ignored.has(entry.name)) continue;
-    const fullPath = path.join(directory, entry.name);
-    if (entry.isDirectory()) {
-      walk(fullPath);
-    } else if (entry.isFile()) {
-      const relative = path.relative(root, fullPath).split(path.sep).join("/");
-      if (entry.name.endsWith(".html")) htmlFiles.push(relative);
-      if (entry.name.endsWith(".js")) jsFiles.push(relative);
-    }
-  }
-}
-
-function read(relativePath) {
-  return fs.readFileSync(path.join(root, relativePath), "utf8");
-}
-
-function decode(value) {
+import fs from 'node:fs';
+import path from 'node:path';
+import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
+const origin = 'https://biottoslaedeli.ch';
+const decode = (v) => {
   try {
-    return decodeURIComponent(value);
+    return decodeURIComponent(v);
   } catch {
-    return value;
+    return v;
   }
-}
-
-walk(root);
-const htmlInfo = new Map();
-
-for (const file of htmlFiles) {
-  const source = read(file);
-  const ids = new Set();
-  const idPattern = /\bid\s*=\s*(["'])(.*?)\1/gi;
-  const namePattern = /\bname\s*=\s*(["'])(.*?)\1/gi;
-
-  for (const match of source.matchAll(idPattern)) {
-    const id = match[2];
-    if (ids.has(id)) errors.push(`${file}: duplicate id "${id}"`);
-    ids.add(id);
+};
+export function checkSite(root) {
+  root = path.resolve(root);
+  const files = [],
+    errors = [],
+    html = new Map();
+  function walk(dir) {
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (
+        e.isDirectory() &&
+        ['.git', 'node_modules', '.vercel'].includes(e.name)
+      )
+        continue;
+      const full = path.join(dir, e.name);
+      if (e.isDirectory()) walk(full);
+      else if (/\.(html|css|js|mjs|xml)$/.test(e.name))
+        files.push(path.relative(root, full));
+    }
   }
-  for (const match of source.matchAll(namePattern)) ids.add(match[2]);
-  htmlInfo.set(file, { source, ids });
-}
-
-for (const file of htmlFiles) {
-  const { source } = htmlInfo.get(file);
-  const attrPattern = /\b(?:href|src|poster|action)\s*=\s*(["'])(.*?)\1/gi;
-
-  for (const match of source.matchAll(attrPattern)) {
-    const raw = match[2].trim();
-    if (!raw || /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i.test(raw)) continue;
-
-    const hashIndex = raw.indexOf("#");
-    const queryIndex = raw.indexOf("?");
-    let end = raw.length;
-    if (hashIndex !== -1) end = Math.min(end, hashIndex);
-    if (queryIndex !== -1) end = Math.min(end, queryIndex);
-    const pathname = decode(raw.slice(0, end));
-    const hash = hashIndex === -1 ? "" : decode(raw.slice(hashIndex + 1).split("?")[0]);
-
-    let target;
-    if (!pathname) {
-      target = path.resolve(root, file);
-    } else if (pathname.startsWith("/")) {
-      target = path.join(root, pathname.slice(1));
-    } else {
-      target = path.resolve(root, path.dirname(file), pathname);
+  walk(root);
+  for (const file of files.filter((f) => f.endsWith('.html'))) {
+    const source = fs.readFileSync(path.join(root, file), 'utf8'),
+      ids = new Set();
+    for (const m of source.matchAll(/\bid\s*=\s*(["'])(.*?)\1/gi)) {
+      if (ids.has(m[2])) errors.push(`${file}: duplicate id "${m[2]}"`);
+      ids.add(m[2]);
     }
-
-    if (pathname.endsWith("/")) target = path.join(target, "index.html");
-    if (!path.extname(target) && fs.existsSync(target) && fs.statSync(target).isDirectory()) {
-      target = path.join(target, "index.html");
+    html.set(file, { source, ids });
+  }
+  function reference(file, raw, fromRoot = false) {
+    raw = raw.trim().replace(/&amp;/g, '&');
+    if (!raw) return;
+    let url;
+    try {
+      url = new URL(
+        raw,
+        `${origin}/${fromRoot ? 'index.html' : file.split(path.sep).join('/')}`,
+      );
+    } catch {
+      errors.push(`${file}: invalid reference "${raw}"`);
+      return;
     }
-
-    if (!target.startsWith(root + path.sep) && target !== root) {
-      errors.push(`${file}: reference escapes site root: ${raw}`);
-      continue;
+    if (url.origin !== origin) return;
+    const pathname = decode(url.pathname);
+    let target = path.resolve(root, '.' + pathname);
+    if (target !== root && !target.startsWith(root + path.sep)) {
+      errors.push(`${file}: reference escapes site root "${raw}"`);
+      return;
     }
-
-    if (!fs.existsSync(target)) {
+    if (
+      pathname.endsWith('/') ||
+      (fs.existsSync(target) && fs.statSync(target).isDirectory())
+    )
+      target = path.join(target, 'index.html');
+    if (!fs.existsSync(target) || !fs.statSync(target).isFile()) {
       errors.push(`${file}: missing local target "${raw}"`);
-      continue;
+      return;
     }
-
-    if (hash && target.endsWith(".html")) {
-      const targetRelative = path.relative(root, target).split(path.sep).join("/");
-      const targetInfo = htmlInfo.get(targetRelative);
-      if (targetInfo && !targetInfo.ids.has(hash)) {
-        errors.push(`${file}: missing anchor "#${hash}" in "${targetRelative}"`);
+    const info = html.get(path.relative(root, target));
+    if (url.hash && info && !info.ids.has(decode(url.hash.slice(1))))
+      errors.push(
+        `${file}: missing anchor "${url.hash}" in "${path.relative(root, target)}"`,
+      );
+  }
+  function jsonRefs(file, v) {
+    if (Array.isArray(v)) v.forEach((x) => jsonRefs(file, x));
+    else if (v && typeof v === 'object')
+      Object.entries(v).forEach(([k, x]) => {
+        if (['url', 'image', 'contentUrl'].includes(k) && typeof x === 'string')
+          reference(file, x);
+        else jsonRefs(file, x);
+      });
+  }
+  for (const file of files) {
+    const source = fs.readFileSync(path.join(root, file), 'utf8');
+    if (file.endsWith('.html')) {
+      for (const m of source.matchAll(
+        /\b(?:href|src|poster|action)\s*=\s*(["'])(.*?)\1/gi,
+      ))
+        reference(file, m[2]);
+      for (const m of source.matchAll(/\bsrcset\s*=\s*(["'])(.*?)\1/gi))
+        if (!m[2].startsWith('data:'))
+          m[2]
+            .split(',')
+            .forEach((v) => reference(file, v.trim().split(/\s+/)[0]));
+      for (const m of source.matchAll(/<meta\b[^>]*>/gi)) {
+        const a = Object.fromEntries(
+          [...m[0].matchAll(/([\w:-]+)\s*=\s*(["'])(.*?)\2/g)].map((x) => [
+            x[1].toLowerCase(),
+            x[3],
+          ]),
+        );
+        if (
+          /^(og:(image|url)|twitter:image)$/.test(a.property || a.name || '') &&
+          a.content
+        )
+          reference(file, a.content);
+      }
+      for (const m of source.matchAll(
+        /<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi,
+      )) {
+        try {
+          jsonRefs(file, JSON.parse(m[1]));
+        } catch {
+          errors.push(`${file}: invalid structured-data JSON`);
+        }
       }
     }
+    if (file.endsWith('.css') || file.endsWith('.html')) {
+      for (const m of source.matchAll(/url\(\s*(["']?)([^)'"\s]+)\1\s*\)/gi))
+        reference(file, m[2]);
+      if (file.endsWith('.css'))
+        for (const m of source.matchAll(/@import\s+(["'])(.*?)\1/gi))
+          reference(file, m[2]);
+    }
+    // Browser asset paths resolve against the document, not js/app.js.
+    // Keep complete literal paths: dynamic concatenation is not evaluated.
+    if (file.endsWith('.js'))
+      for (const m of source.matchAll(
+        /(["'`])((?:\.?\/?img\/|https?:\/\/biottoslaedeli\.ch\/)[^"'`]+)\1/g,
+      ))
+        reference(file, m[2], true);
+    if (file.endsWith('.xml'))
+      for (const m of source.matchAll(/<loc>(.*?)<\/loc>/g))
+        reference(file, m[1]);
+    if (/\.(js|mjs)$/.test(file)) {
+      const r = spawnSync(
+        process.execPath,
+        ['--check', path.join(root, file)],
+        { encoding: 'utf8' },
+      );
+      if (r.status !== 0)
+        errors.push(
+          `${file}: JavaScript syntax check failed\n${r.stderr || r.stdout}`,
+        );
+    }
   }
+  return { errors: [...new Set(errors)], files: files.length };
 }
-
-for (const file of jsFiles) {
-  const result = spawnSync(process.execPath, ["--check", path.join(root, file)], {
-    encoding: "utf8"
-  });
-  if (result.status !== 0) {
-    errors.push(`${file}: JavaScript syntax check failed\n${result.stderr || result.stdout}`);
-  }
-}
-
-if (errors.length) {
-  console.error(`Site checks failed with ${errors.length} issue(s):`);
-  for (const error of errors) console.error(`- ${error}`);
-  process.exitCode = 1;
-} else {
-  console.log(`Site checks passed: ${htmlFiles.length} HTML file(s), ${jsFiles.length} JavaScript file(s), local references and anchors checked.`);
+if (
+  process.argv[1] &&
+  path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)
+) {
+  const r = checkSite(
+    path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'),
+  );
+  if (r.errors.length) {
+    console.error(
+      `Site checks failed with ${r.errors.length} issue(s):\n${r.errors.map((e) => '- ' + e).join('\n')}`,
+    );
+    process.exitCode = 1;
+  } else
+    console.log(
+      `Site checks passed: ${r.files} source files; HTML, CSS, literal JS assets, metadata, sitemap, anchors and JavaScript syntax checked.`,
+    );
 }

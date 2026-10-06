@@ -2,12 +2,13 @@
   "name": "biottos-laedeli-website",
   "private": true,
   "version": "1.0.0",
-  "description": "Static HTML, CSS and JavaScript website for Biottos Lädeli",
+  "description": "Static HTML, CSS and JavaScript website for Biottos L\u00e4deli",
   "scripts": {
     "check": "node scripts/check-site.mjs",
-    "test": "npm run check"
+    "test": "node --test scripts/check-site.test.mjs && npm run check",
+    "start": "node scripts/serve.mjs"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=24"
   }
 }
