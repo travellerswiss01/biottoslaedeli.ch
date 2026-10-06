@@ -58,3 +58,15 @@ Screenshots der lokalen Prüfung, mit blockierten externen Diensten:
 - [Süssmost auf dem Handy](docs/qa/suessmost-390.png)
 - [Geschenkskörbe auf dem Desktop](docs/qa/geschenkskoerbe-1440.png)
 - [Startseite auf dem Desktop](docs/qa/start-1440.png)
+
+## Freigegebene Korbauswahl (7. Oktober 2026)
+
+Desktop: drei ruhige Karten mit Foto, Korbname, Preis, Bestellbutton und aufklappbaren Inhalten. Darunter eine dreistufige Bildanleitung; Geschenk-Anlässe stehen bei der Überschrift, der Firmenlink im Footer.
+
+Mobile: „Was möchtest du schenken?“ mit Mitbringsel, Dankeschön und Grosses Geschenk. Vollständige Fotos, Preise, direkte Bestellbuttons und aufklappbare Inhalte. Keine vorgelagerte Auswahl, keine Wischpflicht und keine sichtbare Bestellanleitung. Originale Korbnamen bleiben in Bestelllogik und Desktop erhalten.
+
+Die schmale mobile Leiste auf der Korbansicht zeigt Logo und Menü. Sie blendet beim Herunterscrollen aus und beim Hochscrollen ein. Bei geöffnetem Menü oder Tastaturfokus bleibt sie sichtbar. Sprachwahl im Menü; auf Desktop und anderen Ansichten bleibt ihre bisherige Position erhalten.
+
+Prüfung: npm test (drei Regressionstests und statische Prüfung), git diff --check und 90 Browserprüfungen bei 360/390/768/1440 Pixeln bestanden. Sieben Bestellanfragen simuliert. Zusätzlich Aus-/Einblenden, Menü und Sprachwechsel im Browser geprüft und als 10-Sekunden-Demo aufgezeichnet.
+
+Nachweise: docs/qa/mobile-navigation/open.png, scrolled.png, menu.png und demo.mp4. Keine reale Bestellung, kein Merge, keine Produktionsveröffentlichung. Geschäftsdaten und bestehende Grenzen bleiben unverändert.

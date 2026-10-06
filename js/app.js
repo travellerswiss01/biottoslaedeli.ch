@@ -192,20 +192,7 @@ if(siteNav)siteNav.addEventListener("click",function(e){if(e.target.closest("a")
 document.addEventListener("keydown",function(e){if(e.key==="Escape")setMenuOpen(false)});
 function show(){var h=(location.hash||"#start").slice(1);if(views.indexOf(h)<0)h="start";views.forEach(function(v){$("#"+v).classList.toggle("on",v===h)});document.querySelectorAll("#siteNav a").forEach(function(a){a.classList.toggle("on",a.getAttribute("href")==="#"+h)});document.querySelector(".brand-tab").classList.toggle("on",h==="start");document.body.dataset.currentView=h;setMenuOpen(false);window.scrollTo(0,0)}
 window.addEventListener("hashchange",show);show();
-(function(){
-var track=document.querySelector("#koerbe .korb-picker-grid"),cards=track?Array.prototype.slice.call(track.querySelectorAll(".korb-card")):[],prev=$("#korbPrev"),next=$("#korbNext"),position=$("#korbPosition");
-if(!track||!cards.length||!prev||!next||!position)return;
-var current=0;
-function update(){
- var tr=track.getBoundingClientRect(),pad=parseFloat(getComputedStyle(track).paddingLeft)||0,target=tr.left+pad,best=Infinity;
- cards.forEach(function(card,i){var distance=Math.abs(card.getBoundingClientRect().left-target);if(distance<best){best=distance;current=i}});
- position.textContent=(current+1)+" / "+cards.length;
- prev.disabled=current===0;next.disabled=current===cards.length-1;
-}
-function move(delta){var i=Math.max(0,Math.min(cards.length-1,current+delta));track.scrollTo({left:cards[i].offsetLeft-cards[0].offsetLeft,behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});current=i;update()}
-prev.addEventListener("click",function(){move(-1)});next.addEventListener("click",function(){move(1)});
-track.addEventListener("scroll",update,{passive:true});window.addEventListener("resize",update);update();
-})();
+
 function fmt(x){return "CHF "+x.toFixed(2)}
 function chips(el,name,items,cur){el.innerHTML=items.map(function(i){return '<label><input type="radio" name="'+name+'" value="'+i.v+'"'+(String(i.v)===String(cur)?" checked":"")+'><span>'+i.l+"</span></label>"}).join("")}
 function zurichToday(){var parts=new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Zurich",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date()),v={};parts.forEach(function(p){v[p.type]=p.value});return new Date(Number(v.year),Number(v.month)-1,Number(v.day),12)}
@@ -461,4 +448,14 @@ document.addEventListener("click",function(e){var a=e.target.closest("[data-lega
 document.getElementById("lgx").addEventListener("click",close);
 lg.addEventListener("click",function(e){if(e.target===lg)close()});
 document.addEventListener("keydown",function(e){if(e.key==="Escape")close();if(e.key==="Tab"&&lg.classList.contains("on")){var items=Array.from(lg.querySelectorAll("button,a[href]")).filter(function(el){return el.getClientRects().length&&!el.closest("[hidden]")}),first=items[0],last=items[items.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}});
+})();
+
+// Gift selection on phones: compact navigation that returns on upward scrolling.
+(function(){
+ var head=document.querySelector("body>header"),nav=document.getElementById("siteNav"),langButton=document.getElementById("langSwitch"),bar=head.querySelector(".bar"),menu=document.getElementById("menuToggle"),media=matchMedia("(max-width:720px)"),lastY=window.scrollY;
+ function active(){return media.matches&&document.body.dataset.currentView==="koerbe"}
+ function sync(){head.classList.remove("header-away");lastY=window.scrollY;if(active()){nav.appendChild(langButton)}else{bar.appendChild(langButton)}}
+ addEventListener("hashchange",sync);media.addEventListener("change",sync);sync();
+ addEventListener("scroll",function(){var y=Math.max(0,window.scrollY),delta=y-lastY;if(!active()||y<24||menu.getAttribute("aria-expanded")==="true"||head.contains(document.activeElement)){head.classList.remove("header-away");lastY=y;return}if(Math.abs(delta)>5){head.classList.toggle("header-away",delta>0);lastY=y}},{passive:true});
+ head.addEventListener("focusin",function(){head.classList.remove("header-away")});menu.addEventListener("click",function(){head.classList.remove("header-away")});
 })();

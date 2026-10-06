@@ -169,10 +169,12 @@ fs.mkdirSync(out, { recursive: true });
   count++;
   await p.waitForFunction(() => document.body.dataset.currentView === 'koerbe');
   const original = await p.locator('main').innerText();
+  await p.locator('#menuToggle').click();
   await p.locator('#langSwitch').click();
   assert.equal(await p.locator('html').getAttribute('lang'), 'gsw-CH');
   await p.locator('#langSwitch').click();
   assert.equal(await p.locator('main').innerText(), original);
+  await p.locator('#menuToggle').click();
   count++;
   async function select(id, qty) {
     await p.locator('.korb-card [data-open="' + id + '"]').click();
