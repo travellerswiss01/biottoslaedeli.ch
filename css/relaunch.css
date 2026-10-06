@@ -1,5 +1,5 @@
 
-/* website02 Relaunch – conversion layer */
+/* Shared layout and offer styles */
 .hero-kicker{font-family:Caveat,cursive;font-size:1.25rem;color:var(--red,#8f1116);margin:0 auto 10px;text-align:center}
 .hero-lead{max-width:720px;margin:18px auto 0;text-align:center;font-size:clamp(1.05rem,2vw,1.3rem);line-height:1.65}
 .hero-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:24px auto 16px}
@@ -41,7 +41,7 @@
 .order-progress{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin:0 0 12px;padding-bottom:10px;border-bottom:1px solid var(--line)}
 .order-progress span{font-size:.68rem;text-align:center;padding:6px 3px;border-bottom:2px solid var(--line);opacity:.5}
 .order-progress span.active{opacity:1;border-bottom-color:var(--red,#8f1116);font-weight:700}
-.order-selection{min-height:20px;margin:0 0 12px;padding:7px 10px;border-radius:8px;background:var(--paper2);font-size:.76rem;opacity:.78}
+.order-selection{border:1px solid var(--line);color:var(--ink);min-height:20px;margin:0 0 12px;padding:7px 10px;border-radius:8px;background:var(--paper2);font-size:.76rem;opacity:1}
 .order-step .q{margin-top:4px}
 @media(max-width:700px){.order-progress span{font-size:.62rem}.order-selection{font-size:.72rem}}
 
@@ -79,7 +79,6 @@
 
 /* Checkout mobile clarity */
 .order-progress{position:sticky;top:0;z-index:2;background:var(--paper);padding-top:4px}
-.order-selection{border:1px solid var(--line);color:var(--ink);opacity:1}
 .order-selection:empty{display:none}
 @media(max-width:700px){
   .sheet{padding:14px 14px calc(18px + env(safe-area-inset-bottom,0px))}
@@ -637,3 +636,141 @@ img{max-width:100%;height:auto}
   .otto-garten-contact strong{text-align:center;font-size:1.2rem}
   .otto-garten-contact .btn{width:100%;box-sizing:border-box}
 }
+
+/* Standalone offer pages share the visual system, without homepage nav clipping. */
+.site-head .wrap{display:block;padding-top:10px;padding-bottom:10px}
+.site-head nav{display:flex;flex-wrap:wrap;gap:4px;max-width:100%;width:100%;margin:8px 0 0;overflow:visible}
+.site-head nav a{white-space:normal;min-height:44px;padding:10px 8px}
+.relaunch-hero .wrap{display:block;text-align:center}
+.relaunch-hero h1{max-width:850px;margin:0 auto}
+.korb-highlights:has(>article){display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;font-size:1rem}
+.korb-highlights>article{display:flex;flex-direction:column;gap:10px;padding:22px;border:1px solid var(--line);border-radius:8px;background:var(--white);min-width:0}
+.korb-highlights>article h3{font-size:1.55rem;margin:0}
+.korb-highlights>article>strong{font-size:1.2rem;color:var(--red)}
+.korb-highlights>article p{margin:0;line-height:1.6}
+.korb-highlights>article .btn{margin-top:auto;font-size:1rem;padding:14px 12px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:start}
+.trust-points>li{display:grid;gap:5px;padding:15px 0;border-bottom:1px solid var(--line);list-style:none}
+.site-head a:focus-visible,.btn:focus-visible,.back-link:focus-visible,summary:focus-visible{outline:3px solid var(--red);outline-offset:4px}
+@media(max-width:720px){
+  .site-head nav{margin:0;width:100%;justify-content:flex-start}
+  .korb-highlights:has(>article),.two-col{grid-template-columns:1fr}
+}
+/* Keep the chef contact actions inside tablet widths as well. */
+@media(min-width:721px) and (max-width:1000px){
+  .lucia-chef-contact{grid-template-columns:1fr;text-align:center}
+  .lucia-chef-contact strong{text-align:center}
+  .lucia-chef-contact .text-link{white-space:normal}
+}
+/* Readable mobile product cards and story steps, with no overlapping badges. */
+@media(max-width:720px){
+  #koerbe .korb-picker-grid{display:grid;grid-template-columns:minmax(0,1fr);padding:12px 20px;gap:20px;overflow:visible;scroll-snap-type:none}
+  #koerbe .korb-card{display:flex;flex-direction:column;padding:16px;gap:10px}
+  #koerbe .korb-card-photo{max-width:260px;margin:0 auto}
+  #koerbe .korb-card-photo img{height:auto;max-height:none;aspect-ratio:1100/1467;object-fit:contain}
+  #koerbe .korb-card-number{position:static;display:inline-block;margin:0 6px 8px 0}
+  #koerbe .korb-badge{font-size:.8rem;line-height:1.25;margin:0 0 8px}
+  #koerbe .korb-card-copy{text-align:left;padding:0}
+  #koerbe .korb-card-copy .hand{font-size:1rem}
+  #koerbe .korb-card-copy h3{font-size:1.6rem;line-height:1.2}
+  #koerbe .korb-card-price{font-size:1.2rem}
+  #koerbe .korb-card-copy .korb-count{font-size:.85rem}
+  #koerbe .korb-card-copy p{display:block;font-size:1rem;line-height:1.5;margin:10px 0}
+  #koerbe .korb-highlights{font-size:.95rem;line-height:1.6}
+  #koerbe .korb-card-link{font-size:1rem;min-height:48px;margin:12px 0 0}
+  #koerbe .korb-card-more summary{font-size:1rem;min-height:44px}
+  #koerbe .korb-card-detail ul{font-size:.9rem;line-height:1.5}
+  #koerbe .korb-picker-controls{display:none}
+  body[data-current-view="suessmost"] .hero-story-steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  body[data-current-view="suessmost"] .hero-story-step:last-child{grid-column:1/-1}
+  body[data-current-view="suessmost"] .hero-story-step b{font-size:1rem;overflow-wrap:anywhere}
+  body[data-current-view="suessmost"] .hero-story-step small{font-size:.8rem;line-height:1.4}
+  .wa{position:static;display:block;width:max-content;max-width:calc(100% - 40px);margin:20px auto}
+  .foto img[role="button"]:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+}
+
+/* Compact illustrated ordering guide below the gift basket selection. */
+#koerbe .order-guide{padding:32px 0 46px;text-align:center}
+#koerbe .order-guide h2{font-size:1.7rem;margin:0 0 26px}
+.order-guide-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;list-style:none;padding:0;margin:0 auto;max-width:920px}
+.order-guide-art{position:relative;width:108px;height:108px;margin:0 auto 18px;border-radius:50%;background:#f7ecd7;color:var(--red)}
+.order-guide-art svg{width:96px;height:96px;margin:6px}
+.order-guide-art span{position:absolute;left:-6px;top:0;background:var(--red);color:white;border-radius:50%;width:26px;height:26px;line-height:26px;font-size:.85rem}
+#koerbe .order-guide h3{font-size:1.25rem;margin:0 0 9px}
+#koerbe .order-guide li p{font-size:1.05rem;line-height:1.5;margin:0}
+.order-guide-occasion{margin:12px auto 0;font-size:1rem;line-height:1.5;max-width:600px}
+.order-guide-business{font-size:.9rem;text-underline-offset:4px;color:var(--red)}
+@media(max-width:600px){
+ #koerbe .order-guide{padding:26px 20px 36px}
+ .order-guide-steps{grid-template-columns:1fr;gap:22px;text-align:left;max-width:340px}
+ .order-guide-steps li{display:grid;grid-template-columns:84px 1fr;column-gap:16px;align-items:center}
+ .order-guide-art{grid-row:1/3;width:80px;height:80px;margin:0}
+ .order-guide-art svg{width:68px;height:68px}
+ #koerbe .order-guide h3{align-self:end;font-size:1.1rem}
+ #koerbe .order-guide li p{align-self:start;font-size:1rem}
+ .order-guide-occasion{line-height:1.6}
+}
+
+/* Mobile gift finder: three complete photographs with direct ordering. */
+.korb-mobile-title,.korb-gift-intent{display:none}
+@media(min-width:721px){#koerbe .k1{order:1}#koerbe .k2{order:2}#koerbe .k3{order:3}}
+@media(max-width:720px){
+ #koerbe .korb-desktop-title{display:none}
+ #koerbe .korb-mobile-title{display:inline}
+ #koerbe .koerbe-intro{padding:14px 16px 6px}
+ #koerbe .koerbe-intro h2{font-size:1.65rem;line-height:1.25}
+ #koerbe .koerbe-intro .order-guide-occasion{font-size:.85rem;line-height:1.4;margin:7px auto 0;max-width:300px}
+ #koerbe .korb-picker-grid{display:flex;flex-direction:column;gap:10px;padding:8px 16px 12px;overflow:visible;scroll-snap-type:none}
+ #koerbe .korb-card{display:grid;grid-template-columns:96px minmax(0,1fr);gap:12px;padding:10px;align-items:center;transform:none;flex:0 0 auto;min-height:0;height:auto}
+ #koerbe .k3{order:1}#koerbe .k2{order:2}#koerbe .k1{order:3}
+ #koerbe .korb-card-photo{width:96px;max-width:none;margin:0}
+ #koerbe .korb-card-photo img{width:100%;height:128px!important;max-height:none!important;aspect-ratio:auto;object-fit:contain!important}
+ #koerbe .korb-card .foto{padding:0;transform:none}
+ #koerbe .korb-card .tape::before{display:none}
+ #koerbe .korb-card-copy{padding:0;text-align:left}
+ #koerbe .korb-gift-intent{display:block;font-size:1.05rem;line-height:1.2;margin-bottom:4px}
+ #koerbe .korb-card-copy h3{display:inline;font-size:.8rem;line-height:1.3;margin:0;color:#665548}
+ #koerbe .korb-card-price{display:inline;font-size:.95rem;margin:0 0 0 6px;white-space:nowrap}
+ #koerbe .korb-card-link{width:100%;margin:7px 0 0;min-height:44px;padding:7px 8px;font-size:.95rem}
+ #koerbe .korb-card-more summary{min-height:32px;padding:5px 0;font-size:.85rem;justify-content:flex-start}
+ #koerbe .korb-card-detail{display:block}
+ #koerbe .korb-card-second-foto{display:none}
+ #koerbe .korb-card-detail ul{font-size:.85rem;line-height:1.5}
+ #koerbe .order-guide{padding-top:22px}
+}
+@media(max-width:370px){
+ #koerbe .korb-card{grid-template-columns:84px minmax(0,1fr);gap:10px}
+ #koerbe .korb-card-photo{width:84px}
+ #koerbe .korb-card-photo img{height:116px!important}
+ #koerbe .korb-gift-intent{font-size:1rem}
+ #koerbe .korb-card-copy h3{font-size:.75rem}
+ #koerbe .korb-card-price{font-size:.85rem;margin-left:4px}
+}
+
+/* Minimal mobile selection: keep descriptive copy on desktop only. */
+@media(max-width:720px){
+ #koerbe .korb-gift-intent,#koerbe .order-guide,#koerbe .koerbe-intro .order-guide-occasion{display:none}
+ #koerbe .koerbe-intro{padding:16px 16px 8px}
+ #koerbe .koerbe-intro h2{font-size:1.65rem}
+ #koerbe .korb-card{padding:12px;gap:16px}
+ #koerbe .korb-card-copy h3{display:block;font-size:1.15rem;color:var(--ink);line-height:1.25;margin:0 0 7px;text-align:left}
+ #koerbe .korb-card-price{display:block;font-size:1.05rem;margin:0;text-align:left}
+ #koerbe .korb-card-link{margin-top:10px}
+ #koerbe .korb-card-more summary{font-size:.8rem;min-height:32px}
+}
+
+.korb-mobile-name,.menu-caption{display:none}
+@media(max-width:720px){
+ #koerbe .korb-desktop-name{display:none}
+ #koerbe .korb-mobile-name{display:inline}
+ body[data-current-view="koerbe"]>header{transition:transform .2s ease;will-change:transform}
+ body[data-current-view="koerbe"]>header.header-away{transform:translateY(-110%)}
+ body[data-current-view="koerbe"]>header .bar{grid-template-columns:minmax(0,1fr) 88px;min-height:54px;padding:6px 16px;gap:12px}
+ body[data-current-view="koerbe"] .menu-toggle{width:88px;height:42px;display:flex;align-items:center;justify-content:center;gap:9px}
+ body[data-current-view="koerbe"] .menu-caption{display:inline;font:14px Georgia;font-weight:normal}
+ body[data-current-view="koerbe"] #siteNav #langSwitch{position:static;grid-column:auto;width:100%;max-width:none;min-height:44px;margin:10px 0 0;justify-content:center}
+ body[data-current-view="koerbe"] #siteNav{max-height:calc(100svh - 70px);overflow-y:auto}
+ body[data-current-view="koerbe"] .brand-tab{font-size:.85rem!important}
+ #koerbe .koerbe-intro h2{max-width:340px;margin:0 auto;line-height:1.2}
+}
+@media(prefers-reduced-motion:reduce){body[data-current-view="koerbe"]>header{transition:none}}
