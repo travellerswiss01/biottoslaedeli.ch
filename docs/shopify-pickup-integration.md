@@ -9,7 +9,7 @@
 - Shopify meldet den Tarif **Basic**. Im Admin unter Einstellungen → Plan wird eine Aktion von **CHF 1 pro Monat bis 6. Januar 2027** angezeigt; **CHF 29 pro Monat** ist als regulärer Betrag durchgestrichen. Der genaue Betrag der späteren Rechnung sollte nach Ablauf der Aktion erneut geprüft werden. Die Planansicht nennt Kartengebühren von 2,95 % + CHF 0,30 online und 2 % + CHF 0,00 vor Ort. Das sind Kartengebühren; sie belegen keine Gebühr auf Barzahlung oder TWINT bei Abholung. Shopify Plus ist nicht aktiv.
 - Vor diesem Auftrag waren keine Produkte vorhanden. Die drei unten aufgeführten Produkte wurden als **Entwürfe** mit belegten Inhalten, Preisen und bestehenden Websitefotos angelegt. Sie sind nicht veröffentlicht. Es wurden keine Kaufbuttons in die Website eingebaut.
 - Der vorher unvollständige Standort ist jetzt «Biottos Lädeli», Hauptstrasse 90, 8357 Maischhausen.
-- Eine Termin-App ist nicht installiert. Zahlungsanbieter und manuelle Zahlungsarten sind noch nicht abschliessend geprüft.
+- Pickeasy ist installiert; ein App-Tarif ist noch nicht aktiviert. Zahlungsanbieter und manuelle Zahlungsarten sind noch nicht abschliessend geprüft.
 
 | Geschenkidee | Shopify-Produkt | Preis | Status | Shopify-Produkt-ID | Varianten-ID |
 |---|---|---:|---|---|---|
@@ -29,13 +29,13 @@ Shopify-Abholung am Standort und die Wahl eines konkreten Abholdatums mit Uhrzei
 
 ### Vorläufiger Termin-App-Kandidat
 
-[Pickup Delivery Date Pickeasy](https://apps.shopify.com/order-delivery-date-time) ist ein **Kandidat für einen kostenlosen Pilottest**, keine bereits gewählte oder installierte Lösung. Die aktuelle App-Store-Seite nennt Abholung, Datum und Zeitslots, Sperrzeiten, Vorlauf, Bestelllimits und Deutsch als unterstützte Sprache. Der kostenlose Tarif ist laut Eintrag auf 10 Bestellungen pro Monat und einen Standort begrenzt. Starter kostet laut Eintrag USD 9.99 pro Monat; höhere Tarife kosten USD 19.99 bzw. USD 29.99. Die genauen Bestellgrenzen der kostenpflichtigen Tarife und der tatsächlich nutzbare Funktionsumfang sind vor Aktivierung zu prüfen. Das Checkout-Seiten-Widget wird auf der App-Seite nur für Shopify Plus ausgewiesen; die Produkt-/Warenkorbvariante müsste hier getestet werden.
+[Pickup Delivery Date Pickeasy](https://apps.shopify.com/order-delivery-date-time) ist installiert, die Tarifwahl aber noch nicht abgeschlossen. Im Pickeasy-Tarifbildschirm steht: **USD 0 pro Monat bis zu 10 Bestellungen/Monat; bei Überschreiten werden USD 9.99 pro Monat berechnet.** Damit ist der kostenlose Tarif nicht ohne mögliche Folgekosten, wenn der Shop mehr als 10 App-Bestellungen in einem Monat erhält. Der App Store nennt einen Standort im kostenlosen Plan. Starter kostet USD 9.99/Monat; Smart USD 19.99/Monat; Premium USD 29.99/Monat. Das Checkout-Seiten-Widget ist laut App-Seite Shopify Plus vorbehalten; im gewählten Shop wäre der Warenkorb-/Theme-Weg zu testen.
 
-Es wurde keine App installiert, kein kostenpflichtiger Pickeasy-Tarif aktiviert und keine Bestellung ausgelöst. App-Abrechnung, Wechselkurs und allfällige Abgaben sind nicht im Shop bestätigt.
+Pickeasy kann Abholung, Datum, Zeitslots, Vorlauf und Sperrzeiten verwalten. Die App wurde installiert, aber kein Tarif aktiviert und keine Bestellung ausgelöst. Wechselkurs und allfällige Abgaben sind nicht bestätigt.
 
 ### Geprüfte Installationsberechtigungen – noch nicht erteilt
 
-Die Installationsseite nennt Zugriff auf Kundendaten (Name, E-Mail, Telefonnummer, physische Adresse sowie Geolokalisierung, IP-Adresse, Browser und Betriebssystem), Inhaberdaten (Name, E-Mail, Telefonnummer, physische Adresse), Kunden- und Produktdaten, Inventar und Kollektionen, die gesamte Bestellhistorie der letzten 60 Tage, Bestellentwürfe und Versand-/Fulfillmentdaten. Zusätzlich werden Bearbeitungsrechte für Bestellungen, Shopify Functions (Zustellanpassungen und Warenkorb-/Checkout-Validierungen) sowie Onlineshop-Themes und Skript-Tags angefordert. Standorte und Gebietsschemas werden angezeigt. Diese Berechtigungen wurden nicht erteilt; Pickeasy ist nicht installiert.
+Die Installationsseite nennt Zugriff auf Kundendaten (Name, E-Mail, Telefonnummer, physische Adresse sowie Geolokalisierung, IP-Adresse, Browser und Betriebssystem), Inhaberdaten (Name, E-Mail, Telefonnummer, physische Adresse), Kunden- und Produktdaten, Inventar und Kollektionen, die gesamte Bestellhistorie der letzten 60 Tage, Bestellentwürfe und Versand-/Fulfillmentdaten. Zusätzlich werden Bearbeitungsrechte für Bestellungen, Shopify Functions (Zustellanpassungen und Warenkorb-/Checkout-Validierungen) sowie Onlineshop-Themes und Skript-Tags angefordert. Standorte und Gebietsschemas werden angezeigt. Diese Berechtigungen wurden bei der Installation erteilt. Die Nutzung/Abfrage tatsächlicher Kunden- oder Bestelldaten wurde nicht getestet; es wurde keine App-Bestellung ausgelöst.
 
 ## Abholung und Zahlung
 
@@ -61,11 +61,11 @@ Diese Schritte gelten erst, nachdem App, Standort, Zahlungsart, Kundenmitteilung
 | Position | Aktueller Preis/Status | Einordnung |
 |---|---|---|
 | Shopify | Basic; CHF 1/Monat bis 6. Januar 2027 laut Planansicht; regulär CHF 29/Monat durchgestrichen | Kartengebühren laut Planansicht: online 2,95 % + CHF 0,30; vor Ort 2 % + CHF 0,00. Nicht mit Bar/TWINT bei Abholung gleichzusetzen. |
-| Termin-App Pickeasy | Laut Listing kostenlos bis 10 Bestellungen/Monat; Starter USD 9.99/Monat | Nicht installiert. Funktions- und Bestellgrenze für den Liveumfang offen. |
+| Termin-App Pickeasy | USD 0/Monat bis 10 App-Bestellungen; USD 9.99/Monat bei Überschreiten laut Tarifbildschirm | Installiert; Tarif noch nicht aktiviert. Keine Bestellung ausgelöst. |
 | Shopify manuelle Zahlung | Keine externe Shopify-Transaktionsgebühr für manuelle Zahlungsmethoden laut Shopify-Hilfe | Bar/TWINT vor Ort bleibt vorgesehen; Zahlung erst nach Eingang als bezahlt markieren. |
 | Shopify Payments online | Nicht eingerichtet oder für diesen Auftrag aktiviert | Nicht Teil der vorgesehenen Pflichtzahlung. Gebühren hängen vom Tarif ab; Online-TWINT wäre eine separate optionale Erweiterung. |
 
-Keine App wurde installiert und kein Theme geändert. Basic ist im Shopify-Shop ausgewählt; die zeitlich befristete Aktion ist in der Admin-Planansicht sichtbar. Pickeasy-Installationsberechtigungen wurden geprüft, aber nicht erteilt.
+Pickeasy ist installiert und die angezeigten Berechtigungen sind erteilt; kein App-Tarif aktiviert, kein Theme geändert. Basic zeigt die zeitlich befristete Aktion. Keine Testbestellung ausgelöst.
 
 ## Tests und offene Abnahme
 
@@ -84,7 +84,7 @@ Die öffentliche Website verwendet weiterhin den bisherigen Formspree-Bestellweg
 
 ## Noch offene Freigabe
 
-- Pickeasy wurde noch nicht installiert. Zuerst muss der Betreiber Umfang, Datenzugriff und kostenlose Testinstallation freigeben. Für höhere Nutzung braucht es eine Kostenfreigabe nach bestätigter App-Abrechnung.
+- Pickeasy ist installiert; vor der Tarifwahl ist noch die mögliche USD-9.99-Monatsgebühr bei Überschreiten von 10 App-Bestellungen freizugeben oder abzulehnen. Zusätzlich müssen Terminpflicht, Warenkorb-Mengenlimit und Theme-Kompatibilität im Test geprüft werden.
 
 ## Verwendete Shopify-Quellen
 
