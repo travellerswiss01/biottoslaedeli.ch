@@ -35,9 +35,9 @@ Es wurde keine App installiert, kein kostenpflichtiger Tarif aktiviert und keine
 
 ## Abholung und Zahlung
 
-Der aktuelle Website-/Auditstand dokumentiert: frühestens am Folgetag, Montag bis Samstag, 08:00–18:00 Uhr, Halbstundenschritte, bis drei Kalendermonate voraus, Zeitzone Europe/Zurich. Diese Regeln müssen vor Übernahme durch den Betreiber bestätigt werden. Feiertage, Sperrtage, Kapazitäten und Vorbereitungszeiten ausser dem dokumentierten Mindestvorlauf bleiben offen.
+Der Betreiber hat am 7. Oktober 2026 bestätigt: frühestens am Folgetag, Montag bis Samstag, 08:00–18:00 Uhr, Halbstundenschritte, bis drei Kalendermonate voraus, Zeitzone Europe/Zurich. Feiertage, Sperrtage, Kapazitäten und Vorbereitungszeiten ausser dem dokumentierten Mindestvorlauf bleiben offen.
 
-Der bisherige Ablauf erlaubt 1–10 Körbe einer Variante pro Bestellung. Für den ersten Shopify-Abnahmeumfang soll diese bestehende Beschränkung erhalten bleiben, bis entschieden ist, ob gemischte Körbe oder 10 Stück je Produkt gewünscht sind. Eine Warenkorbmenge lässt sich nicht durch JavaScript allein absichern; die tatsächliche Server-/Appbegrenzung muss mit ungültigen Mengen getestet werden.
+Der Betreiber hat bestätigt: gemischte Sorten sind erlaubt, höchstens 10 Körbe insgesamt pro Bestellung. Das ist eine Gesamtgrenze über alle Varianten, keine Grenze von 10 pro Produkt. Die Pickeasy-Angabe «order limits» beschreibt Bestell-/Zeitfensterlimits und belegt keine Gesamtstückzahlgrenze im Warenkorb. Eine Warenkorbmenge lässt sich nicht durch JavaScript allein absichern; vor Freigabe muss eine unterstützte Shopify-/App-Validierung die Gesamtmenge serverseitig auf 10 begrenzen. Falls der gewählte Tarif diese Regel nicht unterstützt, bleibt die Integration blockiert.
 
 Die Website nennt weiterhin Zahlung bei Abholung, bar oder TWINT. Dafür ist eine manuelle Shopify-Zahlungsart mit klaren Anweisungen vorgesehen. Manuelle Shopify-Bestellungen bleiben bis zur tatsächlichen Zahlung als unbezahlt markiert; erst nach Erhalt von Bargeld oder TWINT wird der Zahlungsstatus im Admin auf bezahlt gesetzt. TWINT vor Ort ist keine Online-TWINT-Zahlung über Shopify Payments. Onlinezahlung wird nicht verpflichtend aktiviert.
 
@@ -73,11 +73,14 @@ Vor Freigabe müssen über den echten Shopify-Testkanal mindestens diese Fälle 
 
 Die öffentliche Website verwendet weiterhin den bisherigen Formspree-Bestellweg. Formspree und seine Daten wurden nicht entfernt oder verändert. Ein Wechsel erfolgt erst nach geprüfter Shopify-Vorschau; danach bleibt ein dokumentierter Rückweg über den vorherigen Website-Commit erhalten. Es gibt keinen Merge und keine Produktionsveröffentlichung.
 
-## Offene Betreiberentscheidungen
+## Bestätigte Betreiberentscheidungen
 
-- Gelten Abholvorlauf, Öffnungstage, Zeitfenster und Drei-Monats-Grenze weiterhin genau so?
-- Soll eine Bestellung wie bisher nur eine Korbart enthalten und höchstens 10 Stück umfassen, oder sind gemischte Körbe erlaubt?
-- Darf Pickeasy zunächst im kostenlosen Umfang (höchstens 10 Bestellungen/Monat) für einen Test eingerichtet werden? Für höhere Nutzung braucht es eine Kostenfreigabe nach bestätigter App-Abrechnung.
+- Abholvorlauf, Öffnungstage, Zeitfenster und Drei-Monats-Grenze gelten weiterhin wie dokumentiert.
+- Gemischte Sorten sind erlaubt; die Gesamtmenge ist auf 10 Körbe pro Bestellung begrenzt.
+
+## Noch offene Freigabe
+
+- Pickeasy wurde noch nicht installiert. Zuerst muss der Betreiber Umfang, Datenzugriff und kostenlose Testinstallation freigeben. Für höhere Nutzung braucht es eine Kostenfreigabe nach bestätigter App-Abrechnung.
 
 ## Verwendete Shopify-Quellen
 
