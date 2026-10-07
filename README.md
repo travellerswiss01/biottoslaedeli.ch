@@ -35,7 +35,7 @@ Dann `http://localhost:8080` öffnen. Beenden mit `Ctrl+C`. Der Server hört nur
 
 ### Shopify-Übergang – noch nicht freigeschaltet
 
-Die drei bestätigten Geschenkskörbe sind im verbundenen Shopify-Shop als Entwürfe mit den vorhandenen Fotos und Preisen vorbereitet. Shopify Basic zeigt im Admin CHF 1 pro Monat bis 6. Januar 2027; danach steht CHF 29 pro Monat als regulärer Betrag. Die aktuelle Website nutzt weiterhin den Formspree-Bestellweg; es gibt keine Shopify-Kaufbuttons und keine freigegebenen Checkout-Links. Die Termin-App ist noch nicht installiert oder geprüft.
+Die drei bestätigten Geschenkskörbe sind im verbundenen Shopify-Shop als Entwürfe mit den vorhandenen Fotos und Preisen vorbereitet. Shopify Basic zeigt im Admin CHF 1 pro Monat bis 6. Januar 2027; danach steht CHF 29 pro Monat als regulärer Betrag. Die aktuelle Website nutzt weiterhin den Formspree-Bestellweg; es gibt keine Shopify-Kaufbuttons und keine freigegebenen Checkout-Links. Pickeasy ist installiert, aber noch kein Tarif aktiviert: Der Tarifbildschirm zeigt USD 0 bis 10 Bestellungen pro Monat und USD 9.99 pro Monat bei Überschreiten.
 
 Der Abholstandort ist in Shopify auf **Biottos Lädeli, Hauptstrasse 90, 8357 Maischhausen** gesetzt. Terminwahl, manuelle Zahlung, Orderzustellung und serverseitige Mengenbegrenzung sind noch nicht abgenommen. Deshalb die Websitepreise und Formspree-Konfiguration noch nicht ablösen. Der vollständige Stand, die Kosten und die nötigen Prüfschritte stehen in [docs/shopify-pickup-integration.md](docs/shopify-pickup-integration.md).
 
