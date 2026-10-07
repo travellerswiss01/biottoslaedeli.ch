@@ -2,16 +2,16 @@
 (function(){
 var LANG_KEY="biottos-lang";
 var lang="de";
-var dict={"Jetzt bestellen":"Jetzt bstelle","Vorheriger Korb":"Vorige Gschänksharass","Nächster Korb":"Nächste Gschänksharass","Wischen oder Pfeile antippen":"Wische oder Pfeil antippe","Maischhauserkorb":"Maischhuserharass","Welcher darf's sein?":"Wele darfs sii?","Bestellen":"Bstelle","Der grosse":"De grosse","Der mittlere":"De mittlere","Der kleine":"De chliine",
+var dict={"Jetzt bestellen":"Jetzt bstelle","Vorheriger Korb":"Vorige Gschänksharass","Nächster Korb":"Nächste Gschänksharass","Wischen oder Pfeile antippen":"Wische oder Pfeil antippe","Welcher darf's sein?":"Wele darfs sii?","Bestellen":"Bstelle","Der grosse":"De grosse","Der mittlere":"De mittlere","Der kleine":"De chliine",
 "Geschenkskörbe":"Gschänksharass","Sprache":"Sproch","Zuhause":"Dehai","wo alles beginnt":"wo alles afangt","Garten":"Garte","was bei uns wächst":"wo bi üs wachst","Küche":"Chuchi","was daraus entsteht":"was drus entstoht","Geschenk":"Gschänk","fertig zum Abholen":"fertig zum Abhole",
 "Traubensaft":"Truubesaft","Süssmost":"Süessmost","Über uns":"Über üs","Abholung":"Abholig","Kontakt":"Kontakt",
-"Geschenke aus Maischhausen.":"Maischhuser Gschänk",
-"BIOTTOS LÄDELI · MAISCHHAUSEN":"BIOTTOS LÄDELI · MAISCHHUSE","MAISCHHAUSEN · THURGAU":"MAISCHHUSE · THURGAU","MIT SORGFALT ZUSAMMENGESTELLT":"MIT SORGFALT ZÄMEGSTELLT",
+"Geschenke aus Guntershausen.":"Guntershausenr Gschänk",
+"BIOTTOS LÄDELI · GUNTERSHAUSEN":"BIOTTOS LÄDELI · GUNTERSHAUSEN","GUNTERSHAUSEN · THURGAU":"GUNTERSHAUSEN · THURGAU","MIT SORGFALT ZUSAMMENGESTELLT":"MIT SORGFALT ZÄMEGSTELLT",
 
 "Wo fängt ein Geschenkskorb an?":"Wo fangt es Gschänksharass aa?",
 "Bei uns daheim.":"Bi üs dehai.",
 "Wo fängt das alles an?":"Wo fangt das alles ah?",
-"Biottos Lädeli beginnt nicht irgendwo – sondern zuhause, in Maischhuuse und im Garten.":"Biottos Lädeli fangt nöd irgenwo - sondern bi üs dehai im Garte ah.",
+"Biottos Lädeli beginnt nicht irgendwo – sondern zuhause, in Guntershausen und im Garten.":"Biottos Lädeli fangt nöd irgenwo - sondern bi üs dehai im Garte ah.",
 "Bei uns ziemlich oft im Garten.":"Bi üs ziemlich oft im Garte.",
 "Etwas Feines aus unserem Garten – zum Verschenken oder selber Geniessen.":"Öppis Feins us üsere Garte – zum Verschenke oder sälber Gnüsse.",
 "Was bei uns wächst, kommt bei uns in die Küche.":"Was bi üs wachst, chunnt bi üs i d Chuchi.",
@@ -27,8 +27,8 @@ var dict={"Jetzt bestellen":"Jetzt bstelle","Vorheriger Korb":"Vorige Gschänksh
 "Für Menschen mit Geschmack.":"Für Lüüt mit Gschmack.",
 "Korb anschauen":"Gschänksharass aluege","Was ist drin?":"Was isch dinne?",
 "Tippen":"Antippe","Sie auf einen Korb – dann geht's direkt zum Bestellzettel.":"en Gschänksharass – denn gaht's grad zum Bestellzettel.",
-"aus unserem Garten in Maischhausen":"us üsem Garte z Maischhuse",
-"Die blauen Trauben wachsen bei uns im Garten in Maischhausen, wo wir wohnen. Wir haben sie selber gepflückt, als sie schön reif waren.":"Die blaue Truube wachsed bi üs im Garte z Maischhuse. Mir hend sie selber gärntet, wo sie schön reif gsi sind.",
+"aus unserem Garten in Guntershausen":"us üsem Garte z Guntershausen",
+"Die blauen Trauben wachsen bei uns im Garten in Guntershausen, wo wir wohnen. Wir haben sie selber gepflückt, als sie schön reif waren.":"Die blaue Truube wachsed bi üs im Garte z Guntershausen. Mir hend sie selber gärntet, wo sie schön reif gsi sind.",
 "Otto, der Familienvater, hat daraus zusammen mit Bernadette mit einer Handpresse einen köstlichen Traubensaft gemacht.":"De Otto, üse Familievater, het zäme mit de Bernadette en feine Truubesaft presst.",
 "Fein zum Zmorge, zum Znüni oder als alkoholfreie Alternative am Tisch.":"Fein zum Zmorge, zum Znüni oder als alkoholfreii Alternative am Tisch.",
 "Fragen Sie uns einfach per WhatsApp, ob gerade Traubensaft im Lädeli bereitsteht.":"Fröged üs eifach per WhatsApp, öb grad Truubesaft im Lädeli parat isch.",
@@ -75,9 +75,9 @@ var dict={"Jetzt bestellen":"Jetzt bstelle","Vorheriger Korb":"Vorige Gschänksh
 "Beim Besuch unserer Website können technische Daten wie IP-Adresse, Browsertyp oder Zugriffszeit automatisch erfasst werden. Diese Daten dienen der sicheren und störungsfreien Bereitstellung der Website.":"Bi em Bsuech vo üsere Website chönd technischi Date wie IP-Adresse, Browsertyp oder Zuegriffsziit automatisch erfasst werde. Die Date diened de sichere und störigsfreie Bereitstellig vo de Website.",
 "Wir speichern persönliche Daten nur so lange, wie dies für die Bearbeitung der Bestellung oder aufgrund gesetzlicher Pflichten erforderlich ist.":"Mir speichered persönligi Date nur so lang, wie das für d Bearbeitig vo de Bestellig oder us gesetzliche Pflicht nötig isch.",
 "Bei Fragen zum Datenschutz können Sie uns über die angegebene Telefonnummer kontaktieren.":"Bi Frage zum Datenschutz chönd Sie üs über d agäh Telefonnummer kontaktiere.",
-"Biottos Lädeli":"Biottos Lädeli","Hauptstrasse 90, 8357 Maischhuuse TG":"Hauptstrasse 90, 8357 Maischhuuse TG"
+"Biottos Lädeli":"Biottos Lädeli","Hauptstrasse 90, 8357 Guntershausen TG":"Hauptstrasse 90, 8357 Guntershausen TG"
 ,
-"Hausgemacht in Maischhausen · Thurgau":"Huusgmacht z Maischhuse · Thurgau",
+"Hausgemacht in Guntershausen · Thurgau":"Huusgmacht z Guntershausen · Thurgau",
 "Der Geschenkkorb,":"De Gschänksharass,",
 "in dem alles selbst gemacht ist.":"wo alles sälber gmacht isch.",
 "Sirup, Saucen, Essig und Dörrfrüchte aus unserem Garten – von uns gemacht und von Hand zum Geschenkkorb gepackt.":"Sirup, Saucen, Essig und Dörrfrücht us üsem Garte – vo üs gmacht und vo Hand i de Gschänksharass packt.",
