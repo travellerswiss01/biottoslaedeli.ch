@@ -6,7 +6,7 @@
 
 - Shopwährung: CHF; Zeitzone: CEST; Land: Schweiz.
 - Shopstatus: Testzeitraum. Shopify startet Shops im privaten Modus bzw. mit inaktivem Checkout. Während eines Testzeitraums kann verkauft werden, wenn ein Zahlungsanbieter eingerichtet und der private Modus deaktiviert ist. Freischaltung und Zahlungsanbieter wurden hier nicht geprüft.
-- Kein bezahlter Tarif ist ausgewählt; Shopify Plus ist nicht aktiv. Shopify Basic kostet zurzeit CHF 29 pro Monat oder CHF 21 pro Monat bei jährlicher Abrechnung (CHF 252 im Voraus). Vor Auswahl die aktuellen Konditionen im Admin prüfen.
+- Shopify meldet den Tarif **Basic**; Shopify Plus ist nicht aktiv. Das genaue Abrechnungsintervall und der konkrete Rechnungsbetrag waren über die Shopabfrage nicht sichtbar und müssen unter Einstellungen → Plan/Rechnungen geprüft werden. Die öffentliche Schweizer Preisseite nennt CHF 29 monatlich oder CHF 21 pro Monat bei jährlicher Abrechnung (CHF 252 im Voraus); das ist kein Nachweis für die konkret gewählte Abrechnung.
 - Vor diesem Auftrag waren keine Produkte vorhanden. Die drei unten aufgeführten Produkte wurden als **Entwürfe** mit belegten Inhalten, Preisen und bestehenden Websitefotos angelegt. Sie sind nicht veröffentlicht. Es wurden keine Kaufbuttons in die Website eingebaut.
 - Der vorher unvollständige Standort ist jetzt «Biottos Lädeli», Hauptstrasse 90, 8357 Maischhausen.
 - Eine Termin-App ist nicht installiert. Zahlungsanbieter und manuelle Zahlungsarten sind noch nicht abschliessend geprüft.
@@ -56,12 +56,12 @@ Diese Schritte gelten erst, nachdem App, Standort, Zahlungsart, Kundenmitteilung
 
 | Position | Aktueller Preis/Status | Einordnung |
 |---|---|---|
-| Shopify | Testzeitraum; Basic CHF 29 monatlich oder CHF 21/Monat bei jährlicher Abrechnung | Noch kein Tarif ausgewählt. Der Jahrespreis wird im Voraus abgerechnet. |
+| Shopify | Tarif Basic aktiv; Abrechnungsintervall/Betrag im Admin noch nicht geprüft | Aktuelle öffentliche Preisseite: CHF 29 monatlich oder CHF 21/Monat bei jährlicher Abrechnung (CHF 252 im Voraus). |
 | Termin-App Pickeasy | Laut Listing kostenlos bis 10 Bestellungen/Monat; Starter USD 9.99/Monat | Nicht installiert. Funktions- und Bestellgrenze für den Liveumfang offen. |
 | Shopify manuelle Zahlung | Keine externe Shopify-Transaktionsgebühr für manuelle Zahlungsmethoden laut Shopify-Hilfe | Bar/TWINT vor Ort bleibt vorgesehen; Zahlung erst nach Eingang als bezahlt markieren. |
 | Shopify Payments online | Nicht eingerichtet oder für diesen Auftrag aktiviert | Nicht Teil der vorgesehenen Pflichtzahlung. Gebühren hängen vom Tarif ab; Online-TWINT wäre eine separate optionale Erweiterung. |
 
-Keine kostenpflichtige App, kein Tarif und kein Theme wurde aktiviert. Vor einer Aktivierung muss die konkrete CHF-Gesamtsumme im Shopify-Admin freigegeben werden.
+Keine kostenpflichtige App und kein Theme wurden aktiviert. Basic ist im Shopify-Shop ausgewählt. Der konkrete Rechnungsbetrag und das Abrechnungsintervall sind vor der Kostenübersicht im Admin zu bestätigen.
 
 ## Tests und offene Abnahme
 
