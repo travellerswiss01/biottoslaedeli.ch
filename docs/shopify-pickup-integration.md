@@ -6,7 +6,7 @@
 
 - Shopwährung: CHF; Zeitzone: CEST; Land: Schweiz.
 - Shopstatus: Testzeitraum. Shopify startet Shops im privaten Modus bzw. mit inaktivem Checkout. Während eines Testzeitraums kann verkauft werden, wenn ein Zahlungsanbieter eingerichtet und der private Modus deaktiviert ist. Freischaltung und Zahlungsanbieter wurden hier nicht geprüft.
-- Shopify meldet den Tarif **Basic**; Shopify Plus ist nicht aktiv. Das genaue Abrechnungsintervall und der konkrete Rechnungsbetrag waren über die Shopabfrage nicht sichtbar und müssen unter Einstellungen → Plan/Rechnungen geprüft werden. Die öffentliche Schweizer Preisseite nennt CHF 29 monatlich oder CHF 21 pro Monat bei jährlicher Abrechnung (CHF 252 im Voraus); das ist kein Nachweis für die konkret gewählte Abrechnung.
+- Shopify meldet den Tarif **Basic**. Im Admin unter Einstellungen → Plan wird eine Aktion von **CHF 1 pro Monat bis 6. Januar 2027** angezeigt; **CHF 29 pro Monat** ist als regulärer Betrag durchgestrichen. Der genaue Betrag der späteren Rechnung sollte nach Ablauf der Aktion erneut geprüft werden. Die Planansicht nennt Kartengebühren von 2,95 % + CHF 0,30 online und 2 % + CHF 0,00 vor Ort. Das sind Kartengebühren; sie belegen keine Gebühr auf Barzahlung oder TWINT bei Abholung. Shopify Plus ist nicht aktiv.
 - Vor diesem Auftrag waren keine Produkte vorhanden. Die drei unten aufgeführten Produkte wurden als **Entwürfe** mit belegten Inhalten, Preisen und bestehenden Websitefotos angelegt. Sie sind nicht veröffentlicht. Es wurden keine Kaufbuttons in die Website eingebaut.
 - Der vorher unvollständige Standort ist jetzt «Biottos Lädeli», Hauptstrasse 90, 8357 Maischhausen.
 - Eine Termin-App ist nicht installiert. Zahlungsanbieter und manuelle Zahlungsarten sind noch nicht abschliessend geprüft.
@@ -31,7 +31,11 @@ Shopify-Abholung am Standort und die Wahl eines konkreten Abholdatums mit Uhrzei
 
 [Pickup Delivery Date Pickeasy](https://apps.shopify.com/order-delivery-date-time) ist ein **Kandidat für einen kostenlosen Pilottest**, keine bereits gewählte oder installierte Lösung. Die aktuelle App-Store-Seite nennt Abholung, Datum und Zeitslots, Sperrzeiten, Vorlauf, Bestelllimits und Deutsch als unterstützte Sprache. Der kostenlose Tarif ist laut Eintrag auf 10 Bestellungen pro Monat und einen Standort begrenzt. Starter kostet laut Eintrag USD 9.99 pro Monat; höhere Tarife kosten USD 19.99 bzw. USD 29.99. Die genauen Bestellgrenzen der kostenpflichtigen Tarife und der tatsächlich nutzbare Funktionsumfang sind vor Aktivierung zu prüfen. Das Checkout-Seiten-Widget wird auf der App-Seite nur für Shopify Plus ausgewiesen; die Produkt-/Warenkorbvariante müsste hier getestet werden.
 
-Es wurde keine App installiert, kein kostenpflichtiger Tarif aktiviert und keine Bestellung ausgelöst. App-Abrechnung, Wechselkurs und allfällige Abgaben sind nicht im Shop bestätigt.
+Es wurde keine App installiert, kein kostenpflichtiger Pickeasy-Tarif aktiviert und keine Bestellung ausgelöst. App-Abrechnung, Wechselkurs und allfällige Abgaben sind nicht im Shop bestätigt.
+
+### Geprüfte Installationsberechtigungen – noch nicht erteilt
+
+Die Installationsseite nennt Zugriff auf Kundendaten (Name, E-Mail, Telefonnummer, physische Adresse sowie Geolokalisierung, IP-Adresse, Browser und Betriebssystem), Inhaberdaten (Name, E-Mail, Telefonnummer, physische Adresse), Kunden- und Produktdaten, Inventar und Kollektionen, die gesamte Bestellhistorie der letzten 60 Tage, Bestellentwürfe und Versand-/Fulfillmentdaten. Zusätzlich werden Bearbeitungsrechte für Bestellungen, Shopify Functions (Zustellanpassungen und Warenkorb-/Checkout-Validierungen) sowie Onlineshop-Themes und Skript-Tags angefordert. Standorte und Gebietsschemas werden angezeigt. Diese Berechtigungen wurden nicht erteilt; Pickeasy ist nicht installiert.
 
 ## Abholung und Zahlung
 
@@ -56,12 +60,12 @@ Diese Schritte gelten erst, nachdem App, Standort, Zahlungsart, Kundenmitteilung
 
 | Position | Aktueller Preis/Status | Einordnung |
 |---|---|---|
-| Shopify | Tarif Basic aktiv; Abrechnungsintervall/Betrag im Admin noch nicht geprüft | Aktuelle öffentliche Preisseite: CHF 29 monatlich oder CHF 21/Monat bei jährlicher Abrechnung (CHF 252 im Voraus). |
+| Shopify | Basic; CHF 1/Monat bis 6. Januar 2027 laut Planansicht; regulär CHF 29/Monat durchgestrichen | Kartengebühren laut Planansicht: online 2,95 % + CHF 0,30; vor Ort 2 % + CHF 0,00. Nicht mit Bar/TWINT bei Abholung gleichzusetzen. |
 | Termin-App Pickeasy | Laut Listing kostenlos bis 10 Bestellungen/Monat; Starter USD 9.99/Monat | Nicht installiert. Funktions- und Bestellgrenze für den Liveumfang offen. |
 | Shopify manuelle Zahlung | Keine externe Shopify-Transaktionsgebühr für manuelle Zahlungsmethoden laut Shopify-Hilfe | Bar/TWINT vor Ort bleibt vorgesehen; Zahlung erst nach Eingang als bezahlt markieren. |
 | Shopify Payments online | Nicht eingerichtet oder für diesen Auftrag aktiviert | Nicht Teil der vorgesehenen Pflichtzahlung. Gebühren hängen vom Tarif ab; Online-TWINT wäre eine separate optionale Erweiterung. |
 
-Keine kostenpflichtige App und kein Theme wurden aktiviert. Basic ist im Shopify-Shop ausgewählt. Der konkrete Rechnungsbetrag und das Abrechnungsintervall sind vor der Kostenübersicht im Admin zu bestätigen.
+Keine App wurde installiert und kein Theme geändert. Basic ist im Shopify-Shop ausgewählt; die zeitlich befristete Aktion ist in der Admin-Planansicht sichtbar. Pickeasy-Installationsberechtigungen wurden geprüft, aber nicht erteilt.
 
 ## Tests und offene Abnahme
 
