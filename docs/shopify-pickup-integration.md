@@ -39,7 +39,7 @@ Die Installationsseite nennt Zugriff auf Kundendaten (Name, E-Mail, Telefonnumme
 
 ## Abholung und Zahlung
 
-Der Betreiber hat am 7. Oktober 2026 bestätigt: frühestens am Folgetag, Montag bis Samstag, 08:00–18:00 Uhr, Halbstundenschritte, bis drei Kalendermonate voraus, Zeitzone Europe/Zurich. Feiertage, Sperrtage, Kapazitäten und Vorbereitungszeiten ausser dem dokumentierten Mindestvorlauf bleiben offen.
+Der Betreiber hat am 7. Oktober 2026 bestätigt: frühestens am Folgetag, Montag bis Samstag, 08:00–18:00 Uhr, Halbstundenschritte, bis drei Kalendermonate voraus, Zeitzone Europe/Zurich. Pickeasy zeigt derzeit 90 Tage; das ist nicht in jedem Monat exakt gleichbedeutend mit drei Kalendermonaten und muss an der Kalendergrenze in der Vorschau geprüft werden. Feiertage, Sperrtage, Kapazitäten und Vorbereitungszeiten ausser dem dokumentierten Mindestvorlauf bleiben offen.
 
 Der Betreiber hat bestätigt: gemischte Sorten sind erlaubt; ein 10-Körbe-Limit ist nicht erforderlich. Es wird keine Gesamtstückzahlgrenze für den Shopify-Warenkorb eingerichtet. Die Pickeasy-App-Abrechnungsschwelle von 10 App-Bestellungen ist davon getrennt und kann bei Überschreiten USD 9.99 je 30 Tage auslösen. Vor Freigabe bleibt zu testen, ob der Warenkorb mehrere Varianten korrekt zusammenführt und Pickeasy das erforderliche Zeitfenster in der Bestellung speichert.
 
@@ -65,7 +65,7 @@ Diese Schritte gelten erst, nachdem App, Standort, Zahlungsart, Kundenmitteilung
 | Shopify manuelle Zahlung | Keine externe Shopify-Transaktionsgebühr für manuelle Zahlungsmethoden laut Shopify-Hilfe | Bar/TWINT vor Ort bleibt vorgesehen; Zahlung erst nach Eingang als bezahlt markieren. |
 | Shopify Payments online | Nicht eingerichtet oder für diesen Auftrag aktiviert | Nicht Teil der vorgesehenen Pflichtzahlung. Gebühren hängen vom Tarif ab; Online-TWINT wäre eine separate optionale Erweiterung. |
 
-Pickeasy Freemium ist aktiviert; die angezeigten App-Berechtigungen wurden bei der Installation erteilt. Das Horizon-App-Embed ist weiterhin deaktiviert. Basic zeigt die zeitlich befristete Aktion. Keine Testbestellung ausgelöst.
+Pickeasy Freemium ist aktiviert; die angezeigten App-Berechtigungen wurden bei der Installation erteilt. Die ursprüngliche Horizon-Einbettung ist weiterhin deaktiviert. Für die isolierte Vorschau wurde «Kopie von Horizon» als unveröffentlichtes Draft-Theme dupliziert und dort nur «Date and Time Picker Pickeasy» eingeschaltet und gespeichert. Die Theme-Vorschau zeigt noch generische Horizon-Platzhalter; die Shopify-Entwürfe erscheinen nicht als kaufbare Produkte. Basic zeigt die zeitlich befristete Aktion. Keine Testbestellung ausgelöst.
 
 ## Tests und offene Abnahme
 
