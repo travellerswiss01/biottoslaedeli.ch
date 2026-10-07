@@ -4,7 +4,7 @@ Statische Geschäftswebsite mit HTML, CSS und JavaScript. Kein Framework, kein B
 
 ## Auf Windows lokal ansehen
 
-1. Auf GitHub den gewünschten Branch auswählen: `main` ist der Hauptstand; Änderungen dieses Auftrags liegen auf `fix/website-quality`.
+1. Auf GitHub den gewünschten Branch auswählen: `main` ist der Ausgangsstand; die Shopify-Vorbereitung liegt auf `feat/shopify-pickup`.
 2. **Code → Download ZIP**, danach **Alle extrahieren**. Alle Ordner zusammen lassen.
 3. Für eine schnelle Ansicht `index.html` in Chrome oder Edge öffnen. Für zuverlässige Prüfung den lokalen Server verwenden.
 4. [Node.js 24 LTS](https://nodejs.org/en/download) installieren. Die Reihe 24 ist laut [offiziellem Releaseplan](https://github.com/nodejs/Release#release-schedule) am 7. Oktober 2026 unterstützt, mit geplantem Wartungsende am 30. April 2028.
@@ -32,6 +32,12 @@ Dann `http://localhost:8080` öffnen. Beenden mit `Ctrl+C`. Der Server hört nur
 | Lokale Vorschau | `scripts/serve.mjs` |
 | GitHub-Prüflauf | `.github/workflows/site-checks.yml` |
 | Suchmaschinen | Metadaten in den HTML-Dateien, `sitemap.xml`, `robots.txt` |
+
+### Shopify-Übergang – noch nicht freigeschaltet
+
+Die drei bestätigten Geschenkskörbe sind im verbundenen Shopify-Shop als Entwürfe mit den vorhandenen Fotos und Preisen vorbereitet. Die aktuelle Website nutzt weiterhin den Formspree-Bestellweg; es gibt keine Shopify-Kaufbuttons und keine freigegebenen Checkout-Links. Der Shopify-Shop ist im Testzeitraum, hat keinen bezahlten Tarif ausgewählt und die Termin-App ist noch nicht geprüft.
+
+Der Abholstandort ist in Shopify auf **Biottos Lädeli, Hauptstrasse 90, 8357 Maischhausen** gesetzt. Terminwahl, manuelle Zahlung, Orderzustellung und serverseitige Mengenbegrenzung sind noch nicht abgenommen. Deshalb die Websitepreise und Formspree-Konfiguration noch nicht ablösen. Der vollständige Stand, die Kosten und die nötigen Prüfschritte stehen in [docs/shopify-pickup-integration.md](docs/shopify-pickup-integration.md).
 
 ### Preise und Bestellung
 
