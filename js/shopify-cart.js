@@ -20,7 +20,7 @@
   function buildCartUrl(key,quantity){
     var variant=config.variants[key],count=Number(quantity);
     if(!variant||!Number.isInteger(count)||count<1)return null;
-    var base=config.storeUrl.replace(/\\/+$/,'');
+    var base=config.storeUrl.replace(/\/+$/,'');
     return base+"/cart/"+variant+":"+count+(config.storefront?"?storefront=true":"");
   }
 
