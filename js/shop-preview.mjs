@@ -25,6 +25,20 @@ function render() {
   const visible = filterProducts(productDrafts, search.value, category.value);
   const fragment = document.createDocumentFragment();
   visible.forEach((product,index) => {
+    if (product.displayVariants) {
+      const row = element('div','','shop-variant-row');
+      row.setAttribute('role','group');
+      row.setAttribute('aria-label',product.title+' – alle Grössen');
+      product.displayVariants.forEach(variant => {
+        const card = element('article','','shop-card');
+        card.append(photo(variant.photo,product.title+' · '+variant.label),
+          element('p',product.type,'shop-category'),element('h2',product.title),
+          element('p',variant.label,'shop-variant-size'));
+        row.append(card);
+      });
+      fragment.append(row);
+      return;
+    }
     const article = element('article', '', 'shop-card');
     article.append(photo(product.photos[0],product.title,index > 2),element('p',product.type,'shop-category'),element('h2',product.title));
     if (product.sizes) article.append(element('p',product.sizes.join(' · '),'shop-sizes'));

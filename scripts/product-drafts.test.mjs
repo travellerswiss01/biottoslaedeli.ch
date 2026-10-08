@@ -15,5 +15,8 @@ test('draft products have no fabricated prices, stock or Shopify IDs',()=>{
     assert.equal(product.price,null);assert.equal(product.stock,null);
     assert.equal(product.shopifyProductId,null);assert.equal(product.confirmed,false);
     if(product.sizes) assert.equal(product.sizes.length,product.photos.length);
+    if(product.displayVariants) {
+      for(const variant of product.displayVariants) assert.ok(product.photos.includes(variant.photo));
+    }
   }
 });

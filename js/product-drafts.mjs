@@ -14,7 +14,11 @@ export const productDrafts = [
   {title:'Gedörrte Birnen · ganz',type:'Dörrfrüchte',photos:['Cellophanetüte mit ganzen getrockneten Birnen.png','Verpackte Dörrbirnen ganz mit Probierteller.png','Gedörrte Birne einzel Keramikschälchen.png']},
   {title:'Gedörrte Birnen · halb',type:'Dörrfrüchte',photos:['Gedörrte Birnen halb Becher.jpg','Gedörrte Birnen halb  Becher und im Keramikschälchen.png']},
   {title:'Gedörrte Zwetschgen',type:'Dörrfrüchte',photos:['Gedörrte Zwetschgen Becher.png','Gedörrte Zwetschgen halb Becher ausgelegt.png','Gedörrte Zwetschge einzel.png']},
-  {title:'Süssmost',type:'Säfte',photos:['Süssmost3Liter.png','Süssmost Bag in Box 5Liter.png'],sizes:['3 Liter','5 Liter']},
+  {title:'Süssmost',type:'Säfte',photos:['Süssmost3Liter.png','Süssmost Bag in Box 5Liter.png'],ingredients:'Reiner Apfelsaft aus 15 verschiedenen Apfelsorten',displayVariants:[
+    {label:'3 Liter',photo:'Süssmost3Liter.png',stock:25},
+    {label:'5 Liter',photo:'Süssmost Bag in Box 5Liter.png',stock:50},
+    {label:'10 Liter',photo:'Süssmost Bag in Box 5Liter.png',stock:25}
+  ]},
   {title:'Traubensaft',type:'Säfte',photos:['TraubensafthalbLiter.png','Traubensaft1Liter.png'],sizes:['0.5 Liter','1 Liter']},
   {title:'Essigharassli',type:'Geschenksharassen',photos:['Essigharassli.png']},
   {title:'Geschenksharassli · mittel',type:'Geschenksharassen',photos:['Geschenkharassli mittel.png']},
