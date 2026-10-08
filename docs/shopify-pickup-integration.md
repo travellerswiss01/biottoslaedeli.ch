@@ -26,6 +26,12 @@ Auf dem Branch `feat/shopify-pickup` ist eine kleine Shopify-Cart-Brücke vorber
 
 Die Brücke wird erst freigeschaltet, wenn ein direkter Einstieg aus einer frischen Sitzung im Ziel-Theme Pickeasy sichtbar lädt, ein gültiges Zeitfenster bis zum Checkout erhalten bleibt und die Terminpflicht ohne Umgehung nachgewiesen ist. Der aktuelle Gegencheck landete ohne Draft-Vorschau im aktiven Theme; dort fehlte Pickeasy. Deshalb gibt es noch keine öffentliche Umschaltung, keinen neuen Kaufbutton und keine Entfernung von Formspree.
 
+### Einbettungsstatus im Theme-Editor (8. Oktober 2026)
+
+Die lesende Gegenprüfung im Shopify-Theme-Editor bestätigt die Ursache: Im veröffentlichten Theme «Horizon» (Theme-ID `194903867658`) sind «Date and Time Picker» und «Zipcode check all pages» von Pickeasy ausgeschaltet. Im unveröffentlichten Entwurf «Kopie von Horizon» (Theme-ID `194906685706`) ist nur «Date and Time Picker» eingeschaltet; der Zipcode-Check bleibt ausgeschaltet. Kein Schalter wurde bei dieser Prüfung betätigt, und der aktive Theme-Stand wurde nicht verändert.
+
+Damit bleibt der Draft die Prüfstrecke, aber nicht der öffentliche Kaufpfad. Die Cart-Brücke darf erst nach einer bestätigten Aktivierung und End-to-End-Prüfung im tatsächlichen Ziel-Theme auf `enabled: true` gestellt werden.
+
 ## Vorgesehene Architektur
 
 Die bestehende statische Website und die freigegebene Produktdarstellung bleiben erhalten. Nach erfolgreicher Abnahme soll jede Produktkarte die gewählte Shopify-Variante mit Menge 1 vorladen und zur Shopify-Onlineshop-Warenkorbseite führen. Shopify dokumentiert Warenkorb-Permalinks für vorausgewählte Varianten und Mengen; mit `storefront=true` kann der Link zuerst den Onlineshop-Warenkorb statt des Checkouts öffnen. Dadurch kann ein Terminpicker auf Produkt- oder Warenkorbseite angezeigt werden.
