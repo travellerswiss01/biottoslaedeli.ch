@@ -13,12 +13,17 @@ function element(tag, text, className) {
 function photo(filename, title, lazy = true) {
   const media = element('div', '', 'shop-photo');
   const img = element('img');
+  const picture = element('picture');
+  const source = element('source');
+  source.type = 'image/webp';
+  source.srcset = 'img/' + encodeURIComponent(filename + '.webp');
   img.src = 'img/' + encodeURIComponent(filename);
   img.alt = title;
   img.loading = lazy ? 'lazy' : 'eager';
   img.width = 600; img.height = 600;
   img.addEventListener('error', () => media.replaceChildren(element('span', 'Bild derzeit nicht verfügbar')), {once:true});
-  media.append(img);
+  picture.append(source, img);
+  media.append(picture);
   return media;
 }
 function render() {
@@ -60,3 +65,4 @@ function render() {
 search.addEventListener('input',render);
 category.addEventListener('change',render);
 render();
+

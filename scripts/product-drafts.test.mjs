@@ -6,8 +6,8 @@ import {productDrafts} from '../js/product-drafts.mjs';
 test('all uploaded product photos are grouped once and exist at their original paths',()=>{
   const photos=productDrafts.flatMap(product=>product.photos);
   assert.equal(productDrafts.length,17);
-  assert.equal(photos.length,24);
-  assert.equal(new Set(photos).size,24);
+  assert.equal(photos.length,25);
+  assert.equal(new Set(photos).size,25);
   for(const filename of photos) assert.ok(fs.existsSync(new URL('../img/'+encodeURIComponent(filename),import.meta.url)),filename);
 });
 test('draft products have no fabricated prices, stock or Shopify IDs',()=>{
@@ -20,3 +20,4 @@ test('draft products have no fabricated prices, stock or Shopify IDs',()=>{
     }
   }
 });
+

@@ -20,6 +20,7 @@
 .shop-variant-row{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;min-width:0}
 .shop-variant-size{font-size:1.15rem;font-weight:700;margin:6px 0 12px}
 .shop-photo{aspect-ratio:1;background:#fff;border:1px solid #eee;border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.shop-photo picture{display:block;width:100%;height:100%}
 .shop-photo img{width:100%;height:100%;object-fit:contain;padding:16px;box-sizing:border-box}
 .shop-photo span{padding:24px;text-align:center;color:#595959}
 .shop-category{font-size:.8rem;color:#65605a;margin:18px 0 6px;min-height:1.2em}
@@ -40,3 +41,4 @@
 @media(max-width:760px){.shop-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 16px}.shop-page .site-head .wrap{align-items:flex-start;flex-direction:column;gap:8px}.shop-page .site-head nav{gap:6px 18px}.shop-intro{padding-top:28px}.shop-card h2{font-size:1.2rem}}
 @media(max-width:380px){.shop-grid{grid-template-columns:1fr}.shop-controls label{min-width:0;flex-basis:100%}}
 @media(max-width:760px){.shop-variant-row{gap:10px}.shop-variant-row .shop-photo img{padding:6px}.shop-variant-row h2{font-size:clamp(.9rem,3vw,1.2rem)}.shop-variant-row .shop-variant-size{font-size:1rem}}
+
