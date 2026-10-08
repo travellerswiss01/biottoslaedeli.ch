@@ -170,3 +170,10 @@ Offen bleibt die positive Abnahme des vollständigen Statuswegs: eine eindeutig 
 Shopify führt unter Kundenbenachrichtigungen die Vorlage **«Bereit zur lokalen Abholung»**. Sie wird laut Admin gesendet, wenn eine Bestellung zur Abholung bereit ist. Die Vorschau zeigt den Betreff «Ein Paket aus der Bestellung #9999 ist bereit für die Abholung» sowie den Text «Deine Bestellung ist zur Abholung bereit» und einen Abholort. Die Vorschau nutzt Shopify-Beispieldaten.
 
 Die Vorlage wurde nur gelesen; «Test senden» wurde nicht betätigt. Es wurde keine E-Mail ausgelöst und keine Kundennachricht geändert. Die tatsächliche Zustellung bleibt bis zur klar gekennzeichneten Testbestellung offen.
+
+
+### Testauftrag #D1 vorbereitet am 8. Oktober 2026, 14:02 Uhr (Europe/Zurich)
+
+Der bestehende Entwurf **#D1** wurde für die native Abholbestätigungsprüfung eindeutig gekennzeichnet: «Chli & Fii», Menge 1, CHF 19.95, Testkundschaft «Test Bestellung», `test@example.com`, Tag `TESTBESTELLUNG` und interne QA-Notiz. Die Zahlung ist auf «später fällig» mit Zahlungsbedingung «fällig bei Erhalt» gesetzt.
+
+Der Entwurf wurde gespeichert, aber noch nicht als Bestellung erstellt. Es gab keine Zahlung, keine Bestandsänderung und keine Nachricht. Der verbleibende Schritt ist, den Testauftrag anzulegen, danach «Bereit zur Abholung» zu markieren und die Abholbestätigung an der Testadresse zu prüfen.
