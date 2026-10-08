@@ -177,3 +177,11 @@ Die Vorlage wurde nur gelesen; «Test senden» wurde nicht betätigt. Es wurde k
 Der bestehende Entwurf **#D1** wurde für die native Abholbestätigungsprüfung eindeutig gekennzeichnet: «Chli & Fii», Menge 1, CHF 19.95, Testkundschaft «Test Bestellung», `test@example.com`, Tag `TESTBESTELLUNG` und interne QA-Notiz. Die Zahlung ist auf «später fällig» mit Zahlungsbedingung «fällig bei Erhalt» gesetzt.
 
 Der Entwurf wurde gespeichert, aber noch nicht als Bestellung erstellt. Es gab keine Zahlung, keine Bestandsänderung und keine Nachricht. Der verbleibende Schritt ist, den Testauftrag anzulegen, danach «Bereit zur Abholung» zu markieren und die Abholbestätigung an der Testadresse zu prüfen.
+
+## Aktueller Branch-Stand nach nativer Abnahme und ausdrücklicher Freigabe am 8. Oktober 2026
+
+Die native Abnahme wurde inzwischen mit dem klar markierten Auftrag **#1003** durchgeführt: Abholung im Geschäft, erwartete Bereitstellung, «Bereit zur Abholung» und die native Abholbestätigung an `test@example.com` sind im Shopify-Admin nachgewiesen. Der versehentlich als Versand angelegte Testauftrag **#1002** wurde nach separater Freigabe storniert, archiviert und mit einem Artikel wieder eingelagert; eine Stornierungs-E-Mail wurde nicht versendet.
+
+Die Cart-Brücke auf `feat/shopify-pickup` wurde nach ausdrücklicher Freigabe auf `enabled: true` gestellt. Diese Aktivierung gilt nur für den Branch. Die authentifizierte Vercel-Vorschau zeigt «Guntershausen» und die drei Produkte; der CTA «Chli & Fii» öffnet nun den Shopify-Cart-Einstieg. Es wurde kein Checkout abgesendet und keine Bestellung über die Website angelegt. Der Formspree-Rückfallweg, das veröffentlichte Theme, Shopify-Flow und die öffentliche Website bleiben unverändert.
+
+Die lokale Prüfung besteht mit **5/5 Tests**, `npm run check` über **13 Quelldateien** und `git diff --check`. Offen bleiben die Übertragung des Branch-Commits zur Vercel-Vorschau, die separate Mobil-/Desktop-E2E-Prüfung des Shopify-Ziels, Review/Merge von PR #3, eine spätere öffentliche Umschaltung und die Formspree-Ablösung. Keine dieser Live-Aktionen ist mit der Branch-Aktivierung freigegeben oder ausgeführt.

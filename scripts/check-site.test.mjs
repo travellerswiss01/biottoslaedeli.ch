@@ -53,15 +53,16 @@ test('detects invalid anchors, duplicate IDs and invalid structured data', (t) =
 });
 
 
-test('keeps the Shopify cart bridge gated until storefront readiness is proven', () => {
+test('routes valid product CTAs through the Shopify cart bridge', () => {
   const helperPath = path.resolve(
     path.dirname(fileURLToPath(import.meta.url)),
     '../js/shopify-cart.js',
   );
-  const context = { window: { location: { assign() {} } } };
+  const assigned = [];
+  const context = { window: { location: { assign(url) { assigned.push(url); } } } };
   vm.runInNewContext(fs.readFileSync(helperPath, 'utf8'), context);
   const bridge = context.window.BiottosShopify;
-  assert.equal(bridge.enabled, false);
+  assert.equal(bridge.enabled, true);
   for (const [key, variant] of Object.entries({
     gross: '53868017647882',
     fein: '53868017582346',
@@ -76,7 +77,10 @@ test('keeps the Shopify cart bridge gated until storefront readiness is proven',
     assert.equal(bridge.buildCartUrl('chili', quantity), null);
   }
   assert.equal(bridge.buildCartUrl('unknown', 1), null);
-  assert.equal(bridge.openCart('chili', 1), false);
+  assert.equal(bridge.openCart('chili', 1), true);
+  assert.deepEqual(assigned, [
+    'https://biottoslaedeli.myshopify.com/cart/53868017549578:1?storefront=true',
+  ]);
 });
 
 test('keeps the Formspree fallback and all product CTAs wired', () => {

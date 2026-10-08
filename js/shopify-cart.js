@@ -2,12 +2,12 @@
   "use strict";
 
   /*
-   * Shopify migration gate. Keep this disabled until the target storefront
-   * theme loads Pickeasy from a fresh session and the checkout/no-show tests
-   * are signed off. This keeps the existing Formspree order path intact.
+   * Shopify migration gate. Native Shopify pickup was signed off with the
+   * marked QA order #1003. The branch preview may now route product CTAs to
+   * the Shopify cart; live publication and Formspree removal stay separate.
    */
   var config=Object.freeze({
-    enabled:false,
+    enabled:true,
     storeUrl:"https://biottoslaedeli.myshopify.com",
     storefront:true,
     variants:Object.freeze({
