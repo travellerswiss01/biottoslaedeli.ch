@@ -105,3 +105,56 @@ test('describes native pickup without mandatory date or time selection', () => {
   assert.match(html, /Nach Ihrer Bestellung zeigt Shopify den Abholort und die erwartete Bereitstellung\. Sobald Ihr Korb bereit ist, erhalten Sie die Abholbestätigung\./);
   assert.doesNotMatch(html, /<h3>Abholung festlegen<\/h3><p>Datum und Uhrzeit auswählen\.<\/p>/);
 });
+
+test('enhances all standalone product links and preserves unknown fallback links', () => {
+  const helperPath = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../js/shopify-cart.js');
+  const links = ['gross', 'fein', 'chili', 'unknown'].map((key) => ({ dataset: { shopifyCart: key }, href: 'index.html#koerbe' }));
+  const document = { readyState: 'complete', querySelectorAll(selector) { assert.equal(selector, 'a[data-shopify-cart]'); return links; } };
+  const context = { window: { document, location: { assign() {} } } };
+  vm.runInNewContext(fs.readFileSync(helperPath, 'utf8'), context);
+  for (const [i, variant] of ['53868017647882', '53868017582346', '53868017549578'].entries()) {
+    assert.equal(links[i].href, `https://biottoslaedeli.myshopify.com/cart/${variant}:1?storefront=true`);
+  }
+  assert.equal(links[3].href, 'index.html#koerbe');
+  assert.equal(context.window.BiottosShopify.buildCartUrl('toString', 1), null);
+  assert.equal(context.window.BiottosShopify.buildCartUrl('constructor', 1), null);
+  assert.equal(context.window.BiottosShopify.buildCartUrl('__proto__', 1), null);
+  assert.equal(context.window.BiottosShopify.buildCartUrl('gross', Number.MAX_SAFE_INTEGER + 1), null);
+  assert.match(context.window.BiottosShopify.buildCartUrl('gross', 11), /:11\?/);
+});
+
+test('keeps all standalone links on the original page when the bridge is disabled', () => {
+  const helperPath = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../js/shopify-cart.js');
+  const source = fs.readFileSync(helperPath, 'utf8').replace('enabled:true', 'enabled:false');
+  const links = [{ dataset: { shopifyCart: 'gross' }, href: 'index.html#koerbe' }];
+  const context = { window: { document: { readyState: 'complete', querySelectorAll() { return links; } }, location: { assign() { throw new Error('Must not navigate'); } } } };
+  vm.runInNewContext(source, context);
+  assert.equal(links[0].href, 'index.html#koerbe');
+  assert.equal(context.window.BiottosShopify.openCart('gross', 1), false);
+});
+
+test('removes obsolete limits and mandatory appointments from the native shopping pages', () => {
+  const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+  const index = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  const landing = fs.readFileSync(path.join(root, 'geschenkskoerbe.html'), 'utf8');
+  const corporate = fs.readFileSync(path.join(root, 'firmengeschenke.html'), 'utf8');
+  for (const html of [index, landing, corporate]) assert.doesNotMatch(html, /bis zu 10 Körbe|Bis 10 Körbe|mehr als 10 Körbe|Mehr als 10 Körbe/);
+  assert.doesNotMatch(landing, /Bestellen, Termin wählen|2 · Abholtermin wählen/);
+  for (const key of ['gross', 'fein', 'chili']) assert.match(landing, new RegExp(`data-shopify-cart="${key}"`));
+  assert.match(landing, /js\/shopify-cart\.js/);
+  const faq = JSON.parse([...index.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/g)].map((m) => m[1]).find((json) => JSON.parse(json)['@type'] === 'FAQPage'));
+  for (const entry of faq.mainEntity) assert.ok(index.includes(`<p>${entry.acceptedAnswer.text}</p>`), entry.name);
+});
+
+test('includes the confirmed operator, email, Shopify notice and reachable legal links', () => {
+  const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+  const index = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  assert.match(index, /Josef Ignaz Zehnder/);
+  assert.match(index, /mailto:biottoslaedeli@gmail\.com/);
+  assert.match(index, /Bestellungen über Shopify/);
+  for (const file of ['geschenkskoerbe.html', 'firmengeschenke.html']) {
+    const html = fs.readFileSync(path.join(root, file), 'utf8');
+    assert.match(html, /index\.html#l-impressum/);
+    assert.match(html, /index\.html#l-datenschutz/);
+  }
+});

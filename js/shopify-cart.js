@@ -18,8 +18,9 @@
   });
 
   function buildCartUrl(key,quantity){
+    if(!Object.prototype.hasOwnProperty.call(config.variants,key))return null;
     var variant=config.variants[key],count=Number(quantity);
-    if(!variant||!Number.isInteger(count)||count<1)return null;
+    if(!variant||!Number.isSafeInteger(count)||count<1)return null;
     var base=config.storeUrl.replace(/\/+$/,'');
     return base+"/cart/"+variant+":"+count+(config.storefront?"?storefront=true":"");
   }
@@ -35,4 +36,20 @@
       return true;
     }
   };
+
+  // Enhance product links on standalone pages without loading app.js,
+  // which depends on the homepage's dialogs. Original hrefs remain the
+  // no-JavaScript / disabled-bridge fallback and native link semantics stay intact.
+  var document=window.document;
+  function bindProductLinks(){
+    if(!config.enabled)return;
+    document.querySelectorAll('a[data-shopify-cart]').forEach(function(link){
+      var url=buildCartUrl(link.dataset.shopifyCart,1);
+      if(url)link.href=url;
+    });
+  }
+  if(document){
+    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bindProductLinks,{once:true});
+    else bindProductLinks();
+  }
 })(window);

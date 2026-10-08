@@ -117,15 +117,15 @@ var dict={"Jetzt bestellen":"Jetzt bstelle","Vorheriger Korb":"Vorige Gschänksh
 "Shopify informiert Sie":"Shopify informiert Sie",
 "Abholung vorbereiten":"Abholig vorbereite",
 "Shopify zeigt Abholort und erwartete Bereitstellung.":"Shopify zeigt Abholort und erwarteti Bereitstellig.",
-"Du bezahlst vor Ort":"Du bezahlsch vor Ort",
+"So bezahlen Sie":"So chönd Sie zahle",
 "Die wichtigsten Fragen.":"Die wichtigschte Frage.",
 "Noch etwas unklar?":"No öppis unklar?",
 "Wann kann ich meinen Korb abholen?":"Wänn cha ich min Gschänksharass abhole?",
 "Bei der Onlinebestellung wählen Sie Abholdatum und Uhrzeit. Ihr Korb steht am vereinbarten Termin im Biottos Lädeli bereit.":"Bi de Onlinebestellig wähled Sie Abholdatum und Uhrziit. De Gschänksharass staht am abgmachte Termin im Biottos Lädeli parat.",
 "Kann ich auch mehrere Körbe bestellen?":"Cha ich au mehri Gschänksharass bstelle?",
-"Ja. Im Bestellzettel können Sie bis zu 10 Körbe auswählen. Bei grösseren Mengen oder Firmenbestellungen melden Sie sich am besten direkt bei uns.":"Ja. Im Bestellzettel chönd Sie bis zu 10 Gschänksharass ussueche. Bi grössere Menge oder Firmabstellige melded Sie sich am beschte direkt bi üs.",
+"Ja. Im Shopify-Warenkorb können Sie mehrere verfügbare Körbe und verschiedene Sorten bestellen. Bei grösseren Mengen oder Firmenbestellungen melden Sie sich am besten direkt bei uns.":"Ja. Im Shopify-Warechorb chönd Sie mehri verfüegbari Gschänksharass und verschiedeni Sorte bstelle. Bi grössere Menge oder Firmabstellige melded Sie sich am beschte direkt bi üs.",
 "Wie bezahle ich?":"Wie bezahl ich?",
-"Sie bezahlen bei der Abholung vor Ort – bar oder mit TWINT.":"Sie bezahled bi de Abholig vor Ort – bar oder mit TWINT.",
+"Sie können im Shopify-Checkout online bezahlen oder bei der Abholung vor Ort – bar oder mit TWINT.":"Sie chönd im Shopify-Checkout online zahle oder bi de Abholig vor Ort – bar oder mit TWINT.",
 "Ist Versand möglich?":"Isch Versand möglich?",
 "Nein. Die Geschenkskörbe werden im Biottos Lädeli zur Abholung bereitgestellt.":"Nei. D Gschänksharass werde im Biottos Lädeli zur Abholig parat gstellt.",
 "Was ist in den Körben?":"Was isch i de Gschänksharass?",
@@ -137,7 +137,11 @@ var dict={"Jetzt bestellen":"Jetzt bstelle","Vorheriger Korb":"Vorige Gschänksh
 "anrufen →":"aalüte →",
 "Öffnungszeiten":"Öffnigsziite",
 "Für grössere Mengen":"Für grössere Menge",
-"Bis 10 Körbe online · grössere Bestellungen gern direkt anfragen":"Bis 10 Gschänksharass online · grössere Bestellige gern direkt aafrage"
+"Verfügbare Körbe direkt im Shopify-Warenkorb bestellen":"Verfüegbari Gschänksharass direkt im Shopify-Warechorb bstelle",
+"Firmengeschenke aus dem Thurgau – persönlich abgestimmt":"Firmagschänk us em Thurgau – persönlich abgsproche",
+"Abholen & geniessen":"Abhole & gnüsse",
+"Online bezahlen oder im Lädeli – bar oder mit TWINT.":"Online zahle oder im Lädeli – bar oder mit TWINT.",
+"Online im Shopify-Checkout oder bei Abholung bar oder mit TWINT. Ein Versand ist nicht möglich.":"Online im Shopify-Checkout oder bi Abholig bar oder mit TWINT. E Versand isch nöd möglich."
 };
 Object.assign(dict,{
 "Menü öffnen":"Menü öffne","Menü schliessen":"Menü schliesse",
@@ -448,7 +452,11 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")close();if(l
 })();
 (function(){var lg=document.getElementById("lg"),lastLegal=null;
 function close(){if(!lg.classList.contains("on"))return;lg.classList.remove("on");lg.setAttribute("aria-hidden","true");document.body.style.overflow=document.querySelector(".ov.on,.lb.on")?"hidden":"";if(lastLegal)lastLegal.focus()}
-document.addEventListener("click",function(e){var a=e.target.closest("[data-legal]");if(a){e.preventDefault();lastLegal=a;["impressum","datenschutz"].forEach(function(k){document.getElementById("l-"+k).hidden=(k!==a.dataset.legal)});lg.classList.add("on");lg.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";document.getElementById("lgx").focus()}});
+function openLegal(key,trigger){if(["impressum","datenschutz"].indexOf(key)<0)return;lastLegal=trigger||document.querySelector('[data-legal="'+key+'"]');["impressum","datenschutz"].forEach(function(k){document.getElementById("l-"+k).hidden=(k!==key)});lg.classList.add("on");lg.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";document.getElementById("lgx").focus()}
+function openLegalFromHash(){var key=location.hash.slice(1);if(key==="l-impressum"||key==="l-datenschutz")openLegal(key.slice(2))}
+document.addEventListener("click",function(e){var a=e.target.closest("[data-legal]");if(a){e.preventDefault();openLegal(a.dataset.legal,a)}});
+window.addEventListener("hashchange",openLegalFromHash);
+openLegalFromHash();
 document.getElementById("lgx").addEventListener("click",close);
 lg.addEventListener("click",function(e){if(e.target===lg)close()});
 document.addEventListener("keydown",function(e){if(e.key==="Escape")close();if(e.key==="Tab"&&lg.classList.contains("on")){var items=Array.from(lg.querySelectorAll("button,a[href]")).filter(function(el){return el.getClientRects().length&&!el.closest("[hidden]")}),first=items[0],last=items[items.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}});
