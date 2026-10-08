@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import vm from 'node:vm';
+import { fileURLToPath } from 'node:url';
 import { checkSite } from './check-site.mjs';
 function fixture(t, files) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'biottos-check-'));
@@ -48,4 +50,22 @@ test('detects invalid anchors, duplicate IDs and invalid structured data', (t) =
       '<div id="a"></div><div id="a"></div><a href="#absent">Link</a><script type="application/ld+json">{oops}</script>',
   });
   assert.equal(checkSite(root).errors.length, 3);
+});
+
+
+test('keeps the Shopify cart bridge gated until storefront readiness is proven', () => {
+  const helperPath = path.resolve(
+    path.dirname(fileURLToPath(import.meta.url)),
+    '../js/shopify-cart.js',
+  );
+  const context = { window: { location: { assign() {} } } };
+  vm.runInNewContext(fs.readFileSync(helperPath, 'utf8'), context);
+  const bridge = context.window.BiottosShopify;
+  assert.equal(bridge.enabled, false);
+  assert.equal(
+    bridge.buildCartUrl('chili', 1),
+    'https://biottoslaedeli.myshopify.com/cart/53868017549578:1?storefront=true',
+  );
+  assert.equal(bridge.buildCartUrl('chili', 0), null);
+  assert.equal(bridge.openCart('chili', 1), false);
 });
