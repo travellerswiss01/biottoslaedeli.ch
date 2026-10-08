@@ -41,6 +41,8 @@ export function checkSite(root) {
   function reference(file, raw, fromRoot = false) {
     raw = raw.trim().replace(/&amp;/g, '&');
     if (!raw) return;
+    // Skip Vercel-specific paths (provided by Vercel infrastructure)
+    if (raw.startsWith('/_vercel/')) return;
     let url;
     try {
       url = new URL(

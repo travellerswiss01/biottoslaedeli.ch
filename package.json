@@ -2,7 +2,7 @@
   "name": "biottos-laedeli-website",
   "private": true,
   "version": "1.0.0",
-  "description": "Static HTML, CSS and JavaScript website for Biottos L\u00e4deli",
+  "description": "Static HTML, CSS and JavaScript website for Biottos Lädeli",
   "scripts": {
     "check": "node scripts/check-site.mjs",
     "test": "node --test scripts/check-site.test.mjs && npm run check",
@@ -10,5 +10,8 @@
   },
   "engines": {
     "node": ">=24"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
   }
 }
