@@ -117,3 +117,10 @@ Dieser Abgleich ersetzt die älteren Aussagen über den Produkt-Entwurfsstatus: 
 Der Warenkorb-Einstieg ist weiterhin der konkrete Integrationsblocker: Der getestete Cart-Permalink öffnet das aktive Theme ohne Pickeasy, während der Terminpicker im unveröffentlichten Draft funktioniert. Vor CTA-Code müssen korrekte Variante/Menge, sichtbarer Pickeasy-Picker und Blockierung ohne gültigen Termin über denselben Einstiegspfad nachgewiesen werden. Formspree bleibt bis zur erfolgreichen Abnahme der Bestellweg.
 
 Shopify dokumentiert zeitlich begrenzte Vorschau-Links für unveröffentlichte Themes und bestätigt, dass Cart-Permalinks den Storefront-Passwortschutz nicht umgehen. Vorschau-Links sind daher kein dauerhafter Website-Kaufpfad. Quellen: [Theme-Vorschau](https://help.shopify.com/en/manual/online-store/themes/adding-themes), [Cart Permalinks](https://shopify.dev/docs/apps/build/checkout/create-cart-permalinks).
+
+
+### Ergänzender Draft-Test am 8. Oktober 2026
+
+Nach erneutem Öffnen der authentifizierten Vorschau von «Kopie von Horizon» wurde derselbe Cart-Permalink für Variante `53868017549578`, Menge 1, mit `storefront=true` getestet. Der Redirect behielt in dieser Sitzung den Draft-Kontext bei (Vorschauleiste: «Kopie von Horizon Draft»). Der Warenkorb zeigte Chli & Fii, Menge 1, CHF 19.95. Pickeasy wurde nachgeladen und zeigte «Hauptstrasse 90 / 8357 Guntershausen / Switzerland». Der Checkout-Klick ohne Termin blieb im Warenkorb und zeigte «Wähle ein Abholzeitfenster aus, um fortzufahren.» Keine Bestellung wurde angelegt.
+
+Dieser Befund präzisiert den früheren Test: Der Permalink kann in einer bereits bestehenden Draft-Vorschau-Sitzung Pickeasy erreichen. Ein direkter Einstieg aus einer frischen Kundensitzung ist damit nicht bewiesen. Die öffentliche Integration bleibt offen; Vorschau-Sitzung oder Vorschau-Token dürfen keine Voraussetzung des späteren Kaufpfads sein.
