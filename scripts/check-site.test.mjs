@@ -78,3 +78,16 @@ test('keeps the Shopify cart bridge gated until storefront readiness is proven',
   assert.equal(bridge.buildCartUrl('unknown', 1), null);
   assert.equal(bridge.openCart('chili', 1), false);
 });
+
+test('keeps the Formspree fallback and all product CTAs wired', () => {
+  const indexPath = path.resolve(
+    path.dirname(fileURLToPath(import.meta.url)),
+    '../index.html',
+  );
+  const html = fs.readFileSync(indexPath, 'utf8');
+  assert.match(html, /action="https:\/\/formspree\.io\/f\/xvkgydoe"/);
+  assert.ok(html.indexOf('js/shopify-cart.js') < html.indexOf('js/app.js'));
+  for (const key of ['chili', 'fein', 'gross']) {
+    assert.match(html, new RegExp(`data-open="${key}"`));
+  }
+});
