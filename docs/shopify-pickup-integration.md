@@ -20,6 +20,12 @@
 
 Das sind echte IDs aus diesem Shop, aber wegen des Entwurfsstatus keine freigegebenen Live-Kaufziele. Preise stehen weiterhin zusätzlich in Website-HTML, strukturierten Daten und `js/app.js`. Bis eine automatische Produktdarstellung umgesetzt und geprüft ist, müssen Preisänderungen gemeinsam in Shopify und den Websitequellen erfolgen.
 
+## Website-Bridge im Draft-Branch (8. Oktober 2026)
+
+Auf dem Branch `feat/shopify-pickup` ist eine kleine Shopify-Cart-Brücke vorbereitet. Sie kennt die drei echten Varianten und kann einen Cart-Permalink mit `storefront=true` erzeugen. Der Aufruf bleibt jedoch absichtlich **deaktiviert** (`enabled: false`); die bestehenden Formspree-Bestellungen bleiben dadurch unverändert. Die Startseite lädt die Brücke vor `js/app.js`, und der vorhandene «Jetzt bestellen»-Ablauf fällt bei deaktivierter Brücke weiterhin auf den bisherigen Bestellzettel zurück.
+
+Die Brücke wird erst freigeschaltet, wenn ein direkter Einstieg aus einer frischen Sitzung im Ziel-Theme Pickeasy sichtbar lädt, ein gültiges Zeitfenster bis zum Checkout erhalten bleibt und die Terminpflicht ohne Umgehung nachgewiesen ist. Der aktuelle Gegencheck landete ohne Draft-Vorschau im aktiven Theme; dort fehlte Pickeasy. Deshalb gibt es noch keine öffentliche Umschaltung, keinen neuen Kaufbutton und keine Entfernung von Formspree.
+
 ## Vorgesehene Architektur
 
 Die bestehende statische Website und die freigegebene Produktdarstellung bleiben erhalten. Nach erfolgreicher Abnahme soll jede Produktkarte die gewählte Shopify-Variante mit Menge 1 vorladen und zur Shopify-Onlineshop-Warenkorbseite führen. Shopify dokumentiert Warenkorb-Permalinks für vorausgewählte Varianten und Mengen; mit `storefront=true` kann der Link zuerst den Onlineshop-Warenkorb statt des Checkouts öffnen. Dadurch kann ein Terminpicker auf Produkt- oder Warenkorbseite angezeigt werden.
