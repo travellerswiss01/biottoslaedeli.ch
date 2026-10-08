@@ -4,7 +4,7 @@
 
 ## Aktueller Shopify-Stand
 
-- Shopwährung: CHF; Zeitzone: CEST; Land: Schweiz.
+- Shopwährung: CHF; Zeitzone: `Europe/Zurich`; Land: Schweiz.
 - Shopstatus: Testzeitraum; im Admin wird die Storefront als **privat** angezeigt und ist noch nicht eröffnet. Ein Verkauf ist nicht freigegeben.
 - Shopify meldet den Tarif **Basic**. Im Admin unter Einstellungen → Plan wird eine Aktion von **CHF 1 pro Monat bis 6. Januar 2027** angezeigt; **CHF 29 pro Monat** ist als regulärer Betrag durchgestrichen. Der genaue Betrag der späteren Rechnung sollte nach Ablauf der Aktion erneut geprüft werden. Die Planansicht nennt Kartengebühren von 2,95 % + CHF 0,30 online und 2 % + CHF 0,00 vor Ort. Das sind Kartengebühren; sie belegen keine Gebühr auf Barzahlung oder TWINT bei Abholung. Shopify Plus ist nicht aktiv.
 - Vor diesem Auftrag waren keine Produkte vorhanden. Die drei unten aufgeführten Produkte wurden als **Entwürfe** mit belegten Inhalten, Preisen und bestehenden Websitefotos angelegt. Die erneute Produktprüfung bestätigte die Entwürfe und Bilder; der Betreiber hat am 7. Oktober 2026 einen Bestand von **5 je Sorte** bestätigt; dieser Bestand wurde im Shopify-Standort Biottos Lädeli eingetragen und erneut als verfügbar **5** zurückgelesen. Die Produkte bleiben Entwürfe und sind nicht veröffentlicht. Es wurden keine Kaufbuttons in die Website eingebaut.
@@ -14,9 +14,9 @@
 
 | Geschenkidee | Shopify-Produkt | Preis | Status | Shopify-Produkt-ID | Varianten-ID |
 |---|---|---:|---|---|---|
-| Mitbringsel | Chli & Fii | CHF 19.95 | Entwurf | `gid://shopify/Product/10659082797322` | `gid://shopify/ProductVariant/53868017549578` |
-| Dankeschön | Fein & Guet | CHF 29.95 | Entwurf | `gid://shopify/Product/10659082830090` | `gid://shopify/ProductVariant/53868017582346` |
-| Grosses Geschenk | Gross & Guet | CHF 49.95 | Entwurf | `gid://shopify/Product/10659082895626` | `gid://shopify/ProductVariant/53868017647882` |
+| Mitbringsel | Chli & Fii | CHF 19.95 | Aktiv | `gid://shopify/Product/10659082797322` | `gid://shopify/ProductVariant/53868017549578` |
+| Dankeschön | Fein & Guet | CHF 29.95 | Aktiv | `gid://shopify/Product/10659082830090` | `gid://shopify/ProductVariant/53868017582346` |
+| Grosses Geschenk | Gross & Guet | CHF 49.95 | Aktiv | `gid://shopify/Product/10659082895626` | `gid://shopify/ProductVariant/53868017647882` |
 
 Das sind echte IDs aus diesem Shop, aber wegen des Entwurfsstatus keine freigegebenen Live-Kaufziele. Preise stehen weiterhin zusätzlich in Website-HTML, strukturierten Daten und `js/app.js`. Bis eine automatische Produktdarstellung umgesetzt und geprüft ist, müssen Preisänderungen gemeinsam in Shopify und den Websitequellen erfolgen.
 
@@ -108,3 +108,12 @@ Dieser datierte Nachtrag ergänzt den Snapshot vom 7. Oktober und hat bei abweic
 - Der Shopify-Standort bleibt strukturiert als Hauptstrasse 90, Postleitzahl 8357, Ort Guntershausen gespeichert. In Pickeasy wurde die separate Option «Adresse ersetzen» eingeschaltet und die Warenkorbanzeige auf drei Zeilen gesetzt: «Hauptstrasse 90», «8357 Guntershausen», «Switzerland». Nach dem Speichern und Neuladen ist die Reihenfolge im Warenkorb des unveröffentlichten Themes «Kopie von Horizon» sichtbar bestätigt.
 - Das Pickeasy-Widget und der Terminwähler erscheinen in dieser Draft-Theme-Vorschau. Eine Prüfung des direkten Warenkorb-Permalinks mit `storefront=true` führte dagegen zum aktiven Theme-Warenkorb; dort wurde kein Pickeasy-Widget angezeigt. Damit ist der Permalink-Einstieg von der bestehenden Website noch nicht abgenommen. Die App-Einbettung des aktiven Themes bleibt aus; kein Live-Theme wurde verändert oder veröffentlicht.
 - Kein Kaufbutton wurde ergänzt, kein Checkout abgeschlossen und keine neue Bestellung angelegt. Der nächste Umsetzungsschritt ist, den Cart-Einstieg so zu verifizieren, dass Pickeasy auf dem tatsächlich erreichten Warenkorb verfügbar ist und den Abholtermin erzwingt. Erst danach folgen CTA-Änderungen auf `feat/shopify-pickup`, Vorschau- und Mobiltests sowie CI-Prüfung. Formspree bleibt bis zur späteren Abnahme bestehen.
+
+
+### Aktueller Abgleich am 8. Oktober 2026
+
+Dieser Abgleich ersetzt die älteren Aussagen über den Produkt-Entwurfsstatus: Alle drei Produkte sind im Shopify-Admin **Aktiv**. Die Variantenpreise sind CHF 19.95, CHF 29.95 und CHF 49.95; jede Variante zeigt 5 verfügbare Stück. Der Shop bleibt passwortgeschützt. Die Website-Kaufbuttons und der öffentliche Start sind noch nicht freigegeben.
+
+Der Warenkorb-Einstieg ist weiterhin der konkrete Integrationsblocker: Der getestete Cart-Permalink öffnet das aktive Theme ohne Pickeasy, während der Terminpicker im unveröffentlichten Draft funktioniert. Vor CTA-Code müssen korrekte Variante/Menge, sichtbarer Pickeasy-Picker und Blockierung ohne gültigen Termin über denselben Einstiegspfad nachgewiesen werden. Formspree bleibt bis zur erfolgreichen Abnahme der Bestellweg.
+
+Shopify dokumentiert zeitlich begrenzte Vorschau-Links für unveröffentlichte Themes und bestätigt, dass Cart-Permalinks den Storefront-Passwortschutz nicht umgehen. Vorschau-Links sind daher kein dauerhafter Website-Kaufpfad. Quellen: [Theme-Vorschau](https://help.shopify.com/en/manual/online-store/themes/adding-themes), [Cart Permalinks](https://shopify.dev/docs/apps/build/checkout/create-cart-permalinks).
