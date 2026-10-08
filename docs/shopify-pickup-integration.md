@@ -163,3 +163,10 @@ Der Draft «Kopie von Horizon» wurde auf den nativen Shopify-Abholweg zurückge
 Der aktive Theme-Pfad wurde lesend geprüft. Ohne Termin zeigt der Shopify-Checkout den Abholort «Biottos Lädeli», «Hauptstrasse 90, Guntershausen», «KOSTENLOS», «Gewöhnlich fertig in 24 Stunden» sowie «Bar oder TWINT bei Abholung». Es wurde kein Kundendatensatz ausgefüllt, keine Zahlung ausgelöst und keine Bestellung abgesendet.
 
 Offen bleibt die positive Abnahme des vollständigen Statuswegs: eine eindeutig als Test gekennzeichnete Bestellung anlegen, den Korb vorbereiten, in Shopify «Bereit zur Abholung» setzen und die Zustellung der Abholbestätigung an die Testadresse prüfen. Bis dahin bleibt die Website-Brücke `enabled: false`, Formspree bleibt erhalten und es wird nichts veröffentlicht.
+
+
+### Abholbestätigungsvorlage geprüft am 8. Oktober 2026, 13:54 Uhr (Europe/Zurich)
+
+Shopify führt unter Kundenbenachrichtigungen die Vorlage **«Bereit zur lokalen Abholung»**. Sie wird laut Admin gesendet, wenn eine Bestellung zur Abholung bereit ist. Die Vorschau zeigt den Betreff «Ein Paket aus der Bestellung #9999 ist bereit für die Abholung» sowie den Text «Deine Bestellung ist zur Abholung bereit» und einen Abholort. Die Vorschau nutzt Shopify-Beispieldaten.
+
+Die Vorlage wurde nur gelesen; «Test senden» wurde nicht betätigt. Es wurde keine E-Mail ausgelöst und keine Kundennachricht geändert. Die tatsächliche Zustellung bleibt bis zur klar gekennzeichneten Testbestellung offen.
