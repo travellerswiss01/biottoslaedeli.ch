@@ -95,3 +95,13 @@ test('keeps the Formspree fallback and all product CTAs wired', () => {
     assert.match(html, new RegExp(`data-open="${key}"`));
   }
 });
+
+test('describes native pickup without mandatory date or time selection', () => {
+  const html = fs.readFileSync(
+    path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../index.html'),
+    'utf8',
+  );
+  assert.match(html, /<h3>Abholung vorbereiten<\/h3><p>Shopify zeigt Abholort und erwartete Bereitstellung\.<\/p>/);
+  assert.match(html, /Nach Ihrer Bestellung zeigt Shopify den Abholort und die erwartete Bereitstellung\. Sobald Ihr Korb bereit ist, erhalten Sie die Abholbestätigung\./);
+  assert.doesNotMatch(html, /<h3>Abholung festlegen<\/h3><p>Datum und Uhrzeit auswählen\.<\/p>/);
+});
