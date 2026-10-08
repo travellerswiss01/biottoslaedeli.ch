@@ -100,3 +100,11 @@ Die öffentliche Website verwendet weiterhin den bisherigen Formspree-Bestellweg
 - [Shopify-Warenkorb-Permalinks](https://shopify.dev/docs/apps/build/checkout/create-cart-permalinks)
 - [Shopify manuelle Zahlungsmethoden](https://help.shopify.com/en/manual/payments/manual-payments)
 - [Shopify TWINT in der Schweiz](https://help.shopify.com/en/manual/payments/shopify-payments/local-payment-methods/twint)
+
+## Prüfstand vom 8. Oktober 2026
+
+Dieser datierte Nachtrag ergänzt den Snapshot vom 7. Oktober und hat bei abweichenden Aussagen Vorrang:
+
+- Der Shopify-Standort bleibt strukturiert als Hauptstrasse 90, Postleitzahl 8357, Ort Guntershausen gespeichert. In Pickeasy wurde die separate Option «Adresse ersetzen» eingeschaltet und die Warenkorbanzeige auf drei Zeilen gesetzt: «Hauptstrasse 90», «8357 Guntershausen», «Switzerland». Nach dem Speichern und Neuladen ist die Reihenfolge im Warenkorb des unveröffentlichten Themes «Kopie von Horizon» sichtbar bestätigt.
+- Das Pickeasy-Widget und der Terminwähler erscheinen in dieser Draft-Theme-Vorschau. Eine Prüfung des direkten Warenkorb-Permalinks mit `storefront=true` führte dagegen zum aktiven Theme-Warenkorb; dort wurde kein Pickeasy-Widget angezeigt. Damit ist der Permalink-Einstieg von der bestehenden Website noch nicht abgenommen. Die App-Einbettung des aktiven Themes bleibt aus; kein Live-Theme wurde verändert oder veröffentlicht.
+- Kein Kaufbutton wurde ergänzt, kein Checkout abgeschlossen und keine neue Bestellung angelegt. Der nächste Umsetzungsschritt ist, den Cart-Einstieg so zu verifizieren, dass Pickeasy auf dem tatsächlich erreichten Warenkorb verfügbar ist und den Abholtermin erzwingt. Erst danach folgen CTA-Änderungen auf `feat/shopify-pickup`, Vorschau- und Mobiltests sowie CI-Prüfung. Formspree bleibt bis zur späteren Abnahme bestehen.
