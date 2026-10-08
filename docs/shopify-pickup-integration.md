@@ -124,3 +124,17 @@ Shopify dokumentiert zeitlich begrenzte Vorschau-Links für unveröffentlichte T
 Nach erneutem Öffnen der authentifizierten Vorschau von «Kopie von Horizon» wurde derselbe Cart-Permalink für Variante `53868017549578`, Menge 1, mit `storefront=true` getestet. Der Redirect behielt in dieser Sitzung den Draft-Kontext bei (Vorschauleiste: «Kopie von Horizon Draft»). Der Warenkorb zeigte Chli & Fii, Menge 1, CHF 19.95. Pickeasy wurde nachgeladen und zeigte «Hauptstrasse 90 / 8357 Guntershausen / Switzerland». Der Checkout-Klick ohne Termin blieb im Warenkorb und zeigte «Wähle ein Abholzeitfenster aus, um fortzufahren.» Keine Bestellung wurde angelegt.
 
 Dieser Befund präzisiert den früheren Test: Der Permalink kann in einer bereits bestehenden Draft-Vorschau-Sitzung Pickeasy erreichen. Ein direkter Einstieg aus einer frischen Kundensitzung ist damit nicht bewiesen. Die öffentliche Integration bleibt offen; Vorschau-Sitzung oder Vorschau-Token dürfen keine Voraussetzung des späteren Kaufpfads sein.
+
+
+### Abnahmetests am 8. Oktober 2026 – normaler Einstieg, gemischter Warenkorb und Reload
+
+| Test | Beobachtetes Ergebnis | Bewertung |
+|---|---|---|
+| Draft-Vorschau ausdrücklich verlassen, normalen Warenkorb neu geladen | Aktives Theme mit englischen Standardtexten; kein Pickeasy-Block | Öffentlicher Kaufpfad weiterhin nicht abgenommen. Kein Test einer vollständig neuen oder anonymen Sitzung. |
+| Draft-Vorschau erneut geöffnet; Cart-Permalink mit allen drei Varianten, Menge je 1 | Chli & Fii CHF 19.95, Fein & Guet CHF 29.95, Gross & Guet CHF 49.95; Gesamt CHF 99.85 | Varianten, Mengen und Summe im Draft bestanden |
+| Gemischter Draft-Warenkorb ohne Termin; Checkout geklickt | Verbleibt im Warenkorb; Meldung «Wähle ein Abholzeitfenster aus, um fortzufahren.» | Terminpflicht in diesem UI-Pfad bestanden |
+| Gültiges Datum und Zeit gewählt | Freitag, 9. Oktober 2026; 10:00–10:30 Uhr sichtbar gewählt | Auswahl bestanden; noch kein Checkout-/Bestellnachweis |
+| Reload der Permalink-Zielseite mit `cart_link_id` | Nach Pickeasy-Nachladen Datum/Uhrzeit nicht mehr sichtbar gewählt | Wiederaufnahme nicht bestanden |
+| Derselbe Test auf normalem `/cart` ohne Linkparameter | Datum/Uhrzeit nach Reload ebenfalls nicht mehr sichtbar gewählt; Checkout wird erneut mit Fehlermeldung blockiert | Effekt nicht auf `cart_link_id` begrenzt; Ursache und Speicherung in Cart-/Bestelldaten noch offen |
+
+Es wurde keine Bestellung erstellt und kein Theme veröffentlicht. Der Befund zum Reload belegt die fehlende sichtbare Wiederherstellung, nicht automatisch den Verlust serverseitiger Daten. Vor Freigabe Pickeasy-Konfiguration bzw. dokumentiertes Verhalten prüfen und den Datenerhalt sowie Terminzwang im Checkout separat nachweisen. Die Express-Checkout-Umgehungsprüfung bleibt offen.
