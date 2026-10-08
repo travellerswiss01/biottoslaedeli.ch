@@ -62,10 +62,19 @@ test('keeps the Shopify cart bridge gated until storefront readiness is proven',
   vm.runInNewContext(fs.readFileSync(helperPath, 'utf8'), context);
   const bridge = context.window.BiottosShopify;
   assert.equal(bridge.enabled, false);
-  assert.equal(
-    bridge.buildCartUrl('chili', 1),
-    'https://biottoslaedeli.myshopify.com/cart/53868017549578:1?storefront=true',
-  );
-  assert.equal(bridge.buildCartUrl('chili', 0), null);
+  for (const [key, variant] of Object.entries({
+    gross: '53868017647882',
+    fein: '53868017582346',
+    chili: '53868017549578',
+  })) {
+    assert.equal(
+      bridge.buildCartUrl(key, 1),
+      `https://biottoslaedeli.myshopify.com/cart/${variant}:1?storefront=true`,
+    );
+  }
+  for (const quantity of [0, -1, 1.5, NaN, Infinity]) {
+    assert.equal(bridge.buildCartUrl('chili', quantity), null);
+  }
+  assert.equal(bridge.buildCartUrl('unknown', 1), null);
   assert.equal(bridge.openCart('chili', 1), false);
 });
