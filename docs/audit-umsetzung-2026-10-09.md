@@ -4,8 +4,8 @@ Basis: feat/shopify-pickup, 23027197bc72438d64cbce54fd641097539a579a. Nur Branch
 
 | Auditpunkt | Umsetzung / Status |
 |---|---|
-| A01 Mobile Geschenkdetails | CSS-Kaskade repariert, lesbare und bedienbare Mengen-Details. Browserabnahme im aktuellen QA-Lauf vorgesehen. |
-| A02 Roter Test | Sachliche Prüfung von Inhaltsprodukten und Mengen ersetzt veralteten Gesamtstring. Lokal bestanden; neuer Remote-Lauf zu prüfen. |
+| A01 Mobile Geschenkdetails | CSS-Kaskade repariert, lesbare und bedienbare Mengen-Details. Auf 320, 360 und 390 Pixeln im Browser bestanden. |
+| A02 Roter Test | Sachliche Prüfung von Inhaltsprodukten und Mengen ersetzt veralteten Gesamtstring. Lokal und in GitHub Actions bestanden. |
 | A03 Verkaufsweg neues Sortiment | Gemeinsamer Warenkorb für bestehende drei Produkte umgesetzt. Neue 19 Entwürfe bleiben mangels bestätigter Daten/IDs nicht bestellbar; keine falsche Zuordnung. |
 | A04 Fehlende Daten | Vollständige aktualisierte Daten-/Lückenliste erstellt. Betreiberangaben, verbindliche Preise und Freigabe fehlen weiterhin. |
 | A05 Überschrift und Einstieg | Punkt entfernt; kurzer Untertext unmittelbar darunter; reduzierte Abstände und kompakter Hinweis. |
@@ -42,7 +42,10 @@ Das bereitgestellte Logo ist in allen Haupt-Seitenköpfen, auf der Startseite un
 - 31 Node-Tests lokal bestanden, einschliesslich gemeinsamem Warenkorb, ungültiger Varianten, Speicherung und Entwurfs-Sperre.
 - 74 Rasterdateien vollständig decodiert, keine Bildfehler.
 - JavaScript-Syntax und lokale Verweise: 26 Quelldateien erfolgreich geprüft. Lokaler Server zusätzlich durch tatsächliche HTTP-HEAD-Abfragen auf Modul-/PNG-/WebP-MIME-Typen geprüft.
-- Lokales Chromium nicht verfügbar; Installationsversuch lieferte ungültige Download-ZIPs. Daher keine lokale mobile Browserabnahme behauptet. Der neue GitHub-Lauf führt die Browserprüfung auf dem Runner aus; Ergebnis wird separat dokumentiert.
+- GitHub Actions für Seitenstand `7edf38f`: erfolgreich. 134 aktuelle Browserprüfungen bei 320, 360, 390, 768 und 1440 Pixeln; 195 Fotoöffnungen, keine JavaScript-Fehler oder fehlenden lokalen Ressourcen. Mobile Geschenkdetails, schwarze Produktnamen, Footer-Klickflächen, Suche/Filter, Escape/Fokus, Warenkorb und JavaScript-Fallback bestanden.
+- 90 isolierte Formularprüfungen bestanden, sieben simulierte Anfragen, keine externe Übermittlung. Screenshots als QA-Artefakt erhalten. [Prüflauf](https://github.com/travellerswiss01/biottoslaedeli.ch/actions/runs/37950822236).
+- Desktop-Vorschau visuell geprüft: Apfellogo, Originalfoto der grossen Harasse mit BIOTTOS-Etikette, gut sichtbares Schliessen, kombinierter Warenkorb mit CHF 69.90.
+- Folgecommit `fdfceb4` ändert ausschliesslich QA-Diagnose und Zeitbegrenzung; kein Anwendungscode. Dessen wiederholter Lauf wird separat kontrolliert.
 - Kein realer Checkout, keine Zahlung, Bestellung oder Kundenmail ausgelöst.
 
 ## Konkrete verbleibende Grenzen

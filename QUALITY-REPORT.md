@@ -2,7 +2,7 @@
 
 31 lokale Node-Tests und statische Prüfung von 26 Quelldateien bestanden. 74 Rasterbilder vollständig decodiert. Der lokale Server liefert Module, PNG und WebP mit korrektem MIME-Typ (echte HTTP-Prüfung). Die Vorschau wurde auf Desktop visuell geprüft; das Apfellogo ist auf Startseite, Sortiment und Warenkorb korrekt eingebunden. Ein Mischwarenkorb mit Chli & Fii und Gross & Guet ergab CHF 69.90, blieb nach Reload erhalten und wurde anschliessend wieder geleert. Kein realer Checkout ausgelöst.
 
-Aktuelle mobile Browserprüfung und isolierter Formspree-Rückfalllauf werden in GitHub Actions ausgeführt; Ergebnisse im [Audit-Protokoll](docs/audit-umsetzung-2026-10-09.md). Frühere Testzahlen unten gelten ausschliesslich für den damaligen Stand.
+134 aktuelle Browserprüfungen bei fünf Bildschirmbreiten, 195 Fotoöffnungen und 90 isolierte Formspree-Rückfallprüfungen in GitHub Actions bestanden, ohne JavaScript-Fehler; Ergebnisse im [Audit-Protokoll](docs/audit-umsetzung-2026-10-09.md). Frühere Testzahlen unten gelten ausschliesslich für den damaligen Stand.
 
 ---
 
