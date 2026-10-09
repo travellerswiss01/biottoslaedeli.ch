@@ -32,5 +32,6 @@ test('agreed guide prices appear in the assortment preview',()=>{
   ]) assert.equal(byTitle[title].previewPrice,price,title);
   assert.deepEqual(byTitle.Traubensaft.displayVariants.map(({label,previewPrice})=>[label,previewPrice]),[['0.5 Liter',5],['1 Liter',9]]);
   assert.equal(byTitle['Geschenksharass · gross'].previewPrice,undefined);
+  assert.equal(byTitle['Geschenksharass · gross'].description,'Enthält: Kirschen-Birnen-Essig (250 ml), halb gedörrte Birnen (100 g), Dessertzwetschgen (250 ml), Tomatensauce (250 ml) und Birnen-Balsamico (250 ml).');
 });
 
