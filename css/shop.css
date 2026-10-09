@@ -87,3 +87,6 @@
   .shop-photo-viewer p{font-size:.95rem;margin-top:8px}
   .shop-page .shop-photo-viewer-close{top:6px;right:6px;width:52px;height:52px;min-width:52px;min-height:52px;font-size:30px}
 }
+.shop-page .shop-card{color:#000}
+.shop-page .shop-card h2,.shop-page .shop-card .shop-content-label{color:#000;font-weight:700}
+.shop-page .shop-card .shop-variant-size,.shop-page .shop-card .shop-sizes{color:#000}
