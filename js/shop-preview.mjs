@@ -13,8 +13,10 @@ function element(tag, text, className) {
 const photoViewer = document.createElement('dialog');
 photoViewer.className = 'shop-photo-viewer';
 photoViewer.setAttribute('aria-label','Produktfoto in Grossansicht');
-const photoViewerClose = element('button','Schliessen','shop-photo-viewer-close');
+const photoViewerClose = element('button','×','shop-photo-viewer-close');
 photoViewerClose.type = 'button';
+photoViewerClose.setAttribute('aria-label','Foto schliessen');
+photoViewerClose.title = 'Schliessen';
 const photoViewerImage = element('img');
 const photoViewerCaption = element('p');
 photoViewer.append(photoViewerClose,photoViewerImage,photoViewerCaption);
