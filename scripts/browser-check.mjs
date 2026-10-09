@@ -66,8 +66,8 @@ try{
       assert.ok(await page.locator('#li').evaluate(img=>img.naturalWidth>0));
       await page.keyboard.press('Escape');assert.equal(await page.locator('#lb').evaluate(e=>e.classList.contains('on')),false);
       assert.equal(await photo.evaluate(e=>e===document.activeElement),true);checks++;
-      const details=cards.first().locator('.korb-card-more');await details.locator('summary').click();
-      const second=details.locator('.korb-card-second-foto img');await second.press('Enter');
+      const details=cards.first().locator('.korb-card-more');await details.locator('summary').click();assert.equal(await details.evaluate(e=>e.open),true);
+      const second=details.locator('.korb-card-second-foto img');await second.focus();assert.equal(await second.evaluate(e=>e===document.activeElement),true);await page.keyboard.press('Enter');
       assert.equal(await page.locator('#lb').evaluate(e=>e.classList.contains('on')),true);
       await page.getByRole('button',{name:'Schliessen',exact:true}).click();
       assert.equal(await page.locator('#lb').evaluate(e=>e.classList.contains('on')),false);checks++;
