@@ -31,6 +31,11 @@ test('agreed guide prices appear in the assortment preview',()=>{
     ['Geschenksharassli · mittel',39]
   ]) assert.equal(byTitle[title].previewPrice,price,title);
   assert.deepEqual(byTitle.Traubensaft.displayVariants.map(({label,previewPrice})=>[label,previewPrice]),[['0.5 Liter',5],['1 Liter',9]]);
+  const appleJuice=byTitle.Süssmost.displayVariants;
+  const fiveL=appleJuice.find(variant=>variant.label==='5 Liter');
+  const tenL=appleJuice.find(variant=>variant.label==='10 Liter');
+  assert.ok((tenL.imageScaleX ?? 1) > (fiveL.imageScaleX ?? 1));
+  assert.ok((tenL.imageScaleY ?? 1) > (fiveL.imageScaleY ?? 1));
   assert.equal(byTitle['Geschenksharassli · mittel'].description.includes('halben gedörrten Birnen (100 g)'),true);
   assert.equal(byTitle['Geschenksharass · gross'].previewPrice,undefined);
   assert.equal(byTitle['Geschenksharass · gross'].description,'Enthält: Kirschen-Birnen-Essig (250 ml), halb gedörrte Birnen (100 g), Dessertzwetschgen (250 ml), Tomatensauce (250 ml) und Birnen-Balsamico (250 ml).');
