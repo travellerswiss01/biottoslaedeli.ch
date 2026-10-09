@@ -58,11 +58,11 @@ try{
       assert.equal(headingStyle.color,'rgb(0, 0, 0)');assert.ok(headingStyle.weight>=700&&headingStyle.size>=20);
       const listStyle=await card.locator('.korb-card-contents li').first().evaluate(e=>parseFloat(getComputedStyle(e).fontSize));assert.ok(listStyle>=14);
     }
-    const geometry=await cards.evaluateAll(es=>es.map(e=>{const rect=s=>e.querySelector(s).getBoundingClientRect();return{left:e.getBoundingClientRect().left,top:e.getBoundingClientRect().top,photo:rect('.korb-card-photo'),copy:rect('.korb-card-copy'),buy:rect('.korb-card-buy'),button:rect('.korb-card-link'),contents:rect('.korb-card-contents')}}));
+    const geometry=await cards.evaluateAll(es=>es.map(e=>{const r=e.getBoundingClientRect(),rect=s=>e.querySelector(s).getBoundingClientRect();return{left:r.left,top:r.top,height:r.height,photo:rect('.korb-card-photo'),copy:rect('.korb-card-copy'),buy:rect('.korb-card-buy'),button:rect('.korb-card-link'),contents:rect('.korb-card-contents')}}));
     const y=geometry.map(x=>x.top);assert.ok(y[0]<y[1]&&y[1]<y[2],'Baskets must follow small to large at every width: '+JSON.stringify(geometry));
     for(const item of geometry){
       assert.ok(item.button.left>=item.buy.left&&item.button.right<=item.buy.right,'Basket choice must stay inside its price area: '+JSON.stringify(item));
-      if(width>720)assert.ok(item.photo.left<item.copy.left&&item.copy.left<item.buy.left,'Desktop rows must read photo, contents, price: '+JSON.stringify(item));
+      if(width>720){assert.ok(item.photo.left<item.copy.left&&item.copy.left<item.buy.left,'Rows must read photo, contents, price: '+JSON.stringify(item));assert.ok(item.height<360,'Basket rows should stay compact: '+JSON.stringify(item))}
       else assert.ok(item.photo.bottom<=item.contents.top&&item.contents.bottom<=item.buy.top,'Mobile rows must stack photo, contents, price: '+JSON.stringify(item));
     }
     checks++;

@@ -808,7 +808,7 @@ footer .order-guide-business{font-size:1rem;color:#000;min-height:44px}
 #koerbe .korb-picker{padding:22px 0 48px}
 #koerbe .korb-picker .wrap{max-width:1120px}
 #koerbe .korb-picker-grid{display:flex;flex-direction:column;gap:14px;margin:0;padding:0}
-#koerbe .korb-card{display:grid;grid-template-columns:180px minmax(0,1fr) 205px;align-items:stretch;gap:0;min-height:0;height:auto;padding:12px;overflow:hidden;border:1px solid var(--line);border-radius:9px;background:#fff;box-shadow:0 2px 8px rgba(35,22,14,.06);transform:none}
+#koerbe .korb-card{display:grid;grid-template-columns:180px minmax(0,1fr) 215px;align-items:stretch;gap:0;min-height:0;height:auto;flex:none;padding:12px;overflow:hidden;border:1px solid var(--line);border-radius:9px;background:#fff;box-shadow:0 2px 8px rgba(35,22,14,.06);transform:none}
 #koerbe .korb-card:hover,#koerbe .korb-card:focus-visible{transform:none;box-shadow:0 3px 12px rgba(35,22,14,.1)}
 #koerbe .korb-card.k1,#koerbe .korb-card.k2,#koerbe .korb-card.k3{order:initial}
 #koerbe .korb-card-photo{width:100%;margin:0;align-self:center}
@@ -816,17 +816,17 @@ footer .order-guide-business{font-size:1rem;color:#000;min-height:44px}
 #koerbe .korb-card-photo img{display:block;width:100%;height:100%!important;min-height:0!important;max-height:none!important;aspect-ratio:auto;object-fit:contain!important;cursor:zoom-in}
 #koerbe .korb-card-photo img:focus-visible,#koerbe .korb-card-second-foto img:focus-visible{outline:3px solid #8f1116;outline-offset:-4px}
 #koerbe .korb-card-copy{display:flex;flex-direction:column;align-items:stretch;gap:5px;min-width:0;padding:8px 22px;text-align:left}
-#koerbe .korb-gift-intent{display:block;margin:0;color:#444;font-size:.9rem;line-height:1.35}
-#koerbe .korb-card-copy h3{display:block;margin:0;color:#000;font-size:clamp(1.25rem,1.65vw,1.55rem);font-weight:700;line-height:1.2}
-#koerbe .korb-card-copy .korb-count{margin:0;color:#333;font-size:.9rem!important;font-weight:600;line-height:1.35!important}
+#koerbe .korb-gift-intent{display:block;margin:0;color:#444;font-size:.9rem;line-height:1.35;text-align:left}
+#koerbe .korb-card-copy h3{display:block;margin:0;color:#000;font-size:clamp(1.25rem,1.65vw,1.55rem);font-weight:700;line-height:1.2;text-align:left}
+#koerbe .korb-card-copy .korb-count{margin:0;color:#333;font-size:.9rem!important;font-weight:600;line-height:1.35!important;text-align:left}
 #koerbe .korb-card-contents{margin:8px 0 0;padding:9px 0 0;border-top:1px solid var(--line)}
-#koerbe .korb-card-contents h4{margin:0 0 6px;color:#000;font-size:.95rem;font-weight:700;line-height:1.35}
+#koerbe .korb-card-contents h4{margin:0 0 6px;color:#000;font-size:.95rem;font-weight:700;line-height:1.35;text-align:left}
 #koerbe .korb-card-contents ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 18px;margin:0;padding:0;list-style:none}
-#koerbe .korb-card-contents li{position:relative;padding-left:18px;color:#222;font-size:.92rem;line-height:1.4}
+#koerbe .korb-card-contents li{position:relative;padding-left:18px;color:#222;font-size:.92rem;line-height:1.4;text-align:left}
 #koerbe .korb-card-contents li::before{position:absolute;left:0;color:#86151b;font-weight:700;content:"✓"}
 #koerbe .korb-card-buy{display:flex;flex-direction:column;align-items:stretch;justify-content:center;gap:11px;padding:8px 4px 8px 20px;border-left:1px solid var(--line)}
 #koerbe .korb-card-price{margin:0;color:#86151b;font-size:1.35rem;font-weight:700;line-height:1.3;white-space:nowrap}
-#koerbe .korb-card-link{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;margin:0;padding:10px 12px;border:0;border-radius:5px;background:var(--red);color:#fff;font-size:.92rem;font-weight:700;line-height:1.3;text-align:center}
+#koerbe .korb-card-link{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;margin:0;padding:10px 10px;border:0;border-radius:5px;background:var(--red);color:#fff;font-size:.86rem;font-weight:700;line-height:1.3;text-align:center;white-space:nowrap}
 #koerbe .korb-card-link:hover{background:#741016}
 #koerbe .korb-card-more{margin:4px 0 0;border-top:1px dashed var(--line)}
 #koerbe .korb-card-more summary{min-height:44px;padding:9px 0 4px;color:#6f1117;font-size:.9rem;font-weight:700;line-height:1.4}
@@ -858,7 +858,7 @@ footer .order-guide-business{font-size:1rem;color:#000;min-height:44px}
   #koerbe .korb-card-contents li{font-size:.9rem;line-height:1.4}
   #koerbe .korb-card-buy{grid-column:1/-1;grid-row:5;display:grid;grid-template-columns:minmax(0,1fr) minmax(170px,210px);align-items:center;gap:12px;padding:10px 0 0;border-top:1px solid var(--line);border-left:0}
   #koerbe .korb-card-price{font-size:1.2rem}
-  #koerbe .korb-card-link{min-height:48px;font-size:.9rem}
+  #koerbe .korb-card-link{min-height:48px;font-size:.9rem;white-space:normal}
   #koerbe .korb-card-second-foto{max-width:260px}
   #koerbe .korb-card-second-foto img{height:300px}
 }
