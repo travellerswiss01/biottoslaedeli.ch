@@ -41,7 +41,8 @@ try{
   async function checkBasketOverview(width){
     const cards=page.locator('#koerbe .korb-card');
     assert.equal(await cards.count(),3);
-    assert.equal(await page.getByRole('heading',{name:'Geschenkskörbe auf einen Blick',exact:true}).innerText(),'Geschenkskörbe auf einen Blick');
+    assert.equal(await page.getByRole('heading',{name:'Ein Korb voller Thurgau.',exact:true}).innerText(),'Ein Korb voller Thurgau.');
+    assert.equal(await page.locator('#koerbe .order-guide-occasion').innerText(),'Korb wählen. Produkte ansehen. Bestellen.');
     const expected=[['Es Tröpfli Heimat',3,'CHF 29.00','chili'],['Geschenksharassli · mittel',5,'CHF 39.00','fein'],['Geschenksharass · gross',7,'CHF 74.90','gross']];
     for(let i=0;i<expected.length;i++){
       const card=cards.nth(i),[name,count,price,variant]=expected[i];
@@ -50,7 +51,7 @@ try{
       assert.equal(await card.locator('.korb-card-contents').isVisible(),true);
       assert.equal((await card.locator('.korb-card-price').innerText()).trim(),price);
       const choice=card.locator('.korb-card-link');
-      assert.equal(await choice.innerText(),'Diesen Korb auswählen');
+      assert.equal(await choice.innerText(),'Korb wählen');
       assert.equal(await choice.getAttribute('data-open'),variant);
       assert.ok(await choice.evaluate(e=>e.getBoundingClientRect().height>=44));
       assert.equal(await card.locator('.korb-card-photo img').getAttribute('tabindex'),'0');
