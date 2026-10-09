@@ -887,3 +887,9 @@ footer .order-guide-business{font-size:1rem;color:#000;min-height:44px}
 #koerbe .korb-card-contents li .korb-product-link::after{flex:0 0 auto;color:#86151b;content:"↗";font-size:.8em;font-weight:700;text-decoration:none}
 #koerbe .korb-card-contents li .korb-product-link:hover{color:#86151b}
 #koerbe .korb-card-contents li .korb-product-link:focus-visible{position:relative;z-index:1;outline:3px solid #8f1116;outline-offset:2px;border-radius:3px}
+
+
+/* Geschenkskörbe: ruhiges Zoom-Zeichen und kurze Bestellaktion. */
+#koerbe .korb-card-photo .foto::after{top:auto;right:8px;bottom:8px;left:auto;width:34px;height:34px;padding:0;border:1px solid rgba(134,21,27,.28);border-radius:50%;background:rgba(255,255,255,.97);color:#86151b;content:"+";font-size:1.55rem;font-weight:600;line-height:31px;text-align:center;box-shadow:0 1px 5px rgba(0,0,0,.16);pointer-events:none}
+#koerbe .korb-card-link{box-sizing:border-box;min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere}
+@media(max-width:720px){#koerbe .korb-card-photo .foto::after{right:6px;bottom:6px;left:auto;width:32px;height:32px;padding:0;font-size:1.45rem;line-height:29px}}
