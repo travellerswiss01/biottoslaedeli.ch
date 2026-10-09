@@ -38,7 +38,7 @@ test('agreed guide prices appear in the assortment preview',()=>{
   assert.ok((tenL.imageScaleY ?? 1) > (fiveL.imageScaleY ?? 1));
   assert.equal(byTitle['Geschenksharassli · mittel'].description.includes('halben gedörrten Birnen (100 g)'),true);
   assert.equal(byTitle['Geschenksharass · gross'].previewPrice,undefined);
-  assert.equal(byTitle['Geschenksharass · gross'].description,'Enthält: Kirschen-Birnen-Essig (250 ml), halb gedörrte Birnen (100 g), Dessertzwetschgen (250 ml), Tomatensauce (250 ml) und Birnen-Balsamico (250 ml).');
+  assert.equal(byTitle['Geschenksharass · gross'].description,'Enthält: Kirschen-Birnen-Essig (250 ml), halb gedörrte Birnen (100 g), Dessertzwetschgen (250 ml), Tomatensauce (250 ml), Birnen-Balsamico (250 ml), Birnenweggen und Himbeeressig.');
 });
 
 
@@ -49,7 +49,8 @@ test('gift crates link included products to their available photos',()=>{
     assert.ok(items.length>0,title);
     for(const item of items) {
       if(item.productTitle) assert.ok(byTitle[item.productTitle]?.photos?.length,item.label);
-      else assert.equal(item.label,'Himbeeressig');
+      else assert.ok(['Birnenweggen','Himbeeressig'].includes(item.label),item.label);
     }
   }
+  assert.deepEqual(byTitle['Geschenksharass · gross'].includedProducts.slice(-2).map(item=>item.label),['Birnenweggen','Himbeeressig']);
 });
