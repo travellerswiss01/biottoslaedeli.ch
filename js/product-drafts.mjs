@@ -70,9 +70,9 @@ export const productDrafts = [
   {title:'Birnel',type:'Spezialitäten',photos:['Birnel.png'],sizes:['250 ml'],previewPrice:10.5},
   {title:'Tomatensauce',type:'Spezialitäten',photos:['Tomatensauce.png'],sizes:['250 ml'],previewPrice:6.5},
   {title:'Dessertzwetschgen',type:'Spezialitäten',photos:['Dessertzwetschgen.png'],sizes:['250 ml'],previewPrice:7.5},
-  {title:'Gedörrte Birnen · ganz',type:'Dörrfrüchte',photos:['Cellophanetüte mit ganzen getrockneten Birnen.png','Verpackte Dörrbirnen ganz mit Probierteller.png','Gedörrte Birne einzel Keramikschälchen.png'],sizes:['250 g'],previewPrice:6},
+  {title:'Gedörrte Birnen · ganz',type:'Dörrfrüchte',photos:['Cellophanetüte mit ganzen getrockneten Birnen.png','Verpackte Dörrbirnen ganz mit Probierteller.png'],sizes:['250 g'],previewPrice:6},
   {title:'Gedörrte Birnen · halb',type:'Dörrfrüchte',photos:['Gedörrte Birnen halb Becher.jpg','Gedörrte Birnen halb  Becher und im Keramikschälchen.png'],sizes:['100 g'],previewPrice:3.5},
-  {title:'Gedörrte Zwetschgen',type:'Dörrfrüchte',photos:['Gedörrte Zwetschgen Becher.png','Gedörrte Zwetschgen halb Becher ausgelegt.png','Gedörrte Zwetschge einzel.png'],sizes:['100 g'],previewPrice:4},
+  {title:'Gedörrte Zwetschgen',type:'Dörrfrüchte',photos:['Gedörrte Zwetschgen Becher.png','Gedörrte Zwetschgen halb Becher ausgelegt.png'],sizes:['100 g'],previewPrice:4},
   {title:'Süssmost',type:'Säfte',photos:['Süssmost3Liter.png','Süssmost Bag in Box 5Liter.png','Süssmost pasteurisiert 10 Liter.png'],ingredients:'Reiner Apfelsaft aus 15 verschiedenen Apfelsorten',displayVariants:[
     {label:'3 Liter',photo:'Süssmost3Liter.png',reportedStock:25,netVolumeMl:3000,packaging:'Beutel'},
     {label:'5 Liter',photo:'Süssmost Bag in Box 5Liter.png',reportedStock:50,netVolumeMl:5000,packaging:'Bag-in-Box'},
