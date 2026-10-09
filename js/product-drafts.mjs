@@ -78,7 +78,10 @@ export const productDrafts = [
     {label:'5 Liter',photo:'Süssmost Bag in Box 5Liter.png',reportedStock:50,netVolumeMl:5000,packaging:'Bag-in-Box'},
     {label:'10 Liter',photo:'Süssmost pasteurisiert 10 Liter.png',reportedStock:25,netVolumeMl:10000,packaging:'Bag-in-Box',imageScaleX:1.2}
   ]},
-  {title:'Traubensaft',type:'Säfte',photos:['TraubensafthalbLiter.png','Traubensaft1Liter.png'],sizes:['500 ml','1 Liter'],previewPrices:[5,9]},
+  {title:'Traubensaft',type:'Säfte',photos:['TraubensafthalbLiter.png','Traubensaft1Liter.png'],displayVariants:[
+    {label:'0.5 Liter',photo:'TraubensafthalbLiter.png',previewPrice:5},
+    {label:'1 Liter',photo:'Traubensaft1Liter.png',previewPrice:9}
+  ]},
   {title:'Es Tröpfli Heimat',type:'Geschenksharassen',photos:['Essigharassli.png'],description:'Drei Fläschchen à 100 ml: Himbeeressig, Birnenbalsamico und Kirschessig. Im kleinen Holzharassli mit Masche.',previewPrice:29},
   {title:'Geschenksharassli · mittel',type:'Geschenksharassen',photos:['Geschenkharassli mittel.png'],description:'Mit Tomatensauce (250 ml), Kirschen-Birnen-Essig (250 ml), Dessertzwetschgen (250 ml) und halb gedörrten Birnen (100 g).',previewPrice:39},
   {title:'Geschenksharass · gross',type:'Geschenksharassen',photos:['Geschenksharass gross.png']}
