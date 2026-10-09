@@ -36,7 +36,15 @@ function photo(filename, title, lazy = true) {
   img.alt = title;
   img.loading = lazy ? 'lazy' : 'eager';
   img.width = 600; img.height = 600;
-  img.addEventListener('error', () => media.replaceChildren(element('span', 'Bild derzeit nicht verfügbar')), {once:true});
+  img.addEventListener('error', () => {
+    if (!img.dataset.fallbackAttempted) {
+      img.dataset.fallbackAttempted = 'true';
+      source.removeAttribute('srcset');
+      img.src = 'img/' + encodeURIComponent(filename);
+      return;
+    }
+    media.replaceChildren(element('span', 'Bild derzeit nicht verfügbar'));
+  });
   picture.append(source, img);
   button.append(picture);
   media.append(button);
