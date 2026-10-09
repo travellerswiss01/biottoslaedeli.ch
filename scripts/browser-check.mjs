@@ -20,12 +20,12 @@ const server=http.createServer((req,res)=>{
 });
 await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
 const origin='http://127.0.0.1:'+server.address().port;
-let browser,checks=0,photoChecks=0;const errors=[];
+let browser,page,checks=0,photoChecks=0;const errors=[];
 try{
   browser=await chromium.launch({headless:true,...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{})});
   const context=await browser.newContext({timezoneId:'Europe/Zurich'});
   await context.route('**/*',route=>route.request().url().startsWith(origin)?route.continue():route.abort());
-  const page=await context.newPage();page.setDefaultTimeout(10000);
+  page=await context.newPage();page.setDefaultTimeout(10000);
   page.on('pageerror',error=>errors.push(error.message));
   page.on('response',response=>{if(response.url().startsWith(origin)&&response.status()>=400)errors.push(response.status()+' '+response.url())});
   async function layout(){
@@ -35,7 +35,7 @@ try{
       return {overflow:document.documentElement.scrollWidth>innerWidth+1,broken:images.filter(i=>!i.complete||!i.naturalWidth).map(i=>i.src),footer:[...document.querySelectorAll('footer a')].filter(e=>e.getClientRects().length).map(e=>({size:parseFloat(getComputedStyle(e).fontSize),height:e.getBoundingClientRect().height})),color:getComputedStyle(document.body).color};
     });
     assert.equal(result.overflow,false,page.url());assert.deepEqual(result.broken,[],page.url());
-    assert.ok(result.footer.every(link=>link.size>=16&&link.height>=44),JSON.stringify(result.footer));checks++;
+    assert.ok(result.footer.every(link=>link.size>=16&&link.height>=44),page.url()+' '+JSON.stringify(result.footer));checks++;
   }
   const views=['start','koerbe','gartenprodukte','traubensaft','suessmost','essig','doerrfruechte','tee','ueber-uns','laedeli','lucia-kocht','otto-garten','abholung','faq','kontakt'];
   for(const width of [320,360,390,768,1440]){
@@ -80,4 +80,4 @@ try{
   await page.goto(origin+'/index.html#l-impressum');await page.locator('#lgx').waitFor({state:'visible'});await page.keyboard.press('Escape');assert.equal(await page.locator('#lg').getAttribute('aria-hidden'),'true');checks++;
   const noJs=await browser.newContext({javaScriptEnabled:false});await noJs.route('**/*',r=>r.request().url().startsWith(origin)?r.continue():r.abort());const fallback=await noJs.newPage();await fallback.goto(origin+'/shop-vorschau.html');assert.match(await fallback.locator('noscript').innerText(),/Apfelessig/);await noJs.close();checks++;
   assert.deepEqual(errors,[]);const result={checks,photoChecks,errors,screenshots:out};fs.writeFileSync(path.join(out,'result.json'),JSON.stringify(result,null,2));console.log(JSON.stringify(result,null,2));
-}finally{await browser?.close();await new Promise(resolve=>server.close(resolve))}
+}catch(error){if(page)await page.screenshot({path:path.join(out,'failure.png'),fullPage:true}).catch(()=>{});throw error}finally{await browser?.close();await new Promise(resolve=>server.close(resolve))}
