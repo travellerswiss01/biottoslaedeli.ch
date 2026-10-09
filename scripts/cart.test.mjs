@@ -30,8 +30,14 @@ test('corrupted saved carts never inject prices, images, or unsupported products
 });
 test('storage denial retains an in-page cart and preserves direct Shopify navigation fallback',()=>{
   const {bridge,assigned}=setup(null,true);assert.equal(bridge.addToCart('chili',1),true);assert.equal(bridge.getCart().length,1);assert.equal(bridge.storageAvailable(),false);
-  assert.equal(bridge.openCart('gross',1),true);assert.equal(assigned[0],bridge.buildCartUrl('gross',1));
+  assert.equal(bridge.openCart('gross',1),true);assert.equal(assigned[0],bridge.buildMixedCartUrl(bridge.getCart()));
 });
 test('regular product selection goes through the shared cart without creating a Shopify order',()=>{
   const {bridge,assigned}=setup();assert.equal(bridge.openCart('fein',1),true);assert.deepEqual(assigned,['warenkorb.html']);assert.equal(bridge.getCart()[0].key,'fein');
+});
+
+test('failed storage writes preserve all selected items within the current page',()=>{
+  const window={localStorage:{getItem(){return JSON.stringify({version:1,items:[{key:'chili',quantity:1}]})},setItem(){throw new Error('Quota exceeded')}},location:{assign(){}}};
+  vm.runInNewContext(source,{window});const bridge=window.BiottosShopify;
+  assert.equal(bridge.addToCart('gross',1),true);assert.equal(bridge.getCart().length,2);assert.equal(bridge.storageAvailable(),false);
 });

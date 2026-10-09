@@ -1,3 +1,13 @@
+# Aktueller Qualitätsnachweis – Audit-Umsetzung, 9. Oktober 2026
+
+31 lokale Node-Tests und statische Prüfung von 26 Quelldateien bestanden. 74 Rasterbilder vollständig decodiert. Der lokale Server liefert Module, PNG und WebP mit korrektem MIME-Typ (echte HTTP-Prüfung). Die Vorschau wurde auf Desktop visuell geprüft; das Apfellogo ist auf Startseite, Sortiment und Warenkorb korrekt eingebunden. Ein Mischwarenkorb mit Chli & Fii und Gross & Guet ergab CHF 69.90, blieb nach Reload erhalten und wurde anschliessend wieder geleert. Kein realer Checkout ausgelöst.
+
+Aktuelle mobile Browserprüfung und isolierter Formspree-Rückfalllauf werden in GitHub Actions ausgeführt; Ergebnisse im [Audit-Protokoll](docs/audit-umsetzung-2026-10-09.md). Frühere Testzahlen unten gelten ausschliesslich für den damaligen Stand.
+
+---
+
+## Historische Qualitätsnachweise
+
 # Qualitätsbericht – Biottos Lädeli
 
 Stand: 7. Oktober 2026. Ausgangspunkt: `main`, Commit `9e23cdd`. Arbeitsbranch: `fix/website-quality`. Die vollständige Root-`AGENTS.md` wurde gelesen; weitere `AGENTS.md` waren im Checkout nicht vorhanden. Der Checkout war vor Beginn sauber.
@@ -70,3 +80,4 @@ Die schmale mobile Leiste auf der Korbansicht zeigt Logo und Menü. Sie blendet 
 Prüfung: npm test (drei Regressionstests und statische Prüfung), git diff --check und 90 Browserprüfungen bei 360/390/768/1440 Pixeln bestanden. Sieben Bestellanfragen simuliert. Zusätzlich Aus-/Einblenden, Menü und Sprachwechsel im Browser geprüft und als 10-Sekunden-Demo aufgezeichnet.
 
 Nachweise: docs/qa/mobile-navigation/open.png, scrolled.png, menu.png und demo.mp4. Keine reale Bestellung, kein Merge, keine Produktionsveröffentlichung. Geschäftsdaten und bestehende Grenzen bleiben unverändert.
+

@@ -39,10 +39,11 @@
     return result;
   }
   function getCart(){
+    if(!storageAvailable)return memoryCart.map(function(item){return {key:item.key,quantity:item.quantity}});
     try{
       if(window.localStorage){
         var saved=window.localStorage.getItem(storageKey);
-        if(saved!==null){var payload=JSON.parse(saved);memoryCart=payload.version===1?sanitize(payload.items):[]}
+        if(saved!==null){try{var payload=JSON.parse(saved);memoryCart=payload.version===1?sanitize(payload.items):[]}catch(_){memoryCart=[]}}
       }else storageAvailable=false;
     }catch(_){storageAvailable=false}
     return memoryCart.map(function(item){return {key:item.key,quantity:item.quantity}});
@@ -70,8 +71,9 @@
   var bridge={enabled:config.enabled,products:products,buildCartUrl:buildCartUrl,buildMixedCartUrl:buildMixedCartUrl,getCart:getCart,addToCart:addToCart,setQuantity:setQuantity,removeFromCart:removeFromCart,storageAvailable:function(){return storageAvailable},openCart:function(key,quantity){
     if(!config.enabled)return false;
     var url=buildCartUrl(key,quantity);if(!url)return false;
-    if(addToCart(key,Number(quantity))&&storageAvailable)window.location.assign('warenkorb.html');
-    else window.location.assign(url);
+    addToCart(key,Number(quantity));
+    if(storageAvailable)window.location.assign('warenkorb.html');
+    else window.location.assign(buildMixedCartUrl(getCart())||url);
     return true;
   }};
   window.BiottosShopify=bridge;
