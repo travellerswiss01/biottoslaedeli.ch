@@ -19,7 +19,7 @@ test('three published gift crates show their Shopify names, prices and complete 
     assert.match(card, new RegExp(`${item.count} (?:Spezialitäten im Korb|Fläschchen à 250 ml|Produkte)`));
     const contents = card.match(/<section class="korb-card-contents"[^>]*>([\s\S]*?)<\/section>/);
     assert.ok(contents, item.name);
-    const listed = [...contents[1].matchAll(/<li>(.*?)<\/li>/g)].map(([, value]) => value);
+    const listed = [...contents[1].matchAll(/<li>(.*?)<\/li>/g)].map(([, value]) => value.replace(/<[^>]*>/g, '').trim());
     assert.deepEqual(listed, item.items, item.name);
     assert.match(card, new RegExp(`data-open="${item.key}"`));
     assert.match(card, /<img[^>]+role="button"[^>]+tabindex="0"[^>]+aria-haspopup="dialog"/);
@@ -27,6 +27,8 @@ test('three published gift crates show their Shopify names, prices and complete 
 });
 
 test('basket overview keeps its plain-language heading and enlargable Shopify photos', () => {
+  assert.match(html, /Korb wählen\\. Produkte ansehen\\. Bestellen\\./);
+  assert.equal([...html.matchAll(/<button class="korb-card-link"[^>]*>Korb wählen<\\/button>/g)].length, 3);
   assert.match(html, /<h2>Geschenkskörbe auf einen Blick<\/h2>/);
   const overview = html.match(/<div class="korb-picker-grid">([\s\S]*?)<section class="order-guide"/);
   assert.ok(overview);
