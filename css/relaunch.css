@@ -894,6 +894,3 @@ footer .order-guide-business{font-size:1rem;color:#000;min-height:44px}
 #koerbe .korb-card-link{box-sizing:border-box;min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere}
 @media(max-width:720px){#koerbe .korb-card-photo .foto::after{right:6px;bottom:6px;left:auto;width:32px;height:32px;padding:0;font-size:1.45rem;line-height:29px}}
 
-
-/* Herkunft im Geschenkekorb-Überblick direkt, knapp und ruhig zeigen. */
-#koerbe .korb-origin{margin:5px auto 0;color:#333;font-size:.98rem;font-weight:600;line-height:1.45;text-align:center}
