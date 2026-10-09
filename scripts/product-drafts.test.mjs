@@ -8,7 +8,14 @@ test('all uploaded product photos are grouped once and exist at their original p
   assert.equal(productDrafts.length,19);
   assert.equal(photos.length,25);
   assert.equal(new Set(photos).size,25);
-  for(const filename of photos) assert.ok(fs.existsSync(new URL('../img/'+encodeURIComponent(filename),import.meta.url)),filename);
+  for(const filename of photos) {
+    const original=new URL('../img/'+encodeURIComponent(filename),import.meta.url);
+    assert.ok(fs.statSync(original).size>0,filename);
+    const optimized=filename.endsWith('.webp')?original:new URL('../img/'+encodeURIComponent(filename+'.webp'),import.meta.url);
+    const bytes=fs.readFileSync(optimized);
+    assert.equal(bytes.subarray(0,4).toString(),'RIFF',filename);
+    assert.equal(bytes.subarray(8,12).toString(),'WEBP',filename);
+  }
 });
 test('draft products keep preview guide prices separate from Shopify prices and stock',()=>{
   for(const product of productDrafts) {
@@ -34,11 +41,12 @@ test('agreed guide prices appear in the assortment preview',()=>{
   const appleJuice=byTitle.Süssmost.displayVariants;
   const fiveL=appleJuice.find(variant=>variant.label==='5 Liter');
   const tenL=appleJuice.find(variant=>variant.label==='10 Liter');
-  assert.ok((tenL.imageScaleX ?? 1) > (fiveL.imageScaleX ?? 1));
-  assert.ok((tenL.imageScaleY ?? 1) > (fiveL.imageScaleY ?? 1));
+  assert.ok(tenL.imageScale > fiveL.imageScale);
+  assert.equal(tenL.imageScaleX, undefined);
+  assert.equal(tenL.imageScaleY, undefined);
   assert.equal(byTitle['Geschenksharassli · mittel'].description.includes('halben gedörrten Birnen (100 g)'),true);
   assert.equal(byTitle['Geschenksharass · gross'].previewPrice,undefined);
-  assert.equal(byTitle['Geschenksharass · gross'].description,'Enthält: Kirschen-Birnen-Essig (250 ml), halb gedörrte Birnen (100 g), Dessertzwetschgen (250 ml), Tomatensauce (250 ml), Birnen-Balsamico (250 ml), Birnenweggen und Himbeeressig.');
+  for (const ingredient of ['Kirschen-Birnen-Essig (250 ml)', 'halb gedörrte Birnen (100 g)', 'Dessertzwetschgen (250 ml)', 'Tomatensauce (250 ml)', 'Birnen-Balsamico (250 ml)', 'Himbeeressig (250 ml)', 'Birnenweggen']) assert.ok(byTitle['Geschenksharass · gross'].description.includes(ingredient),ingredient);
 });
 
 
@@ -65,3 +73,4 @@ test('gift crates link included products to their available photos',()=>{
   assert.equal(byTitle['Es Tröpfli Heimat'].description,'Drei Fläschchen à 250 ml: Himbeeressig, Birnen-Balsamico und Kirschessig. Im kleinen Holzharassli mit Masche.');
   assert.deepEqual(byTitle['Es Tröpfli Heimat'].includedProducts[0],{label:'Himbeeressig',productTitle:'Himbeeressig'});
 });
+

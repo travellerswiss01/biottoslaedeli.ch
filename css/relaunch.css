@@ -774,3 +774,25 @@ img{max-width:100%;height:auto}
  #koerbe .koerbe-intro h2{max-width:340px;margin:0 auto;line-height:1.2}
 }
 @media(prefers-reduced-motion:reduce){body[data-current-view="koerbe"]>header{transition:none}}
+
+
+/* Shared readability and supplied apple wordmark, audit 2026-10-09. */
+.brand-logo{display:block;position:relative;width:230px;max-width:100%;aspect-ratio:6.2;overflow:hidden;background:#fff}
+.brand-logo img{position:absolute;width:110%;max-width:none;height:auto;left:-5%;top:-272%;margin:0;padding:0}
+.brand-tab:has(.brand-logo),.brand:has(.brand-logo){display:block;padding:8px 0;background:#fff;box-shadow:none;border:0;transform:none;line-height:1}
+.homepage-apple-logo{position:relative;overflow:hidden;aspect-ratio:6.2;width:min(600px,100%);height:auto;margin:0 auto;background:#fff}
+.homepage-apple-logo img{position:absolute;left:-5%;top:-272%;width:110%;max-width:none;height:auto;padding:0;margin:0;object-fit:initial}
+footer a,.site-foot a{display:inline-flex;align-items:center;min-height:44px;padding:8px 5px;font-size:1rem;color:#000;font-weight:600;text-underline-offset:3px}
+body{color:#000}h1,h2,h3{color:#000}
+.korb-card h3,.korb-card-copy h3{font-weight:700;color:#000}
+.korb-card-copy p,.korb-highlights,.korb-count,.contact-business-kicker,.otto-garten-note{color:#222}
+.korb-count,.korb-highlights{font-size:1rem!important;line-height:1.5!important}
+.note,.order-selection,.order-progress span,.checkout-summary span,.pickup-badge span,.family-people span{font-size:.95rem;line-height:1.5;opacity:1}
+body :focus-visible{outline:3px solid #8f1116;outline-offset:4px}
+@media(max-width:700px){.brand-logo{width:200px}.homepage-apple-logo{width:min(420px,100%)}footer a,.site-foot a{font-size:1rem}.korb-highlights{font-size:.95rem!important}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+/* Image dimensions come from the original square logo; crop only in its viewport. */
+.brand-logo img,.homepage-apple-logo img{max-height:none;border-radius:0;filter:none}
+#koerbe .korb-card-copy h3{font-weight:700;color:#000}
+#koerbe .korb-card-copy .korb-count{font-size:1rem!important;line-height:1.45}
+.homepage-path small,.homepage-brand-copy small,.contact-business-kicker,.otto-garten-note{font-size:1rem;opacity:1;color:#333}

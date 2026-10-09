@@ -1,3 +1,11 @@
+# Aktueller verbindlicher Projektstand – Audit-Umsetzung, 9. Oktober 2026
+
+Die Website-Brücke im Entwicklungsbranch ist **enabled:true**. Die drei bestehenden Körbe verwenden den gemeinsamen lokalen Warenkorb mit anschliessender Übergabe an Shopify. Neue Sortiment-Entwürfe sind weiterhin nicht bestellbar. Native Abholung ohne verpflichtenden Termin bleibt das Zielmodell. Keine Shopify-Einstellungen oder Produktion verändert. Aktuelle Daten: [Produktdaten](produktdaten-bestaetigt.md); aktueller Umsetzungs- und Prüfstatus: [Audit-Umsetzung](audit-umsetzung-2026-10-09.md).
+
+Die folgenden Abschnitte sind eine historische Chronologie. Angaben zu früher deaktivierter Brücke, Pickeasy, alten Füllmengen oder Testzahlen sind keine aktuellen Arbeitsanweisungen.
+
+---
+
 # Shopify-Arbeitsstand – 9. Oktober 2026
 
 Basis nach neuem Betreiber-Upload: `18d62de08f679ec9de094bdea55f2b621f1c2034`, Branch `feat/shopify-pickup`.
@@ -27,3 +35,4 @@ PR #3 offen, Draft. main frisch gelesen: `62c2893cc113f1506a167afa240596a86f1027
 - Kein neuer Browser-/Checkout-/Zahlungs- oder Zustellungstest als bestanden behauptet.
 
 Die Kontaktänderung wurde von Shopify ohne userErrors bestätigt. Alle weiteren Arbeiten bleiben im Entwicklungszweig. Es wurden keine Bestellungen, Zahlungen, Kundenmails, Stornierungen oder Rückerstattungen ausgelöst.
+

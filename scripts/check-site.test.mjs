@@ -38,7 +38,7 @@ test('accepts encoded assets, queries, own-domain URLs, anchors, external and da
   const root = fixture(t, {
     'index.html':
       '<div id="korb"></div><a href="#korb">Korb</a><img src="img/%C3%A4pfel.jpg?v=1"><img src="data:image/png;base64,AAAA"><a href="https://example.com/missing">Extern</a><meta property="og:url" content="https://biottoslaedeli.ch/">',
-    'img/äpfel.jpg': '',
+    'img/äpfel.jpg': 'nonempty fixture',
     'js/app.js': 'var photo="img/äpfel.jpg";',
     'css/style.css': 'body{background:url(../img/%C3%A4pfel.jpg)}',
   });
@@ -113,7 +113,7 @@ test('enhances all standalone product links and preserves unknown fallback links
   const context = { window: { document, location: { assign() {} } } };
   vm.runInNewContext(fs.readFileSync(helperPath, 'utf8'), context);
   for (const [i, variant] of ['53868017647882', '53868017582346', '53868017549578'].entries()) {
-    assert.equal(links[i].href, `https://biottoslaedeli.myshopify.com/cart/${variant}:1?storefront=true`);
+    assert.equal(links[i].href, 'warenkorb.html?korb='+['gross','fein','chili'][i]);
   }
   assert.equal(links[3].href, 'index.html#koerbe');
   assert.equal(context.window.BiottosShopify.buildCartUrl('toString', 1), null);
@@ -157,4 +157,10 @@ test('includes the confirmed operator, email, Shopify notice and reachable legal
     assert.match(html, /index\.html#l-impressum/);
     assert.match(html, /index\.html#l-datenschutz/);
   }
+});
+
+
+test('rejects zero-byte referenced images', (t) => {
+  const root=fixture(t,{'index.html':'<img src=\"img/empty.png\">','img/empty.png':''});
+  assert.ok(checkSite(root).errors.some(e=>e.includes('empty image target')));
 });

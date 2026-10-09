@@ -1,349 +1,83 @@
-// Optional browser regression suite; Playwright is a development tool, not a site dependency.
+// Current storefront UI regression checks. All external services are blocked;
+// this suite never submits an actual order, payment or notification.
 import fs from 'node:fs';
 import http from 'node:http';
 import path from 'node:path';
 import os from 'node:os';
 import assert from 'node:assert/strict';
-import { createRequire } from 'node:module';
-import { fileURLToPath } from 'node:url';
-const require = createRequire(import.meta.url);
-const { chromium } = require('playwright');
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const out =
-  process.env.QA_OUTPUT_DIR || path.join(os.tmpdir(), 'biottos-browser-qa');
-fs.mkdirSync(out, { recursive: true });
-(async () => {
-  const s = http
-    .createServer((req, res) => {
-      const p = path.join(
-        root,
-        decodeURIComponent(
-          req.url.split('?')[0] === '/' ? '/index.html' : req.url.split('?')[0],
-        ),
-      );
-      if (fs.existsSync(p) && fs.statSync(p).isFile()) {
-        res.setHeader(
-          'Content-Type',
-          p.endsWith('.html')
-            ? 'text/html'
-            : p.endsWith('.js')
-              ? 'application/javascript'
-              : p.endsWith('.css')
-                ? 'text/css'
-                : p.endsWith('.svg')
-                  ? 'image/svg+xml'
-                  : 'image/jpeg',
-        );
-        res.end(fs.readFileSync(p));
-      } else {
-        res.statusCode = 404;
-        res.end();
-      }
-    })
-    .listen(8765, '127.0.0.1');
-  const b = await chromium.launch({
-    ...(process.env.CHROMIUM_PATH
-      ? { executablePath: process.env.CHROMIUM_PATH }
-      : {}),
-    headless: true,
-  });
-  let failures = [],
-    count = 0,
-    requests = 0,
-    mode = 'success',
-    payloads = [];
-  const context = await b.newContext({ timezoneId: 'America/Los_Angeles' });
-  await context.route('**/*', async (r) => {
-    const url = r.request().url();
-    if (url.startsWith('http://127.0.0.1:8765')) return r.continue();
-    if (url.startsWith('https://formspree.io/')) {
-      requests++;
-      payloads.push(r.request().postData());
-      if (mode === 'network') return r.abort();
-      if (mode === 'slow')
-        await new Promise((resolve) => setTimeout(resolve, 250));
-      return r.fulfill({
-        status: mode === 'error' ? 422 : 200,
-        contentType: 'application/json',
-        body: mode === 'error' ? '{}' : '{"ok":true}',
-      });
-    }
-    return r.abort();
-  });
-  const p = await context.newPage();
-  p.setDefaultTimeout(5000);
-  p.on('pageerror', (e) => failures.push(e.message));
-  p.on('response', (r) => {
-    if (r.url().startsWith('http://127.0.0.1') && r.status() >= 400)
-      failures.push(r.status() + ' ' + r.url());
-  });
-  await p.clock.install({ time: new Date('2026-10-06T22:30:00Z') });
-  const views = [
-    'start',
-    'koerbe',
-    'gartenprodukte',
-    'traubensaft',
-    'suessmost',
-    'essig',
-    'doerrfruechte',
-    'tee',
-    'ueber-uns',
-    'laedeli',
-    'lucia-kocht',
-    'otto-garten',
-    'abholung',
-    'faq',
-    'kontakt',
-  ];
-  for (const width of [360, 390, 768, 1440]) {
-    await p.setViewportSize({ width, height: 900 });
-    for (const file of ['', 'geschenkskoerbe.html', 'firmengeschenke.html']) {
-      await p.goto('http://127.0.0.1:8765/' + file);
-      for (const view of file ? [''] : views) {
-        if (view) await p.evaluate((v) => (location.hash = v), view);
-        await p.locator('main').waitFor();
-        await p.evaluate(async () => {
-          for (const img of document.querySelectorAll('img[src]'))
-            if (img.getClientRects().length) {
-              img.loading = 'eager';
-              try {
-                await img.decode();
-              } catch {}
-            }
-        });
-        const data = await p.evaluate(() => ({
-          overflow: document.documentElement.scrollWidth > innerWidth + 1,
-          broken: [...document.querySelectorAll('img[src]')]
-            .filter(
-              (i) =>
-                i.getClientRects().length &&
-                (!i.complete || i.naturalWidth === 0),
-            )
-            .map((i) => i.getAttribute('src')),
-        }));
-        assert.equal(data.overflow, false, file + '#' + view + ' ' + width);
-        assert.deepEqual(data.broken, [], file + '#' + view);
-        count++;
-        if (
-          (width === 390 || width === 1440) &&
-          ((!file && ['start', 'koerbe', 'suessmost'].includes(view)) || file)
-        ) {
-          await p.screenshot({
-            path:
-              out +
-              '/' +
-              (file ? file.replace('.html', '') : view) +
-              '-' +
-              width +
-              '.png',
-            fullPage: true,
-          });
-        }
-      }
-    }
-  }
-  await p.goto('http://127.0.0.1:8765/#suessmost');
-  for (let i = 0; i < 5; i++) {
-    await p.locator('[data-hero-story="' + i + '"]').click();
-    assert.equal(
-      await p
-        .locator('[data-hero-story="' + i + '"]')
-        .getAttribute('aria-current'),
-      'step',
-    );
-    await p.locator('.hero-photo-target').evaluate((i) => i.decode());
-  }
-  count += 5;
-  await p.setViewportSize({ width: 390, height: 844 });
-  await p.goto('http://127.0.0.1:8765/');
-  await p.locator('#menuToggle').click();
-  assert.equal(
-    await p.locator('#menuToggle').getAttribute('aria-expanded'),
-    'true',
-  );
-  await p.locator('#siteNav a[href="#koerbe"]').click();
-  assert.equal(
-    await p.locator('#menuToggle').getAttribute('aria-expanded'),
-    'false',
-  );
-  count++;
-  await p.waitForFunction(() => document.body.dataset.currentView === 'koerbe');
-  const original = await p.locator('main').innerText();
-  await p.locator('#menuToggle').click();
-  await p.locator('#langSwitch').click();
-  assert.equal(await p.locator('html').getAttribute('lang'), 'gsw-CH');
-  await p.locator('#langSwitch').click();
-  assert.equal(await p.locator('main').innerText(), original);
-  await p.locator('#menuToggle').click();
-  count++;
-  async function select(id, qty) {
-    await p.locator('.korb-card [data-open="' + id + '"]').click();
-    assert.equal(
-      await p.locator('#nextPickupDate').innerText(),
-      'Do, 08.10.2026',
-    );
-    await p.locator('#cD label').first().click();
-    await p.locator('[data-time="08:00"]').click();
-    await p
-      .locator('#cN label')
-      .nth(qty - 1)
-      .click();
-    await p.locator('#customerName').fill('Test Vorschau');
-    await p.locator('#customerEmail').fill('preview@example.invalid');
-  }
-  for (const [id, price, qty] of [
-    ['gross', 49.95, 10],
-    ['fein', 29.95, 2],
-    ['chili', 19.95, 1],
-  ]) {
-    await select(id, qty);
-    assert.equal(
-      await p.locator('#checkoutTotal').innerText(),
-      'CHF ' + (price * qty).toFixed(2),
-    );
-    assert.equal(await p.locator('#cN input').count(), 10);
-    await p.locator('#directForm button[type=submit]').click();
-    await p.locator('#successScene').waitFor({ state: 'visible' });
-    assert.equal(
-      await p.locator('#successTotal').innerText(),
-      'CHF ' + (price * qty).toFixed(2),
-    );
-    await p.locator('#successClose').click();
-    await p.evaluate(() => (location.hash = 'koerbe'));
-    count++;
-  }
-  for (const outcome of ['error', 'network']) {
-    mode = outcome;
-    await select('gross', 1);
-    await p.locator('#directForm button[type=submit]').click();
-    await p.locator('#directConfirm').waitFor({ state: 'visible' });
-    assert.equal(
-      await p.locator('#customerName').inputValue(),
-      'Test Vorschau',
-    );
-    assert.equal(
-      await p.locator('#directForm button[type=submit]').isEnabled(),
-      true,
-    );
-    await p.locator('#x').click();
-    count++;
-  }
-  mode = 'slow';
-  await select('fein', 1);
-  let before = requests;
-  await p.evaluate(() => {
-    const f = document.querySelector('#directForm');
-    f.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
-    f.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
-  });
-  await p.locator('#successScene').waitFor({ state: 'visible' });
-  assert.equal(requests - before, 1);
-  count++;
-  await p.locator('#successClose').click();
-  await p.evaluate(() => (location.hash = 'koerbe'));
-  mode = 'success';
-  await select('chili', 1);
-  await p.locator('.contact-tabs label').nth(1).click();
-  await p.locator('#customerPhone').fill('+41 00 000 00 00');
-  await p.locator('#directForm button[type=submit]').click();
-  await p.locator('#successScene').waitFor({ state: 'visible' });
-  assert.ok(!payloads.at(-1).includes('preview@example.invalid'));
-  count++;
-  await p.locator('#successClose').click();
-  await p.evaluate(() => (location.hash = 'koerbe'));
-  await select('gross', 1);
-  await p.locator('#x').focus();
-  await p.keyboard.press('Shift+Tab');
-  assert.equal(
-    await p.evaluate(() => document.activeElement.dataset.stepBack),
-    'n',
-  );
-  await p.keyboard.press('Tab');
-  assert.equal(await p.evaluate(() => document.activeElement.id), 'x');
-  count++;
-  // Validation must reject whitespace names and out-of-range quantities without sending.
-  let sent = requests;
-  await p.locator('#customerName').fill('   ');
-  await p.evaluate(() =>
-    document
-      .querySelector('#directForm')
-      .dispatchEvent(new Event('submit', { bubbles: true, cancelable: true })),
-  );
-  assert.equal(requests, sent);
-  assert.equal(await p.locator('#directConfirm').isVisible(), true);
-  count++;
-  await p.locator('#customerName').fill('Test Vorschau');
-  await p.evaluate(() => {
-    let input = document.createElement('input');
-    input.name = 'n';
-    input.value = '11';
-    document.querySelector('#cN').appendChild(input);
-    input.dispatchEvent(new Event('change', { bubbles: true }));
-    document
-      .querySelector('#directForm')
-      .dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
-  });
-  assert.equal(requests, sent);
-  assert.equal(await p.locator('#directConfirm').isVisible(), true);
-  count++;
-  await p.locator('#x').click();
-  await select('gross', 1);
-  await p.locator('#sp').focus();
-  await p.keyboard.press('Enter');
-  assert.equal(await p.locator('#lb').getAttribute('aria-hidden'), 'false');
-  await p.keyboard.press('Escape');
-  assert.equal(await p.locator('#ov').getAttribute('aria-hidden'), 'false');
-  assert.equal(await p.evaluate(() => document.activeElement.id), 'sp');
-  count++;
-  await p.clock.setSystemTime(new Date('2026-10-07T22:30:00Z'));
-  sent = requests;
-  await p.locator('#directForm button[type=submit]').click();
-  assert.equal(requests, sent);
-  assert.equal(await p.locator('#directConfirm').isVisible(), true);
-  count++;
-  await p.locator('#x').click();
-  await p.clock.setSystemTime(new Date('2026-10-10T10:00:00Z'));
-  await p.locator('.korb-card [data-open="gross"]').click();
-  assert.equal(
-    await p.locator('#nextPickupDate').innerText(),
-    'Mo, 12.10.2026',
-  );
-  await p.locator('#x').click();
-  count++;
-  await p.clock.setSystemTime(new Date('2026-11-30T10:00:00Z'));
-  await p.locator('.korb-card [data-open="gross"]').click();
-  let last = [];
-  for (let i = 0; i < 16; i++) {
-    last = await p
-      .locator('#cD input')
-      .evaluateAll((items) => items.map((i) => i.value));
-    if (await p.locator('#weekNext').isHidden()) break;
-    await p.locator('#weekNext').click();
-  }
-  assert.equal(last.at(-1), 'Sa, 27.02.2027');
-  await p.locator('#x').click();
-  count++;
-  await p.locator('[data-legal="impressum"]').click();
-  assert.equal(await p.evaluate(() => document.activeElement.id), 'lgx');
-  await p.keyboard.press('Escape');
-  assert.equal(await p.locator('#lg').getAttribute('aria-hidden'), 'true');
-  count++;
-  assert.deepEqual(failures, []);
-  console.log(
-    JSON.stringify(
-      {
-        checks: count,
-        simulatedRequests: requests,
-        errors: failures,
-        screenshots: out,
-      },
-      null,
-      2,
-    ),
-  );
-  await b.close();
-  s.close();
-})().catch((e) => {
-  console.error(e);
-  process.exit(1);
+import {createRequire} from 'node:module';
+import {fileURLToPath} from 'node:url';
+const {chromium}=createRequire(import.meta.url)('playwright');
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const out=process.env.QA_OUTPUT_DIR||path.join(os.tmpdir(),'biottos-browser-qa');
+fs.mkdirSync(out,{recursive:true});
+const types={'.html':'text/html','.js':'text/javascript','.mjs':'text/javascript','.css':'text/css','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.webp':'image/webp'};
+const server=http.createServer((req,res)=>{
+  let name;try{name=decodeURIComponent(new URL(req.url,'http://localhost').pathname)}catch{res.writeHead(400);res.end();return}
+  const file=path.resolve(root,'.'+(name==='/'?'/index.html':name));
+  if(!file.startsWith(root+path.sep)||!fs.existsSync(file)||!fs.statSync(file).isFile()){res.writeHead(404);res.end();return}
+  res.setHeader('Content-Type',types[path.extname(file)]||'application/octet-stream');res.end(fs.readFileSync(file));
 });
+await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+const origin='http://127.0.0.1:'+server.address().port;
+let browser,checks=0,photoChecks=0;const errors=[];
+try{
+  browser=await chromium.launch({headless:true,...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{})});
+  const context=await browser.newContext({timezoneId:'Europe/Zurich'});
+  await context.route('**/*',route=>route.request().url().startsWith(origin)?route.continue():route.abort());
+  const page=await context.newPage();page.setDefaultTimeout(10000);
+  page.on('pageerror',error=>errors.push(error.message));
+  page.on('response',response=>{if(response.url().startsWith(origin)&&response.status()>=400)errors.push(response.status()+' '+response.url())});
+  async function layout(){
+    const result=await page.evaluate(async()=>{
+      const images=[...document.querySelectorAll('img[src]')].filter(i=>i.getClientRects().length);
+      for(const image of images){image.loading='eager';try{await image.decode()}catch{}}
+      return {overflow:document.documentElement.scrollWidth>innerWidth+1,broken:images.filter(i=>!i.complete||!i.naturalWidth).map(i=>i.src),footer:[...document.querySelectorAll('footer a')].filter(e=>e.getClientRects().length).map(e=>({size:parseFloat(getComputedStyle(e).fontSize),height:e.getBoundingClientRect().height})),color:getComputedStyle(document.body).color};
+    });
+    assert.equal(result.overflow,false,page.url());assert.deepEqual(result.broken,[],page.url());
+    assert.ok(result.footer.every(link=>link.size>=16&&link.height>=44),JSON.stringify(result.footer));checks++;
+  }
+  const views=['start','koerbe','gartenprodukte','traubensaft','suessmost','essig','doerrfruechte','tee','ueber-uns','laedeli','lucia-kocht','otto-garten','abholung','faq','kontakt'];
+  for(const width of [320,360,390,768,1440]){
+    await page.setViewportSize({width,height:900});await page.emulateMedia({colorScheme:'dark'});
+    for(const view of views){await page.goto(origin+'/index.html#'+view);await page.waitForFunction(v=>document.body.dataset.currentView===v,view);await layout()}
+    for(const file of ['geschenkskoerbe.html','firmengeschenke.html','warenkorb.html','404.html']){await page.goto(origin+'/'+file);await layout()}
+    await page.goto(origin+'/shop-vorschau.html');await page.locator('.shop-card').first().waitFor();await layout();
+    assert.equal(await page.locator('h1').innerText(),'Feines aus unserem Lädeli');
+    assert.equal(await page.locator('.shop-section-title').count(),6);
+    assert.equal(await page.locator('#shop-count').innerText(),'19 von 19 Produkten');
+    const titleStyles=await page.locator('.shop-product-title').evaluateAll(elements=>elements.map(e=>({color:getComputedStyle(e).color,weight:getComputedStyle(e).fontWeight,size:parseFloat(getComputedStyle(e).fontSize)})));
+    assert.ok(titleStyles.every(s=>s.color==='rgb(0, 0, 0)'&&Number(s.weight)>=700&&s.size>=16));checks++;
+    if(width<=600){
+      for(const details of await page.locator('.shop-mobile-details').all()){
+        assert.equal(await details.isVisible(),true);await details.locator('summary').click();assert.equal(await details.locator('.shop-description').isVisible(),true);await details.locator('summary').click();checks++;
+      }
+    }
+    for(const button of await page.locator('.shop-photo-open').all()){
+      if(!await button.isVisible())continue;
+      await button.click();await page.locator('.shop-photo-viewer img').evaluate(img=>img.decode());
+      assert.ok(await page.locator('.shop-photo-viewer img').evaluate(img=>img.naturalWidth>0));
+      await page.getByRole('button',{name:'Foto schliessen',exact:true}).click();photoChecks++;
+    }
+    for(const extra of await page.locator('.shop-card>details:not(.shop-mobile-details)').all()){
+      await extra.locator('summary').click();
+      for(const button of await extra.locator('.shop-photo-open').all()){await button.click();await page.locator('.shop-photo-viewer img').evaluate(img=>img.decode());await page.getByRole('button',{name:'Foto schliessen',exact:true}).click();photoChecks++}
+      await extra.locator('summary').click();
+    }
+    const first=page.locator('.shop-photo-open').first();await first.click();await page.keyboard.press('Escape');assert.equal(await page.locator('.shop-photo-viewer').evaluate(e=>e.open),false);assert.equal(await first.evaluate(e=>e===document.activeElement),true);checks++;
+    await page.getByLabel('Produkt suchen',{exact:true}).fill('himbeer');assert.equal(await page.locator('#shop-count').innerText(),'3 von 19 Produkten');
+    await page.getByLabel('Produkt suchen',{exact:true}).fill('zzzzkeinprodukt');assert.match(await page.locator('#shop-products').innerText(),/Keine passenden Produkte/);
+    await page.getByLabel('Produkt suchen',{exact:true}).fill('');await page.locator('#shop-category').selectOption('Essig & Balsamico');assert.equal(await page.locator('#shop-count').innerText(),'7 von 19 Produkten');assert.deepEqual(await page.locator('.shop-sizes').allTextContents(),Array(7).fill('250 ml'));checks++;
+    await page.goto(origin+'/shop-vorschau.html?kategorie=Geschenksharassen');await page.locator('.shop-card').first().waitFor();assert.equal(await page.locator('.shop-card--gift').count(),3);await layout();
+    await page.screenshot({path:path.join(out,'geschenksharassen-'+width+'.png'),fullPage:true});
+    await page.goto(origin+'/shop-vorschau.html');await page.locator('.shop-card').first().waitFor();await page.screenshot({path:path.join(out,'sortiment-'+width+'.png'),fullPage:true});
+  }
+  await page.goto(origin+'/warenkorb.html');await page.getByRole('button',{name:'Chli & Fii hinzufügen',exact:true}).click();await page.getByRole('button',{name:'Gross & Guet hinzufügen',exact:true}).click();
+  assert.match(await page.locator('#cart-checkout').getAttribute('href'),/53868017549578:1,53868017647882:1/);assert.equal(await page.locator('#cart-total').innerText(),'Zwischensumme · CHF 69.90');checks++;
+  await page.getByLabel('Anzahl Chli & Fii',{exact:true}).fill('2');await page.getByLabel('Anzahl Chli & Fii',{exact:true}).press('Tab');assert.equal(await page.locator('#cart-total').innerText(),'Zwischensumme · CHF 89.85');await page.reload();assert.equal(await page.getByLabel('Anzahl Chli & Fii',{exact:true}).inputValue(),'2');checks++;
+  await page.getByRole('button',{name:'Gross & Guet entfernen',exact:true}).click();assert.equal(await page.locator('#cart-total').innerText(),'Zwischensumme · CHF 39.90');await layout();
+  await page.screenshot({path:path.join(out,'warenkorb.png'),fullPage:true});
+  await page.goto(origin+'/index.html#l-impressum');await page.locator('#lgx').waitFor({state:'visible'});await page.keyboard.press('Escape');assert.equal(await page.locator('#lg').getAttribute('aria-hidden'),'true');checks++;
+  const noJs=await browser.newContext({javaScriptEnabled:false});await noJs.route('**/*',r=>r.request().url().startsWith(origin)?r.continue():r.abort());const fallback=await noJs.newPage();await fallback.goto(origin+'/shop-vorschau.html');assert.match(await fallback.locator('noscript').innerText(),/Apfelessig/);await noJs.close();checks++;
+  assert.deepEqual(errors,[]);const result={checks,photoChecks,errors,screenshots:out};fs.writeFileSync(path.join(out,'result.json'),JSON.stringify(result,null,2));console.log(JSON.stringify(result,null,2));
+}finally{await browser?.close();await new Promise(resolve=>server.close(resolve))}

@@ -5,6 +5,7 @@ on:
     branches:
       - fix/website-quality
       - main
+      - feat/shopify-pickup
   pull_request:
 
 permissions:
@@ -24,3 +25,32 @@ jobs:
 
       - name: Run static site checks
         run: npm test
+
+
+      - name: Check image decoding
+        run: |
+          python3 -m pip install Pillow
+          python3 scripts/check-images.py
+
+      - name: Install browser QA tools
+        run: |
+          npm install --no-save --package-lock=false playwright@1.62.1
+          npx playwright install --with-deps chromium
+
+      - name: Check current website in desktop and mobile viewports
+        run: node scripts/browser-check.mjs
+        env:
+          QA_OUTPUT_DIR: qa-output
+
+      - name: Check isolated Formspree fallback
+        run: node scripts/form-fallback-browser-check.mjs
+        env:
+          QA_OUTPUT_DIR: qa-output/form-fallback
+
+      - name: Retain QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-qa
+          path: qa-output
+          if-no-files-found: ignore

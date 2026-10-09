@@ -1,3 +1,11 @@
+# Aktueller verbindlicher Projektstand – Audit-Umsetzung, 9. Oktober 2026
+
+Die Website-Brücke im Entwicklungsbranch ist **enabled:true**. Die drei bestehenden Körbe verwenden den gemeinsamen lokalen Warenkorb mit anschliessender Übergabe an Shopify. Neue Sortiment-Entwürfe sind weiterhin nicht bestellbar. Native Abholung ohne verpflichtenden Termin bleibt das Zielmodell. Keine Shopify-Einstellungen oder Produktion verändert. Aktuelle Daten: [Produktdaten](produktdaten-bestaetigt.md); aktueller Umsetzungs- und Prüfstatus: [Audit-Umsetzung](audit-umsetzung-2026-10-09.md).
+
+Die folgenden Abschnitte sind eine historische Chronologie. Angaben zu früher deaktivierter Brücke, Pickeasy, alten Füllmengen oder Testzahlen sind keine aktuellen Arbeitsanweisungen.
+
+---
+
 # Shopify-Abholung – Vorbereitungsstand
 
 **Stand: 8. Oktober 2026 (Europe/Zurich).** Die Betreiberentscheidung ist jetzt: **keine verpflichtende Datum-/Zeitwahl**. Kund:innen bestellen ohne Termin; nach der Vorbereitung wird die Bestellung in Shopify als «Bereit zur Abholung» markiert und Shopify versendet die Abholbestätigung. Diese Datei hält den tatsächlichen Shopstand, die native Abnahme und die gesperrte Website-Brücke fest. Sie bestätigt nicht, dass Shopify-Bestellungen bereits öffentlich angenommen oder zugestellt werden.
@@ -196,3 +204,4 @@ Der Shopify-Admin wurde ergänzend ausschließlich lesend abgefragt. Es wurden k
 - Eine ausgefüllte Datenschutzerklärung ist vorhanden (letzte Fassung 7. Oktober 2026). Die zusätzlich angelegten Seiten «Kontakt» und «Impressum» sind noch unveröffentlicht; die veröffentlichte Seite mit Handle `contact` liefert bei der Admin-Abfrage keine Inhaltszusammenfassung.
 - In der Shopify-Policy-Liste wurde neben der Datenschutzerklärung keine ausgefüllte Rückgabe-, Versand-, AGB-/Terms-of-Service- oder Legal-Notice-Policy zurückgegeben. Diese Inhalte müssen vor dem Livegang geprüft bzw. ergänzt werden.
 - Die Abfrage von `privacySettings`/Cookie-Banner wurde wegen fehlender Berechtigung `read_privacy_settings` abgewiesen. Dieser Punkt ist deshalb nicht als geprüft markiert; es wurde nichts verändert.
+

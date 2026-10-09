@@ -77,9 +77,9 @@ export const productDrafts = [
   {title:'Gedörrte Birnen · halb',type:'Dörrfrüchte',photos:['Gedörrte Birnen halb Becher.jpg','Gedörrte Birnen halb  Becher und im Keramikschälchen.png'],sizes:['100 g'],previewPrice:3.5},
   {title:'Gedörrte Zwetschgen',type:'Dörrfrüchte',photos:['Gedörrte Zwetschgen Becher.png','Gedörrte Zwetschgen halb Becher ausgelegt.png'],sizes:['100 g'],previewPrice:4},
   {title:'Süssmost',type:'Säfte',photos:['Süssmost3Liter.png','Süssmost Bag in Box 5Liter.png','Süssmost pasteurisiert 10 Liter.png'],ingredients:'Reiner Apfelsaft aus 15 verschiedenen Apfelsorten',displayVariants:[
-    {label:'3 Liter',photo:'Süssmost3Liter.png',reportedStock:25,netVolumeMl:3000,packaging:'Beutel'},
-    {label:'5 Liter',photo:'Süssmost Bag in Box 5Liter.png',reportedStock:50,netVolumeMl:5000,packaging:'Bag-in-Box'},
-    {label:'10 Liter',photo:'Süssmost pasteurisiert 10 Liter.png',reportedStock:25,netVolumeMl:10000,packaging:'Bag-in-Box',imageScaleX:1.35,imageScaleY:1.08}
+    {label:'3 Liter',photo:'Süssmost3Liter.png',reportedStock:25,netVolumeMl:3000,packaging:'Beutel',imageScale:0.68},
+    {label:'5 Liter',photo:'Süssmost Bag in Box 5Liter.png',reportedStock:50,netVolumeMl:5000,packaging:'Bag-in-Box',imageScale:0.78},
+    {label:'10 Liter',photo:'Süssmost pasteurisiert 10 Liter.png',reportedStock:25,netVolumeMl:10000,packaging:'Bag-in-Box',imageScale:1}
   ]},
   {title:'Traubensaft',type:'Säfte',photos:['TraubensafthalbLiter.png','Traubensaft1Liter.png'],displayVariants:[
     {label:'0.5 Liter',photo:'TraubensafthalbLiter.png',previewPrice:5},
@@ -94,4 +94,5 @@ export const productDrafts = [
   description:product.description ?? '',price:null,stock:null,shopifyProductId:null,confirmed:false,
   allergens:null,storage:null,shelfLife:null,
   factsSource:confirmedFacts[product.title] || product.title === 'Süssmost' ? 'Betreiberangaben, Übergabe 2026-10-09' : null}));
+
 
