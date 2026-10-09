@@ -41,3 +41,15 @@ test('agreed guide prices appear in the assortment preview',()=>{
   assert.equal(byTitle['Geschenksharass · gross'].description,'Enthält: Kirschen-Birnen-Essig (250 ml), halb gedörrte Birnen (100 g), Dessertzwetschgen (250 ml), Tomatensauce (250 ml) und Birnen-Balsamico (250 ml).');
 });
 
+
+test('gift crates link included products to their available photos',()=>{
+  const byTitle=Object.fromEntries(productDrafts.map(product=>[product.title,product]));
+  for(const title of ['Es Tröpfli Heimat','Geschenksharassli · mittel','Geschenksharass · gross']) {
+    const items=byTitle[title].includedProducts;
+    assert.ok(items.length>0,title);
+    for(const item of items) {
+      if(item.productTitle) assert.ok(byTitle[item.productTitle]?.photos?.length,item.label);
+      else assert.equal(item.label,'Himbeeressig');
+    }
+  }
+});
