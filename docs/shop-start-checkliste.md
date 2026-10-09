@@ -5,8 +5,8 @@ Die Häkchen bedeuten, dass ein Schritt anhand des Codes oder der Browserprüfun
 
 1. [x] Projektregeln, vorhandenen Branch und uncommittierte Änderungen geprüft.
 2. [x] Geschenkskorb-Bereich geprüft: auf dem Handy waren die vollen Korbnamen und Inhalte nicht gemeinsam sichtbar; der Inhalt musste aufgeklappt werden.
-3. [ ] Drei Korbkarten übersichtlich zeigen: vollständiger Name, Foto, Preis, Spezialitätenzahl und kompletter Inhalt direkt sichtbar; zweite Fotoansicht optional; Auswahl klar beschriften.
-4. [ ] Codeprüfung und Browserprüfung abschliessen: Korbinhalt, mobile und Desktopdarstellung, Tastaturbedienung, Fotovergrösserung, Schliessen und Fokus-Rückkehr prüfen. Erst nach bestandener Prüfung die Punkte 3 und 4 abhaken.
+3. [x] Drei Korbkarten übersichtlich zeigen: vollständiger Name, Foto, Preis, Spezialitätenzahl und kompletter Inhalt direkt sichtbar; zweite Fotoansicht optional; Auswahl klar beschriften.
+4. [x] Codeprüfung und Browserprüfung abschliessen: Korbinhalt, mobile und Desktopdarstellung, Tastaturbedienung, Fotovergrösserung, Schliessen und Fokus-Rückkehr geprüft. Die CI-Browserläufe und die Codeprüfungen sind erfolgreich.
 
 ## Abgrenzung
 
