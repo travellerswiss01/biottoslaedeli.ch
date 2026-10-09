@@ -35,6 +35,7 @@ function render() {
   visible.forEach((product,index) => {
     if (product.displayVariants) {
       const row = element('div','','shop-variant-row');
+      row.style.gridTemplateColumns='repeat('+product.displayVariants.length+',minmax(0,1fr))';
       row.setAttribute('role','group');
       row.setAttribute('aria-label',product.title+' – alle Grössen');
       product.displayVariants.forEach(variant => {
