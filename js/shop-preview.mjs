@@ -10,8 +10,23 @@ function element(tag, text, className) {
   if (className) node.className = className;
   return node;
 }
+const photoViewer = document.createElement('dialog');
+photoViewer.className = 'shop-photo-viewer';
+photoViewer.setAttribute('aria-label','Produktfoto in Grossansicht');
+const photoViewerClose = element('button','Schliessen','shop-photo-viewer-close');
+photoViewerClose.type = 'button';
+const photoViewerImage = element('img');
+const photoViewerCaption = element('p');
+photoViewer.append(photoViewerClose,photoViewerImage,photoViewerCaption);
+document.body.append(photoViewer);
+photoViewerClose.addEventListener('click',()=>photoViewer.close());
+photoViewer.addEventListener('click',event=>{if(event.target===photoViewer)photoViewer.close()});
 function photo(filename, title, lazy = true) {
   const media = element('div', '', 'shop-photo');
+  const button = element('button','','shop-photo-open');
+  button.type = 'button';
+  button.setAttribute('aria-label','Foto vergrössern: '+title);
+  button.title = 'Foto vergrössern';
   const img = element('img');
   const picture = element('picture');
   const source = element('source');
@@ -23,7 +38,14 @@ function photo(filename, title, lazy = true) {
   img.width = 600; img.height = 600;
   img.addEventListener('error', () => media.replaceChildren(element('span', 'Bild derzeit nicht verfügbar')), {once:true});
   picture.append(source, img);
-  media.append(picture);
+  button.append(picture);
+  media.append(button);
+  button.addEventListener('click',()=>{
+    photoViewerImage.src=img.currentSrc || img.src;
+    photoViewerImage.alt=title;
+    photoViewerCaption.textContent=title;
+    photoViewer.showModal();
+  });
   return media;
 }
 function guidePrice(amount) {
