@@ -31,13 +31,16 @@ function photo(filename, title, lazy = true) {
   const picture = element('picture');
   const source = element('source');
   source.type = 'image/webp';
-  source.srcset = 'img/' + encodeURIComponent(filename + '.webp');
+  if (!filename.toLowerCase().endsWith('.webp')) {
+    source.srcset = 'img/' + encodeURIComponent(filename + '.webp');
+    picture.append(source);
+  }
   img.src = 'img/' + encodeURIComponent(filename);
   img.alt = title;
   img.loading = lazy ? 'lazy' : 'eager';
   img.width = 600; img.height = 600;
   img.addEventListener('error', () => {
-    if (!img.dataset.fallbackAttempted) {
+    if (source.hasAttribute('srcset') && !img.dataset.fallbackAttempted) {
       img.dataset.fallbackAttempted = 'true';
       source.removeAttribute('srcset');
       img.src = 'img/' + encodeURIComponent(filename);
@@ -45,7 +48,7 @@ function photo(filename, title, lazy = true) {
     }
     media.replaceChildren(element('span', 'Bild derzeit nicht verfügbar'));
   });
-  picture.append(source, img);
+  picture.append(img);
   button.append(picture);
   media.append(button);
   button.addEventListener('click',()=>{
