@@ -883,7 +883,7 @@ footer .order-guide-business{font-size:1rem;color:#000;min-height:44px}
 
 
 /* Produktnamen im Korbinhalt öffnen das passende Produktfoto. */
-#koerbe .korb-card-contents li .korb-product-link{display:flex;align-items:center;justify-content:space-between;gap:6px;width:100%;min-width:0;min-height:40px;padding:7px 0;border:0;background:transparent;color:#222;font-family:inherit;font-size:inherit;font-weight:inherit;line-height:1.4;text-align:left;text-decoration-line:underline;text-decoration-style:dotted;text-underline-offset:3px;cursor:zoom-in}
+#koerbe .korb-card-contents li .korb-product-link{display:flex;align-items:center;justify-content:flex-start;gap:6px;width:100%;min-width:0;min-height:40px;padding:7px 0;border:0;background:transparent;color:#222;font-family:inherit;font-size:inherit;font-weight:inherit;line-height:1.4;text-align:left;text-decoration-line:underline;text-decoration-style:dotted;text-underline-offset:3px;cursor:zoom-in}
 #koerbe .korb-card-contents li .korb-product-link::after{flex:0 0 auto;color:#86151b;content:"↗";font-size:.8em;font-weight:700;text-decoration:none}
 #koerbe .korb-card-contents li .korb-product-link:hover{color:#86151b}
 #koerbe .korb-card-contents li .korb-product-link:focus-visible{position:relative;z-index:1;outline:3px solid #8f1116;outline-offset:2px;border-radius:3px}
