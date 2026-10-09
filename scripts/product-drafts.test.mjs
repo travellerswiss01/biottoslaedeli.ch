@@ -30,7 +30,7 @@ test('agreed guide prices appear in the assortment preview',()=>{
     ['Kirschen-Birnen-Essig',9.5],['Es Tröpfli Heimat',29],
     ['Geschenksharassli · mittel',39]
   ]) assert.equal(byTitle[title].previewPrice,price,title);
-  assert.deepEqual(byTitle.Traubensaft.previewPrices,[5,9]);
+  assert.deepEqual(byTitle.Traubensaft.displayVariants.map(({label,previewPrice})=>[label,previewPrice]),[['0.5 Liter',5],['1 Liter',9]]);
   assert.equal(byTitle['Geschenksharass · gross'].previewPrice,undefined);
 });
 
