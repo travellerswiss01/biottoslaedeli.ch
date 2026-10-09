@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {productDrafts} from '../js/product-drafts.mjs';
+import {shopifyProducts} from '../js/shopify-product-data.mjs';
 
 test('all uploaded product photos are grouped once and exist at their original paths',()=>{
   const photos=productDrafts.flatMap(product=>product.photos);
@@ -17,27 +18,27 @@ test('all uploaded product photos are grouped once and exist at their original p
     assert.equal(bytes.subarray(8,12).toString(),'WEBP',filename);
   }
 });
-test('draft products keep preview guide prices separate from Shopify prices and stock',()=>{
+test('all preview products are joined to a current Shopify product and variant',()=>{
   for(const product of productDrafts) {
-    assert.equal(product.price,null);assert.equal(product.stock,null);
-    assert.equal(product.shopifyProductId,null);assert.equal(product.confirmed,false);
-    if(product.previewPrices) assert.equal(product.previewPrices.length,product.sizes.length);
-    if(product.previewPrice != null) assert.ok(Number.isFinite(product.previewPrice) && product.previewPrice > 0);
+    assert.match(product.shopifyProductId,/^gid:\/\/shopify\/Product\/\d+$/);
+    assert.equal(product.confirmed,true);
+    assert.ok(product.shopifyVariants.length>0,product.title);
+    assert.ok(product.shopifyVariants.every(variant=>Number.isSafeInteger(variant.priceCents)),product.title);
     if(product.displayVariants) {
       for(const variant of product.displayVariants) assert.ok(product.photos.includes(variant.photo));
     }
   }
 });
-test('agreed guide prices appear in the assortment preview',()=>{
+test('confirmed prices and juice sizes match the Shopify snapshot',()=>{
   const byTitle=Object.fromEntries(productDrafts.map(product=>[product.title,product]));
   for(const [title,price] of [
-    ['Tomatensauce',6.5],['Birnel',10.5],['Dessertzwetschgen',7.5],
-    ['Gedörrte Birnen · ganz',6],['Gedörrte Birnen · halb',3.5],
-    ['Gedörrte Zwetschgen',4],['Apfelessig · 33 Sorten',15],
-    ['Kirschen-Birnen-Essig',9.5],['Es Tröpfli Heimat',29],
-    ['Geschenksharassli · mittel',39]
-  ]) assert.equal(byTitle[title].previewPrice,price,title);
-  assert.deepEqual(byTitle.Traubensaft.displayVariants.map(({label,previewPrice})=>[label,previewPrice]),[['0.5 Liter',5],['1 Liter',9]]);
+    ['Tomatensauce',650],['Birnel',1050],['Dessertzwetschgen',750],
+    ['Gedörrte Birnen · ganz',600],['Gedörrte Birnen · halb',350],
+    ['Gedörrte Zwetschgen',400],['Apfelessig · 33 Sorten',1500],
+    ['Kirschen-Birnen-Essig',950],['Es Tröpfli Heimat',2900],
+    ['Geschenksharassli · mittel',3900],['Geschenksharass · gross',7490]
+  ]) assert.equal(byTitle[title].shopifyPriceCents,price,title);
+  assert.deepEqual(byTitle.Traubensaft.shopifyVariants.map(({label,priceCents})=>[label,priceCents]),[['0.5 Liter',500],['1 Liter',900]]);
   const appleJuice=byTitle.Süssmost.displayVariants;
   const fiveL=appleJuice.find(variant=>variant.label==='5 Liter');
   const tenL=appleJuice.find(variant=>variant.label==='10 Liter');
@@ -45,8 +46,16 @@ test('agreed guide prices appear in the assortment preview',()=>{
   assert.equal(tenL.imageScaleX, undefined);
   assert.equal(tenL.imageScaleY, undefined);
   assert.equal(byTitle['Geschenksharassli · mittel'].description.includes('halben gedörrten Birnen (100 g)'),true);
-  assert.equal(byTitle['Geschenksharass · gross'].previewPrice,undefined);
+  assert.equal(byTitle['Geschenksharass · gross'].shopifyPriceCents,7490);
   for (const ingredient of ['Kirschen-Birnen-Essig (250 ml)', 'halb gedörrte Birnen (100 g)', 'Dessertzwetschgen (250 ml)', 'Tomatensauce (250 ml)', 'Birnen-Balsamico (250 ml)', 'Himbeeressig (250 ml)', 'Birnenweggen']) assert.ok(byTitle['Geschenksharass · gross'].description.includes(ingredient),ingredient);
+});
+
+test('the 19-product snapshot only enables the three published gift crates for checkout',()=>{
+  assert.equal(shopifyProducts.length,19);
+  assert.equal(new Set(shopifyProducts.map(product=>product.id)).size,19);
+  assert.deepEqual(shopifyProducts.filter(product=>product.published).map(product=>product.title).sort(),[
+    'Es Tröpfli Heimat','Geschenksharass · gross','Geschenksharassli · mittel'
+  ].sort());
 });
 
 

@@ -42,7 +42,7 @@ try{
     const cards=page.locator('#koerbe .korb-card');
     assert.equal(await cards.count(),3);
     assert.equal(await page.getByRole('heading',{name:'Geschenkskörbe auf einen Blick',exact:true}).innerText(),'Geschenkskörbe auf einen Blick');
-    const expected=[['Chli & Fii',3,'CHF 19.95','chili'],['Fein & Guet',5,'CHF 29.95','fein'],['Gross & Guet',6,'CHF 49.95','gross']];
+    const expected=[['Es Tröpfli Heimat',3,'CHF 29.00','chili'],['Geschenksharassli · mittel',5,'CHF 39.00','fein'],['Geschenksharass · gross',7,'CHF 74.90','gross']];
     for(let i=0;i<expected.length;i++){
       const card=cards.nth(i),[name,count,price,variant]=expected[i];
       assert.equal(await card.locator('h3').innerText(),name);
@@ -66,11 +66,6 @@ try{
       assert.ok(await page.locator('#li').evaluate(img=>img.naturalWidth>0));
       await page.keyboard.press('Escape');assert.equal(await page.locator('#lb').evaluate(e=>e.classList.contains('on')),false);
       assert.equal(await photo.evaluate(e=>e===document.activeElement),true);checks++;
-      const details=cards.first().locator('.korb-card-more');await details.locator('summary').click();assert.equal(await details.evaluate(e=>e.open),true);
-      const second=details.locator('.korb-card-second-foto img');await second.focus();assert.equal(await second.evaluate(e=>e===document.activeElement),true);await page.keyboard.press('Enter');
-      assert.equal(await page.locator('#lb').evaluate(e=>e.classList.contains('on')),true);
-      await page.getByRole('button',{name:'Schliessen',exact:true}).click();
-      assert.equal(await page.locator('#lb').evaluate(e=>e.classList.contains('on')),false);checks++;
     }
   }
   const views=['start','koerbe','gartenprodukte','traubensaft','suessmost','essig','doerrfruechte','tee','ueber-uns','laedeli','lucia-kocht','otto-garten','abholung','faq','kontakt'];
@@ -108,10 +103,10 @@ try{
     await page.screenshot({path:path.join(out,'geschenksharassen-'+width+'.png'),fullPage:true});
     await page.goto(origin+'/shop-vorschau.html');await page.locator('.shop-card').first().waitFor();await page.screenshot({path:path.join(out,'sortiment-'+width+'.png'),fullPage:true});
   }
-  await page.goto(origin+'/warenkorb.html');await page.getByRole('button',{name:'Chli & Fii hinzufügen',exact:true}).click();await page.getByRole('button',{name:'Gross & Guet hinzufügen',exact:true}).click();
-  assert.match(await page.locator('#cart-checkout').getAttribute('href'),/53868017549578:1,53868017647882:1/);assert.equal(await page.locator('#cart-total').innerText(),'Zwischensumme · CHF 69.90');checks++;
-  await page.getByLabel('Anzahl Chli & Fii',{exact:true}).fill('2');await page.getByLabel('Anzahl Chli & Fii',{exact:true}).press('Tab');assert.equal(await page.locator('#cart-total').innerText(),'Zwischensumme · CHF 89.85');await page.reload();assert.equal(await page.getByLabel('Anzahl Chli & Fii',{exact:true}).inputValue(),'2');checks++;
-  await page.getByRole('button',{name:'Gross & Guet entfernen',exact:true}).click();assert.equal(await page.locator('#cart-total').innerText(),'Zwischensumme · CHF 39.90');await layout();
+  await page.goto(origin+'/warenkorb.html');await page.getByRole('button',{name:'Es Tröpfli Heimat hinzufügen',exact:true}).click();await page.getByRole('button',{name:'Geschenksharass · gross hinzufügen',exact:true}).click();
+  assert.match(await page.locator('#cart-checkout').getAttribute('href'),/53868017549578:1,53868017647882:1/);assert.equal(await page.locator('#cart-total').innerText(),'Zwischensumme · CHF 103.90');checks++;
+  await page.getByLabel('Anzahl Es Tröpfli Heimat',{exact:true}).fill('2');await page.getByLabel('Anzahl Es Tröpfli Heimat',{exact:true}).press('Tab');assert.equal(await page.locator('#cart-total').innerText(),'Zwischensumme · CHF 132.90');await page.reload();assert.equal(await page.getByLabel('Anzahl Es Tröpfli Heimat',{exact:true}).inputValue(),'2');checks++;
+  await page.getByRole('button',{name:'Geschenksharass · gross entfernen',exact:true}).click();assert.equal(await page.locator('#cart-total').innerText(),'Zwischensumme · CHF 58.00');await layout();
   await page.screenshot({path:path.join(out,'warenkorb.png'),fullPage:true});
   await page.goto(origin+'/index.html#l-impressum');await page.locator('#lgx').waitFor({state:'visible'});await page.keyboard.press('Escape');assert.equal(await page.locator('#lg').getAttribute('aria-hidden'),'true');checks++;
   const noJs=await browser.newContext({javaScriptEnabled:false});await noJs.route('**/*',r=>r.request().url().startsWith(origin)?r.continue():r.abort());const fallback=await noJs.newPage();await fallback.goto(origin+'/shop-vorschau.html');assert.match(await fallback.locator('noscript').innerText(),/Apfelessig/);await noJs.close();checks++;

@@ -1,3 +1,4 @@
+import './shopify-cart.js';
 
 (function(){
 var LANG_KEY="biottos-lang";
@@ -155,7 +156,7 @@ Object.assign(dict,{
 });
 var originalNodes=new WeakMap(),originalAttrs=new WeakMap();
 function translateTextNode(n,on){var v=n.nodeValue;if(!v||!v.trim())return;var saved=originalNodes.get(n);if(!saved||v!==saved.output)saved={original:v,output:v};var original=saved.original,key=original.trim();saved.output=on&&dict[key]?original.replace(key,dict[key]):original;n.nodeValue=saved.output;originalNodes.set(n,saved)}
-function applyLang(){var on=lang==="ch";document.documentElement.lang=on?"gsw-CH":"de";document.querySelectorAll("*").forEach(function(el){if(el.id==="langSwitch")return;el.childNodes.forEach(function(n){if(n.nodeType===3)translateTextNode(n,on)});["aria-label","placeholder","alt","title"].forEach(function(a){if(el.hasAttribute(a)){var v=el.getAttribute(a),saved=originalAttrs.get(el)||{},item=saved[a];if(!item||v!==item.output)item={original:v,output:v};item.output=on&&dict[item.original]?dict[item.original]:item.original;el.setAttribute(a,item.output);saved[a]=item;originalAttrs.set(el,saved)}})});var b=document.getElementById("langSwitch");if(b){b.classList.toggle("is-ch",on);b.setAttribute("aria-pressed",String(on));b.setAttribute("aria-label",on?"Sproch wechsle â€“ aktuell SchwiizerdÃ¼tsch, Deutsch aazeige":"Sprache wechseln â€“ aktuell Deutsch, SchwiizerdÃ¼tsch anzeigen")}}
+function applyLang(){var on=lang==="ch";document.documentElement.lang=on?"gsw-CH":"de";document.querySelectorAll("*").forEach(function(el){if(el.id==="langSwitch")return;el.childNodes.forEach(function(n){if(n.nodeType===3)translateTextNode(n,on)});["aria-label","placeholder","alt","title"].forEach(function(a){if(el.hasAttribute(a)){var v=el.getAttribute(a),saved=originalAttrs.get(el)||{},item=saved[a];if(!item||v!==item.output)item={original:v,output:v};item.output=on&&dict[item.original]?dict[item.original]:item.original;el.setAttribute(a,item.output);saved[a]=item;originalAttrs.set(el,saved)}})});var b=document.getEµ¨¥Â¸­yêë¢°k¢G§¦*^lementById("langSwitch");if(b){b.classList.toggle("is-ch",on);b.setAttribute("aria-pressed",String(on));b.setAttribute("aria-label",on?"Sproch wechsle â€“ aktuell SchwiizerdÃ¼tsch, Deutsch aazeige":"Sprache wechseln â€“ aktuell Deutsch, SchwiizerdÃ¼tsch anzeigen")}}
 try{lang=localStorage.getItem(LANG_KEY)||"de"}catch(e){}
 document.addEventListener("click",function(e){var b=e.target.closest("#langSwitch");if(!b)return;lang=lang==="de"?"ch":"de";try{localStorage.setItem(LANG_KEY,lang)}catch(e){}applyLang()});
 window.applyBiottosLanguage=applyLang;
@@ -186,7 +187,7 @@ renderHeroStory(0);
 })();
 (function(){
 var NR="41762552256",$=function(x){return document.querySelector(x)};
-var K=[{id:"gross",n:"Gross & Guet",p:49.95},{id:"fein",n:"Fein & Guet",p:29.95},{id:"chili",n:"Chli & Fii",p:19.95}];
+var K=[{id:"gross",n:"Geschenksharass Â· gross",p:74.90},{id:"fein",n:"Geschenksharassli Â· mittel",p:39.00},{id:"chili",n:"Es TrÃ¶pfli Heimat",p:29.00}];
 var shopifyBridge=window.BiottosShopify||{enabled:false,openCart:function(){return false}};
 var ZEITEN=[];(function(){for(var m=8*60;m<=18*60;m+=30){ZEITEN.push(("0"+Math.floor(m/60)).slice(-2)+":"+("0"+m%60).slice(-2))}})();
 var st={k:K[0].id,n:1,d:"",t:"",step:"k",week:0};
@@ -420,7 +421,7 @@ function resetOrderState(){
   if(form){form.reset();syncContactMethod();form.hidden=true;var button=form.querySelector("button[type=submit]");if(button){button.disabled=false;button.textContent="Bestellung verbindlich senden"}}
   var back=document.querySelector("[data-step-back='n']");if(back)back.hidden=false;
 }
-function open(k){if(submitting)return;refreshDays();refreshWeeks();st.k=K.some(function(o){return o.id===k})?k:st.k;resetOrderState();var photoMap={gross:["img/gross-vorne.jpg","img/gross-oben.jpg"],fein:["img/fein-vorne.jpg","img/fein-oben.jpg"],chili:["img/chili-vorne.jpg","img/chili-oben.jpg"]};var pm=photoMap[st.k]||photoMap.gross;var sp=document.getElementById("sp"),sp2=document.getElementById("sp2");if(sp){sp.src=pm[0];sp.alt=K.find(function(o){return o.id===st.k}).n}if(sp2){sp2.src=pm[1];sp2.alt=K.find(function(o){return o.id===st.k}).n+" â€“ zweite Ansicht";sp2.hidden=false}st.step="d";dWeek=0;render();$("#ov").classList.add("on");$("#ov").setAttribute("aria-hidden","false");document.body.style.overflow="hidden";requestAnimationFrame(function(){$("#x").focus()})}
+function open(k){if(submitting)return;refreshDays();refreshWeeks();st.k=K.some(function(o){return o.id===k})?k:st.k;resetOrderState();var photoMap={gross:"img/Geschenksharass-gross-komplett.webp",fein:"img/Geschenkharassli mittel.png",chili:"img/Essigharassli.png"};var photo=photoMap[st.k]||photoMap.gross;var name=K.find(function(o){return o.id===st.k}).n;var sp=document.getElementById("sp"),sp2=document.getElementById("sp2");if(sp){sp.src=photo;sp.alt=name}if(sp2){sp2.hidden=true;sp2.removeAttribute("src");sp2.removeAttribute("alt")}st.step="d";dWeek=0;render();$("#ov").classList.add("on");$("#ov").setAttribute("aria-hidden","false");document.body.style.overflow="hidden";requestAnimationFrame(function(){$("#x").focus()})}
 function close(){
   if(submitting||!$("#ov").classList.contains("on"))return;
   $("#ov").classList.remove("on");$("#ov").setAttribute("aria-hidden","true");document.body.style.overflow="";
@@ -471,3 +472,4 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")close();if(e
  addEventListener("scroll",function(){var y=Math.max(0,window.scrollY),delta=y-lastY;if(!active()||y<24||menu.getAttribute("aria-expanded")==="true"||head.contains(document.activeElement)){head.classList.remove("header-away");lastY=y;return}if(Math.abs(delta)>5){head.classList.toggle("header-away",delta>0);lastY=y}},{passive:true});
  head.addEventListener("focusin",function(){head.classList.remove("header-away")});menu.addEventListener("click",function(){head.classList.remove("header-away")});
 })();
+

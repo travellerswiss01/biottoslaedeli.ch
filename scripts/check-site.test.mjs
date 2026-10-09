@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import { checkSite } from './check-site.mjs';
+import {createCartBridge} from '../js/shopify-cart.js';
 function fixture(t, files) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'biottos-check-'));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
@@ -54,14 +54,10 @@ test('detects invalid anchors, duplicate IDs and invalid structured data', (t) =
 
 
 test('routes valid product CTAs through the Shopify cart bridge', () => {
-  const helperPath = path.resolve(
-    path.dirname(fileURLToPath(import.meta.url)),
-    '../js/shopify-cart.js',
-  );
   const assigned = [];
-  const context = { window: { location: { assign(url) { assigned.push(url); } } } };
-  vm.runInNewContext(fs.readFileSync(helperPath, 'utf8'), context);
-  const bridge = context.window.BiottosShopify;
+  const state=new Map();
+  const window={location:{assign(url){assigned.push(url)}},localStorage:{getItem:key=>state.get(key)??null,setItem:(key,value)=>state.set(key,value)}};
+  const bridge=createCartBridge(window);
   assert.equal(bridge.enabled, true);
   for (const [key, variant] of Object.entries({
     gross: '53868017647882',
@@ -78,9 +74,7 @@ test('routes valid product CTAs through the Shopify cart bridge', () => {
   }
   assert.equal(bridge.buildCartUrl('unknown', 1), null);
   assert.equal(bridge.openCart('chili', 1), true);
-  assert.deepEqual(assigned, [
-    'https://biottoslaedeli.myshopify.com/cart/53868017549578:1?storefront=true',
-  ]);
+  assert.deepEqual(assigned,['warenkorb.html']);
 });
 
 test('keeps the Formspree fallback and all product CTAs wired', () => {
@@ -90,10 +84,10 @@ test('keeps the Formspree fallback and all product CTAs wired', () => {
   );
   const html = fs.readFileSync(indexPath, 'utf8');
   assert.match(html, /action="https:\/\/formspree\.io\/f\/xvkgydoe"/);
-  assert.ok(html.indexOf('js/shopify-cart.js') < html.indexOf('js/app.js'));
-  for (const key of ['chili', 'fein', 'gross']) {
-    assert.match(html, new RegExp(`data-open="${key}"`));
-  }
+  assert.match(html,/type="module" src="js\/app\.js/);
+  assert.match(fs.readFileSync(path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../js/app.js'),'utf8'),/import '\.\/shopify-cart\.js';/);
+  for (const key of ['chili', 'fein', 'gross']) assert.match(html,new RegExp(`data-open="${key}"`));
+  assert.match(html,/CHF 29\.00/);assert.match(html,/CHF 39\.00/);assert.match(html,/CHF 74\.90/);
 });
 
 test('describes native pickup without mandatory date or time selection', () => {
@@ -107,30 +101,27 @@ test('describes native pickup without mandatory date or time selection', () => {
 });
 
 test('enhances all standalone product links and preserves unknown fallback links', () => {
-  const helperPath = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../js/shopify-cart.js');
   const links = ['gross', 'fein', 'chili', 'unknown'].map((key) => ({ dataset: { shopifyCart: key }, href: 'index.html#koerbe' }));
   const document = { readyState: 'complete', querySelectorAll(selector) { assert.equal(selector, 'a[data-shopify-cart]'); return links; } };
-  const context = { window: { document, location: { assign() {} } } };
-  vm.runInNewContext(fs.readFileSync(helperPath, 'utf8'), context);
+  const window={document,location:{assign(){}},localStorage:{getItem(){return null},setItem(){}}};
+  const bridge=createCartBridge(window);
   for (const [i, variant] of ['53868017647882', '53868017582346', '53868017549578'].entries()) {
     assert.equal(links[i].href, 'warenkorb.html?korb='+['gross','fein','chili'][i]);
   }
   assert.equal(links[3].href, 'index.html#koerbe');
-  assert.equal(context.window.BiottosShopify.buildCartUrl('toString', 1), null);
-  assert.equal(context.window.BiottosShopify.buildCartUrl('constructor', 1), null);
-  assert.equal(context.window.BiottosShopify.buildCartUrl('__proto__', 1), null);
-  assert.equal(context.window.BiottosShopify.buildCartUrl('gross', Number.MAX_SAFE_INTEGER + 1), null);
-  assert.match(context.window.BiottosShopify.buildCartUrl('gross', 11), /:11\?/);
+  assert.equal(bridge.buildCartUrl('toString', 1), null);
+  assert.equal(bridge.buildCartUrl('constructor', 1), null);
+  assert.equal(bridge.buildCartUrl('__proto__', 1), null);
+  assert.equal(bridge.buildCartUrl('gross', Number.MAX_SAFE_INTEGER + 1), null);
+  assert.match(bridge.buildCartUrl('gross', 11), /:11\?/);
 });
 
 test('keeps all standalone links on the original page when the bridge is disabled', () => {
-  const helperPath = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../js/shopify-cart.js');
-  const source = fs.readFileSync(helperPath, 'utf8').replace('enabled:true', 'enabled:false');
   const links = [{ dataset: { shopifyCart: 'gross' }, href: 'index.html#koerbe' }];
-  const context = { window: { document: { readyState: 'complete', querySelectorAll() { return links; } }, location: { assign() { throw new Error('Must not navigate'); } } } };
-  vm.runInNewContext(source, context);
+  const window={document:{readyState:'complete',querySelectorAll(){return links}},location:{assign(){throw new Error('Must not navigate')}},localStorage:{getItem(){return null},setItem(){}}};
+  const bridge=createCartBridge(window,undefined,{enabled:false});
   assert.equal(links[0].href, 'index.html#koerbe');
-  assert.equal(context.window.BiottosShopify.openCart('gross', 1), false);
+  assert.equal(bridge.openCart('gross', 1), false);
 });
 
 test('removes obsolete limits and mandatory appointments from the native shopping pages', () => {

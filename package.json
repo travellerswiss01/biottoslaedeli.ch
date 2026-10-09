@@ -1,5 +1,6 @@
 {
   "name": "biottos-laedeli-website",
+  "type": "module",
   "private": true,
   "version": "1.0.0",
   "description": "Static HTML, CSS and JavaScript website for Biottos L\u00e4deli",
@@ -12,3 +13,4 @@
     "node": ">=24"
   }
 }
+

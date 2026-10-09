@@ -5,9 +5,9 @@ Statische Website mit HTML, CSS und JavaScript, ohne Framework oder Build-Schrit
 ## Aktueller Stand – 9. Oktober 2026
 
 - Das bereitgestellte Apfellogo ist im Seitenkopf und auf der Startseite eingebunden. Die Originalupload bleibt unverändert; weisse Ränder werden nur durch den Darstellungsrahmen ausgeblendet.
-- `shop-vorschau.html` zeigt 19 Entwürfe, sechs Kategorieabschnitte, Suche und Filter. Sämtliche sieben Essig-/Balsamicoprodukte haben 250 ml. Richtpreise sind ausdrücklich unverbindlich.
+- `shop-vorschau.html` zeigt 19 Produkte in sechs Kategorieabschnitten mit Suche und Filter. Shopify-Preise und Varianten-IDs sind als schreibgeschützter Snapshot hinterlegt; drei veröffentlichte Geschenksharassen sind bestellbar, 16 noch nicht veröffentlichte Sortimentsprodukte bleiben Vorschau.
 - Neue Produkte sind noch nicht bestellbar: verbindliche Preise, vollständige Produktangaben und echte Shopify-Zuordnungen fehlen. Details: [Produktdaten](docs/produktdaten-bestaetigt.md).
-- Die drei bereits aktiven Körbe Chli & Fii, Fein & Guet und Gross & Guet können im gemeinsamen `warenkorb.html` kombiniert werden. Der Browser speichert nur Produkt-Schlüssel und Menge. Preise und Varianten stammen aus der bestätigten Zuordnung in `js/shopify-cart.js`; Shopify prüft die endgültige Verfügbarkeit und Preise.
+- Die drei veröffentlichten Geschenksharassen können im gemeinsamen `warenkorb.html` kombiniert werden. Der Browser speichert nur Produkt-Schlüssel und Menge. Shopify-Produktdaten liegen in `js/shopify-product-data.mjs`; `js/shopify-cart.js` übergibt die bestätigten Varianten-IDs. Shopify prüft Verfügbarkeit und Preis im Checkout.
 - Die aktive Brücke ist `enabled:true`. Bei Browsern ohne Speicherung bleibt der direkte Shopify-Einstieg erhalten. Für den gemeinsamen Warenkorb ohne JavaScript gibt es direkte Einzelkorb-Links.
 - Native Abholung: kostenlos, Hauptstrasse 90, 8357 Guntershausen, Montag–Samstag 08:00–18:00, bereit nach Abholbestätigung. Keine verpflichtende Terminwahl. Onlinezahlung sowie Bar/TWINT bei Abholung sind historisch dokumentiert; vor Freigabe aktuell abnehmen.
 - Formspree bleibt als bestehender Rückfallweg im Projekt. Keine App deinstalliert, kein Theme veröffentlicht, kein Verkaufskanal geändert.

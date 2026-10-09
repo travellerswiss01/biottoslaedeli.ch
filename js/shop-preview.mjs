@@ -66,8 +66,19 @@ function photo(filename, title, lazy = true) {
   });
   return media;
 }
-function guidePrice(amount) {
-  return element('p','Richtpreis · CHF '+amount.toFixed(2),'shop-price');
+function shopifyPrice(cents) {
+  return element('p','CHF '+(cents/100).toFixed(2),'shop-price');
+}
+function availability(product) {
+  return element('p',product.shopifyPublished?'Im Shopify-Store bestellbar':'Preis bestätigt · Online-Bestellung folgt',
+    product.shopifyPublished?'shop-availability shop-availability--ready':'shop-availability');
+}
+function addToCartLink(product,variant) {
+  if(!product.shopifyPublished||!variant?.key)return null;
+  const link=element('a','In den Warenkorb','btn shop-add-to-cart');
+  link.href='warenkorb.html?korb='+encodeURIComponent(variant.key);
+  link.dataset.shopifyCart=variant.key;
+  return link;
 }
 function render() {
   const visible = filterProducts(productDrafts, search.value, category.value);
@@ -95,8 +106,10 @@ function render() {
         if (variant.imageScale) media.querySelector('img').style.transform='scale('+variant.imageScale+')';
         card.append(media,element('h3',product.title,'shop-product-title'),
           element('p',variant.label,'shop-variant-size'));
-        if (variant.previewPrice != null) card.append(guidePrice(variant.previewPrice));
-        else card.append(element('p','Preis wird bestätigt','shop-price-pending'));
+        const storeVariant=product.shopifyVariants.find(candidate=>candidate.label===variant.label);
+        if(storeVariant)card.append(shopifyPrice(storeVariant.priceCents));
+        card.append(availability(product));
+        const cartLink=addToCartLink(product,storeVariant);if(cartLink)card.append(cartLink);
         row.append(card);
       });
       target.append(row);
@@ -106,11 +119,9 @@ function render() {
     if (product.type === 'Geschenksharassen') article.classList.add('shop-card--gift');
     article.append(photo(product.photos[0],product.title,index > 2),element('h3',product.title,'shop-product-title'));
     let mobileDetails = null;
-    if (product.previewPrices) {
-      product.sizes.forEach((size,index)=>article.append(element('p',size+' · Richtpreis CHF '+product.previewPrices[index].toFixed(2),'shop-variant-size')));
-    } else if (product.sizes) article.append(element('p',product.sizes.join(' · '),'shop-sizes'));
-    if (product.previewPrice != null) article.append(guidePrice(product.previewPrice));
-    else article.append(element('p','Preis wird bestätigt','shop-price-pending'));
+    if (product.sizes) article.append(element('p',product.sizes.join(' · '),'shop-sizes'));
+    if (product.shopifyPriceCents!=null) article.append(shopifyPrice(product.shopifyPriceCents));
+    article.append(availability(product));
     if (product.description) {
       article.append(element('p',product.description,'shop-description'));
       if (product.type === 'Geschenksharassen' && product.includedProducts?.length) {
@@ -134,6 +145,7 @@ function render() {
       contents.append(list);
       article.append(contents);
     }
+    const cartLink=addToCartLink(product,product.shopifyVariants[0]);if(cartLink)article.append(cartLink);
     if (mobileDetails) article.append(mobileDetails);
     if (product.photos.length > 1) {
       const details = element('details');
@@ -151,7 +163,7 @@ function render() {
   count.textContent = visible.length + ' von ' + productDrafts.length + ' Produkten';
   for(const button of categoryNav.querySelectorAll('button')) button.setAttribute('aria-pressed',String(button.dataset.category===category.value));
 }
-const categoryOrder=['Essig & Balsamico','Säfte','Dörrfrüchte','Spezialitäten','Backwaren','Geschenksharassen'];
+const categoryOrder=['Geschenksharassen','Essig & Balsamico','Säfte','Dörrfrüchte','Spezialitäten','Backwaren'];
 const categoryNav=document.querySelector('#shop-categories');
 categoryOrder.forEach(type=>category.add(new Option(type,type)));
 for(const type of ['',...categoryOrder]) {

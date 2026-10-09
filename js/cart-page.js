@@ -1,3 +1,5 @@
+import './shopify-cart.js';
+
 (function(){
   'use strict';
   var bridge=window.BiottosShopify,itemsNode=document.querySelector('#cart-items'),choices=document.querySelector('#cart-choices'),status=document.querySelector('#cart-status'),checkout=document.querySelector('#cart-checkout'),total=document.querySelector('#cart-total');

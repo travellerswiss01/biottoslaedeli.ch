@@ -26,8 +26,8 @@ fs.mkdirSync(out, { recursive: true });
           'Content-Type',
           p.endsWith('.html')
             ? 'text/html'
-            : p.endsWith('.js')
-              ? 'application/javascript'
+            : (p.endsWith('.js') || p.endsWith('.mjs'))
+              ? 'text/javascript'
               : p.endsWith('.css')
                 ? 'text/css'
                 : p.endsWith('.svg')
@@ -55,7 +55,7 @@ fs.mkdirSync(out, { recursive: true });
   const context = await b.newContext({ timezoneId: 'America/Los_Angeles' });
   await context.route('**/*', async (r) => {
     const url = r.request().url();
-    if (url.startsWith('http://127.0.0.1:8765/js/shopify-cart.js')) return r.fulfill({contentType:'text/javascript',body:fs.readFileSync(path.join(root,'js/shopify-cart.js'),'utf8').replace('enabled:true','enabled:false')});
+    if (url.startsWith('http://127.0.0.1:8765/js/shopify-cart.js')) return r.fulfill({contentType:'text/javascript',body:fs.readFileSync(path.join(root,'js/shopify-cart.js'),'utf8').replace('enabled:options.enabled!==false','enabled:false')});
     if (url.startsWith('http://127.0.0.1:8765')) return r.continue();
     if (url.startsWith('https://formspree.io/')) {
       requests++;
@@ -193,9 +193,9 @@ fs.mkdirSync(out, { recursive: true });
     await p.locator('#customerEmail').fill('preview@example.invalid');
   }
   for (const [id, price, qty] of [
-    ['gross', 49.95, 10],
-    ['fein', 29.95, 2],
-    ['chili', 19.95, 1],
+    ['gross', 74.90, 10],
+    ['fein', 39.00, 2],
+    ['chili', 29.00, 1],
   ]) {
     await select(id, qty);
     assert.equal(

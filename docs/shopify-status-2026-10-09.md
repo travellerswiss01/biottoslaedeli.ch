@@ -1,6 +1,6 @@
 # Aktueller verbindlicher Projektstand – Audit-Umsetzung, 9. Oktober 2026
 
-Die Website-Brücke im Entwicklungsbranch ist **enabled:true**. Die drei bestehenden Körbe verwenden den gemeinsamen lokalen Warenkorb mit anschliessender Übergabe an Shopify. Neue Sortiment-Entwürfe sind weiterhin nicht bestellbar. Native Abholung ohne verpflichtenden Termin bleibt das Zielmodell. Keine Shopify-Einstellungen oder Produktion verändert. Aktuelle Daten: [Produktdaten](produktdaten-bestaetigt.md); aktueller Umsetzungs- und Prüfstatus: [Audit-Umsetzung](audit-umsetzung-2026-10-09.md).
+Im Branch `feat/shopify-pickup` liegen eine gemeinsame Zuordnung der Shopify-Varianten, bestätigten Preise und lokalen Produktfotos sowie die Warenkorb-Brücke. Live geprüft: 19 Produkte sind aktiv; die drei Geschenksharassen sind im Online-Store-Kanal veröffentlicht, die 16 einzelnen Sortimentsprodukte noch nicht. Nur veröffentlichte Harassen erhalten einen Checkout-Knopf. Die Website verwendet einen lokalen Shopify-Datenschnappschuss, keinen Live-API-Aufruf und keinen Vercel-Schlüssel. Es wurden keine Shopify-Veröffentlichungen, Theme-Einstellungen oder Checkout-Einstellungen geändert. Native Abholung ohne verpflichtenden Termin bleibt das Zielmodell. Aktuelle Daten: [Produktdaten](produktdaten-bestaetigt.md); Umsetzungs- und Prüfstatus: [Audit-Umsetzung](audit-umsetzung-2026-10-09.md).
 
 Die folgenden Abschnitte sind eine historische Chronologie. Angaben zu früher deaktivierter Brücke, Pickeasy, alten Füllmengen oder Testzahlen sind keine aktuellen Arbeitsanweisungen.
 

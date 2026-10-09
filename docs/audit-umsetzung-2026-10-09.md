@@ -2,12 +2,16 @@
 
 Basis: feat/shopify-pickup, 23027197bc72438d64cbce54fd641097539a579a. Nur Branch-Vorschau; keine Produktions- oder Shopify-Admin-Änderung. Userauftrag: Apfellogo sinnvoll integrieren und die 28 Auditpunkte schrittweise bearbeiten.
 
+## Aktualisierung für die Shopify-Vorschau
+
+Am 9. Oktober wurden Produktstatus, Preise und Varianten-IDs live in Shopify geprüft. Der Vorschau-Branch enthält nun einen lokalen Katalog-Schnappschuss für alle 19 Produkte. Preise in den Karten kommen aus diesem Shopify-Abgleich. Drei veröffentlichte Geschenksharassen können in den gemeinsamen Warenkorb gelegt werden; 16 aktive, aber im Online-Store noch unveröffentlichte Einzelprodukte bleiben sichtbar und ohne Bestellknopf. Der Katalog wird nicht live von der Shopify-API geladen; bei Änderungen in Shopify ist der Schnappschuss zu aktualisieren. Keine Produkte, Vertriebskanäle oder Einstellungen in Shopify wurden durch diesen Code-Schritt geändert.
+
 | Auditpunkt | Umsetzung / Status |
 |---|---|
 | A01 Mobile Geschenkdetails | CSS-Kaskade repariert, lesbare und bedienbare Mengen-Details. Auf 320, 360 und 390 Pixeln im Browser bestanden. |
 | A02 Roter Test | Sachliche Prüfung von Inhaltsprodukten und Mengen ersetzt veralteten Gesamtstring. Lokal und in GitHub Actions bestanden. |
-| A03 Verkaufsweg neues Sortiment | Gemeinsamer Warenkorb für bestehende drei Produkte umgesetzt. Neue 19 Entwürfe bleiben mangels bestätigter Daten/IDs nicht bestellbar; keine falsche Zuordnung. |
-| A04 Fehlende Daten | Vollständige aktualisierte Daten-/Lückenliste erstellt. Betreiberangaben, verbindliche Preise und Freigabe fehlen weiterhin. |
+| A03 Verkaufsweg neues Sortiment | Gemeinsamer Shopify-Warenkorb für die drei veröffentlichten Geschenksharassen. Alle 19 Produkt- und Varianten-IDs/Preise lokal abgeglichen; die 16 noch nicht veröffentlichten Einzelprodukte haben keinen Bestellknopf. |
+| A04 Fehlende Daten | Betreiberbestätigte Preise, Varianten und Mengen dokumentiert. Zutaten-/Allergen-/Lagerungsdaten für mehrere Produkte bleiben offen; siehe Produktdatenliste. |
 | A05 Überschrift und Einstieg | Punkt entfernt; kurzer Untertext unmittelbar darunter; reduzierte Abstände und kompakter Hinweis. |
 | A06 Ordnung | Sechs Kategorieabschnitte, passende Überschriften und direkte Kategorieauswahl. Himbeeressig bei Essigen. |
 | A07 Mobile Karten | Sehr schmale Geräte einspaltig; Geschenk-Inhalte zweispaltig und mit 16-Pixel-Beschriftung; Saftgrössen bleiben nebeneinander. |
@@ -30,7 +34,7 @@ Basis: feat/shopify-pickup, 23027197bc72438d64cbce54fd641097539a579a. Nur Branch
 | A24 CI | Vorschau-Branch in Pushfilter aufgenommen; Bilddecodierung und Browserprüfung hinzugefügt; QA-Artefakte aufbewahrt. |
 | A25 Leere Bilder | Nullbyte-Verweise abgelehnt; dynamische Daten prüfen Originale/WebP; vollständige Rasterdecodierung zusätzlich. |
 | A26 CSS-Ordnung | Vorschau-CSS zusammenhängend neu geordnet; gemeinsame Lesbarkeitsregeln zentralisiert. Historische Regeln anderer Funktionen erhalten, keine vollständige Neufassung der ganzen Website. |
-| A27 Ohne JavaScript | Vollständiges statisches Sortiment mit Grössen, Richtpreisen und direkt vergrösserbaren Fotos ergänzt. |
+| A27 Ohne JavaScript | Statische Produktliste mit Shopify-Preisen ergänzt. Interaktive Fotos und Warenkorb benötigen JavaScript. |
 | A28 Freigabe/Rollback | Aktuellen Prüf-/Releaseprozess und Revert-Verfahren dokumentiert. Veröffentlichung bleibt separat freizugeben. |
 
 ## Apfellogo

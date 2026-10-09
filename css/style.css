@@ -1,4 +1,5 @@
-:root{color-scheme:light;--paper:#faf5ea;--paper2:#f1e8d6;--ink:#000;--mute:#444;--red:#c4161c;--line:#d9ccb4;--white:#fffdf8;--tape:#e9d9a6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+µ¨¥zºè¯
+â¶)à²Ö§uªÝ¢ëiºÐk¢G§¦*^:root{color-scheme:light;--paper:#faf5ea;--paper2:#f1e8d6;--ink:#000;--mute:#444;--red:#c4161c;--line:#d9ccb4;--white:#fffdf8;--tape:#e9d9a6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:70px}
 body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.65 Literata,Georgia,serif}
@@ -291,7 +292,8 @@ details ul{margin:0 0 12px!important}
 .checkout-intro{font-size:.9rem;color:var(--mute);line-height:1.5;margin:8px 0 14px}
 #directOrder{margin:0 0 10px}
 .direct-form{border:1px solid var(--line);background:var(--paper2);box-shadow:0 3px 0 rgba(0,0,0,.04)}
-.direct-form .btn{width:100%}
+.direct-fµ¨¥zºè¯
+â¶)à²Ö§uªÝ¢ëiºÐk¢G§¦*^orm .btn{width:100%}
 
 /* Handgeschriebener Bestellzettel */
 .success-receipt{
@@ -399,7 +401,7 @@ details ul{margin:0 0 12px!important}
 
 /* Ruhigere KorbprÃ¤sentation: ein starkes Hauptbild, zweite Ansicht erst bei Bedarf */
 .korb-main-photo{max-width:760px;margin:0 auto 16px}
-.korb-main-photo .foto{max-width:760px;margin:0 auto}
+.korb-main-photo .foµ¨¥Â¸­yêë¢°k¢G§¦*^to{max-width:760px;margin:0 auto}
 .korb-more{max-width:760px;margin:0 auto 18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .korb-more summary{padding:12px 2px;cursor:pointer;list-style:none;text-align:center;font-size:.88rem;color:var(--red);font-weight:600}
 .korb-more summary::-webkit-details-marker{display:none}
