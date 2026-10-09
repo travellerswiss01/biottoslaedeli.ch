@@ -84,7 +84,7 @@ export const productDrafts = [
   ]},
   {title:'Es Tröpfli Heimat',type:'Geschenksharassen',photos:['Essigharassli.png'],description:'Drei Fläschchen à 100 ml: Himbeeressig, Birnenbalsamico und Kirschessig. Im kleinen Holzharassli mit Masche.',previewPrice:29},
   {title:'Geschenksharassli · mittel',type:'Geschenksharassen',photos:['Geschenkharassli mittel.png'],description:'Mit Tomatensauce (250 ml), Kirschen-Birnen-Essig (250 ml), Dessertzwetschgen (250 ml) und halb gedörrten Birnen (100 g).',previewPrice:39},
-  {title:'Geschenksharass · gross',type:'Geschenksharassen',photos:['Geschenksharass gross.png']}
+  {title:'Geschenksharass · gross',type:'Geschenksharassen',photos:['Geschenksharass gross.png'],description:'Enthält: Kirschen-Birnen-Essig (250 ml), halb gedörrte Birnen (100 g), Dessertzwetschgen (250 ml), Tomatensauce (250 ml) und Birnen-Balsamico (250 ml).'}
 ].map((product, index) => Object.freeze({...product,...confirmedFacts[product.title],id:'photo-draft-'+(index+1),
   description:product.description ?? '',price:null,stock:null,shopifyProductId:null,confirmed:false,
   allergens:null,storage:null,shelfLife:null,
