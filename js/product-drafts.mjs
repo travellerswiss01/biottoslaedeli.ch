@@ -76,7 +76,7 @@ export const productDrafts = [
   {title:'Süssmost',type:'Säfte',photos:['Süssmost3Liter.png','Süssmost Bag in Box 5Liter.png','Süssmost pasteurisiert 10 Liter.png'],ingredients:'Reiner Apfelsaft aus 15 verschiedenen Apfelsorten',displayVariants:[
     {label:'3 Liter',photo:'Süssmost3Liter.png',reportedStock:25,netVolumeMl:3000,packaging:'Beutel'},
     {label:'5 Liter',photo:'Süssmost Bag in Box 5Liter.png',reportedStock:50,netVolumeMl:5000,packaging:'Bag-in-Box'},
-    {label:'10 Liter',photo:'Süssmost pasteurisiert 10 Liter.png',reportedStock:25,netVolumeMl:10000,packaging:'Bag-in-Box',imageScaleX:1.2}
+    {label:'10 Liter',photo:'Süssmost pasteurisiert 10 Liter.png',reportedStock:25,netVolumeMl:10000,packaging:'Bag-in-Box',imageScaleX:1.35,imageScaleY:1.08}
   ]},
   {title:'Traubensaft',type:'Säfte',photos:['TraubensafthalbLiter.png','Traubensaft1Liter.png'],displayVariants:[
     {label:'0.5 Liter',photo:'TraubensafthalbLiter.png',previewPrice:5},
