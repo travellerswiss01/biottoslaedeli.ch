@@ -39,8 +39,9 @@ function render() {
       row.setAttribute('aria-label',product.title+' – alle Grössen');
       product.displayVariants.forEach(variant => {
         const card = element('article','','shop-card');
-        card.append(photo(variant.photo,product.title+' · '+variant.label),
-          element('p',product.type,'shop-category'),element('h2',product.title),
+        const media = photo(variant.photo,product.title+' · '+variant.label);
+        if (variant.imageScaleX) media.querySelector('img').style.transform='scaleX('+variant.imageScaleX+')';
+        card.append(media,element('p',product.type,'shop-category'),element('h2',product.title),
           element('p',variant.label,'shop-variant-size'));
         if (variant.previewPrice != null) card.append(guidePrice(variant.previewPrice));
         row.append(card);
