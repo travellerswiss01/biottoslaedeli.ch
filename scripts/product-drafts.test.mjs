@@ -5,9 +5,9 @@ import {productDrafts} from '../js/product-drafts.mjs';
 
 test('all uploaded product photos are grouped once and exist at their original paths',()=>{
   const photos=productDrafts.flatMap(product=>product.photos);
-  assert.equal(productDrafts.length,17);
-  assert.equal(photos.length,23);
-  assert.equal(new Set(photos).size,23);
+  assert.equal(productDrafts.length,19);
+  assert.equal(photos.length,25);
+  assert.equal(new Set(photos).size,25);
   for(const filename of photos) assert.ok(fs.existsSync(new URL('../img/'+encodeURIComponent(filename),import.meta.url)),filename);
 });
 test('draft products keep preview guide prices separate from Shopify prices and stock',()=>{
@@ -48,9 +48,10 @@ test('gift crates link included products to their available photos',()=>{
     const items=byTitle[title].includedProducts;
     assert.ok(items.length>0,title);
     for(const item of items) {
-      if(item.productTitle) assert.ok(byTitle[item.productTitle]?.photos?.length,item.label);
-      else assert.ok(['Birnenweggen','Himbeeressig'].includes(item.label),item.label);
+      assert.ok(item.productTitle,`${title}: ${item.label} has no product photo link`);
+      assert.ok(byTitle[item.productTitle]?.photos?.length,item.label);
     }
   }
   assert.deepEqual(byTitle['Geschenksharass · gross'].includedProducts.slice(-2).map(item=>item.label),['Birnenweggen','Himbeeressig']);
+  assert.deepEqual(byTitle['Es Tröpfli Heimat'].includedProducts[0],{label:'Himbeeressig',productTitle:'Himbeeressig'});
 });
