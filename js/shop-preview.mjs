@@ -86,12 +86,20 @@ function render() {
       return;
     }
     const article = element('article', '', 'shop-card');
+    if (product.type === 'Geschenksharassen') article.classList.add('shop-card--gift');
     article.append(photo(product.photos[0],product.title,index > 2),element('p',product.type,'shop-category'),element('h2',product.title));
+    let mobileDetails = null;
     if (product.previewPrices) {
       product.sizes.forEach((size,index)=>article.append(element('p',size+' · Richtpreis CHF '+product.previewPrices[index].toFixed(2),'shop-variant-size')));
     } else if (product.sizes) article.append(element('p',product.sizes.join(' · '),'shop-sizes'));
     if (product.previewPrice != null) article.append(guidePrice(product.previewPrice));
-    if (product.description) article.append(element('p',product.description,'shop-description'));
+    if (product.description) {
+      article.append(element('p',product.description,'shop-description'));
+      if (product.type === 'Geschenksharassen' && product.includedProducts?.length) {
+        mobileDetails = element('details','','shop-mobile-details');
+        mobileDetails.append(element('summary','Mengen & Produktdetails'),element('p',product.description,'shop-description'));
+      }
+    }
     if (product.includedProducts?.length) {
       const contents = element('section','','shop-contents');
       contents.setAttribute('aria-label','Enthaltene Produkte');
@@ -108,6 +116,7 @@ function render() {
       contents.append(list);
       article.append(contents);
     }
+    if (mobileDetails) article.append(mobileDetails);
     if (product.photos.length > 1) {
       const details = element('details');
       const images = element('div','','shop-extra-photos');
