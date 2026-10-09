@@ -41,7 +41,7 @@ function render() {
       product.displayVariants.forEach(variant => {
         const card = element('article','','shop-card');
         const media = photo(variant.photo,product.title+' · '+variant.label);
-        if (variant.imageScaleX) media.querySelector('img').style.transform='scaleX('+variant.imageScaleX+')';
+        if (variant.imageScaleX || variant.imageScaleY) media.querySelector('img').style.transform='scale('+(variant.imageScaleX ?? 1)+','+(variant.imageScaleY ?? 1)+')';
         card.append(media,element('p',product.type,'shop-category'),element('h2',product.title),
           element('p',variant.label,'shop-variant-size'));
         if (variant.previewPrice != null) card.append(guidePrice(variant.previewPrice));
