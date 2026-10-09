@@ -826,7 +826,7 @@ footer .order-guide-business{font-size:1rem;color:#000;min-height:44px}
 #koerbe .korb-card-more{margin:4px 0 0;border-top:1px dashed var(--line)}
 #koerbe .korb-card-more summary{min-height:44px;padding:9px 0 4px;color:#6f1117;font-size:.9rem;font-weight:700;line-height:1.4}
 #koerbe .korb-card-detail{display:block;padding:6px 0}
-#koerbe .korb-card-second-foto{max-width:240px;margin:0 auto!important;padding:0!important;background:#f7f4ee}
+#koerbe .korb-card-second-foto{display:block;max-width:240px;margin:0 auto!important;padding:0!important;background:#f7f4ee}
 #koerbe .korb-card-second-foto img{display:block;width:100%;height:270px;object-fit:contain;cursor:zoom-in}
 #koerbe .korb-card-link{width:100%;min-height:48px;margin:10px 0 0;padding:11px 14px;border:0;border-radius:5px;background:var(--red);color:#fff;font-size:1rem;font-weight:700;text-align:center}
 #koerbe .korb-card-link:hover{background:#741016}
