@@ -41,7 +41,8 @@ try{
   async function checkBasketOverview(width){
     const cards=page.locator('#koerbe .korb-card');
     assert.equal(await cards.count(),3);
-    assert.equal(await page.getByRole('heading',{name:'Ein Korb voller Thurgau.',exact:true}).innerText(),'Ein Korb voller Thurgau.');
+    assert.equal(await page.getByRole('heading',{name:'Thurgauer Gschänkchörb vo Biottos',exact:true}).innerText(),'Thurgauer Gschänkchörb vo Biottos');
+    assert.equal(await page.locator('#koerbe .korb-origin').innerText(),'Zämegstellt bi eus z Guntershausen.');
     assert.equal(await page.locator('#koerbe .order-guide-occasion').innerText(),'Korb wählen. Produkte ansehen. Bestellen.');
     const expected=[['Es Tröpfli Heimat',3,'CHF 29.00','chili'],['Geschenksharassli · mittel',5,'CHF 39.00','fein'],['Geschenksharass · gross',7,'CHF 74.90','gross']];
     for(let i=0;i<expected.length;i++){
