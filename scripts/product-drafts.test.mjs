@@ -42,6 +42,15 @@ test('agreed guide prices appear in the assortment preview',()=>{
 });
 
 
+test('every vinegar and balsamic product is confirmed as 250 ml',()=>{
+  const vinegars=productDrafts.filter(product=>product.type==='Essig & Balsamico');
+  assert.equal(vinegars.length,7);
+  for(const product of vinegars) {
+    assert.equal(product.netVolumeMl,250,product.title);
+    assert.deepEqual(product.sizes,['250 ml'],product.title);
+  }
+});
+
 test('gift crates link included products to their available photos',()=>{
   const byTitle=Object.fromEntries(productDrafts.map(product=>[product.title,product]));
   for(const title of ['Es Tröpfli Heimat','Geschenksharassli · mittel','Geschenksharass · gross']) {
@@ -53,5 +62,6 @@ test('gift crates link included products to their available photos',()=>{
     }
   }
   assert.deepEqual(byTitle['Geschenksharass · gross'].includedProducts.slice(-2).map(item=>item.label),['Birnenweggen','Himbeeressig']);
+  assert.equal(byTitle['Es Tröpfli Heimat'].description,'Drei Fläschchen à 250 ml: Himbeeressig, Birnen-Balsamico und Kirschessig. Im kleinen Holzharassli mit Masche.');
   assert.deepEqual(byTitle['Es Tröpfli Heimat'].includedProducts[0],{label:'Himbeeressig',productTitle:'Himbeeressig'});
 });
