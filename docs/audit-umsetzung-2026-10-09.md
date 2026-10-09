@@ -40,7 +40,7 @@ Das bereitgestellte Logo ist in allen Haupt-Seitenköpfen, auf der Startseite un
 ## Tatsächlich ausgeführte Prüfungen
 
 - 29 Node-Tests lokal bestanden, einschliesslich gemeinsamem Warenkorb, ungültiger Varianten, Speicherung und Entwurfs-Sperre.
-- 75 Rasterdateien vollständig decodiert, keine Bildfehler.
+- 74 Rasterdateien vollständig decodiert, keine Bildfehler.
 - JavaScript-Syntax und lokale Verweise werden vor dem Commit erneut geprüft.
 - Lokales Chromium nicht verfügbar; Installationsversuch lieferte ungültige Download-ZIPs. Daher keine lokale mobile Browserabnahme behauptet. Der neue GitHub-Lauf führt die Browserprüfung auf dem Runner aus; Ergebnis wird separat dokumentiert.
 - Kein realer Checkout, keine Zahlung, Bestellung oder Kundenmail ausgelöst.
