@@ -26,6 +26,9 @@ function photo(filename, title, lazy = true) {
   media.append(picture);
   return media;
 }
+function guidePrice(amount) {
+  return element('p','Richtpreis · CHF '+amount.toFixed(2),'shop-price');
+}
 function render() {
   const visible = filterProducts(productDrafts, search.value, category.value);
   const fragment = document.createDocumentFragment();
@@ -39,6 +42,7 @@ function render() {
         card.append(photo(variant.photo,product.title+' · '+variant.label),
           element('p',product.type,'shop-category'),element('h2',product.title),
           element('p',variant.label,'shop-variant-size'));
+        if (variant.previewPrice != null) card.append(guidePrice(variant.previewPrice));
         row.append(card);
       });
       fragment.append(row);
@@ -46,12 +50,17 @@ function render() {
     }
     const article = element('article', '', 'shop-card');
     article.append(photo(product.photos[0],product.title,index > 2),element('p',product.type,'shop-category'),element('h2',product.title));
-    if (product.sizes) article.append(element('p',product.sizes.join(' · '),'shop-sizes'));
+    if (product.previewPrices) {
+      product.sizes.forEach((size,index)=>article.append(element('p',size+' · Richtpreis CHF '+product.previewPrices[index].toFixed(2),'shop-variant-size')));
+    } else if (product.sizes) article.append(element('p',product.sizes.join(' · '),'shop-sizes'));
+    if (product.previewPrice != null) article.append(guidePrice(product.previewPrice));
+    if (product.description) article.append(element('p',product.description,'shop-description'));
     if (product.photos.length > 1) {
       const details = element('details');
       const images = element('div','','shop-extra-photos');
-      details.append(element('summary',product.sizes ? 'Grössen ansehen' : 'Weitere Ansichten'));
-      product.photos.slice(1).forEach((filename,i)=>images.append(photo(filename, product.title + (product.sizes ? ' · '+product.sizes[i+1] : ' · Ansicht '+(i+2)))));
+      const sizePhotos=product.sizes && product.sizes.length===product.photos.length;
+      details.append(element('summary',sizePhotos ? 'Grössen ansehen' : 'Weitere Ansichten'));
+      product.photos.slice(1).forEach((filename,i)=>images.append(photo(filename, product.title + (sizePhotos ? ' · '+product.sizes[i+1] : ' · Ansicht '+(i+2)))));
       details.append(images);
       article.append(details);
     }
