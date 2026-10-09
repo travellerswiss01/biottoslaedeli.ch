@@ -38,10 +38,45 @@ try{
     assert.equal(result.overflow,false,page.url());assert.deepEqual(result.broken,[],page.url());
     assert.ok(result.footer.every(link=>link.size>=16&&link.height>=44),page.url()+' '+JSON.stringify(result.footer));checks++;
   }
+  async function checkBasketOverview(width){
+    const cards=page.locator('#koerbe .korb-card');
+    assert.equal(await cards.count(),3);
+    assert.equal(await page.locator('#koerbe h2').innerText(),'Geschenkskörbe auf einen Blick');
+    const expected=[['Chli & Fii',3,'CHF 19.95','chili'],['Fein & Guet',5,'CHF 29.95','fein'],['Gross & Guet',6,'CHF 49.95','gross']];
+    for(let i=0;i<expected.length;i++){
+      const card=cards.nth(i),[name,count,price,variant]=expected[i];
+      assert.equal(await card.locator('h3').innerText(),name);
+      assert.equal(await card.locator('.korb-card-contents li').count(),count);
+      assert.equal(await card.locator('.korb-card-contents').isVisible(),true);
+      assert.equal((await card.locator('.korb-card-price').innerText()).trim(),price);
+      const choice=card.locator('.korb-card-link');
+      assert.equal(await choice.innerText(),'Diesen Korb auswählen');
+      assert.equal(await choice.getAttribute('data-open'),variant);
+      assert.ok(await choice.evaluate(e=>e.getBoundingClientRect().height>=44));
+      assert.equal(await card.locator('.korb-card-photo img').getAttribute('tabindex'),'0');
+      const headingStyle=await card.locator('h3').evaluate(e=>({color:getComputedStyle(e).color,weight:Number(getComputedStyle(e).fontWeight),size:parseFloat(getComputedStyle(e).fontSize)}));
+      assert.equal(headingStyle.color,'rgb(0, 0, 0)');assert.ok(headingStyle.weight>=700&&headingStyle.size>=20);
+      const listStyle=await card.locator('.korb-card-contents li').first().evaluate(e=>parseFloat(getComputedStyle(e).fontSize));assert.ok(listStyle>=14);
+    }
+    if(width<=720){const y=await cards.evaluateAll(es=>es.map(e=>e.getBoundingClientRect().top));assert.ok(y[0]<y[1]&&y[1]<y[2],JSON.stringify(y))}
+    checks++;
+    if(width===390){
+      const photo=cards.first().locator('.korb-card-photo img');
+      await photo.press('Enter');assert.equal(await page.locator('#lb').evaluate(e=>e.classList.contains('on')),true);
+      assert.ok(await page.locator('#li').evaluate(img=>img.naturalWidth>0));
+      await page.keyboard.press('Escape');assert.equal(await page.locator('#lb').evaluate(e=>e.classList.contains('on')),false);
+      assert.equal(await photo.evaluate(e=>e===document.activeElement),true);checks++;
+      const details=cards.first().locator('.korb-card-more');await details.locator('summary').click();
+      const second=details.locator('.korb-card-second-foto img');await second.press('Enter');
+      assert.equal(await page.locator('#lb').evaluate(e=>e.classList.contains('on')),true);
+      await page.getByRole('button',{name:'Schliessen',exact:true}).click();
+      assert.equal(await page.locator('#lb').evaluate(e=>e.classList.contains('on')),false);checks++;
+    }
+  }
   const views=['start','koerbe','gartenprodukte','traubensaft','suessmost','essig','doerrfruechte','tee','ueber-uns','laedeli','lucia-kocht','otto-garten','abholung','faq','kontakt'];
   for(const width of [320,360,390,768,1440]){
     await page.setViewportSize({width,height:900});await page.emulateMedia({colorScheme:'dark'});
-    for(const view of views){await page.goto(origin+'/index.html#'+view);await page.waitForFunction(v=>document.body.dataset.currentView===v,view);await layout()}
+    for(const view of views){await page.goto(origin+'/index.html#'+view);await page.waitForFunction(v=>document.body.dataset.currentView===v,view);await layout();if(view==='koerbe')await checkBasketOverview(width)}
     for(const file of ['geschenkskoerbe.html','firmengeschenke.html','warenkorb.html','404.html']){await page.goto(origin+'/'+file);await layout()}
     await page.goto(origin+'/shop-vorschau.html');await page.locator('.shop-card').first().waitFor();await layout();
     assert.equal(await page.locator('h1').innerText(),'Feines aus unserem Lädeli');
