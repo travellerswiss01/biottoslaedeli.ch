@@ -713,7 +713,7 @@ img{max-width:100%;height:auto}
 
 /* Mobile gift finder: three complete photographs with direct ordering. */
 .korb-mobile-title,.korb-gift-intent{display:none}
-@media(min-width:721px){#koerbe .k1{order:1}#koerbe .k2{order:2}#koerbe .k3{order:3}}
+@media(min-width:721px){#koerbe .k3{order:1}#koerbe .k2{order:2}#koerbe .k1{order:3}}
 @media(max-width:720px){
  #koerbe .korb-desktop-title{display:none}
  #koerbe .korb-mobile-title{display:inline}
@@ -722,7 +722,7 @@ img{max-width:100%;height:auto}
  #koerbe .koerbe-intro .order-guide-occasion{font-size:.85rem;line-height:1.4;margin:7px auto 0;max-width:300px}
  #koerbe .korb-picker-grid{display:flex;flex-direction:column;gap:10px;padding:8px 16px 12px;overflow:visible;scroll-snap-type:none}
  #koerbe .korb-card{display:grid;grid-template-columns:96px minmax(0,1fr);gap:12px;padding:10px;align-items:center;transform:none;flex:0 0 auto;min-height:0;height:auto}
- #koerbe .k3{order:1}#koerbe .k2{order:2}#koerbe .k1{order:3}
+ #koerbe .korb-card.k1,#koerbe .korb-card.k2,#koerbe .korb-card.k3{order:initial}
  #koerbe .korb-card-photo{width:96px;max-width:none;margin:0}
  #koerbe .korb-card-photo img{width:100%;height:128px!important;max-height:none!important;aspect-ratio:auto;object-fit:contain!important}
  #koerbe .korb-card .foto{padding:0;transform:none}
@@ -815,7 +815,7 @@ footer .order-guide-business{font-size:1rem;color:#000;min-height:44px}
 #koerbe .korb-card-photo img:focus-visible,#koerbe .korb-card-second-foto img:focus-visible{outline:3px solid #8f1116;outline-offset:-4px}
 #koerbe .korb-card-copy{display:flex;flex:1;flex-direction:column;align-items:stretch;gap:7px;padding:18px 18px 20px;text-align:left}
 #koerbe .korb-gift-intent{display:block;margin:0;color:#4b4036;font-size:.9rem;line-height:1.35}
-#koerbe .korb-card-copy h3{display:block;margin:0;color:#000;font-size:clamp(1.25rem,1.7vw,1.55rem);font-weight:700;line-height:1.2}
+#koerbe .korb-card-copy h3{display:block;min-height:2.4em;margin:0;color:#000;font-size:clamp(1.25rem,1.7vw,1.55rem);font-weight:700;line-height:1.2}
 #koerbe .korb-card-copy .korb-count{margin:0;color:#333;font-size:.9rem!important;font-weight:600;line-height:1.35!important}
 #koerbe .korb-card-price{margin:0;color:#86151b;font-size:1.2rem;font-weight:700;line-height:1.3}
 #koerbe .korb-card-contents{margin:4px 0 0;padding:11px 0 0;border-top:1px solid var(--line)}
@@ -828,7 +828,7 @@ footer .order-guide-business{font-size:1rem;color:#000;min-height:44px}
 #koerbe .korb-card-detail{display:block;padding:6px 0}
 #koerbe .korb-card-second-foto{display:block;max-width:240px;margin:0 auto!important;padding:0!important;background:#f7f4ee}
 #koerbe .korb-card-second-foto img{display:block;width:100%;height:270px;object-fit:contain;cursor:zoom-in}
-#koerbe .korb-card-link{width:100%;min-height:48px;margin:10px 0 0;padding:11px 14px;border:0;border-radius:5px;background:var(--red);color:#fff;font-size:1rem;font-weight:700;text-align:center}
+#koerbe .korb-card-link{width:100%;min-height:48px;margin:auto 0 0;padding:11px 14px;border:0;border-radius:5px;background:var(--red);color:#fff;font-size:1rem;font-weight:700;text-align:center}
 #koerbe .korb-card-link:hover{background:#741016}
 @media(min-width:721px) and (max-width:980px){#koerbe .korb-picker-grid{grid-template-columns:minmax(0,1fr)}#koerbe .korb-card{display:grid;grid-template-columns:minmax(190px,32%) minmax(0,1fr);height:auto}#koerbe .korb-card-photo img{height:100%;min-height:250px;max-height:320px}}
 @media(max-width:720px){
@@ -845,7 +845,7 @@ footer .order-guide-business{font-size:1rem;color:#000;min-height:44px}
   #koerbe .korb-card-photo img{width:100%;height:clamp(205px,62vw,275px)!important;min-height:0!important;max-height:none!important;aspect-ratio:auto;object-fit:cover!important;object-position:center 65%}
   #koerbe .korb-card-copy{gap:7px;padding:16px;text-align:left}
   #koerbe .korb-gift-intent{display:block;font-size:.95rem;line-height:1.35}
-  #koerbe .korb-card-copy h3{display:block;margin:0;color:#000;font-size:1.35rem;line-height:1.2;text-align:left}
+  #koerbe .korb-card-copy h3{display:block;min-height:0;margin:0;color:#000;font-size:1.35rem;line-height:1.2;text-align:left}
   #koerbe .korb-card-copy .korb-count{margin:0;font-size:.95rem!important}
   #koerbe .korb-card-price{display:block;margin:0;font-size:1.2rem}
   #koerbe .korb-card-contents{margin-top:4px;padding-top:11px}
@@ -859,3 +859,9 @@ footer .order-guide-business{font-size:1rem;color:#000;min-height:44px}
   #koerbe .korb-card-link{min-height:48px;margin-top:8px;font-size:1rem}
 }
 @media(max-width:380px){#koerbe .korb-card-contents ul{grid-template-columns:minmax(0,1fr)}#koerbe .korb-card-photo img{height:205px!important}}
+
+/* Desktop basket cards use one photo frame and one action baseline. */
+@media(min-width:981px){
+  #koerbe .korb-card-photo .foto{height:clamp(220px,22vw,260px)}
+  #koerbe .korb-card-photo img{height:100%!important;max-height:none!important;object-fit:contain!important}
+}

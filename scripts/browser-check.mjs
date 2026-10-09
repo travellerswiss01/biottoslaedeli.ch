@@ -58,7 +58,13 @@ try{
       assert.equal(headingStyle.color,'rgb(0, 0, 0)');assert.ok(headingStyle.weight>=700&&headingStyle.size>=20);
       const listStyle=await card.locator('.korb-card-contents li').first().evaluate(e=>parseFloat(getComputedStyle(e).fontSize));assert.ok(listStyle>=14);
     }
-    if(width<=720){const y=await cards.evaluateAll(es=>es.map(e=>e.getBoundingClientRect().top));assert.ok(y[0]<y[1]&&y[1]<y[2],JSON.stringify(y))}
+    const geometry=await cards.evaluateAll(es=>es.map(e=>({left:e.getBoundingClientRect().left,top:e.getBoundingClientRect().top,buttonBottom:e.querySelector('.korb-card-link').getBoundingClientRect().bottom})));
+    if(width>980){
+      assert.ok(geometry[0].left<geometry[1].left&&geometry[1].left<geometry[2].left,'Desktop baskets must read small to large: '+JSON.stringify(geometry));
+      assert.ok(Math.max(...geometry.map(x=>x.buttonBottom))-Math.min(...geometry.map(x=>x.buttonBottom))<=2,'Desktop basket buttons must align: '+JSON.stringify(geometry));
+    }else{
+      const y=geometry.map(x=>x.top);assert.ok(y[0]<y[1]&&y[1]<y[2],JSON.stringify(y));
+    }
     checks++;
     if(width===390){
       const photo=cards.first().locator('.korb-card-photo img');
