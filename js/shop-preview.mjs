@@ -57,6 +57,22 @@ function render() {
     } else if (product.sizes) article.append(element('p',product.sizes.join(' · '),'shop-sizes'));
     if (product.previewPrice != null) article.append(guidePrice(product.previewPrice));
     if (product.description) article.append(element('p',product.description,'shop-description'));
+    if (product.includedProducts?.length) {
+      const contents = element('section','','shop-contents');
+      contents.setAttribute('aria-label','Enthaltene Produkte');
+      contents.append(element('h3','Enthaltene Produkte','shop-contents-heading'));
+      const list = element('ul','','shop-contents-grid');
+      product.includedProducts.forEach(content => {
+        const item = element('li','','shop-content-item');
+        const includedProduct = content.productTitle && productDrafts.find(candidate => candidate.title === content.productTitle);
+        if (includedProduct?.photos?.[0]) item.append(photo(includedProduct.photos[0],content.label));
+        else item.append(element('div','Foto folgt','shop-content-photo-placeholder'));
+        item.append(element('p',content.label,'shop-content-label'));
+        list.append(item);
+      });
+      contents.append(list);
+      article.append(contents);
+    }
     if (product.photos.length > 1) {
       const details = element('details');
       const images = element('div','','shop-extra-photos');
