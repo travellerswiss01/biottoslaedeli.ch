@@ -41,7 +41,7 @@ try{
   async function checkBasketOverview(width){
     const cards=page.locator('#koerbe .korb-card');
     assert.equal(await cards.count(),3);
-    assert.equal(await page.locator('#koerbe h2').innerText(),'Geschenkskörbe auf einen Blick');
+    assert.equal(await page.getByRole('heading',{name:'Geschenkskörbe auf einen Blick',exact:true}).innerText(),'Geschenkskörbe auf einen Blick');
     const expected=[['Chli & Fii',3,'CHF 19.95','chili'],['Fein & Guet',5,'CHF 29.95','fein'],['Gross & Guet',6,'CHF 49.95','gross']];
     for(let i=0;i<expected.length;i++){
       const card=cards.nth(i),[name,count,price,variant]=expected[i];
