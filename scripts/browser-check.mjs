@@ -29,9 +29,10 @@ try{
   page.on('pageerror',error=>errors.push(error.message));
   page.on('response',response=>{if(response.url().startsWith(origin)&&response.status()>=400)errors.push(response.status()+' '+response.url())});
   async function layout(){
+    console.log('Layout '+await page.url());
     const result=await page.evaluate(async()=>{
       const images=[...document.querySelectorAll('img[src]')].filter(i=>i.getClientRects().length);
-      for(const image of images){image.loading='eager';try{await image.decode()}catch{}}
+      for(const image of images){image.loading='eager';try{await Promise.race([image.decode(),new Promise((_,reject)=>setTimeout(()=>reject(new Error('Image decode timed out: '+image.src)),5000))])}catch{}}
       return {overflow:document.documentElement.scrollWidth>innerWidth+1,broken:images.filter(i=>!i.complete||!i.naturalWidth).map(i=>i.src),footer:[...document.querySelectorAll('footer a')].filter(e=>e.getClientRects().length).map(e=>({size:parseFloat(getComputedStyle(e).fontSize),height:e.getBoundingClientRect().height})),color:getComputedStyle(document.body).color};
     });
     assert.equal(result.overflow,false,page.url());assert.deepEqual(result.broken,[],page.url());
@@ -55,13 +56,13 @@ try{
     }
     for(const button of await page.locator('.shop-photo-open').all()){
       if(!await button.isVisible())continue;
-      await button.click();await page.locator('.shop-photo-viewer img').evaluate(img=>img.decode());
+      await button.click();await page.locator('.shop-photo-viewer img').evaluate(img=>Promise.race([img.decode(),new Promise((_,reject)=>setTimeout(()=>reject(new Error('Photo decode timed out: '+img.src)),5000))]));
       assert.ok(await page.locator('.shop-photo-viewer img').evaluate(img=>img.naturalWidth>0));
-      await page.getByRole('button',{name:'Foto schliessen',exact:true}).click();photoChecks++;
+      await page.getByRole('button',{name:'Foto schliessen',exact:true}).click();photoChecks++;console.log('Photo checks: '+photoChecks);
     }
     for(const extra of await page.locator('.shop-card>details:not(.shop-mobile-details)').all()){
       await extra.locator('summary').click();
-      for(const button of await extra.locator('.shop-photo-open').all()){await button.click();await page.locator('.shop-photo-viewer img').evaluate(img=>img.decode());await page.getByRole('button',{name:'Foto schliessen',exact:true}).click();photoChecks++}
+      for(const button of await extra.locator('.shop-photo-open').all()){await button.click();await page.locator('.shop-photo-viewer img').evaluate(img=>Promise.race([img.decode(),new Promise((_,reject)=>setTimeout(()=>reject(new Error('Photo decode timed out: '+img.src)),5000))]));await page.getByRole('button',{name:'Foto schliessen',exact:true}).click();photoChecks++}
       await extra.locator('summary').click();
     }
     const first=page.locator('.shop-photo-open').first();await first.click();await page.keyboard.press('Escape');assert.equal(await page.locator('.shop-photo-viewer').evaluate(e=>e.open),false);assert.equal(await first.evaluate(e=>e===document.activeElement),true);checks++;
