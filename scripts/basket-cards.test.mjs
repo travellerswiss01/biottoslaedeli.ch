@@ -28,7 +28,7 @@ test('three published gift crates show their Shopify names, prices and complete 
 
 test('basket overview keeps its plain-language heading and enlargable Shopify photos', () => {
   assert.equal((html.match(/class="korb-card-link"[^>]*>Korb wählen/g) || []).length, 3);
-  assert.ok(html.includes('<h2>Thurgauer Gschänkchörb vo Biottos</h2>'));
+  assert.ok(html.includes('<h2>Ein Stück Thurgau zum Verschenken</h2>'));
   const overview = html.match(/<div class="korb-picker-grid">([\s\S]*?)<section class="order-guide"/);
   assert.ok(overview);
   const photos=[...overview[1].matchAll(/<img\b([^>]+)>/g)];
