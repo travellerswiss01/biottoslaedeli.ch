@@ -119,7 +119,15 @@ import './shopify-cart.js';
     add.addEventListener('click',function(){
       var added=bridge.addToCart(product.key,1);
       status.textContent=added?choiceName+' hinzugefügt.':'Bitte Anzahl prüfen: maximal 999 pro Artikel.';
+      if(added){
+        search.value='';
+        activeCategory=categoryByKey[product.key]||'all';
+        categoryFilter.querySelectorAll('button[data-category]').forEach(function(button){
+          button.setAttribute('aria-pressed',String(button.dataset.category===activeCategory));
+        });
+      }
       render();
+      visibleChoices();
     });
     card.append(image,copy,add);choices.append(card);
   });

@@ -28,7 +28,7 @@
 .cart-page .cart-remove{min-height:36px;padding:4px 0;border:0;background:transparent;color:#444;font-size:.9rem;text-decoration:underline;text-underline-offset:3px}
 .cart-summary{position:sticky;top:18px;margin:0;padding:18px;background:var(--cart-paper);border:1px solid var(--cart-line);border-radius:8px}
 .cart-page .cart-summary h2{margin:0 0 12px;font-size:1.15rem}
-.cart-total{margin:0;padding-bottom:12px;border-bottom:1px solid var(--cart-line);font-size:1.35rem;font-weight:700}
+.cart-total{margin:0;padding-bottom:12px;border-bottom:1px solid var(--cart-line);font-size:1.05rem;font-weight:700;white-space:nowrap}
 .cart-summary-note{margin:12px 0;color:#333;font-size:.92rem;line-height:1.45}
 .cart-page .cart-summary .btn,.cart-empty-link{display:flex;min-height:48px;align-items:center;justify-content:center;padding:11px 16px;border:2px solid var(--cart-red);border-radius:5px;background:var(--cart-red);color:#fff;font:700 1rem/1.25 Literata,Georgia,serif;text-align:center;text-decoration:none;cursor:pointer}
 .cart-page .cart-summary .btn:hover,.cart-empty-link:hover{background:#650b10;border-color:#650b10}
