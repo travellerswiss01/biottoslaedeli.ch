@@ -89,3 +89,9 @@
 .shop-category-nav button[aria-pressed="true"]{border:2px solid var(--red);background:var(--paper)}
 @media(max-width:760px){.shop-category-nav{grid-template-columns:repeat(auto-fit,minmax(105px,1fr));gap:5px}}
 @media(max-width:480px){.shop-category-nav{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.shop-category-nav button{min-height:38px;padding:6px 4px;font-size:.82rem}}
+
+/* Make the search control easy to spot and give it a restrained focus response. */
+.shop-controls .shop-search-field input{border:2px solid #81786c;transition:border-color .18s ease,box-shadow .18s ease}
+.shop-controls .shop-search-field input:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(143,17,22,.14)}
+.shop-search-icon{transition:color .18s ease,transform .18s ease}
+.shop-search-field:focus-within .shop-search-icon{color:var(--red);transform:translateY(-50%) scale(1.08)}
