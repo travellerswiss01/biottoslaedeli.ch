@@ -15,6 +15,7 @@ import './shopify-cart.js';
   var choiceCount=document.querySelector('#cart-choice-count');
   var noResults=document.querySelector('#cart-no-results');
   var pickerTitle=document.querySelector('#cart-choices-title');
+  var lastPhotoTrigger=null;
   var categoryByKey={
     chili:'harassen',fein:'harassen',gross:'harassen',
     'apfelessig-33-sorten':'vinegar',birnenessig:'vinegar','birnen-balsamico':'vinegar',
@@ -27,6 +28,35 @@ import './shopify-cart.js';
 
   function node(tag,text,className){var element=document.createElement(tag);if(text)element.textContent=text;if(className)element.className=className;return element}
   function money(cents){return 'CHF '+(cents/100).toFixed(2)}
+
+  var photoViewer=node('div','','lb');photoViewer.id='lb';photoViewer.setAttribute('role','dialog');photoViewer.setAttribute('aria-modal','true');photoViewer.setAttribute('aria-label','Vergrössertes Foto');photoViewer.setAttribute('aria-hidden','true');
+  var photoClose=node('button','×','x');photoClose.id='lx';photoClose.type='button';photoClose.setAttribute('aria-label','Foto schliessen');
+  var photoPreview=node('img');photoPreview.id='li';photoPreview.alt='';
+  var photoHint=node('p','Bild antippen zum Vergrössern · Esc zum Schliessen');
+  photoViewer.append(photoClose,photoPreview,photoHint);document.body.append(photoViewer);
+
+  function openPhoto(image){
+    lastPhotoTrigger=image;photoPreview.src=image.currentSrc||image.src;photoPreview.alt=image.alt;photoViewer.scrollTop=0;photoViewer.scrollLeft=0;
+    photoViewer.classList.add('on');photoViewer.classList.remove('z');photoViewer.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';photoClose.focus();
+  }
+  function closePhoto(){
+    if(!photoViewer.classList.contains('on'))return;
+    photoViewer.classList.remove('on','z');photoViewer.setAttribute('aria-hidden','true');photoPreview.removeAttribute('src');document.body.style.overflow='';
+    if(lastPhotoTrigger&&lastPhotoTrigger.isConnected)lastPhotoTrigger.focus();lastPhotoTrigger=null;
+  }
+  document.addEventListener('click',function(event){
+    var image=event.target.closest('.cart-item-photo,.cart-choice-photo');
+    if(image){openPhoto(image);return}
+    if(event.target===photoClose){closePhoto();return}
+    if(event.target===photoViewer){closePhoto();return}
+    if(event.target===photoPreview){var zoomed=photoViewer.classList.toggle('z');if(!zoomed){photoViewer.scrollTop=0;photoViewer.scrollLeft=0}}
+  });
+  photoClose.addEventListener('click',closePhoto);
+  document.addEventListener('keydown',function(event){
+    if(event.key==='Escape'){closePhoto();return}
+    if(photoViewer.classList.contains('on')&&event.key==='Tab'){event.preventDefault();photoClose.focus();return}
+    if((event.key==='Enter'||event.key===' ')&&event.target.matches('.cart-item-photo,.cart-choice-photo')){event.preventDefault();openPhoto(event.target)}
+  });
 
   function setQuantity(key,value,displayName){
     if(!bridge.setQuantity(key,value)){
@@ -60,7 +90,7 @@ import './shopify-cart.js';
       sum+=product.unitCents*item.quantity;
 
       var row=node('article','','cart-item');row.dataset.cartKey=item.key;
-      var image=node('img','','cart-item-photo');image.src=product.photo;image.alt=displayName;image.width=88;image.height=88;image.loading='lazy';
+      var image=node('img','','cart-item-photo');image.src=product.photo;image.alt=displayName;image.width=88;image.height=88;image.loading='lazy';image.tabIndex=0;image.setAttribute('role','button');image.setAttribute('aria-label','Foto vergrössern: '+displayName);image.setAttribute('aria-haspopup','dialog');
       var copy=node('div','','cart-item-copy');
       copy.append(node('h2',displayName),node('p',money(product.unitCents)+' '+product.unitLabel,'cart-item-unit'));
 
@@ -125,7 +155,7 @@ import './shopify-cart.js';
     card.dataset.category=categoryByKey[product.key]||'specialties';
     card.dataset.search=(choiceName+' '+product.unitLabel).toLocaleLowerCase('de-CH');
 
-    var image=node('img','','cart-choice-photo');image.src=product.photo;image.alt=choiceName;image.width=80;image.height=80;image.loading='lazy';
+    var image=node('img','','cart-choice-photo');image.src=product.photo;image.alt=choiceName;image.width=80;image.height=80;image.loading='lazy';image.tabIndex=0;image.setAttribute('role','button');image.setAttribute('aria-label','Foto vergrössern: '+choiceName);image.setAttribute('aria-haspopup','dialog');
     var copy=node('div','','cart-choice-copy');copy.append(node('h3',choiceName),node('p',money(product.unitCents)+' '+product.unitLabel));
     var add=node('button','+ Hinzufügen','cart-choice-add');add.type='button';add.setAttribute('aria-label',choiceName+' hinzufügen');
     add.addEventListener('click',function(){
