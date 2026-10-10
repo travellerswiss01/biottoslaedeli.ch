@@ -26,6 +26,7 @@ Quellen:
 ### Gesicherte Geschäftsangaben für einen späteren Entwurf
 
 - Shopname: Biottos Lädeli.
+- Vom Betreiber bestätigter Vertragspartner: Josef Ignaz Zehnder.
 - Geschäftsadresse und Abholort: Hauptstrasse 90, 8357 Guntershausen, Schweiz.
 - Kontakt: biottoslaedeli@gmail.com; +41 76 255 22 56.
 - Verkauf über Shopify; Abholung im Lädeli, kein Versand.
@@ -34,7 +35,7 @@ Quellen:
 
 ### Vor dem AGB-Text zu bestätigen
 
-1. **Vertragspartner:** Ist «Biottos Lädeli» der vollständige Anbietername, oder muss eine natürliche Person bzw. ein eingetragener Unternehmensname genannt werden?
+1. **Vertragspartner:** Josef Ignaz Zehnder ist bestätigt. Noch zu klären ist, ob «Biottos Lädeli» als Geschäftsbezeichnung ergänzt werden soll und ob eine eingetragene Rechtsform oder UID aufzuführen ist.
 2. **Abholung und Nichtabholung:** Wie lange bleibt eine bereitgestellte Bestellung reserviert? Gibt es eine Frist und was soll nach deren Ablauf geschehen?
 3. **Änderung, Stornierung, Mängel:** Bis wann kann storniert/geändert werden? Wie soll mit bereits bezahlten Bestellungen und fehlerhaften oder beschädigten Produkten umgegangen werden?
 4. **Preis-/Steuerangabe:** Sind die angezeigten Endpreise inklusive aller anwendbaren Steuern? Das wird in den AGB und im Checkout nicht geraten.
