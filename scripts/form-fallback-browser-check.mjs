@@ -162,7 +162,7 @@ fs.mkdirSync(out, { recursive: true });
     await p.locator('#menuToggle').getAttribute('aria-expanded'),
     'true',
   );
-  await p.locator('#siteNav a[href="#koerbe"]').click();
+  await p.locator('#siteNav > a.nav-gift-link[href="#koerbe"]').click();
   assert.equal(
     await p.locator('#menuToggle').getAttribute('aria-expanded'),
     'false',
