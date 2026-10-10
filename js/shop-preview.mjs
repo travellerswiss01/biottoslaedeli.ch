@@ -132,8 +132,8 @@ function render() {
     }
     if (product.includedProducts?.length) {
       const contents = element('section','','shop-contents');
-      contents.setAttribute('aria-label','Enthaltene Produkte');
-      contents.append(element('h4','Enthaltene Produkte','shop-contents-heading'));
+      contents.setAttribute('aria-label','Enthaltene Spezialitäten');
+      contents.append(element('h4','Enthaltene Spezialitäten','shop-contents-heading'));
       const list = element('ul','','shop-contents-grid');
       product.includedProducts.forEach(content => {
         const item = element('li','','shop-content-item');
