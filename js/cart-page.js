@@ -131,7 +131,14 @@ import './shopify-cart.js';
     categoryFilter.querySelectorAll('button').forEach(function(choice){choice.setAttribute('aria-pressed',String(choice===button))});
     visibleChoices();
   });
-  search.addEventListener('input',visibleChoices);
+  search.addEventListener('input',function(){
+    if(search.value.trim())activeCategory='all';
+    else if(!bridge.getCart().length)activeCategory='harassen';
+    categoryFilter.querySelectorAll('button[data-category]').forEach(function(button){
+      button.setAttribute('aria-pressed',String(button.dataset.category===activeCategory));
+    });
+    visibleChoices();
+  });
 
   categoryFilter.querySelectorAll('button[data-category]').forEach(function(button){
     button.setAttribute('aria-pressed',String(button.dataset.category===activeCategory));
