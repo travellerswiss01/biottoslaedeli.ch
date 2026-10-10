@@ -69,10 +69,6 @@ function photo(filename, title, lazy = true) {
 function shopifyPrice(cents) {
   return element('p','CHF '+(cents/100).toFixed(2),'shop-price');
 }
-function availability(product) {
-  return element('p',product.shopifyPublished?'Im Shopify-Store bestellbar':'Preis bestätigt · Online-Bestellung folgt',
-    product.shopifyPublished?'shop-availability shop-availability--ready':'shop-availability');
-}
 function addToCartLink(product,variant) {
   if(!product.shopifyPublished||!variant?.key)return null;
   const link=element('a','In den Warenkorb','btn shop-add-to-cart');
@@ -109,7 +105,6 @@ function render() {
           element('p',variant.label,'shop-variant-size'));
         const storeVariant=product.shopifyVariants.find(candidate=>candidate.label===variant.label);
         if(storeVariant)card.append(shopifyPrice(storeVariant.priceCents));
-        card.append(availability(product));
         const cartLink=addToCartLink(product,storeVariant);if(cartLink)card.append(cartLink);
         row.append(card);
       });
@@ -121,7 +116,6 @@ function render() {
     article.append(photo(product.photos[0],displayName,index > 2),element('h3',displayName,'shop-product-title'));
     if (product.sizes) article.append(element('p',product.sizes.join(' · '),'shop-sizes'));
     if (product.shopifyPriceCents!=null) article.append(shopifyPrice(product.shopifyPriceCents));
-    article.append(availability(product));
 
     // Keep the primary order action visible before long product or gift contents.
     const cartLink=addToCartLink(product,product.shopifyVariants[0]);
