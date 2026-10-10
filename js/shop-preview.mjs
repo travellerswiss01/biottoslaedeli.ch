@@ -119,35 +119,49 @@ function render() {
     const article = element('article', '', 'shop-card');
     if (product.type === 'Geschenksharassen') article.classList.add('shop-card--gift');
     article.append(photo(product.photos[0],displayName,index > 2),element('h3',displayName,'shop-product-title'));
-    let mobileDetails = null;
     if (product.sizes) article.append(element('p',product.sizes.join(' · '),'shop-sizes'));
     if (product.shopifyPriceCents!=null) article.append(shopifyPrice(product.shopifyPriceCents));
     article.append(availability(product));
-    if (product.description) {
-      article.append(element('p',product.description,'shop-description'));
-      if (product.type === 'Geschenksharassen' && product.includedProducts?.length) {
-        mobileDetails = element('details','','shop-mobile-details');
-        mobileDetails.append(element('summary','Mengen & Produktdetails'),element('p',product.description,'shop-description'));
-      }
-    }
-    if (product.includedProducts?.length) {
-      const contents = element('section','','shop-contents');
+
+    // Keep the primary order action visible before long product or gift contents.
+    const cartLink=addToCartLink(product,product.shopifyVariants[0]);
+    if(cartLink)article.append(cartLink);
+
+    if(product.includedProducts?.length) {
+      const contents=element('section','','shop-contents');
       contents.setAttribute('aria-label','Enthaltene Spezialitäten');
-      contents.append(element('h4','Enthaltene Spezialitäten','shop-contents-heading'));
-      const list = element('ul','','shop-contents-grid');
-      product.includedProducts.forEach(content => {
-        const item = element('li','','shop-content-item');
-        const includedProduct = content.productTitle && productDrafts.find(candidate => candidate.title === content.productTitle);
-        if (includedProduct?.photos?.[0]) item.append(photo(includedProduct.photos[0],content.label));
+      const preview=element('ul','','shop-contents-preview');
+      product.includedProducts.slice(0,3).forEach(content=>{
+        const item=element('li','','shop-content-item');
+        const includedProduct=content.productTitle&&productDrafts.find(candidate=>candidate.title===content.productTitle);
+        if(includedProduct?.photos?.[0])item.append(photo(includedProduct.photos[0],content.label));
+        item.append(element('p',content.label,'shop-content-label'));
+        preview.append(item);
+      });
+      if(product.includedProducts.length>3) {
+        preview.append(element('li','+'+(product.includedProducts.length-3)+' weitere','','shop-content-more'));
+      }
+      contents.append(preview);
+      const details=element('details','','shop-contents-details');
+      details.append(element('summary','Inhalt ansehen ('+product.includedProducts.length+' Produkte)'));
+      if(product.description)details.append(element('p',product.description,'shop-description'));
+      const list=element('ul','','shop-contents-grid');
+      product.includedProducts.forEach(content=>{
+        const item=element('li','','shop-content-item');
+        const includedProduct=content.productTitle&&productDrafts.find(candidate=>candidate.title===content.productTitle);
+        if(includedProduct?.photos?.[0])item.append(photo(includedProduct.photos[0],content.label));
         else item.append(element('div','Foto folgt','shop-content-photo-placeholder'));
         item.append(element('p',content.label,'shop-content-label'));
         list.append(item);
       });
-      contents.append(list);
+      details.append(list);
+      contents.append(details);
       article.append(contents);
+    } else if(product.description) {
+      const details=element('details','','shop-product-details');
+      details.append(element('summary','Produktdetails ansehen'),element('p',product.description,'shop-description'));
+      article.append(details);
     }
-    const cartLink=addToCartLink(product,product.shopifyVariants[0]);if(cartLink)article.append(cartLink);
-    if (mobileDetails) article.append(mobileDetails);
     if (product.photos.length > 1) {
       const details = element('details');
       const images = element('div','','shop-extra-photos');
