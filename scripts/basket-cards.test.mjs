@@ -16,7 +16,7 @@ test('three published gift crates show their Shopify names, prices and complete 
     const item = expected[index];
     assert.match(card, new RegExp(`<h3>${item.name}<\\/h3>`));
     assert.ok(card.includes(item.price));
-    assert.match(card, new RegExp(`${item.count} (?:Spezialitäten im Korb|Fläschchen à 250 ml|Produkte)`));
+    assert.match(card, new RegExp(`${item.count} (?:Spezialitäten|Fläschchen à 250 ml)`, 'i'));
     const contents = card.match(/<section class="korb-card-contents"[^>]*>([\s\S]*?)<\/section>/);
     assert.ok(contents, item.name);
     const listed = [...contents[1].matchAll(/<li>(.*?)<\/li>/g)].map(([, value]) => value.replace(/<[^>]*>/g, '').trim());
