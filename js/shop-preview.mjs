@@ -24,7 +24,7 @@ function eraseSearchExample(){
   if(searchAnimationStopped||search.value||document.activeElement===search||reduceSearchMotion.matches)return;
   if(searchExampleText.length){
     searchExampleText=searchExampleText.slice(0,-1);
-    search.placeholder=searchExampleText||' ';
+    search.placeholder=searchExampleText;
     searchAnimationTimer=window.setTimeout(eraseSearchExample,55);
     return;
   }
