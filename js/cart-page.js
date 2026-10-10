@@ -42,7 +42,7 @@ import './shopify-cart.js';
   function closePhoto(){
     if(!photoViewer.classList.contains('on'))return;
     photoViewer.classList.remove('on','z');photoViewer.setAttribute('aria-hidden','true');photoPreview.removeAttribute('src');document.body.style.overflow='';
-    if(lastPhotoTrigger&&lastPhotoTrigger.isConnected)lastPhotoTrigger.focus();lastPhotoTrigger=null;
+    var trigger=lastPhotoTrigger;lastPhotoTrigger=null;if(trigger&&trigger.isConnected)requestAnimationFrame(function(){if(trigger.isConnected)trigger.focus()});
   }
   document.addEventListener('click',function(event){
     var image=event.target.closest('.cart-item-photo,.cart-choice-photo');
