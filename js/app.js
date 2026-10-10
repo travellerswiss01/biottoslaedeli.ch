@@ -4,7 +4,7 @@ import './shopify-cart.js';
 var LANG_KEY="biottos-lang";
 var lang="de";
 var dict={"Jetzt bestellen":"Jetzt bstelle","Vorheriger Korb":"Vorige Gschänksharass","Nächster Korb":"Nächste Gschänksharass","Wischen oder Pfeile antippen":"Wische oder Pfeil antippe","Welcher darf's sein?":"Wele darfs sii?","Bestellen":"Bstelle","Der grosse":"De grosse","Der mittlere":"De mittlere","Der kleine":"De chliine",
-"Geschenkskörbe":"Gschänksharass","Sprache":"Sproch","Zuhause":"Dehai","wo alles beginnt":"wo alles afangt","Garten":"Garte","was bei uns wächst":"wo bi üs wachst","Küche":"Chuchi","was daraus entsteht":"was drus entstoht","Geschenk":"Gschänk","fertig zum Abholen":"fertig zum Abhole",
+"Geschenkskörbe":"Gschänksharass","Thurgauer Geschenkharassen":"Thurgauer Gschänksharass","Guntershauser Geschenkharassen":"Guntershauser Gschänksharass","Geschenk selbst zusammenstellen":"Schenk sälber zämeschtelle","Sortiment-Untermenü öffnen":"Sortiment-Untermenü öffne","Sortiment-Untermenü schliessen":"Sortiment-Untermenü schliesse","Sprache":"Sproch","Zuhause":"Dehai","wo alles beginnt":"wo alles afangt","Garten":"Garte","was bei uns wächst":"wo bi üs wachst","Küche":"Chuchi","was daraus entsteht":"was drus entstoht","Geschenk":"Gschänk","fertig zum Abholen":"fertig zum Abhole",
 "Traubensaft":"Truubesaft","Süssmost":"Süessmost","Über uns":"Über üs","Abholung":"Abholig","Kontakt":"Kontakt",
 "Geschenke aus Guntershausen.":"Guntershausenr Gschänk",
 "BIOTTOS LÄDELI · GUNTERSHAUSEN":"BIOTTOS LÄDELI · GUNTERSHAUSEN","GUNTERSHAUSEN · THURGAU":"GUNTERSHAUSEN · THURGAU","MIT SORGFALT ZUSAMMENGESTELLT":"MIT SORGFALT ZÄMEGSTELLT",
@@ -193,9 +193,12 @@ var ZEITEN=[];(function(){for(var m=8*60;m<=18*60;m+=30){ZEITEN.push(("0"+Math.f
 var st={k:K[0].id,n:1,d:"",t:"",step:"k",week:0};
 var lastOrderTrigger=null,submitting=false,lockedControls=[];
 function setSubmitting(busy){submitting=busy;if(busy){lockedControls=Array.from(document.querySelectorAll("#ov button,#ov input")).filter(function(el){return !el.disabled});lockedControls.forEach(function(el){el.disabled=true})}else{lockedControls.forEach(function(el){el.disabled=false});lockedControls=[]}}
-var siteNav=$("#siteNav"),menuToggle=$("#menuToggle");
-function setMenuOpen(open){if(!siteNav||!menuToggle)return;siteNav.classList.toggle("is-open",open);menuToggle.setAttribute("aria-expanded",String(open));menuToggle.setAttribute("aria-label",open?"Menü schliessen":"Menü öffnen");if(window.applyBiottosLanguage)window.applyBiottosLanguage()}
+var siteNav=$("#siteNav"),menuToggle=$("#menuToggle"),sortimentMenu=$("#sortimentMenu"),sortimentToggle=$("#sortimentToggle");
+function setSortimentOpen(open){if(!sortimentMenu||!sortimentToggle)return;sortimentMenu.classList.toggle("is-open",open);sortimentToggle.setAttribute("aria-expanded",String(open));sortimentToggle.setAttribute("aria-label",open?"Sortiment-Untermenü schliessen":"Sortiment-Untermenü öffnen");if(window.applyBiottosLanguage)window.applyBiottosLanguage()}
+function setMenuOpen(open){if(!siteNav||!menuToggle)return;siteNav.classList.toggle("is-open",open);menuToggle.setAttribute("aria-expanded",String(open));menuToggle.setAttribute("aria-label",open?"Menü schliessen":"Menü öffnen");if(!open)setSortimentOpen(false);if(window.applyBiottosLanguage)window.applyBiottosLanguage()}
 if(menuToggle)menuToggle.addEventListener("click",function(){setMenuOpen(menuToggle.getAttribute("aria-expanded")!=="true")});
+if(sortimentToggle)sortimentToggle.addEventListener("click",function(){setSortimentOpen(sortimentToggle.getAttribute("aria-expanded")!=="true")});
+document.addEventListener("keydown",function(event){if(event.key==="Escape"&&sortimentMenu&&sortimentMenu.classList.contains("is-open")){setSortimentOpen(false);if(sortimentToggle)sortimentToggle.focus()}});
 var sectionNavigation=[
  ["koerbe","#koerbe"],["shop","#shop"],["traubensaft","#ueber-uns"],["suessmost","#ueber-uns"],
  ["essig","#ueber-uns"],["doerrfruechte","#ueber-uns"],["gartenprodukte","#ueber-uns"],["tee","#ueber-uns"],
