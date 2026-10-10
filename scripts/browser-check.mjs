@@ -103,7 +103,16 @@ try{
       await extra.locator('summary').click();
     }
     const first=page.locator('.shop-photo-open').first();await first.click();await page.keyboard.press('Escape');assert.equal(await page.locator('.shop-photo-viewer').evaluate(e=>e.open),false);assert.equal(await first.evaluate(e=>e===document.activeElement),true);checks++;
-    await page.getByLabel('Spezialität suchen',{exact:true}).fill('himbeer');assert.equal(await page.locator('#shop-count').innerText(),'Zeigt 3 von 19 Produkten');
+    const searchField=page.getByLabel('Spezialität suchen',{exact:true});
+    await page.waitForTimeout(400);
+    const animatedPlaceholder=await searchField.getAttribute('placeholder');
+    await page.waitForTimeout(220);
+    assert.notEqual(await searchField.getAttribute('placeholder'),animatedPlaceholder);
+    assert.equal(await searchField.inputValue(),'');
+    await searchField.focus();
+    await page.waitForTimeout(180);
+    assert.equal(await searchField.inputValue(),'');
+    await searchField.fill('himbeer');assert.equal(await page.locator('#shop-count').innerText(),'Zeigt 3 von 19 Produkten');
     await page.getByLabel('Spezialität suchen',{exact:true}).fill('zzzzkeinprodukt');assert.match(await page.locator('#shop-products').innerText(),/Keine passenden Produkte/);
     await page.getByLabel('Spezialität suchen',{exact:true}).fill('');
     const categoryButtons=page.locator('#shop-categories button');
