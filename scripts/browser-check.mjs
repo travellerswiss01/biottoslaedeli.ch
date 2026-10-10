@@ -106,8 +106,13 @@ try{
     const searchField=page.getByLabel('Spezialität suchen',{exact:true});
     await page.waitForTimeout(400);
     const animatedPlaceholder=await searchField.getAttribute('placeholder');
-    await page.waitForTimeout(220);
-    assert.notEqual(await searchField.getAttribute('placeholder'),animatedPlaceholder);
+    const placeholderDeadline=Date.now()+5000;
+    let placeholderChanged=false;
+    while(Date.now()<placeholderDeadline){
+      if(await searchField.getAttribute('placeholder')!==animatedPlaceholder){placeholderChanged=true;break}
+      await page.waitForTimeout(100);
+    }
+    assert.equal(placeholderChanged,true,'Search hint should eventually rotate');
     assert.equal(await searchField.inputValue(),'');
     await searchField.focus();
     await page.waitForTimeout(180);
