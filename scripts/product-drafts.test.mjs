@@ -68,6 +68,14 @@ test('every vinegar and balsamic product is confirmed as 250 ml',()=>{
   }
 });
 
+test('gift crate preview names differ from the unchanged Shopify product titles',()=>{
+  const byTitle=Object.fromEntries(productDrafts.map(product=>[product.title,product]));
+  assert.equal(byTitle['Geschenksharassli · mittel'].displayTitle,'Maischhauser Harass');
+  assert.equal(byTitle['Geschenksharass · gross'].displayTitle,'Guntershauser Harass');
+  assert.equal(shopifyProducts.find(product=>product.title==='Geschenksharassli · mittel')?.title,'Geschenksharassli · mittel');
+  assert.equal(shopifyProducts.find(product=>product.title==='Geschenksharass · gross')?.title,'Geschenksharass · gross');
+});
+
 test('gift crates link included products to their available photos',()=>{
   const byTitle=Object.fromEntries(productDrafts.map(product=>[product.title,product]));
   for(const title of ['Es Tröpfli Heimat','Geschenksharassli · mittel','Geschenksharass · gross']) {

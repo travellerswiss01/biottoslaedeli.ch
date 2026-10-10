@@ -9,8 +9,8 @@ test('three published gift crates show their Shopify names, prices and complete 
   assert.equal(cards.length, 3);
   const expected = [
     {name: 'Es Tröpfli Heimat', count: 3, price: 'CHF 29.00', key: 'chili', items: ['Himbeeressig · 250 ml', 'Birnen-Balsamico · 250 ml', 'Kirschessig · 250 ml']},
-    {name: 'Geschenksharassli · mittel', count: 5, price: 'CHF 39.00', key: 'fein', items: ['Tomatensauce · 250 ml', 'Kirschen-Birnen-Essig · 250 ml', 'Kirschessig · 250 ml', 'Dessertzwetschgen · 250 ml', 'Halb gedörrte Birnen · 100 g']},
-    {name: 'Geschenksharass · gross', count: 7, price: 'CHF 74.90', key: 'gross', items: ['Kirschen-Birnen-Essig · 250 ml', 'Halb gedörrte Birnen · 100 g', 'Dessertzwetschgen · 250 ml', 'Tomatensauce · 250 ml', 'Birnen-Balsamico · 250 ml', 'Birnenweggen · 360 g', 'Himbeeressig · 250 ml']},
+    {name: 'Maischhauser Harass', count: 5, price: 'CHF 39.00', key: 'fein', items: ['Tomatensauce · 250 ml', 'Kirschen-Birnen-Essig · 250 ml', 'Kirschessig · 250 ml', 'Dessertzwetschgen · 250 ml', 'Halb gedörrte Birnen · 100 g']},
+    {name: 'Guntershauser Harass', count: 7, price: 'CHF 74.90', key: 'gross', items: ['Kirschen-Birnen-Essig · 250 ml', 'Halb gedörrte Birnen · 100 g', 'Dessertzwetschgen · 250 ml', 'Tomatensauce · 250 ml', 'Birnen-Balsamico · 250 ml', 'Birnenweggen · 360 g', 'Himbeeressig · 250 ml']},
   ];
   cards.forEach(([, size, card], index) => {
     const item = expected[index];

@@ -187,7 +187,7 @@ renderHeroStory(0);
 })();
 (function(){
 var NR="41762552256",$=function(x){return document.querySelector(x)};
-var K=[{id:"gross",n:"Geschenksharass · gross",p:74.90},{id:"fein",n:"Geschenksharassli · mittel",p:39.00},{id:"chili",n:"Es Tröpfli Heimat",p:29.00}];
+var K=[{id:"gross",n:"Guntershauser Harass",p:74.90},{id:"fein",n:"Maischhauser Harass",p:39.00},{id:"chili",n:"Es Tröpfli Heimat",p:29.00}];
 var shopifyBridge=window.BiottosShopify||{enabled:false,openCart:function(){return false}};
 var ZEITEN=[];(function(){for(var m=8*60;m<=18*60;m+=30){ZEITEN.push(("0"+Math.floor(m/60)).slice(-2)+":"+("0"+m%60).slice(-2))}})();
 var st={k:K[0].id,n:1,d:"",t:"",step:"k",week:0};

@@ -41,8 +41,8 @@ try{
   async function checkBasketOverview(width){
     const cards=page.locator('#koerbe .korb-card');
     assert.equal(await cards.count(),3);
-    assert.equal(await page.getByRole('heading',{name:'Thurgauer Gschänkchörb vo Biottos',exact:true}).innerText(),'Thurgauer Gschänkchörb vo Biottos');
-    const expected=[['Es Tröpfli Heimat',3,'CHF 29.00','chili'],['Geschenksharassli · mittel',5,'CHF 39.00','fein'],['Geschenksharass · gross',7,'CHF 74.90','gross']];
+    assert.equal(await page.getByRole('heading',{name:'Ein Stück Thurgau zum Verschenken',exact:true}).innerText(),'Ein Stück Thurgau zum Verschenken');
+    const expected=[['Es Tröpfli Heimat',3,'CHF 29.00','chili'],['Maischhauser Harass',5,'CHF 39.00','fein'],['Guntershauser Harass',7,'CHF 74.90','gross']];
     for(let i=0;i<expected.length;i++){
       const card=cards.nth(i),[name,count,price,variant]=expected[i];
       assert.equal(await card.locator('h3').innerText(),name);
@@ -109,10 +109,10 @@ try{
     await page.screenshot({path:path.join(out,'geschenksharassen-'+width+'.png'),fullPage:true});
     await page.goto(origin+'/shop-vorschau.html');await page.locator('.shop-card').first().waitFor();await page.screenshot({path:path.join(out,'sortiment-'+width+'.png'),fullPage:true});
   }
-  await page.goto(origin+'/warenkorb.html');await page.getByRole('button',{name:'Es Tröpfli Heimat hinzufügen',exact:true}).click();await page.getByRole('button',{name:'Geschenksharass · gross hinzufügen',exact:true}).click();
+  await page.goto(origin+'/warenkorb.html');await page.getByRole('button',{name:'Es Tröpfli Heimat hinzufügen',exact:true}).click();await page.getByRole('button',{name:'Guntershauser Harass hinzufügen',exact:true}).click();
   assert.match(await page.locator('#cart-checkout').getAttribute('href'),/53868017549578:1,53868017647882:1/);assert.equal(await page.locator('#cart-total').innerText(),'Zwischensumme · CHF 103.90');checks++;
   await page.getByLabel('Anzahl Es Tröpfli Heimat',{exact:true}).fill('2');await page.getByLabel('Anzahl Es Tröpfli Heimat',{exact:true}).press('Tab');assert.equal(await page.locator('#cart-total').innerText(),'Zwischensumme · CHF 132.90');await page.reload();assert.equal(await page.getByLabel('Anzahl Es Tröpfli Heimat',{exact:true}).inputValue(),'2');checks++;
-  await page.getByRole('button',{name:'Geschenksharass · gross entfernen',exact:true}).click();assert.equal(await page.locator('#cart-total').innerText(),'Zwischensumme · CHF 58.00');await layout();
+  await page.getByRole('button',{name:'Guntershauser Harass entfernen',exact:true}).click();assert.equal(await page.locator('#cart-total').innerText(),'Zwischensumme · CHF 58.00');await layout();
   await page.screenshot({path:path.join(out,'warenkorb.png'),fullPage:true});
   await page.goto(origin+'/index.html#l-impressum');await page.locator('#lgx').waitFor({state:'visible'});await page.keyboard.press('Escape');assert.equal(await page.locator('#lg').getAttribute('aria-hidden'),'true');checks++;
   const noJs=await browser.newContext({javaScriptEnabled:false});await noJs.route('**/*',r=>r.request().url().startsWith(origin)?r.continue():r.abort());const fallback=await noJs.newPage();await fallback.goto(origin+'/shop-vorschau.html');assert.match(await fallback.locator('noscript').innerText(),/Apfelessig/);await noJs.close();checks++;

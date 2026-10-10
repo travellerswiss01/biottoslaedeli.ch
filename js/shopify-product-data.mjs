@@ -27,11 +27,11 @@ export const shopifyProducts = Object.freeze([
   {title:'Birnenweggen',id:'gid://shopify/Product/10662551126282',variants:[{variantId:'53884957032714',priceCents:1100}]},
   {title:'Himbeeressig',id:'gid://shopify/Product/10662551159050',variants:[{variantId:'53884957065482',priceCents:990}]},
   {title:'Es Tröpfli Heimat',id:'gid://shopify/Product/10659082797322',published:true,photo:'Essigharassli.png',variants:[{key:'chili',variantId:'53868017549578',priceCents:2900}]},
-  {title:'Geschenksharassli · mittel',id:'gid://shopify/Product/10659082830090',published:true,photo:'Geschenkharassli mittel.png',variants:[{key:'fein',variantId:'53868017582346',priceCents:3900}]},
-  {title:'Geschenksharass · gross',id:'gid://shopify/Product/10659082895626',published:true,photo:'Geschenksharass-gross-komplett.webp',variants:[{key:'gross',variantId:'53868017647882',priceCents:7490}]}
+  {title:'Geschenksharassli · mittel',displayTitle:'Maischhauser Harass',id:'gid://shopify/Product/10659082830090',published:true,photo:'Geschenkharassli mittel.png',variants:[{key:'fein',variantId:'53868017582346',priceCents:3900}]},
+  {title:'Geschenksharass · gross',displayTitle:'Guntershauser Harass',id:'gid://shopify/Product/10659082895626',published:true,photo:'Geschenksharass-gross-komplett.webp',variants:[{key:'gross',variantId:'53868017647882',priceCents:7490}]}
 ].map(product=>Object.freeze({...product,variants:Object.freeze(product.variants.map(variant=>Object.freeze(variant)))})));
 
 export const cartProducts = Object.freeze(shopifyProducts.flatMap(product=>product.variants
   .filter(variant=>product.published===true)
-  .map(variant=>Object.freeze({key:variant.key,title:product.title,unitCents:variant.priceCents,
+  .map(variant=>Object.freeze({key:variant.key,title:product.title,displayTitle:product.displayTitle||product.title,unitCents:variant.priceCents,
     photo:variant.photo||product.photo,variantId:variant.variantId,productId:product.id}))));

@@ -94,17 +94,18 @@ function render() {
     section.append(heading,cards);fragment.append(section);groups.set(type,cards);
   }
   visible.forEach((product,index) => {
+    const displayName=product.displayTitle||product.title;
     const target=groups.get(product.type);
     if (product.displayVariants) {
       const row = element('div','','shop-variant-row');
       row.style.gridTemplateColumns='repeat('+product.displayVariants.length+',minmax(0,1fr))';
       row.setAttribute('role','group');
-      row.setAttribute('aria-label',product.title+' – alle Grössen');
+      row.setAttribute('aria-label',displayName+' – alle Grössen');
       product.displayVariants.forEach(variant => {
         const card = element('article','','shop-card');
-        const media = photo(variant.photo,product.title+' · '+variant.label);
+        const media = photo(variant.photo,displayName+' · '+variant.label);
         if (variant.imageScale) media.querySelector('img').style.transform='scale('+variant.imageScale+')';
-        card.append(media,element('h3',product.title,'shop-product-title'),
+        card.append(media,element('h3',displayName,'shop-product-title'),
           element('p',variant.label,'shop-variant-size'));
         const storeVariant=product.shopifyVariants.find(candidate=>candidate.label===variant.label);
         if(storeVariant)card.append(shopifyPrice(storeVariant.priceCents));
@@ -117,7 +118,7 @@ function render() {
     }
     const article = element('article', '', 'shop-card');
     if (product.type === 'Geschenksharassen') article.classList.add('shop-card--gift');
-    article.append(photo(product.photos[0],product.title,index > 2),element('h3',product.title,'shop-product-title'));
+    article.append(photo(product.photos[0],displayName,index > 2),element('h3',displayName,'shop-product-title'));
     let mobileDetails = null;
     if (product.sizes) article.append(element('p',product.sizes.join(' · '),'shop-sizes'));
     if (product.shopifyPriceCents!=null) article.append(shopifyPrice(product.shopifyPriceCents));
@@ -152,7 +153,7 @@ function render() {
       const images = element('div','','shop-extra-photos');
       const sizePhotos=product.sizes && product.sizes.length===product.photos.length;
       details.append(element('summary',sizePhotos ? 'Grössen ansehen' : 'Weitere Ansichten'));
-      product.photos.slice(1).forEach((filename,i)=>images.append(photo(filename, product.title + (sizePhotos ? ' · '+product.sizes[i+1] : ' · Ansicht '+(i+2)))));
+      product.photos.slice(1).forEach((filename,i)=>images.append(photo(filename, displayName + (sizePhotos ? ' · '+product.sizes[i+1] : ' · Ansicht '+(i+2)))));
       details.append(images);
       article.append(details);
     }
