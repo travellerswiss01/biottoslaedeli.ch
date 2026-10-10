@@ -111,4 +111,4 @@ Shopify-Quellen:
 - [Shopify: Test-Zahlungs-Gateway aktivieren](https://help.shopify.com/de/manual/checkout-settings/test-orders/payments-test-mode)
 - [Shopify: Testbestellungen](https://help.shopify.com/de/manual/checkout-settings/test-orders)
 
-**Status:** Testfall und Prüfschritte sind vorbereitet; keine Bestellung wurde aufgegeben. Vor dem Abschluss des Testkaufs müssen eine kontrollierte E-Mail-Adresse und ein verfügbarer, nicht abrechnender Testzahlungsweg bestätigt sein.
+**Status:** Testfall und Prüfschritte sind vorbereitet; keine Bestellung wurde aufgegeben. Die vom Betreiber angegebene Testadresse ist biottoslaedeli@gmail.com; es wurde keine E-Mail gesendet. Ein verfügbarer, nicht abrechnender Testzahlungsweg muss vor dem Abschluss des Testkaufs noch geprüft werden.
