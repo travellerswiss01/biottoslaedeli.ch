@@ -193,14 +193,46 @@ var ZEITEN=[];(function(){for(var m=8*60;m<=18*60;m+=30){ZEITEN.push(("0"+Math.f
 var st={k:K[0].id,n:1,d:"",t:"",step:"k",week:0};
 var lastOrderTrigger=null,submitting=false,lockedControls=[];
 function setSubmitting(busy){submitting=busy;if(busy){lockedControls=Array.from(document.querySelectorAll("#ov button,#ov input")).filter(function(el){return !el.disabled});lockedControls.forEach(function(el){el.disabled=true})}else{lockedControls.forEach(function(el){el.disabled=false});lockedControls=[]}}
-var views=["start","koerbe","gartenprodukte","traubensaft","suessmost","essig","doerrfruechte","tee","ueber-uns","laedeli","lucia-kocht","otto-garten","abholung","faq","kontakt"];
 var siteNav=$("#siteNav"),menuToggle=$("#menuToggle");
 function setMenuOpen(open){if(!siteNav||!menuToggle)return;siteNav.classList.toggle("is-open",open);menuToggle.setAttribute("aria-expanded",String(open));menuToggle.setAttribute("aria-label",open?"Menü schliessen":"Menü öffnen");if(window.applyBiottosLanguage)window.applyBiottosLanguage()}
 if(menuToggle)menuToggle.addEventListener("click",function(){setMenuOpen(menuToggle.getAttribute("aria-expanded")!=="true")});
-if(siteNav)siteNav.addEventListener("click",function(e){if(e.target.closest("a"))setMenuOpen(false)});
-document.addEventListener("keydown",function(e){if(e.key==="Escape")setMenuOpen(false)});
-function show(){var requested=(location.hash||"#start").slice(1),shopTarget=requested==="shop",h=shopTarget?"start":requested;if(views.indexOf(h)<0)h="start";views.forEach(function(v){$("#"+v).classList.toggle("on",v===h)});document.querySelectorAll("#siteNav a").forEach(function(a){a.classList.toggle("on",a.getAttribute("href")==="#"+requested||a.getAttribute("href")==="#"+h&&!shopTarget)});document.querySelector(".brand-tab").classList.toggle("on",h==="start"&&!shopTarget);document.body.dataset.currentView=h;setMenuOpen(false);if(shopTarget){requestAnimationFrame(function(){var target=document.getElementById("shop");if(target)target.scrollIntoView({behavior:"smooth",block:"start"})})}else{window.scrollTo(0,0)}}
-window.addEventListener("hashchange",show);show();
+var sectionNavigation=[
+ ["koerbe","#koerbe"],["shop","#shop"],["traubensaft","#ueber-uns"],["suessmost","#ueber-uns"],
+ ["essig","#ueber-uns"],["doerrfruechte","#ueber-uns"],["gartenprodukte","#ueber-uns"],["tee","#ueber-uns"],
+ ["ueber-uns","#ueber-uns"],["otto-garten","#ueber-uns"],["lucia-kocht","#ueber-uns"],["laedeli","#ueber-uns"],
+ ["abholung","#abholung"],["faq","#kontakt"],["kontakt","#kontakt"]
+];
+function setActiveNavigation(target){
+ if(!siteNav)return;
+ siteNav.querySelectorAll("a[href^='#']").forEach(function(link){
+  var active=target&&link.getAttribute("href")===target;
+  link.classList.toggle("on",!!active);
+  if(active)link.setAttribute("aria-current","location");else link.removeAttribute("aria-current");
+ });
+}
+function updateNavigationFromScroll(){
+ var header=document.querySelector("header");
+ var marker=window.scrollY+(header?header.offsetHeight:0)+28;
+ var active="";
+ sectionNavigation.forEach(function(entry){
+  var section=document.getElementById(entry[0]);
+  if(section&&section.getBoundingClientRect().top+window.scrollY<=marker)active=entry[1];
+ });
+ setActiveNavigation(active);
+}
+function show(){
+ document.body.removeAttribute("data-current-view");
+ document.querySelectorAll(".view").forEach(function(section){section.classList.add("on")});
+ setMenuOpen(false);
+ var fragment=(location.hash||"").slice(1);
+ var matched=sectionNavigation.find(function(entry){return entry[0]===fragment});
+ setActiveNavigation(matched?matched[1]:"");
+}
+if(siteNav)siteNav.addEventListener("click",function(event){if(event.target.closest("a[href^='#']"))setMenuOpen(false)});
+window.addEventListener("hashchange",show);
+window.addEventListener("scroll",updateNavigationFromScroll,{passive:true});
+show();
+updateNavigationFromScroll();
 
 function fmt(x){return "CHF "+x.toFixed(2)}
 function chips(el,name,items,cur){el.innerHTML=items.map(function(i){return '<label><input type="radio" name="'+name+'" value="'+i.v+'"'+(String(i.v)===String(cur)?" checked":"")+'><span>'+i.l+"</span></label>"}).join("")}
