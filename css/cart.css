@@ -16,6 +16,7 @@
 .cart-item{display:grid;grid-template-columns:80px minmax(0,1fr) auto;align-items:center;gap:16px;padding:16px 0;border-top:1px solid #e5ded2}
 .cart-item:last-child{border-bottom:1px solid #e5ded2}
 .cart-item-photo,.cart-choice-photo{display:block;aspect-ratio:1;width:100%;object-fit:contain;background:#fff;border:1px solid #e5ded2;border-radius:6px}
+.cart-page .cart-item-photo,.cart-page .cart-choice-photo{cursor:zoom-in}
 .cart-item-copy{min-width:0}
 .cart-page .cart-item-copy h2{margin:0 0 4px;font-size:1.08rem;line-height:1.35;overflow-wrap:anywhere}
 .cart-item-unit{margin:0;color:#444;font-size:.94rem;line-height:1.4}
