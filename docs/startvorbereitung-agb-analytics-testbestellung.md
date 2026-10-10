@@ -10,7 +10,7 @@
 - Shopify meldet für die Schweiz in den Customer-Privacy-Regeln aktuell `consentRequired: false` und `dataSaleOptOutRequired: false`. Das bestätigt nicht, ob ein Cookie-Banner oder einzelne Pixel eingerichtet sind.
 - In den geprüften Website-Dateien `index.html`, `js/app.js` und `warenkorb.html` wurde kein GA4-Mess-Tag gefunden. Die Shopify-Einstellungen für Customer Events und ein mögliches Google-Analytics-Konto konnten über die verfügbare Admin-Abfrage nicht abschliessend geprüft werden.
 - Der aktuelle Shopify-Katalog enthält 19 aktive Produkte. Die drei Geschenksharassen und verfügbare Spezialitäten sind im Codebestand abgebildet.
-- **Keine** Shopify-Richtlinie, Analytics-Einstellung, Zahlungsmethode, Veröffentlichung oder Bestellung wurde in diesem Arbeitsschritt verändert. Es wurde keine Bestellung, Zahlung oder E-Mail ausgelöst.
+- Shopify-Richtlinien und Analytics-Einstellungen wurden in diesem Arbeitsschritt nicht geändert. Für den autorisierten Test wurde Shopify Payments kurz in den Testmodus geschaltet und danach wieder deaktiviert. Eine Testbestellung wurde durchgeführt, storniert und die zwei Artikel wurden dem Bestand wieder gutgeschrieben; es wurde keine echte Zahlung verarbeitet.
 
 ## 1. AGB vorbereiten
 
@@ -96,14 +96,14 @@ Quellen:
 
 Vorgeschlagener Mischwarenkorb: **1 × Es Tröpfli Heimat (CHF 29.00) und 1 × Birnenessig (CHF 8.50), total CHF 37.50 vor allfälligen Checkout-Anpassungen.** Die aktuellen Produktnamen, Varianten und Preise stammen aus der verbundenen Shopify-Abfrage. Der Test prüft einen Korb zusammen mit einer Spezialität in derselben Bestellung.
 
-### Testablauf nach Bestätigung
+### Durchgeführter Testlauf (10. Oktober 2026)
 
-1. **Geprüft:** Shopify Payments nimmt Zahlungen an; als manuelle Zahlungsmethode ist «Bar oder TWINT bei Abholung» eingerichtet. PayPal zeigt «Setup unvollständig». Ein Testmodus wurde nicht aktiviert; keine Zahlungsmethode wurde geändert.
-2. Einen Shopify-Zahlungstestmodus verwenden; keine echte Karte und keine reale TWINT-Zahlung verwenden. Shopify warnt, dass während des Testmodus keine regulären Kreditkartenzahlungen angenommen werden. Das Umschalten könnte deshalb Live-Zahlungen vorübergehend unterbrechen; erst für einen abgesprochenen Testzeitpunkt erwägen. Testbestellungen sind laut Shopify erst nach Wahl eines kostenpflichtigen Plans möglich.
-3. Eine vom Betreiber kontrollierte E-Mail-Adresse einsetzen. Keine echte Kundschaft als Testkontakt verwenden.
-4. Abholung auswählen und Bestellung nur im Testmodus abschliessen.
-5. Prüfen: angezeigte Produkte/Preise, Abholort, Bestelleingang in Shopify, Bestellbestätigungs-E-Mail, Status «Bereit zur Abholung» und Abholbestätigung. Die Shopify-Admin-Vorschau für «Bereit zur lokalen Abholung» zeigt derzeit Beispieldaten (Example Shop/Example Street/Ottawa); erst eine Test-E-Mail belegt die echten Angaben.
-6. Danach die Testbestellung stornieren, Bestand wiederherstellen und den Testmodus deaktivieren bzw. ursprüngliche Zahlungsarten wiederherstellen. Den Checkout anschliessend erneut kontrollieren.
+1. Shopify Payments wurde für den Test kurz in den Testmodus geschaltet. Der Shop zeigte danach sichtbar „Testmodus aktiviert“; nach dem Checkout wurde der Testmodus wieder deaktiviert. Die Zahlungsseite zeigte anschliessend „Testmodus deaktiviert“.
+2. Im Checkout wurden **1 × Es Tröpfli Heimat (CHF 29.00)** und **1 × Birnenessig (CHF 8.50)** bestellt. Der Gesamtbetrag war **CHF 37.50**, Abholung bei Biottos Lädeli war kostenlos. Für die Kartenzahlung wurde die von Shopify dokumentierte Visa-Testnummer mit Endung 4242 verwendet; es wurde keine echte Kartenzahlung verarbeitet.
+3. Shopify erstellte **Bestellung #1004**, Bestätigungsnummer **PQV84U8GQ**. Der Checkout zeigte die Bestellbestätigung und die angegebene Testadresse.
+4. Die Shopify-Bestellchronik bestätigt, dass die Bestellbestätigung und anschliessend die Benachrichtigung „a ready for pickup“ an biottoslaedeli@gmail.com gesendet wurden. Das belegt den Versand durch Shopify, nicht die Zustellung oder Darstellung im Posteingang.
+5. Bestellung #1004 wurde storniert. Die Chronik bestätigt, dass beide Artikel wieder aufgestockt wurden. Shopify zeigt eine Rückerstattung von CHF 37.50 als ausstehend; die Bestellung ist als Testbestellung markiert und es wurde keine echte Zahlung verarbeitet.
+6. Die vorbestehenden Testbestellungen #1001–#1003 wurden nicht verändert. Die aktiven Zahlungsarten wurden nicht geändert; Testmodus ist wieder deaktiviert.
 
 Shopify-Quellen:
 
@@ -111,4 +111,4 @@ Shopify-Quellen:
 - [Shopify: Test-Zahlungs-Gateway aktivieren](https://help.shopify.com/de/manual/checkout-settings/test-orders/payments-test-mode)
 - [Shopify: Testbestellungen](https://help.shopify.com/de/manual/checkout-settings/test-orders)
 
-**Status:** Testfall und Prüfschritte sind vorbereitet; keine Bestellung wurde aufgegeben. Die vom Betreiber angegebene Testadresse ist biottoslaedeli@gmail.com; es wurde keine E-Mail gesendet. Das Vorhandensein eines nicht abrechnenden Testzahlungswegs ist nicht bestätigt. Shopify Payments ist aktiv; deshalb müsste ein Testmodus vorübergehend Live-Zahlungen unterbrechen.
+**Status:** Checkout, Bestellbestätigung und Abholbenachrichtigung wurden mit der vom Betreiber angegebenen Testadresse geprüft. Shopify zeigt die Testbestellung #1004 als storniert; zwei Artikel sind zurückgebucht, und eine Test-Rückerstattung von CHF 37.50 wird noch als ausstehend angezeigt. Testmodus ist deaktiviert. Die Zustellung der E-Mails im Posteingang konnte nicht geprüft werden.
