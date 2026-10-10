@@ -11,6 +11,7 @@
 .cart-storage-note{margin:10px 0;padding:10px 12px;border-left:3px solid var(--cart-red);background:var(--cart-paper);font-size:.95rem}
 .cart-layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;align-items:start;gap:28px;margin:22px 0 42px}
 .cart-main.is-empty .cart-layout{grid-template-columns:minmax(0,1fr);margin:18px 0 34px}
+.cart-main.is-empty .cart-summary{display:none}
 .cart-items{min-width:0}
 .cart-item{display:grid;grid-template-columns:80px minmax(0,1fr) auto;align-items:center;gap:16px;padding:16px 0;border-top:1px solid #e5ded2}
 .cart-item:last-child{border-bottom:1px solid #e5ded2}

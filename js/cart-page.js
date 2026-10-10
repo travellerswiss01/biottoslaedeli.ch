@@ -14,6 +14,7 @@ import './shopify-cart.js';
   var categoryFilter=document.querySelector('#cart-category-filter');
   var choiceCount=document.querySelector('#cart-choice-count');
   var noResults=document.querySelector('#cart-no-results');
+  var pickerTitle=document.querySelector('#cart-choices-title');
   var categoryByKey={
     chili:'harassen',fein:'harassen',gross:'harassen',
     'apfelessig-33-sorten':'vinegar',birnenessig:'vinegar','birnen-balsamico':'vinegar',
@@ -42,6 +43,7 @@ import './shopify-cart.js';
   function render(){
     var items=bridge.getCart(),sum=0,fragment=document.createDocumentFragment();
     main.classList.toggle('is-empty',items.length===0);
+    pickerTitle.textContent=items.length?'Noch etwas hinzufügen?':'Harassen und Spezialitäten auswählen';
 
     if(!items.length){
       var empty=node('div','','cart-empty');
@@ -131,6 +133,9 @@ import './shopify-cart.js';
   });
   search.addEventListener('input',visibleChoices);
 
+  categoryFilter.querySelectorAll('button[data-category]').forEach(function(button){
+    button.setAttribute('aria-pressed',String(button.dataset.category===activeCategory));
+  });
   render();
   visibleChoices();
   window.addEventListener('storage',render);
