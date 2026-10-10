@@ -86,9 +86,12 @@ try{
     await page.setViewportSize({width,height:900});await page.emulateMedia({colorScheme:'dark'});
     for(const file of ['geschenkskoerbe.html','firmengeschenke.html','warenkorb.html','404.html']){await page.goto(origin+'/'+file);await layout()}
     await page.goto(origin+'/index.html#start');await page.waitForFunction(()=>location.hash==='#start');
-    assert.equal(await page.locator('#siteNav a').count(),5,'One consistent five-link navigation');
+    const mainNavigationLinks=page.locator('#siteNav > a, #siteNav > .nav-dropdown > .nav-dropdown-main > a');
+    assert.equal(await mainNavigationLinks.count(),5,'Five primary navigation links');
+    assert.equal(await page.locator('#sortimentSubmenu a').count(),3,'Three Sortiment submenu links');
     const visibleViews=await page.evaluate(ids=>ids.map(id=>{const section=document.getElementById(id);return{id,visible:!!section&&getComputedStyle(section).display!=='none'&&section.getClientRects().length>0}}),views);
     assert.ok(visibleViews.every(section=>section.visible),'All page sections remain visible: '+JSON.stringify(visibleViews));
+    const sortimentToggle=page.locator('#sortimentToggle');assert.equal(await sortimentToggle.getAttribute('aria-expanded'),'false');await sortimentToggle.click();assert.equal(await sortimentToggle.getAttribute('aria-expanded'),'true');assert.equal(await page.locator('#sortimentSubmenu a:visible').count(),3,'All submenu choices are visible when expanded');await sortimentToggle.click();assert.equal(await sortimentToggle.getAttribute('aria-expanded'),'false');
     if(width<=900){assert.equal(await page.locator('#menuToggle').isVisible(),true);await page.locator('#menuToggle').click();assert.equal(await page.locator('#menuToggle').getAttribute('aria-expanded'),'true');assert.equal(await page.locator('#siteNav').isVisible(),true);await page.locator('#siteNav a[href="#shop"]').click();assert.equal(await page.locator('#menuToggle').getAttribute('aria-expanded'),'false')}
     else{assert.equal(await page.locator('#siteNav').isVisible(),true);await page.locator('#siteNav a[href="#shop"]').click()}
     await page.waitForFunction(()=>location.hash==='#shop');await page.locator('#shop .shop-card').first().waitFor();await layout();await checkBasketOverview(width);
