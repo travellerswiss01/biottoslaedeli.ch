@@ -128,7 +128,7 @@ try{
     if(width<=600)assert.equal(await page.locator('.shop-category-nav').evaluate(e=>getComputedStyle(e).display),'grid');
     await vinegarFilter.click();assert.equal(await page.locator('#shop-count').innerText(),'Zeigt 7 von 19 Produkten');assert.deepEqual(await page.locator('.shop-sizes').allTextContents(),Array(7).fill('250 ml'));assert.equal(await vinegarFilter.getAttribute('aria-pressed'),'true');checks++;
     await page.getByRole('button',{name:'Alle Produkte (19)',exact:true}).click();
-    await page.goto(origin+'/index.html#shop?kategorie=Geschenksharassen');await page.locator('#shop .shop-card').first().waitFor();assert.equal(await page.locator('#shop .shop-card--gift').count(),3);await layout();
+    await page.goto(origin+'/index.html?kategorie=Geschenksharassen#shop');await page.locator('#shop .shop-card').first().waitFor();assert.equal(await page.locator('#shop .shop-card--gift').count(),3);await layout();
     await page.screenshot({path:path.join(out,'geschenksharassen-'+width+'.png'),fullPage:true});
     await page.goto(origin+'/index.html#shop');await page.locator('#shop .shop-card').first().waitFor();await page.screenshot({path:path.join(out,'sortiment-'+width+'.png'),fullPage:true});
   }
