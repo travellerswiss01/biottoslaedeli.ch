@@ -42,6 +42,18 @@ Quellen:
 3. **Änderung, Stornierung, Mängel:** Bis wann kann storniert/geändert werden? Wie soll mit bereits bezahlten Bestellungen und fehlerhaften oder beschädigten Produkten umgegangen werden?
 4. **Preis-/Steuerangabe:** Sind die angezeigten Endpreise inklusive aller anwendbaren Steuern? Das wird in den AGB und im Checkout nicht geraten.
 
+
+### AGB-Gerüst für die nächste Fassung (intern, nicht veröffentlichen)
+
+- **Vertragspartner und Kontakt:** Josef Ignaz Zehnder; Geschäftsbezeichnung, eingetragene Rechtsform/UID vor Verwendung noch abgleichen; Hauptstrasse 90, 8357 Guntershausen; biottoslaedeli@gmail.com; +41 76 255 22 56.
+- **Sortiment, Bestellung und Preis:** konkrete Produkte, Varianten und angezeigte Preise gemäss Shopify. Der Hinweis auf Endpreis/Steuern bleibt offen, bis die Steuerangabe bestätigt ist.
+- **Zahlung:** Onlinezahlung oder Barzahlung/TWINT bei Abholung gemäss bestätigtem Ablauf; vor Veröffentlichung mit den tatsächlich aktiven Shopify-Zahlungsarten abgleichen.
+- **Abholung:** kein Versand; Abholung am angegebenen Standort. Bereitstellung wird per Abholbestätigung mitgeteilt. Abholung innerhalb einer Woche ab dieser Bestätigung.
+- **Nichtabholung:** nach Ablauf der Wochenfrist wird die Bestellung storniert; eine bereits eingegangene Zahlung wird zurückerstattet.
+- **Änderungen, Stornierung vor Bereitstellung und mangelhafte/beschädigte Ware:** noch keine Formulierung, bis die offenen Abläufe festgelegt sind.
+- **Datenschutz:** Verweis auf die separate Datenschutzerklärung; keine Datenschutzklausel aus der AGB ableiten.
+
+Das ist eine Arbeitsstruktur mit bestätigten Fakten und offenen Stellen, kein abschliessender Rechtstext. Vor Veröffentlichung bleiben die offenen Punkte zu Vertragspartner/Rechtsform, Steuerangabe und Umgang mit Änderungen/Mängeln zu klären; anschliessend muss die AGB im Bestellablauf vor Abschluss lesbar verlinkt werden.
 Erst nach diesen Antworten kann ein vollständiger, inhaltlich passender Entwurf geschrieben werden. Er bleibt bis zur fachlichen Prüfung als Entwurf markiert und wird nicht in Shopify veröffentlicht. Das Schweizer KMU-Portal weist darauf hin, dass für Schweizer Onlinekäufe kein allgemeines gesetzliches Widerrufsrecht wie in der EU besteht; daraus wird hier keine Rückgabe- oder Stornoklausel abgeleitet.
 
 ## 2. Analytics vorbereiten
