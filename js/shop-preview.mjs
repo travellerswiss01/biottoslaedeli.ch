@@ -139,7 +139,7 @@ function render() {
         preview.append(item);
       });
       if(product.includedProducts.length>3) {
-        preview.append(element('li','+'+(product.includedProducts.length-3)+' weitere','','shop-content-more'));
+        preview.append(element('li','+'+(product.includedProducts.length-3)+' weitere','shop-contents-more'));
       }
       contents.append(preview);
       const details=element('details','','shop-contents-details');
