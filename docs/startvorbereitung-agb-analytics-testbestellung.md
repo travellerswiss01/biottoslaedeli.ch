@@ -37,23 +37,31 @@ Quellen:
 
 ### Vor dem AGB-Text zu bestätigen
 
-1. **Vertragspartner:** Josef Ignaz Zehnder ist bestätigt. Noch zu klären ist, ob «Biottos Lädeli» als Geschäftsbezeichnung ergänzt werden soll und ob eine eingetragene Rechtsform oder UID aufzuführen ist.
+1. **Vertragspartner:** Als Geschäftsbezeichnung soll «Biottos Lädeli» verwendet werden; Josef Ignaz Zehnder ist als Betreiber bestätigt. Die genaue rechtliche Firmenbezeichnung sowie eine allfällige Rechtsform/UID sind noch abzugleichen.
 2. **Abholung und Nichtabholung:** Die Abholfrist von einer Woche nach der Abholbestätigung sowie Stornierung und Rückerstattung bei Nichtabholung innerhalb dieser Frist sind bestätigt.
-3. **Änderung, Stornierung, Mängel:** Bis wann kann storniert/geändert werden? Wie soll mit bereits bezahlten Bestellungen und fehlerhaften oder beschädigten Produkten umgegangen werden?
-4. **Preis-/Steuerangabe:** Sind die angezeigten Endpreise inklusive aller anwendbaren Steuern? Das wird in den AGB und im Checkout nicht geraten.
+3. **Änderung, Stornierung, Mängel und Haftung:** Der Wunsch nach einem Haftungsausschluss ist festgehalten. Eine pauschale Ausschlussklausel wird nicht übernommen: Haftung für rechtswidrige Absicht oder grobe Fahrlässigkeit kann nicht im Voraus ausgeschlossen werden; Konsumenten-AGB dürfen zudem keine missbräuchliche Benachteiligung enthalten. Der zulässige Umfang und die Behandlung mangelhafter/beschädigter Ware müssen geprüft werden. Änderungen und Stornierungen vor der Abholung sind noch festzulegen.
+4. **Preis-/Steuerangabe:** Deine Angabe: Es werden keine Steuern angewandt. Vor einer endgültigen Formulierung ist die tatsächliche MWST-Pflicht bzw. ein allfälliger Registereintrag zu prüfen; ich leite aus dieser Angabe keine Steuerbefreiung ab.
 
 
 ### AGB-Gerüst für die nächste Fassung (intern, nicht veröffentlichen)
 
-- **Vertragspartner und Kontakt:** Josef Ignaz Zehnder; Geschäftsbezeichnung, eingetragene Rechtsform/UID vor Verwendung noch abgleichen; Hauptstrasse 90, 8357 Guntershausen; biottoslaedeli@gmail.com; +41 76 255 22 56.
-- **Sortiment, Bestellung und Preis:** konkrete Produkte, Varianten und angezeigte Preise gemäss Shopify. Der Hinweis auf Endpreis/Steuern bleibt offen, bis die Steuerangabe bestätigt ist.
+- **Vertragspartner und Kontakt:** Geschäftsbezeichnung «Biottos Lädeli»; Betreiber Josef Ignaz Zehnder; genaue rechtliche Firmenbezeichnung und allfällige Rechtsform/UID noch abgleichen; Hauptstrasse 90, 8357 Guntershausen; biottoslaedeli@gmail.com; +41 76 255 22 56.
+- **Sortiment, Bestellung und Preis:** konkrete Produkte, Varianten und angezeigte Preise gemäss Shopify. Betreiberangabe: Es werden keine Steuern angewandt. Vor einem definitiven Steuerhinweis ist die MWST-Pflicht/Registerlage zu prüfen.
 - **Zahlung:** Onlinezahlung oder Barzahlung/TWINT bei Abholung gemäss bestätigtem Ablauf; vor Veröffentlichung mit den tatsächlich aktiven Shopify-Zahlungsarten abgleichen.
 - **Abholung:** kein Versand; Abholung am angegebenen Standort. Bereitstellung wird per Abholbestätigung mitgeteilt. Abholung innerhalb einer Woche ab dieser Bestätigung.
 - **Nichtabholung:** nach Ablauf der Wochenfrist wird die Bestellung storniert; eine bereits eingegangene Zahlung wird zurückerstattet.
-- **Änderungen, Stornierung vor Bereitstellung und mangelhafte/beschädigte Ware:** noch keine Formulierung, bis die offenen Abläufe festgelegt sind.
+- **Änderungen, Stornierung vor Bereitstellung und mangelhafte/beschädigte Ware:** Abläufe noch offen. Haftungsausschluss ist gewünscht, wird aber nur im rechtlich zulässigen Umfang erwogen; kein Ausschluss für rechtswidrige Absicht oder grobe Fahrlässigkeit. Verbraucherrecht und Klausel müssen fachlich geprüft werden.
 - **Datenschutz:** Verweis auf die separate Datenschutzerklärung; keine Datenschutzklausel aus der AGB ableiten.
 
 Das ist eine Arbeitsstruktur mit bestätigten Fakten und offenen Stellen, kein abschliessender Rechtstext. Vor Veröffentlichung bleiben die offenen Punkte zu Vertragspartner/Rechtsform, Steuerangabe und Umgang mit Änderungen/Mängeln zu klären; anschliessend muss die AGB im Bestellablauf vor Abschluss lesbar verlinkt werden.
+
+Rechtliche Prüfpunkte (amtliche Schweizer Stellen):
+
+- [OR Art. 100: Grenzen eines vorgängigen Haftungsausschlusses](https://www.fedlex.admin.ch/eli/cc/27/317_321_377/de#art_100)
+- [SECO: Missbräuchliche Geschäftsbedingungen](https://www.seco.admin.ch/de/missbraeuchliche-geschaeftsbedingungen)
+- [ESTV: MWST-Pflicht und Umsatzgrenze](https://www.estv.admin.ch/de/mwst-steuerpflicht)
+- [KMU-Portal: Rechtsform Einzelunternehmen und Firmenname](https://www.kmu.admin.ch/de/rechtsform-einzelunternehmen)
+
 Erst nach diesen Antworten kann ein vollständiger, inhaltlich passender Entwurf geschrieben werden. Er bleibt bis zur fachlichen Prüfung als Entwurf markiert und wird nicht in Shopify veröffentlicht. Das Schweizer KMU-Portal weist darauf hin, dass für Schweizer Onlinekäufe kein allgemeines gesetzliches Widerrufsrecht wie in der EU besteht; daraus wird hier keine Rückgabe- oder Stornoklausel abgeleitet.
 
 ## 2. Analytics vorbereiten
