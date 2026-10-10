@@ -174,18 +174,15 @@ function render() {
 }
 const categoryOrder=['Geschenksharassen','Essig & Balsamico','Säfte','Dörrfrüchte','Spezialitäten','Backwaren'];
 const categoryNav=document.querySelector('#shop-categories');
-const categoryFilter=document.querySelector('#shop-category-filter');
-const categoryCurrent=document.querySelector('#shop-category-current');
 for(const type of ['',...categoryOrder]) {
   const total=type ? productDrafts.filter(product=>product.type===type).length : productDrafts.length;
   const label=type || 'Alle Produkte';
   const button=element('button',label+' ('+total+')');button.type='button';button.dataset.category=type;
   button.setAttribute('aria-controls','shop-products');
-  button.addEventListener('click',()=>{selectedCategory=type;categoryCurrent.textContent=label;categoryFilter.open=false;render();});categoryNav.append(button);
+  button.addEventListener('click',()=>{selectedCategory=type;render();});categoryNav.append(button);
 }
 const requestedCategory=new URLSearchParams(location.search).get('kategorie');
 if(categoryOrder.includes(requestedCategory)) selectedCategory=requestedCategory;
-categoryCurrent.textContent=selectedCategory||'Alle Produkte';
 search.addEventListener('input',render);
 render();
 
