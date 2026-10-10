@@ -83,7 +83,7 @@ try{
     await page.goto(origin+'/shop-vorschau.html');await page.locator('.shop-card').first().waitFor();await layout();
     assert.equal(await page.locator('h1').innerText(),'Feines aus unserem Lädeli');
     assert.equal(await page.locator('.shop-section-title').count(),6);
-    assert.equal(await page.locator('#shop-count').innerText(),'19 von 19 Produkten');
+    assert.equal(await page.locator('#shop-count').innerText(),'Zeigt 19 von 19 Produkten');
     const titleStyles=await page.locator('.shop-product-title').evaluateAll(elements=>elements.map(e=>({color:getComputedStyle(e).color,weight:getComputedStyle(e).fontWeight,size:parseFloat(getComputedStyle(e).fontSize)})));
     assert.ok(titleStyles.every(s=>s.color==='rgb(0, 0, 0)'&&Number(s.weight)>=700&&s.size>=16));checks++;
     if(width<=600){
@@ -103,9 +103,14 @@ try{
       await extra.locator('summary').click();
     }
     const first=page.locator('.shop-photo-open').first();await first.click();await page.keyboard.press('Escape');assert.equal(await page.locator('.shop-photo-viewer').evaluate(e=>e.open),false);assert.equal(await first.evaluate(e=>e===document.activeElement),true);checks++;
-    await page.getByLabel('Produkt suchen',{exact:true}).fill('himbeer');assert.equal(await page.locator('#shop-count').innerText(),'3 von 19 Produkten');
-    await page.getByLabel('Produkt suchen',{exact:true}).fill('zzzzkeinprodukt');assert.match(await page.locator('#shop-products').innerText(),/Keine passenden Produkte/);
-    await page.getByLabel('Produkt suchen',{exact:true}).fill('');await page.locator('#shop-category').selectOption('Essig & Balsamico');assert.equal(await page.locator('#shop-count').innerText(),'7 von 19 Produkten');assert.deepEqual(await page.locator('.shop-sizes').allTextContents(),Array(7).fill('250 ml'));checks++;
+    await page.getByLabel('Spezialität suchen',{exact:true}).fill('himbeer');assert.equal(await page.locator('#shop-count').innerText(),'Zeigt 3 von 19 Produkten');
+    await page.getByLabel('Spezialität suchen',{exact:true}).fill('zzzzkeinprodukt');assert.match(await page.locator('#shop-products').innerText(),/Keine passenden Produkte/);
+    await page.getByLabel('Spezialität suchen',{exact:true}).fill('');
+    const vinegarFilter=page.getByRole('button',{name:'Essig & Balsamico (7)',exact:true});
+    assert.equal(await vinegarFilter.isVisible(),true);
+    if(width<=600)assert.equal(await page.locator('.shop-category-nav').evaluate(e=>getComputedStyle(e).display),'grid');
+    await vinegarFilter.click();assert.equal(await page.locator('#shop-count').innerText(),'Zeigt 7 von 19 Produkten');assert.deepEqual(await page.locator('.shop-sizes').allTextContents(),Array(7).fill('250 ml'));checks++;
+    await page.getByRole('button',{name:'Alle Produkte (19)',exact:true}).click();
     await page.goto(origin+'/shop-vorschau.html?kategorie=Geschenksharassen');await page.locator('.shop-card').first().waitFor();assert.equal(await page.locator('.shop-card--gift').count(),3);await layout();
     await page.screenshot({path:path.join(out,'geschenksharassen-'+width+'.png'),fullPage:true});
     await page.goto(origin+'/shop-vorschau.html');await page.locator('.shop-card').first().waitFor();await page.screenshot({path:path.join(out,'sortiment-'+width+'.png'),fullPage:true});
