@@ -55,3 +55,27 @@
 /* Center the customer-facing shop introduction. */
 .shop-intro{margin-inline:auto;text-align:center}
 .shop-intro h1,.shop-intro>p{text-align:center}
+
+/* Compact first-screen layout for the assortment. */
+.shop-intro{padding:8px 0 0;text-align:center}
+.shop-intro h1{font-size:clamp(1.35rem,2.5vw,1.8rem);line-height:1.15;margin:0}
+.shop-category-title{font-size:1rem;margin:8px 0 4px}
+.shop-category-nav{display:flex;flex-wrap:nowrap;gap:8px;overflow-x:auto;overflow-y:hidden;margin:0 0 8px;padding:2px 1px 6px;scrollbar-width:thin;scrollbar-color:#8f1116 #faf7f0;-webkit-overflow-scrolling:touch}
+.shop-category-nav button{flex:0 0 auto;white-space:nowrap;font-size:.92rem;padding:8px 10px;min-height:40px}
+.shop-category-nav button[aria-pressed="true"]{padding:7px 9px}
+.shop-controls{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;margin:6px 0}
+.shop-controls label{display:grid;gap:5px;max-width:100%;font-weight:800}
+.shop-controls label strong{font-weight:800}
+.shop-search-field{position:relative;display:block;width:100%}
+.shop-controls .shop-search-field input{width:100%;min-height:48px;padding:10px 14px 10px 44px;border:1px solid #999;border-radius:24px;box-shadow:0 1px 3px rgba(0,0,0,.12);background:#fff}
+.shop-search-icon{position:absolute;z-index:1;left:15px;top:50%;width:20px;height:20px;transform:translateY(-50%);color:#555;pointer-events:none}
+#shop-count{margin:2px 0 4px;font-size:.85rem;line-height:1.3}
+.shop-category-section:first-child{padding:5px 0 18px;border-top:0}
+.shop-section-title{font-size:clamp(1.25rem,2vw,1.5rem);margin:0 0 10px}
+@media(max-width:760px){
+  .shop-intro{padding:6px 0 0}
+  .shop-category-title{margin-top:6px}
+  .shop-category-nav{gap:6px}
+  .shop-category-nav button{font-size:.88rem;padding:8px 9px}
+  .shop-category-nav button[aria-pressed="true"]{padding:7px 8px}
+}
