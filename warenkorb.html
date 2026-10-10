@@ -1,5 +1,80 @@
 <!DOCTYPE html>
-<html lang="de-CH"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><title>Warenkorb | Biottos Lädeli</title><meta name="description" content="Spezialitäten und Geschenksharassen gemeinsam im Shopify-Checkout zur Abholung bestellen."><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/relaunch.css"><link rel="stylesheet" href="css/cart.css"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Young+Serif&display=swap" rel="stylesheet"></head>
-<body class="cart-page"><a class="cart-skip" href="#cart-main">Zum Warenkorb</a><header class="site-head"><div class="wrap"><a class="brand" href="index.html#start"><span class="brand-logo"><img src="img/biottos-apfellogo.webp" width="1254" height="1254" alt="Biottos Lädeli – zur Startseite"></span></a><nav aria-label="Hauptnavigation"><a href="geschenkskoerbe.html">Körbe bestellen</a><a href="shop-vorschau.html">Sortiment</a><a href="index.html#kontakt">Kontakt</a></nav></div></header>
-<main id="cart-main" class="wrap"><h1>Dein Warenkorb</h1><p>Füge Spezialitäten und Geschenksharassen hinzu, passe die Mengen an und bestelle alles gemeinsam über Shopify zur Abholung.</p><p id="cart-status" role="status" aria-live="polite"></p><p id="cart-storage-note" hidden>Dein Browser speichert den Warenkorb nicht dauerhaft. Schliesse deine Auswahl auf dieser Seite ab.</p><div id="cart-items"></div><div class="cart-summary"><p id="cart-total"></p><p>Verbindliche Preise und Verfügbarkeit werden im Shopify-Checkout geprüft. Dort wählst du die Abholung im Lädeli und deine Zahlungsmöglichkeit.</p><a id="cart-checkout" class="btn" hidden>Weiter zu Shopify</a></div><section aria-labelledby="cart-choices-title"><h2 id="cart-choices-title">Spezialitäten und Harassen hinzufügen</h2><div id="cart-choices"></div></section><p><a href="geschenkskoerbe.html">Inhalte der Harassen ansehen</a> · <a href="shop-vorschau.html">Gesamtes Sortiment ansehen</a></p><noscript><p>Für den gemeinsamen Warenkorb ist JavaScript erforderlich. Das vollständige Sortiment kannst du direkt im Shopify-Store öffnen:</p><p><a href="https://biottoslaedeli.myshopify.com/cart/53868017549578:1?storefront=true">Es Tröpfli Heimat – CHF 29.00</a> · <a href="https://biottoslaedeli.myshopify.com/cart/53868017582346:1?storefront=true">Geschenksharassli · mittel – CHF 39.00</a> · <a href="https://biottoslaedeli.myshopify.com/cart/53868017647882:1?storefront=true">Geschenksharass · gross – CHF 74.90</a></p><p><a href="https://biottoslaedeli.myshopify.com/collections/all">Vollständiges Sortiment bei Shopify öffnen</a></p></noscript></main>
-<footer class="site-foot"><div class="wrap"><a href="index.html#start">Startseite</a> · <a href="index.html#l-impressum">Impressum</a> · <a href="index.html#l-datenschutz">Datenschutz</a></div></footer><script type="module" src="js/cart-page.js"></script></body></html>
+<html lang="de-CH">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Warenkorb | Biottos Lädeli</title>
+  <meta name="description" content="Spezialitäten und Geschenksharassen gemeinsam zur Abholung bestellen.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/relaunch.css">
+  <link rel="stylesheet" href="css/cart.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Young+Serif&display=swap" rel="stylesheet">
+</head>
+<body class="cart-page">
+  <a class="cart-skip" href="#cart-main">Zum Warenkorb</a>
+  <header class="site-head">
+    <div class="wrap">
+      <a class="brand" href="index.html#start"><span class="brand-logo"><img src="img/biottos-apfellogo.webp" width="1254" height="1254" alt="Biottos Lädeli – zur Startseite"></span></a>
+      <nav aria-label="Hauptnavigation">
+        <a href="geschenkskoerbe.html">Körbe bestellen</a>
+        <a href="shop-vorschau.html">Sortiment</a>
+        <a href="index.html#kontakt">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="cart-main" class="wrap cart-main">
+    <h1>Dein Warenkorb</h1>
+    <p class="cart-intro">Prüfe deine Auswahl und bestelle alles gemeinsam zur Abholung.</p>
+    <p id="cart-status" class="cart-status" role="status" aria-live="polite"></p>
+    <p id="cart-storage-note" class="cart-storage-note" hidden>Dein Warenkorb bleibt während dieses Besuchs verfügbar.</p>
+
+    <div class="cart-layout">
+      <section id="cart-items" class="cart-items" aria-label="Deine Auswahl"></section>
+      <aside class="cart-summary" aria-labelledby="cart-summary-title">
+        <h2 id="cart-summary-title">Deine Bestellung</h2>
+        <p id="cart-total" class="cart-total"></p>
+        <p class="cart-summary-note">Abholung im Lädeli. Preis und Verfügbarkeit werden vor dem Abschluss nochmals geprüft.</p>
+        <a id="cart-checkout" class="btn" hidden>Zur Kasse</a>
+      </aside>
+    </div>
+
+    <section class="cart-picker" aria-labelledby="cart-choices-title">
+      <div class="cart-picker-heading">
+        <h2 id="cart-choices-title">Noch etwas hinzufügen?</h2>
+        <p>Alle Spezialitäten und Harassen mit Foto und Preis.</p>
+      </div>
+      <div class="cart-picker-controls">
+        <label for="cart-search">Produkt suchen
+          <input id="cart-search" type="search" placeholder="Name oder Grösse eingeben" autocomplete="off">
+        </label>
+        <div id="cart-category-filter" class="cart-category-filter" role="group" aria-label="Produkte nach Kategorie filtern">
+          <button type="button" data-category="all" aria-pressed="true">Alle</button>
+          <button type="button" data-category="harassen" aria-pressed="false">Harassen</button>
+          <button type="button" data-category="vinegar" aria-pressed="false">Essig &amp; Balsamico</button>
+          <button type="button" data-category="juices" aria-pressed="false">Säfte</button>
+          <button type="button" data-category="dried" aria-pressed="false">Dörrfrüchte</button>
+          <button type="button" data-category="specialties" aria-pressed="false">Spezialitäten</button>
+          <button type="button" data-category="bakery" aria-pressed="false">Backwaren</button>
+        </div>
+      </div>
+      <p id="cart-choice-count" class="cart-choice-count" role="status" aria-live="polite"></p>
+      <div id="cart-choices" class="cart-choice-list" aria-label="Produkte zum Hinzufügen"></div>
+      <p id="cart-no-results" class="cart-no-results" hidden>Keine passenden Produkte gefunden.</p>
+    </section>
+
+    <p class="cart-back-links"><a href="shop-vorschau.html">Zum ganzen Sortiment</a> · <a href="geschenkskoerbe.html">Inhalte der Harassen ansehen</a></p>
+    <noscript>
+      <p>Für den gemeinsamen Warenkorb ist JavaScript erforderlich. Öffne das Sortiment direkt bei Shopify:</p>
+      <p><a href="https://biottoslaedeli.myshopify.com/collections/all">Vollständiges Sortiment bei Shopify öffnen</a></p>
+    </noscript>
+  </main>
+
+  <footer class="site-foot"><div class="wrap"><a href="index.html#start">Startseite</a> · <a href="index.html#l-impressum">Impressum</a> · <a href="index.html#l-datenschutz">Datenschutz</a></div></footer>
+  <script type="module" src="js/cart-page.js"></script>
+</body>
+</html>
