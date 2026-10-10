@@ -29,7 +29,7 @@ Quellen:
 
 - Shopname: Biottos Lädeli.
 - Vom Betreiber bestätigter Vertragspartner: Josef Ignaz Zehnder.
-- Geschäftsadresse und Abholort: Hauptstrasse 90, 8357 Guntershausen, Schweiz.
+- Geschäftsadresse und Abholort: Hauptstrasse 90, 8357 Guntershausen, Schweiz. Der Betreiber hat am 10. Oktober 2026 ausdrücklich bestätigt, dass diese Adresse zugleich die Geschäftsadresse ist; Shopify zeigt sie am Standort «Biottos Lädeli» ebenfalls vollständig mit PLZ an.
 - Kontakt: biottoslaedeli@gmail.com; +41 76 255 22 56.
 - Verkauf über Shopify; Abholung im Lädeli, kein Versand.
 - Es wurde bestätigt, dass Onlinezahlung sowie Barzahlung oder TWINT bei der Abholung angeboten werden sollen.
