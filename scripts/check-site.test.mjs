@@ -93,7 +93,7 @@ test('makes all Shopify catalog variants available through the mixed cart', () =
 test('shows the complete assortment as orderable, not as a preview', () => {
   const html = fs.readFileSync(path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../shop-vorschau.html'), 'utf8');
   assert.doesNotMatch(html, /noindex,nofollow|erst nach ihrer Freischaltung|nach der Freischaltung im Online-Store/);
-  assert.match(html, /Alle 19 Produkte und drei Geschenksharassen/);
+  assert.match(html, /19 Produkte – darunter drei Geschenksharassen/);
 });
 
 test('keeps the Formspree fallback and all product CTAs wired', () => {
