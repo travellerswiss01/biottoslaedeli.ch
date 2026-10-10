@@ -14,6 +14,8 @@
 
 ## 1. AGB vorbereiten
 
+**Aktualisierung gemäss Betreiberangabe vom 10. Oktober 2026:** Es bestehen keine offizielle Rechtsform und keine offizielle Firmenbezeichnung. Der Anbieter muss im Onlinehandel dennoch klar und vollständig identifizierbar sein. Der Shopname allein wird deshalb nicht als ausreichende Anbieterangabe vorausgesetzt; die Darstellung mit Josef Ignaz Zehnder ist vor Veröffentlichung rechtlich zu prüfen. genuiturn65search0turn65search1
+
 ### Schweizer E-Commerce-Anforderungen
 
 Die offiziellen Informationen des SECO nennen vier Punkte für Onlineangebote: Anbieteridentität und Kontakt, verständliche Schritte zum Vertragsabschluss, eine Möglichkeit zum Erkennen und Korrigieren von Eingabefehlern sowie eine unverzügliche elektronische Bestellbestätigung. Das KMU-Portal erklärt, dass AGB nicht anstelle dieser Informationen treten; wenn AGB verwendet werden, müssen Käuferinnen und Käufer vor dem Abschluss darauf hingewiesen werden und sie lesen können.
@@ -37,7 +39,7 @@ Quellen:
 
 ### Vor dem AGB-Text zu bestätigen
 
-1. **Vertragspartner:** Als Geschäftsbezeichnung soll «Biottos Lädeli» verwendet werden; Josef Ignaz Zehnder ist als Betreiber bestätigt. Die genaue rechtliche Firmenbezeichnung sowie eine allfällige Rechtsform/UID sind noch abzugleichen.
+1. **Vertragspartner:** Der Betreiber bestätigt: Es gibt keine offizielle Rechtsform und keine offizielle Firmenbezeichnung. «Biottos Lädeli» ist der Shopname; Josef Ignaz Zehnder ist als Betreiber bestätigt. Die UID ist nicht bestätigt. Für einen AGB-Entwurf muss die natürliche Person als Anbieter eindeutig genannt werden; die rechtlich korrekte Anbieterangabe im Impressum/Checkout ist vor Veröffentlichung zu prüfen.
 2. **Abholung und Nichtabholung:** Die Abholfrist von einer Woche nach der Abholbestätigung sowie Stornierung und Rückerstattung bei Nichtabholung innerhalb dieser Frist sind bestätigt.
 3. **Änderung, Stornierung, Mängel und Haftung:** Der Wunsch nach einem Haftungsausschluss ist festgehalten. Eine pauschale Ausschlussklausel wird nicht übernommen: Haftung für rechtswidrige Absicht oder grobe Fahrlässigkeit kann nicht im Voraus ausgeschlossen werden; Konsumenten-AGB dürfen zudem keine missbräuchliche Benachteiligung enthalten. Der zulässige Umfang und die Behandlung mangelhafter/beschädigter Ware müssen geprüft werden. Änderungen und Stornierungen vor der Abholung sind noch festzulegen.
 4. **Preis-/Steuerangabe:** Deine Angabe: Es werden keine Steuern angewandt. Vor einer endgültigen Formulierung ist die tatsächliche MWST-Pflicht bzw. ein allfälliger Registereintrag zu prüfen; ich leite aus dieser Angabe keine Steuerbefreiung ab.
@@ -45,7 +47,7 @@ Quellen:
 
 ### AGB-Gerüst für die nächste Fassung (intern, nicht veröffentlichen)
 
-- **Vertragspartner und Kontakt:** Geschäftsbezeichnung «Biottos Lädeli»; Betreiber Josef Ignaz Zehnder; genaue rechtliche Firmenbezeichnung und allfällige Rechtsform/UID noch abgleichen; Hauptstrasse 90, 8357 Guntershausen; biottoslaedeli@gmail.com; +41 76 255 22 56.
+- **Vertragspartner und Kontakt:** Shopname «Biottos Lädeli»; Betreiber Josef Ignaz Zehnder; laut Betreiber bestehen keine offizielle Rechtsform und keine offizielle Firmenbezeichnung; UID nicht bestätigt. Hauptstrasse 90, 8357 Guntershausen; biottoslaedeli@gmail.com; +41 76 255 22 56. Die gesetzlich klare Anbieteridentität für Impressum und AGB muss vor Veröffentlichung geprüft werden.
 - **Sortiment, Bestellung und Preis:** konkrete Produkte, Varianten und angezeigte Preise gemäss Shopify. Betreiberangabe: Es werden keine Steuern angewandt. Vor einem definitiven Steuerhinweis ist die MWST-Pflicht/Registerlage zu prüfen.
 - **Zahlung:** Onlinezahlung oder Barzahlung/TWINT bei Abholung gemäss bestätigtem Ablauf; vor Veröffentlichung mit den tatsächlich aktiven Shopify-Zahlungsarten abgleichen.
 - **Abholung:** kein Versand; Abholung am angegebenen Standort. Bereitstellung wird per Abholbestätigung mitgeteilt. Abholung innerhalb einer Woche ab dieser Bestätigung.
@@ -53,7 +55,7 @@ Quellen:
 - **Änderungen, Stornierung vor Bereitstellung und mangelhafte/beschädigte Ware:** Abläufe noch offen. Haftungsausschluss ist gewünscht, wird aber nur im rechtlich zulässigen Umfang erwogen; kein Ausschluss für rechtswidrige Absicht oder grobe Fahrlässigkeit. Verbraucherrecht und Klausel müssen fachlich geprüft werden.
 - **Datenschutz:** Verweis auf die separate Datenschutzerklärung; keine Datenschutzklausel aus der AGB ableiten.
 
-Das ist eine Arbeitsstruktur mit bestätigten Fakten und offenen Stellen, kein abschliessender Rechtstext. Vor Veröffentlichung bleiben die offenen Punkte zu Vertragspartner/Rechtsform, Steuerangabe und Umgang mit Änderungen/Mängeln zu klären; anschliessend muss die AGB im Bestellablauf vor Abschluss lesbar verlinkt werden.
+Das ist eine Arbeitsstruktur mit bestätigten Fakten und offenen Stellen, kein abschliessender Rechtstext. Vor Veröffentlichung bleiben die offene Anbieteridentität im Impressum, UID-/Registerstatus, Steuerangabe und der Umgang mit Änderungen/Mängeln zu klären; anschliessend muss die AGB im Bestellablauf vor Abschluss lesbar verlinkt werden.
 
 Rechtliche Prüfpunkte (amtliche Schweizer Stellen):
 
