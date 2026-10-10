@@ -1,17 +1,18 @@
+import './shopify-cart.js';
 
 (function(){
 var LANG_KEY="biottos-lang";
 var lang="de";
-var dict={"Jetzt bestellen":"Jetzt bstelle","Vorheriger Korb":"Vorige Gschänksharass","Nächster Korb":"Nächste Gschänksharass","Wischen oder Pfeile antippen":"Wische oder Pfeil antippe","Maischhauserkorb":"Maischhuserharass","Welcher darf's sein?":"Wele darfs sii?","Bestellen":"Bstelle","Der grosse":"De grosse","Der mittlere":"De mittlere","Der kleine":"De chliine",
+var dict={"Jetzt bestellen":"Jetzt bstelle","Vorheriger Korb":"Vorige Gschänksharass","Nächster Korb":"Nächste Gschänksharass","Wischen oder Pfeile antippen":"Wische oder Pfeil antippe","Welcher darf's sein?":"Wele darfs sii?","Bestellen":"Bstelle","Der grosse":"De grosse","Der mittlere":"De mittlere","Der kleine":"De chliine",
 "Geschenkskörbe":"Gschänksharass","Sprache":"Sproch","Zuhause":"Dehai","wo alles beginnt":"wo alles afangt","Garten":"Garte","was bei uns wächst":"wo bi üs wachst","Küche":"Chuchi","was daraus entsteht":"was drus entstoht","Geschenk":"Gschänk","fertig zum Abholen":"fertig zum Abhole",
 "Traubensaft":"Truubesaft","Süssmost":"Süessmost","Über uns":"Über üs","Abholung":"Abholig","Kontakt":"Kontakt",
-"Geschenke aus Maischhausen.":"Maischhuser Gschänk",
-"BIOTTOS LÄDELI · MAISCHHAUSEN":"BIOTTOS LÄDELI · MAISCHHUSE","MAISCHHAUSEN · THURGAU":"MAISCHHUSE · THURGAU","MIT SORGFALT ZUSAMMENGESTELLT":"MIT SORGFALT ZÄMEGSTELLT",
+"Geschenke aus Guntershausen.":"Guntershausenr Gschänk",
+"BIOTTOS LÄDELI · GUNTERSHAUSEN":"BIOTTOS LÄDELI · GUNTERSHAUSEN","GUNTERSHAUSEN · THURGAU":"GUNTERSHAUSEN · THURGAU","MIT SORGFALT ZUSAMMENGESTELLT":"MIT SORGFALT ZÄMEGSTELLT",
 
 "Wo fängt ein Geschenkskorb an?":"Wo fangt es Gschänksharass aa?",
 "Bei uns daheim.":"Bi üs dehai.",
 "Wo fängt das alles an?":"Wo fangt das alles ah?",
-"Biottos Lädeli beginnt nicht irgendwo – sondern zuhause, in Maischhuuse und im Garten.":"Biottos Lädeli fangt nöd irgenwo - sondern bi üs dehai im Garte ah.",
+"Biottos Lädeli beginnt nicht irgendwo – sondern zuhause, in Guntershausen und im Garten.":"Biottos Lädeli fangt nöd irgenwo - sondern bi üs dehai im Garte ah.",
 "Bei uns ziemlich oft im Garten.":"Bi üs ziemlich oft im Garte.",
 "Etwas Feines aus unserem Garten – zum Verschenken oder selber Geniessen.":"Öppis Feins us üsere Garte – zum Verschenke oder sälber Gnüsse.",
 "Was bei uns wächst, kommt bei uns in die Küche.":"Was bi üs wachst, chunnt bi üs i d Chuchi.",
@@ -27,8 +28,8 @@ var dict={"Jetzt bestellen":"Jetzt bstelle","Vorheriger Korb":"Vorige Gschänksh
 "Für Menschen mit Geschmack.":"Für Lüüt mit Gschmack.",
 "Korb anschauen":"Gschänksharass aluege","Was ist drin?":"Was isch dinne?",
 "Tippen":"Antippe","Sie auf einen Korb – dann geht's direkt zum Bestellzettel.":"en Gschänksharass – denn gaht's grad zum Bestellzettel.",
-"aus unserem Garten in Maischhausen":"us üsem Garte z Maischhuse",
-"Die blauen Trauben wachsen bei uns im Garten in Maischhausen, wo wir wohnen. Wir haben sie selber gepflückt, als sie schön reif waren.":"Die blaue Truube wachsed bi üs im Garte z Maischhuse. Mir hend sie selber gärntet, wo sie schön reif gsi sind.",
+"aus unserem Garten in Guntershausen":"us üsem Garte z Guntershausen",
+"Die blauen Trauben wachsen bei uns im Garten in Guntershausen, wo wir wohnen. Wir haben sie selber gepflückt, als sie schön reif waren.":"Die blaue Truube wachsed bi üs im Garte z Guntershausen. Mir hend sie selber gärntet, wo sie schön reif gsi sind.",
 "Otto, der Familienvater, hat daraus zusammen mit Bernadette mit einer Handpresse einen köstlichen Traubensaft gemacht.":"De Otto, üse Familievater, het zäme mit de Bernadette en feine Truubesaft presst.",
 "Fein zum Zmorge, zum Znüni oder als alkoholfreie Alternative am Tisch.":"Fein zum Zmorge, zum Znüni oder als alkoholfreii Alternative am Tisch.",
 "Fragen Sie uns einfach per WhatsApp, ob gerade Traubensaft im Lädeli bereitsteht.":"Fröged üs eifach per WhatsApp, öb grad Truubesaft im Lädeli parat isch.",
@@ -56,6 +57,7 @@ var dict={"Jetzt bestellen":"Jetzt bstelle","Vorheriger Korb":"Vorige Gschänksh
 "Abholung im Lädeli":"Abholig im Lädeli","Standort":"Standort","Bezahlung":"Zahlig",
 "Ihr Geschenkskorb steht am vereinbarten Abholtermin im Biottos Lädeli für Sie bereit.":"De Gschänksharass staht am abgmachte Abholtermin im Biottos Lädeli für Sie parat.",
 "Abholdatum und Uhrzeit geben Sie bei der Onlinebestellung auf dem Bestellzettel an.":"S Abholdatum und d Uhrziit chönd Sie bi de Onlinebestellig uf em Bestellzettel aageh.",
+"Nach Ihrer Bestellung zeigt Shopify den Abholort und die erwartete Bereitstellung. Sobald Ihr Korb bereit ist, erhalten Sie die Abholbestätigung.":"Nach de Bestellig zeigt Shopify de Abholort und d erwarteti Bereitstellig. Sobald din Gschänksharass parat isch, überchunsch d Abholbestätigung.",
 "Sie bezahlen bei der Abholung bar oder mit TWINT. Ein Versand ist nicht möglich.":"Sie bezahled bi de Abholig bar oder mit TWINT. E Versand isch nöd möglich.",
 "Route in Google Maps":"Route i Google Maps",
 "Fragen zu den Körben? Am einfachsten schreiben Sie uns auf WhatsApp.":"Frage zu de Gschänksharass? Am eifachschte schriibed Sie üs uf WhatsApp.",
@@ -75,15 +77,15 @@ var dict={"Jetzt bestellen":"Jetzt bstelle","Vorheriger Korb":"Vorige Gschänksh
 "Beim Besuch unserer Website können technische Daten wie IP-Adresse, Browsertyp oder Zugriffszeit automatisch erfasst werden. Diese Daten dienen der sicheren und störungsfreien Bereitstellung der Website.":"Bi em Bsuech vo üsere Website chönd technischi Date wie IP-Adresse, Browsertyp oder Zuegriffsziit automatisch erfasst werde. Die Date diened de sichere und störigsfreie Bereitstellig vo de Website.",
 "Wir speichern persönliche Daten nur so lange, wie dies für die Bearbeitung der Bestellung oder aufgrund gesetzlicher Pflichten erforderlich ist.":"Mir speichered persönligi Date nur so lang, wie das für d Bearbeitig vo de Bestellig oder us gesetzliche Pflicht nötig isch.",
 "Bei Fragen zum Datenschutz können Sie uns über die angegebene Telefonnummer kontaktieren.":"Bi Frage zum Datenschutz chönd Sie üs über d agäh Telefonnummer kontaktiere.",
-"Biottos Lädeli":"Biottos Lädeli","Hauptstrasse 90, 8357 Maischhuuse TG":"Hauptstrasse 90, 8357 Maischhuuse TG"
+"Biottos Lädeli":"Biottos Lädeli","Hauptstrasse 90, 8357 Guntershausen TG":"Hauptstrasse 90, 8357 Guntershausen TG"
 ,
-"Hausgemacht in Maischhausen · Thurgau":"Huusgmacht z Maischhuse · Thurgau",
+"Hausgemacht in Guntershausen · Thurgau":"Huusgmacht z Guntershausen · Thurgau",
 "Der Geschenkkorb,":"De Gschänksharass,",
 "in dem alles selbst gemacht ist.":"wo alles sälber gmacht isch.",
 "Sirup, Saucen, Essig und Dörrfrüchte aus unserem Garten – von uns gemacht und von Hand zum Geschenkkorb gepackt.":"Sirup, Saucen, Essig und Dörrfrücht us üsem Garte – vo üs gmacht und vo Hand i de Gschänksharass packt.",
 "Korb auswählen →":"Gschänksharass ussueche →",
 "Wer dahintersteckt":"Wer dahintersteckt",
-"Morgen abholbereit":"Morn abholbereit",
+"Abholbereit nach Vorbereitung":"Abholbereit nach Vorbereitig",
 "Nächster Abholtermin":"Nächste Abholtermin",
 "im Lädeli":"im Lädeli",
 "Mo–Sa · 8–18 Uhr":"Mo–Sa · 8–18 Uhr",
@@ -113,16 +115,18 @@ var dict={"Jetzt bestellen":"Jetzt bstelle","Vorheriger Korb":"Vorige Gschänksh
 "Bestellt · gepackt · abholbereit":"Bstellt · packt · abholbereit",
 "Dein Korb wartet im Lädeli.":"Din Gschänksharass wartet im Lädeli.",
 "Hier findest du uns":"Da findsch üs",
-"Du wählst den Termin":"Du wählsch de Termin",
-"Du bezahlst vor Ort":"Du bezahlsch vor Ort",
+"Shopify informiert Sie":"Shopify informiert Sie",
+"Abholung vorbereiten":"Abholig vorbereite",
+"Shopify zeigt Abholort und erwartete Bereitstellung.":"Shopify zeigt Abholort und erwarteti Bereitstellig.",
+"So bezahlen Sie":"So chönd Sie zahle",
 "Die wichtigsten Fragen.":"Die wichtigschte Frage.",
 "Noch etwas unklar?":"No öppis unklar?",
 "Wann kann ich meinen Korb abholen?":"Wänn cha ich min Gschänksharass abhole?",
 "Bei der Onlinebestellung wählen Sie Abholdatum und Uhrzeit. Ihr Korb steht am vereinbarten Termin im Biottos Lädeli bereit.":"Bi de Onlinebestellig wähled Sie Abholdatum und Uhrziit. De Gschänksharass staht am abgmachte Termin im Biottos Lädeli parat.",
 "Kann ich auch mehrere Körbe bestellen?":"Cha ich au mehri Gschänksharass bstelle?",
-"Ja. Im Bestellzettel können Sie bis zu 10 Körbe auswählen. Bei grösseren Mengen oder Firmenbestellungen melden Sie sich am besten direkt bei uns.":"Ja. Im Bestellzettel chönd Sie bis zu 10 Gschänksharass ussueche. Bi grössere Menge oder Firmabstellige melded Sie sich am beschte direkt bi üs.",
+"Ja. Im Shopify-Warenkorb können Sie mehrere verfügbare Körbe und verschiedene Sorten bestellen. Bei grösseren Mengen oder Firmenbestellungen melden Sie sich am besten direkt bei uns.":"Ja. Im Shopify-Warechorb chönd Sie mehri verfüegbari Gschänksharass und verschiedeni Sorte bstelle. Bi grössere Menge oder Firmabstellige melded Sie sich am beschte direkt bi üs.",
 "Wie bezahle ich?":"Wie bezahl ich?",
-"Sie bezahlen bei der Abholung vor Ort – bar oder mit TWINT.":"Sie bezahled bi de Abholig vor Ort – bar oder mit TWINT.",
+"Sie können im Shopify-Checkout online bezahlen oder bei der Abholung vor Ort – bar oder mit TWINT.":"Sie chönd im Shopify-Checkout online zahle oder bi de Abholig vor Ort – bar oder mit TWINT.",
 "Ist Versand möglich?":"Isch Versand möglich?",
 "Nein. Die Geschenkskörbe werden im Biottos Lädeli zur Abholung bereitgestellt.":"Nei. D Gschänksharass werde im Biottos Lädeli zur Abholig parat gstellt.",
 "Was ist in den Körben?":"Was isch i de Gschänksharass?",
@@ -134,7 +138,11 @@ var dict={"Jetzt bestellen":"Jetzt bstelle","Vorheriger Korb":"Vorige Gschänksh
 "anrufen →":"aalüte →",
 "Öffnungszeiten":"Öffnigsziite",
 "Für grössere Mengen":"Für grössere Menge",
-"Bis 10 Körbe online · grössere Bestellungen gern direkt anfragen":"Bis 10 Gschänksharass online · grössere Bestellige gern direkt aafrage"
+"Verfügbare Körbe direkt im Shopify-Warenkorb bestellen":"Verfüegbari Gschänksharass direkt im Shopify-Warechorb bstelle",
+"Firmengeschenke aus dem Thurgau – persönlich abgestimmt":"Firmagschänk us em Thurgau – persönlich abgsproche",
+"Abholen & geniessen":"Abhole & gnüsse",
+"Online bezahlen oder im Lädeli – bar oder mit TWINT.":"Online zahle oder im Lädeli – bar oder mit TWINT.",
+"Online im Shopify-Checkout oder bei Abholung bar oder mit TWINT. Ein Versand ist nicht möglich.":"Online im Shopify-Checkout oder bi Abholig bar oder mit TWINT. E Versand isch nöd möglich."
 };
 Object.assign(dict,{
 "Menü öffnen":"Menü öffne","Menü schliessen":"Menü schliesse",
@@ -179,7 +187,8 @@ renderHeroStory(0);
 })();
 (function(){
 var NR="41762552256",$=function(x){return document.querySelector(x)};
-var K=[{id:"gross",n:"Gross & Guet",p:49.95},{id:"fein",n:"Fein & Guet",p:29.95},{id:"chili",n:"Chli & Fii",p:19.95}];
+var K=[{id:"gross",n:"Guntershauser Harass",p:74.90},{id:"fein",n:"Maischhauser Harass",p:39.00},{id:"chili",n:"Es Tröpfli Heimat",p:29.00}];
+var shopifyBridge=window.BiottosShopify||{enabled:false,openCart:function(){return false}};
 var ZEITEN=[];(function(){for(var m=8*60;m<=18*60;m+=30){ZEITEN.push(("0"+Math.floor(m/60)).slice(-2)+":"+("0"+m%60).slice(-2))}})();
 var st={k:K[0].id,n:1,d:"",t:"",step:"k",week:0};
 var lastOrderTrigger=null,submitting=false,lockedControls=[];
@@ -397,7 +406,7 @@ $("#successClose").addEventListener("click",function(){
 document.addEventListener("click",function(e){
 if(submitting&&e.target.closest("#ov, [data-open]"))return;
 if(e.target.closest(".korb-card-more"))return;
-var a=e.target.closest("[data-open]");if(a){e.preventDefault();lastOrderTrigger=a;open(a.dataset.open);return}
+var a=e.target.closest("[data-open]");if(a){e.preventDefault();lastOrderTrigger=a;if(shopifyBridge.openCart&&shopifyBridge.openCart(a.dataset.open,1))return;open(a.dataset.open);return}
 var b=e.target.closest("[data-step-back]");if(b){e.preventDefault();st.step=b.dataset.stepBack;render();requestAnimationFrame(function(){var target=st.step==="k"?"#cK input[name='k']":st.step==="d"?"#cD input[name='d']":st.step==="t"?".time-chip":"#cN input[name='n']:checked";var el=document.querySelector(target);if(el){el.focus()}});return}
 if(e.target.id==="weekNext"){dWeek++;render();requestAnimationFrame(function(){var el=document.querySelector("#cD input[name='d']");if(el){el.focus()}})}
 if(e.target.id==="weekPrev"){dWeek--;render();requestAnimationFrame(function(){var el=document.querySelector("#cD input[name='d']");if(el){el.focus()}})}
@@ -412,7 +421,7 @@ function resetOrderState(){
   if(form){form.reset();syncContactMethod();form.hidden=true;var button=form.querySelector("button[type=submit]");if(button){button.disabled=false;button.textContent="Bestellung verbindlich senden"}}
   var back=document.querySelector("[data-step-back='n']");if(back)back.hidden=false;
 }
-function open(k){if(submitting)return;refreshDays();refreshWeeks();st.k=K.some(function(o){return o.id===k})?k:st.k;resetOrderState();var photoMap={gross:["img/gross-vorne.jpg","img/gross-oben.jpg"],fein:["img/fein-vorne.jpg","img/fein-oben.jpg"],chili:["img/chili-vorne.jpg","img/chili-oben.jpg"]};var pm=photoMap[st.k]||photoMap.gross;var sp=document.getElementById("sp"),sp2=document.getElementById("sp2");if(sp){sp.src=pm[0];sp.alt=K.find(function(o){return o.id===st.k}).n}if(sp2){sp2.src=pm[1];sp2.alt=K.find(function(o){return o.id===st.k}).n+" – zweite Ansicht";sp2.hidden=false}st.step="d";dWeek=0;render();$("#ov").classList.add("on");$("#ov").setAttribute("aria-hidden","false");document.body.style.overflow="hidden";requestAnimationFrame(function(){$("#x").focus()})}
+function open(k){if(submitting)return;refreshDays();refreshWeeks();st.k=K.some(function(o){return o.id===k})?k:st.k;resetOrderState();var photoMap={gross:"img/Geschenksharass-gross-komplett.webp",fein:"img/Geschenkharassli mittel.png",chili:"img/Essigharassli.png"};var photo=photoMap[st.k]||photoMap.gross;var name=K.find(function(o){return o.id===st.k}).n;var sp=document.getElementById("sp"),sp2=document.getElementById("sp2");if(sp){sp.src=photo;sp.alt=name}if(sp2){sp2.hidden=true;sp2.removeAttribute("src");sp2.removeAttribute("alt")}st.step="d";dWeek=0;render();$("#ov").classList.add("on");$("#ov").setAttribute("aria-hidden","false");document.body.style.overflow="hidden";requestAnimationFrame(function(){$("#x").focus()})}
 function close(){
   if(submitting||!$("#ov").classList.contains("on"))return;
   $("#ov").classList.remove("on");$("#ov").setAttribute("aria-hidden","true");document.body.style.overflow="";
@@ -436,7 +445,7 @@ document.addEventListener("keydown",function(e){
 (function(){var lb=document.getElementById("lb"),li=document.getElementById("li"),lastPhoto=null;
 document.querySelectorAll(".foto img,#sp,#sp2").forEach(function(img){img.tabIndex=0;img.setAttribute("role","button");img.setAttribute("aria-label",img.alt||"Korb-Foto vergrössern")});
 function close(){if(!lb.classList.contains("on"))return;lb.classList.remove("on","z");lb.setAttribute("aria-hidden","true");document.body.style.overflow=document.querySelector(".ov.on")?"hidden":"";if(lastPhoto)lastPhoto.focus()}
-document.addEventListener("click",function(e){var i=e.target.closest(".foto img, #sp, #sp2");if(i){lastPhoto=i;li.src=i.src;li.alt=i.alt;lb.scrollTop=0;lb.scrollLeft=0;lb.classList.add("on");lb.classList.remove("z");lb.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";document.getElementById("lx").focus()}});
+document.addEventListener("click",function(e){var i=e.target.closest(".foto img, #sp, #sp2, .korb-product-link");if(i){lastPhoto=i;if(i.matches(".korb-product-link")){li.src=i.dataset.productPhoto;li.alt=i.dataset.productAlt||i.textContent.trim()}else{li.src=i.src;li.alt=i.alt}lb.scrollTop=0;lb.scrollLeft=0;lb.classList.add("on");lb.classList.remove("z");lb.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";document.getElementById("lx").focus()}});
 li.addEventListener("click",function(e){e.stopPropagation();var z=lb.classList.toggle("z");if(z){var r=li.getBoundingClientRect();lb.scrollLeft=(lb.scrollWidth-lb.clientWidth)/2;lb.scrollTop=Math.max(0,(e.clientY-r.top)/Math.max(r.height,1)*lb.scrollHeight-lb.clientHeight/2)}else{lb.scrollTop=0;lb.scrollLeft=0}});
 lb.addEventListener("click",function(e){if(e.target===lb)close()});
 document.getElementById("lx").addEventListener("click",close);
@@ -444,7 +453,11 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")close();if(l
 })();
 (function(){var lg=document.getElementById("lg"),lastLegal=null;
 function close(){if(!lg.classList.contains("on"))return;lg.classList.remove("on");lg.setAttribute("aria-hidden","true");document.body.style.overflow=document.querySelector(".ov.on,.lb.on")?"hidden":"";if(lastLegal)lastLegal.focus()}
-document.addEventListener("click",function(e){var a=e.target.closest("[data-legal]");if(a){e.preventDefault();lastLegal=a;["impressum","datenschutz"].forEach(function(k){document.getElementById("l-"+k).hidden=(k!==a.dataset.legal)});lg.classList.add("on");lg.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";document.getElementById("lgx").focus()}});
+function openLegal(key,trigger){if(["impressum","datenschutz"].indexOf(key)<0)return;lastLegal=trigger||document.querySelector('[data-legal="'+key+'"]');["impressum","datenschutz"].forEach(function(k){document.getElementById("l-"+k).hidden=(k!==key)});lg.classList.add("on");lg.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";document.getElementById("lgx").focus()}
+function openLegalFromHash(){var key=location.hash.slice(1);if(key==="l-impressum"||key==="l-datenschutz")openLegal(key.slice(2))}
+document.addEventListener("click",function(e){var a=e.target.closest("[data-legal]");if(a){e.preventDefault();openLegal(a.dataset.legal,a)}});
+window.addEventListener("hashchange",openLegalFromHash);
+openLegalFromHash();
 document.getElementById("lgx").addEventListener("click",close);
 lg.addEventListener("click",function(e){if(e.target===lg)close()});
 document.addEventListener("keydown",function(e){if(e.key==="Escape")close();if(e.key==="Tab"&&lg.classList.contains("on")){var items=Array.from(lg.querySelectorAll("button,a[href]")).filter(function(el){return el.getClientRects().length&&!el.closest("[hidden]")}),first=items[0],last=items[items.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}});
@@ -459,3 +472,4 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")close();if(e
  addEventListener("scroll",function(){var y=Math.max(0,window.scrollY),delta=y-lastY;if(!active()||y<24||menu.getAttribute("aria-expanded")==="true"||head.contains(document.activeElement)){head.classList.remove("header-away");lastY=y;return}if(Math.abs(delta)>5){head.classList.toggle("header-away",delta>0);lastY=y}},{passive:true});
  head.addEventListener("focusin",function(){head.classList.remove("header-away")});menu.addEventListener("click",function(){head.classList.remove("header-away")});
 })();
+

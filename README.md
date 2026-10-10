@@ -1,88 +1,76 @@
 # Biottos Lädeli – Website
 
-Statische Geschäftswebsite mit HTML, CSS und JavaScript. Kein Framework, kein Build-Schritt und keine benötigten npm-Pakete. Besucher sehen Angebote und bestellen Geschenkskörbe zur Abholung; Firmenanfragen erfolgen über WhatsApp. Bezahlt wird vor Ort bar oder mit TWINT. Onlinezahlung, Lagerverwaltung und automatische Kapazitätsprüfung sind nicht enthalten.
+Statische Website mit HTML, CSS und JavaScript, ohne Framework oder Build-Schritt. Änderungen dieses Auftrags gelten für `feat/shopify-pickup`; Produktion und Shopify-Einstellungen bleiben separat freizugeben.
 
-## Auf Windows lokal ansehen
+## Aktueller Stand – 9. Oktober 2026
 
-1. Auf GitHub den gewünschten Branch auswählen: `main` ist der Hauptstand; Änderungen dieses Auftrags liegen auf `fix/website-quality`.
-2. **Code → Download ZIP**, danach **Alle extrahieren**. Alle Ordner zusammen lassen.
-3. Für eine schnelle Ansicht `index.html` in Chrome oder Edge öffnen. Für zuverlässige Prüfung den lokalen Server verwenden.
-4. [Node.js 24 LTS](https://nodejs.org/en/download) installieren. Die Reihe 24 ist laut [offiziellem Releaseplan](https://github.com/nodejs/Release#release-schedule) am 7. Oktober 2026 unterstützt, mit geplantem Wartungsende am 30. April 2028.
-5. Im entpackten Ordner ein Terminal öffnen und ausführen:
+- Das bereitgestellte Apfellogo ist im Seitenkopf und auf der Startseite eingebunden. Die Originalupload bleibt unverändert; weisse Ränder werden nur durch den Darstellungsrahmen ausgeblendet.
+- `shop-vorschau.html` zeigt 19 Produkte in sechs Kategorieabschnitten mit Suche und Filter. Shopify-Preise und Varianten-IDs sind als schreibgeschützter Snapshot hinterlegt; drei veröffentlichte Geschenksharassen sind bestellbar, 16 noch nicht veröffentlichte Sortimentsprodukte bleiben Vorschau.
+- Neue Produkte sind noch nicht bestellbar: verbindliche Preise, vollständige Produktangaben und echte Shopify-Zuordnungen fehlen. Details: [Produktdaten](docs/produktdaten-bestaetigt.md).
+- Die drei veröffentlichten Geschenksharassen können im gemeinsamen `warenkorb.html` kombiniert werden. Der Browser speichert nur Produkt-Schlüssel und Menge. Shopify-Produktdaten liegen in `js/shopify-product-data.mjs`; `js/shopify-cart.js` übergibt die bestätigten Varianten-IDs. Shopify prüft Verfügbarkeit und Preis im Checkout.
+- Die aktive Brücke ist `enabled:true`. Bei Browsern ohne Speicherung bleibt der direkte Shopify-Einstieg erhalten. Für den gemeinsamen Warenkorb ohne JavaScript gibt es direkte Einzelkorb-Links.
+- Native Abholung: kostenlos, Hauptstrasse 90, 8357 Guntershausen, Montag–Samstag 08:00–18:00, bereit nach Abholbestätigung. Keine verpflichtende Terminwahl. Onlinezahlung sowie Bar/TWINT bei Abholung sind historisch dokumentiert; vor Freigabe aktuell abnehmen.
+- Formspree bleibt als bestehender Rückfallweg im Projekt. Keine App deinstalliert, kein Theme veröffentlicht, kein Verkaufskanal geändert.
 
-```powershell
+## Lokal öffnen
+
+Node.js 24 verwenden. Im Projektordner:
+
+```sh
 npm start
 ```
 
-Dann `http://localhost:8080` öffnen. Beenden mit `Ctrl+C`. Der Server hört nur auf dem eigenen Rechner. `npm install` ist nicht erforderlich. Ein ZIP-Download wird nicht automatisch mit späteren GitHub-Änderungen aktualisiert.
+Dann `http://localhost:8080` bzw. `http://localhost:8080/shop-vorschau.html` öffnen. Nicht direkt als file:// öffnen: die Vorschau lädt JavaScript-Module. Beenden mit Ctrl+C. Website-Abhängigkeiten müssen nicht installiert werden.
 
-**Achtung:** Auch die lokale Vorschau verwendet das echte Formspree-Ziel. Nicht auf „Bestellung verbindlich senden“ klicken, wenn keine echte Bestellung beabsichtigt ist. Entwicklungstests müssen die Netzwerkanfrage abfangen.
+**Lokale Bestelltests:** Die vorhandenen externen Ziele sind echt. Checkout bzw. Formularversand nur bei bewusst beauftragter Bestellung auslösen. Die Browser-Suiten blockieren externe Dienste und senden keine tatsächlichen Bestellungen.
 
-## Wo ändere ich was?
+## Zuständigkeiten
 
-| Inhalt | Datei |
+| Inhalt | Dateien |
 |---|---|
-| Hauptseite, Produkttexte, Preise, Bestellformular, Impressum und Datenschutz | `index.html` |
-| Zusätzliche Angebotsseiten | `geschenkskoerbe.html`, `firmengeschenke.html` |
-| Grundgestaltung und vorhandene Komponenten | `css/style.css` |
-| Ergänzende Gestaltung, Angebotsseiten und responsive Korrekturen | `css/relaunch.css` |
-| Navigation, Sprache, Bildergeschichte, Termine und Formularversand | `js/app.js` |
-| Fotos, Logo | `img/` |
-| Verweis- und Syntaxprüfung sowie ihre Tests | `scripts/check-site.mjs`, `scripts/check-site.test.mjs` |
-| Lokale Vorschau | `scripts/serve.mjs` |
-| GitHub-Prüflauf | `.github/workflows/site-checks.yml` |
-| Suchmaschinen | Metadaten in den HTML-Dateien, `sitemap.xml`, `robots.txt` |
+| Hauptseite, Sprachtexte, Formular und Rechtstexte | index.html, js/app.js |
+| Angebotsseiten | geschenkskoerbe.html, firmengeschenke.html |
+| Neues Sortiment / bestätigte Entwurfsdaten | shop-vorschau.html, js/product-drafts.mjs, js/shop-preview.mjs |
+| Bestehende Varianten und gemeinsamer Warenkorb | js/shopify-cart.js, warenkorb.html, js/cart-page.js, css/cart.css |
+| Grundgestaltung / gemeinsame Lesbarkeit / Vorschau | css/style.css, css/relaunch.css, css/shop.css |
+| Produktbilder und Apfellogo | img/ |
+| Tests und lokaler Server | scripts/ |
+| CI / SEO | .github/workflows/site-checks.yml, robots.txt, sitemap.xml |
 
-### Preise und Bestellung
-
-- Gross & Guet: CHF 49.95, sechs Spezialitäten.
-- Fein & Guet: CHF 29.95, fünf Spezialitäten.
-- Chli & Fii: CHF 19.95, drei Spezialitäten.
-
-Preise und Namen bleiben bewusst auch statisch lesbar. Bei Änderungen **`index.html`, `geschenkskoerbe.html`, `firmengeschenke.html`, strukturierte Daten und die `K`-Liste in `js/app.js` gemeinsam abgleichen**. Die Spannweite auf den Zusatzseiten ebenfalls aktualisieren.
-
-Eine Bestellung enthält 1–10 Körbe derselben Variante. Abholung: Montag–Samstag, 08:00–18:00 im 30-Minuten-Raster, frühestens am nächsten Tag und bis drei Kalendermonate voraus. Monatsenden werden auf den letzten gültigen Tag begrenzt. Der heutige Tag wird in `Europe/Zurich` berechnet, auch auf Geräten in anderen Zeitzonen. Feiertags- und Kapazitätsregeln sind nicht hinterlegt. Vor dem Versand wird die Auswahl erneut geprüft. Während der Übermittlung bleibt der Bestellzettel gesperrt; nach spätestens 20 Sekunden wird ein ausstehender Aufruf abgebrochen. Ein Fehler bedeutet nicht sicher, dass der Dienst die Bestellung nie erhalten hat: vor einer erneuten Bestellung im Zweifel nachfragen.
-
-### Bilder und Linkvorschau
-
-Die drei ursprünglichen Fotos `obstbäume.jpeg`, `laden-fruechte.jpg` und `Mostaufstuhl.jpeg` sind weder im aktuellen Stand noch in der verfügbaren Historie vorhanden. Die Süssmost-Geschichte nutzt deshalb das echte vorhandene Erntefoto mit passenden Alternativtexten. Es ist kein Foto des Pressvorgangs oder fertiger Mostflaschen. Mit passenden Originalfotos kann jeder Schritt später wieder eine eigene Abbildung erhalten.
-
-Open Graph und Twitter verwenden den vorhandenen Geschenkskorb `img/gross-vorne.jpg` (1100 × 1467, JPEG). Die öffentliche Erreichbarkeit muss nach einer freigegebenen Veröffentlichung erneut geprüft werden; Social-Media-Vorschauen können alte Bilder zwischenspeichern.
+Namen und Preise der bestehenden Körbe gemeinsam in index.html, Angebotsseiten, strukturierten Daten, der K-Liste in js/app.js und js/shopify-cart.js pflegen. Neue Produkte niemals anhand ähnlicher Namen vorhandenen Shopify-IDs zuordnen. Betreiberbestände sind keine Livebestände.
 
 ## Prüfungen
 
-```powershell
+```sh
 npm test
+python3 scripts/check-images.py
 ```
 
-Prüft Regressionstests, JavaScript-Syntax, lokale HTML-Links und Anker, CSS-Ressourcen, vollständige literale JavaScript-Bildpfade, Vorschau-Metadaten, strukturierte JSON-Daten und Sitemap-Ziele. Absolute URLs zu `https://biottoslaedeli.ch` werden lokal zugeordnet. Externe Dienste werden nicht auf Verfügbarkeit geprüft.
+Der zweite Befehl benötigt Pillow. npm test prüft Daten, Warenkorb, Fehlerfälle, Syntax und lokale Verweise. Referenzierte leere Bilddateien werden abgelehnt. Produktbilder müssen Originale und gültige WebP-Signaturen besitzen; vollständige Decodierung erfolgt im Python-Schritt.
 
-Die Verweisprüfung ist eine gezielte statische Prüfung, kein vollständiger HTML-/CSS-/JavaScript-Parser. Dynamisch zusammengesetzte Dateipfade werden nicht ausgewertet; vollständige Pfade in den vorhandenen Bild-Datenlisten verwenden. Sie ersetzt weder Browserprüfung noch rechtliche Prüfung oder den Nachweis einer tatsächlichen Bestellzustellung.
+Optionale Browserprüfung mit Playwright als Entwicklungswerkzeug:
 
-Für die wiederholbare Browserprüfung optional Playwright als lokales Entwicklungswerkzeug installieren (keine Abhängigkeit der Website):
-
-```powershell
-npm install --no-save --package-lock=false playwright
+```sh
+npm install --no-save --package-lock=false playwright@1.62.1
 npx playwright install chromium
 node scripts/browser-check.mjs
+node scripts/form-fallback-browser-check.mjs
 ```
 
-Die Suite startet selbst einen lokalen Prüfserver, blockiert externe Ressourcen und fängt sämtliche Formspree-Anfragen ab. Sie verwendet ausschliesslich erfundene Testkontakte. Screenshots landen standardmässig im temporären Ordner `biottos-browser-qa`. Optional steuern `CHROMIUM_PATH` den Browserpfad und `QA_OUTPUT_DIR` den Screenshot-Ordner. Durch blockierte Google Fonts zeigen die Tests die vorhandenen Ersatzschriften; Google Maps und reale Dienstverfügbarkeit werden damit nicht bestätigt.
+Die aktuelle Suite umfasst Hauptseite, Zusatzseiten, neues Sortiment, Warenkorb, 320/360/390/768/1440 Pixel, dunkle Systemeinstellung, mobile Geschenkdetails, Suche, Fotos und JavaScript-Fallback. Die separate Formularsuite prüft ausschliesslich den deaktivierten Shopify-Rückfallweg mit simuliertem Formspree. Google Fonts und Maps sind dabei blockiert: reale Dienstverfügbarkeit und echte Geräte sind separat abzunehmen. QA_OUTPUT_DIR und CHROMIUM_PATH sind optional.
 
-Vor Freigabe alle drei Angebotsseiten und Hauptseitenbereiche bei 360, 390, 768 und 1440 Pixeln ansehen. Navigation, Sprachwechsel, Tastaturfokus, Bildanzeige sowie Bestell-Erfolg, Netzwerkfehler und Mehrfachübermittlung mit abgefangenen Anfragen prüfen. Testbefunde dieses Auftrags stehen in `QUALITY-REPORT.md`.
+CI führt diese Prüfungen bei Pull Requests und Pushes auf main, fix/website-quality und feat/shopify-pickup aus. Screenshots und Ergebnisdateien werden als browser-qa-Artefakt aufbewahrt. Tatsächlicher Nachweis: [Umsetzungsstatus](docs/audit-umsetzung-2026-10-09.md), nicht historische Qualitätsberichte.
 
-## Änderungen, Veröffentlichung und Rückkehr
+## Freigabe und Rückkehr
 
-1. `AGENTS.md` lesen, Branch und bestehende Änderungen prüfen.
-2. Einen eigenen Branch verwenden, Änderungen durchführen und prüfen.
-3. Draft-Pull-Request mit Beschreibung und tatsächlichen Prüfergebnissen erstellen.
-4. Erst nach ausdrücklicher Freigabe zusammenführen. Laut Projektregeln kann ein Commit auf `main` über Vercel die öffentliche Website aktualisieren. Die konkrete Vercel-Projektverknüpfung ist hier nicht dokumentiert; Domain-/Hosting-Einstellungen nicht erraten oder verändern.
-5. Nach Veröffentlichung öffentliche Links, Vorschau und freigegebenen Zustellungstest prüfen.
+1. AGENTS.md lesen, Branch und fremde Änderungen prüfen.
+2. Änderungen im vereinbarten Entwicklungsbranch prüfen; rote Checks beheben.
+3. Produktdaten und echte mobile/Shopify-Abnahme dokumentieren.
+4. Erst nach ausdrücklicher Freigabe mergen/veröffentlichen. main kann automatisch die Produktionswebsite aktualisieren.
+5. Bei Fehlern einen neuen Revert-Commit auf einem Entwicklungsbranch erstellen und prüfen. Kein Force-Push auf gemeinsam genutzte Branches.
 
-Für eine Rückkehr einen fehlerhaften Commit über einen neuen Branch mit `git revert <commit>` rückgängig machen und diesen Stand erneut prüfen und freigeben. Kein `reset --hard` oder Force-Push auf gemeinsam genutzte Branches. Ein erneuter Download eines älteren GitHub-Stands ändert die Live-Website nicht.
+Für noch offene externe Abnahmen siehe docs/audit-umsetzung-2026-10-09.md. Formspree enthält weiterhin die separate ältere Terminlogik; sie wurde weder entfernt noch als Zielmodell für native Shopify-Abholung neu eingeführt.
 
 ## Externe Dienste und Rechte
 
-Formspree: Bestellübermittlung. Google Fonts: Schriften. Google Maps: Karte und Routenlink. WhatsApp: direkte Anfragen und optionaler Link nach Bestellung. Die Vercel-Analytics-/Speed-Insights-Skripte wurden entfernt; Hosting ist davon getrennt. Datenschutztexte sind keine fachlich bestätigte Rechtsberatung.
-
-Eine `LICENSE`-Datei fehlt. Ohne Klärung der Rechte an Code, Fotos, Logo und Texten das Projekt nicht als frei verwendbare Kundenvorlage anbieten. Dieser Auftrag fügt keine Lizenz hinzu.
+Shopify, Formspree, Google Fonts, Google Maps und WhatsApp bleiben die tatsächlich verwendeten Dienste. Rechtstexte sind keine juristische Freigabe. An Code, Fotos und Logo wurden keine neuen Nutzungsrechte behauptet; keine freie Vorlagenlizenz hinzugefügt.

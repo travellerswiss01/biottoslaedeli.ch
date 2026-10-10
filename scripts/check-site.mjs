@@ -67,6 +67,7 @@ export function checkSite(root) {
       errors.push(`${file}: missing local target "${raw}"`);
       return;
     }
+    if (/\.(png|jpe?g|webp|avif|svg)$/i.test(target) && fs.statSync(target).size === 0) errors.push(`${file}: empty image target "${raw}"`);
     const info = html.get(path.relative(root, target));
     if (url.hash && info && !info.ids.has(decode(url.hash.slice(1))))
       errors.push(
@@ -126,7 +127,7 @@ export function checkSite(root) {
     }
     // Browser asset paths resolve against the document, not js/app.js.
     // Keep complete literal paths: dynamic concatenation is not evaluated.
-    if (file.endsWith('.js'))
+    if ((file.endsWith('.js') || file.endsWith('.mjs')) && !file.startsWith('scripts' + path.sep))
       for (const m of source.matchAll(
         /(["'`])((?:\.?\/?img\/|https?:\/\/biottoslaedeli\.ch\/)[^"'`]+)\1/g,
       ))
@@ -165,3 +166,4 @@ if (
       `Site checks passed: ${r.files} source files; HTML, CSS, literal JS assets, metadata, sitemap, anchors and JavaScript syntax checked.`,
     );
 }
+

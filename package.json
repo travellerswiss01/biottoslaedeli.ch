@@ -1,14 +1,16 @@
 {
   "name": "biottos-laedeli-website",
+  "type": "module",
   "private": true,
   "version": "1.0.0",
   "description": "Static HTML, CSS and JavaScript website for Biottos L\u00e4deli",
   "scripts": {
     "check": "node scripts/check-site.mjs",
-    "test": "node --test scripts/check-site.test.mjs && npm run check",
+    "test": "node --test scripts/*.test.mjs && npm run check",
     "start": "node scripts/serve.mjs"
   },
   "engines": {
     "node": ">=24"
   }
 }
+

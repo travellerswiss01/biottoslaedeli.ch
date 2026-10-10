@@ -713,7 +713,7 @@ img{max-width:100%;height:auto}
 
 /* Mobile gift finder: three complete photographs with direct ordering. */
 .korb-mobile-title,.korb-gift-intent{display:none}
-@media(min-width:721px){#koerbe .k1{order:1}#koerbe .k2{order:2}#koerbe .k3{order:3}}
+@media(min-width:721px){#koerbe .k3{order:1}#koerbe .k2{order:2}#koerbe .k1{order:3}}
 @media(max-width:720px){
  #koerbe .korb-desktop-title{display:none}
  #koerbe .korb-mobile-title{display:inline}
@@ -722,7 +722,7 @@ img{max-width:100%;height:auto}
  #koerbe .koerbe-intro .order-guide-occasion{font-size:.85rem;line-height:1.4;margin:7px auto 0;max-width:300px}
  #koerbe .korb-picker-grid{display:flex;flex-direction:column;gap:10px;padding:8px 16px 12px;overflow:visible;scroll-snap-type:none}
  #koerbe .korb-card{display:grid;grid-template-columns:96px minmax(0,1fr);gap:12px;padding:10px;align-items:center;transform:none;flex:0 0 auto;min-height:0;height:auto}
- #koerbe .k3{order:1}#koerbe .k2{order:2}#koerbe .k1{order:3}
+ #koerbe .korb-card.k1,#koerbe .korb-card.k2,#koerbe .korb-card.k3{order:initial}
  #koerbe .korb-card-photo{width:96px;max-width:none;margin:0}
  #koerbe .korb-card-photo img{width:100%;height:128px!important;max-height:none!important;aspect-ratio:auto;object-fit:contain!important}
  #koerbe .korb-card .foto{padding:0;transform:none}
@@ -774,3 +774,123 @@ img{max-width:100%;height:auto}
  #koerbe .koerbe-intro h2{max-width:340px;margin:0 auto;line-height:1.2}
 }
 @media(prefers-reduced-motion:reduce){body[data-current-view="koerbe"]>header{transition:none}}
+
+
+/* Shared readability and supplied apple wordmark, audit 2026-10-09. */
+.brand-logo{display:block;position:relative;width:230px;max-width:100%;aspect-ratio:6.2;overflow:hidden;background:#fff}
+.brand-logo img{position:absolute;width:110%;max-width:none;height:auto;left:-5%;top:-272%;margin:0;padding:0}
+.brand-tab:has(.brand-logo),.brand:has(.brand-logo){display:block;padding:8px 0;background:#fff;box-shadow:none;border:0;transform:none;line-height:1}
+.homepage-apple-logo{position:relative;overflow:hidden;aspect-ratio:6.2;width:min(600px,100%);height:auto;margin:0 auto;background:#fff}
+.homepage-apple-logo img{position:absolute;left:-5%;top:-272%;width:110%;max-width:none;height:auto;padding:0;margin:0;object-fit:initial}
+footer a,.site-foot a{display:inline-flex;align-items:center;min-height:44px;padding:8px 5px;font-size:1rem;color:#000;font-weight:600;text-underline-offset:3px}
+body{color:#000}h1,h2,h3{color:#000}
+.korb-card h3,.korb-card-copy h3{font-weight:700;color:#000}
+.korb-card-copy p,.korb-highlights,.korb-count,.contact-business-kicker,.otto-garten-note{color:#222}
+.korb-count,.korb-highlights{font-size:1rem!important;line-height:1.5!important}
+.note,.order-selection,.order-progress span,.checkout-summary span,.pickup-badge span,.family-people span{font-size:.95rem;line-height:1.5;opacity:1}
+body :focus-visible{outline:3px solid #8f1116;outline-offset:4px}
+@media(max-width:700px){.brand-logo{width:200px}.homepage-apple-logo{width:min(420px,100%)}footer a,.site-foot a{font-size:1rem}.korb-highlights{font-size:.95rem!important}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+/* Image dimensions come from the original square logo; crop only in its viewport. */
+.brand-logo img,.homepage-apple-logo img{max-height:none;border-radius:0;filter:none}
+#koerbe .korb-card-copy h3{font-weight:700;color:#000}
+#koerbe .korb-card-copy .korb-count{font-size:1rem!important;line-height:1.45}
+.homepage-path small,.homepage-brand-copy small,.contact-business-kicker,.otto-garten-note{font-size:1rem;opacity:1;color:#333}
+/* Footer text links must override the smaller generic .text-link rule too. */
+footer{font-size:1rem;line-height:1.6;color:#333}
+footer h3{font-size:1rem;color:#000}
+footer a.text-link{font-size:1rem;color:#000;min-height:44px}
+#koerbe .korb-picker-hint,#koerbe .korb-picker-hint span{font-size:1rem;line-height:1.5;opacity:1}
+.quick-order-cta{font-size:1rem;min-height:44px}
+footer .order-guide-business{font-size:1rem;color:#000;min-height:44px}
+
+/* Gift baskets: one calm row per basket, with contents and price easy to scan. */
+#koerbe .korb-picker{padding:22px 0 48px}
+#koerbe .korb-picker .wrap{max-width:1120px}
+#koerbe .korb-picker-grid{display:flex;flex-direction:column;gap:14px;margin:0;padding:0}
+#koerbe .korb-card{display:grid;grid-template-columns:240px minmax(0,1fr) 215px;align-items:stretch;gap:0;min-height:0;height:auto;flex:none;padding:12px;overflow:hidden;border:1px solid var(--line);border-radius:9px;background:#fff;box-shadow:0 2px 8px rgba(35,22,14,.06);transform:none}
+#koerbe .korb-card:hover,#koerbe .korb-card:focus-visible{transform:none;box-shadow:0 3px 12px rgba(35,22,14,.1)}
+#koerbe .korb-card.k1,#koerbe .korb-card.k2,#koerbe .korb-card.k3{order:initial}
+#koerbe .korb-card-photo{width:100%;margin:0;align-self:center}
+#koerbe .korb-card-photo .foto{display:flex;align-items:center;justify-content:center;width:100%;aspect-ratio:1/1;overflow:hidden;padding:4px;border:0;border-radius:6px;box-shadow:none;background:#f7f4ee}
+#koerbe .korb-card-photo img{display:block;width:100%;height:100%!important;min-height:0!important;max-height:none!important;aspect-ratio:auto;object-fit:contain!important;cursor:zoom-in}
+#koerbe .korb-card-photo img:focus-visible,#koerbe .korb-card-second-foto img:focus-visible{outline:3px solid #8f1116;outline-offset:-4px}
+#koerbe .korb-card-copy{display:flex;flex-direction:column;align-items:stretch;gap:5px;min-width:0;padding:8px 22px;text-align:left}
+#koerbe .korb-gift-intent{display:block;margin:0;color:#444;font-size:.9rem;line-height:1.35;text-align:left}
+#koerbe .korb-card-copy h3{display:block;margin:0;color:#000;font-size:clamp(1.25rem,1.65vw,1.55rem);font-weight:700;line-height:1.2;text-align:left}
+#koerbe .korb-card-copy .korb-count{margin:0;color:#333;font-size:.9rem!important;font-weight:600;line-height:1.35!important;text-align:left}
+#koerbe .korb-card-contents{margin:8px 0 0;padding:9px 0 0;border-top:1px solid var(--line)}
+#koerbe .korb-card-contents h4{margin:0 0 6px;color:#000;font-size:.95rem;font-weight:700;line-height:1.35;text-align:left}
+#koerbe .korb-card-contents ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 18px;margin:0;padding:0;list-style:none}
+#koerbe .korb-card-contents li{position:relative;padding-left:18px;color:#222;font-size:.92rem;line-height:1.4;text-align:left}
+#koerbe .korb-card-contents li::before{position:absolute;left:0;color:#86151b;font-weight:700;content:"✓"}
+#koerbe .korb-card-buy{display:flex;flex-direction:column;align-items:stretch;justify-content:center;gap:11px;padding:8px 4px 8px 20px;border-left:1px solid var(--line)}
+#koerbe .korb-card-price{margin:0;color:#86151b;font-size:1.35rem;font-weight:700;line-height:1.3;white-space:nowrap}
+#koerbe .korb-card-link{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;margin:0;padding:10px 10px;border:0;border-radius:5px;background:var(--red);color:#fff;font-size:.86rem;font-weight:700;line-height:1.3;text-align:center;white-space:nowrap}
+#koerbe .korb-card-link:hover{background:#741016}
+#koerbe .korb-card-more{margin:4px 0 0;border-top:1px dashed var(--line)}
+#koerbe .korb-card-more summary{min-height:44px;padding:9px 0 4px;color:#6f1117;font-size:.9rem;font-weight:700;line-height:1.4}
+#koerbe .korb-card-detail{display:block;padding:6px 0}
+#koerbe .korb-card-second-foto{display:block;max-width:240px;margin:0 auto!important;padding:0!important;background:#f7f4ee}
+#koerbe .korb-card-second-foto img{display:block;width:100%;height:270px;object-fit:contain;cursor:zoom-in}
+@media(max-width:980px) and (min-width:721px){
+  #koerbe .korb-card{grid-template-columns:190px minmax(0,1fr) 175px;}
+  #koerbe .korb-card-copy{padding-inline:16px}
+  #koerbe .korb-card-buy{padding-left:16px}
+  #koerbe .korb-card-contents ul{gap:4px 10px}
+}
+@media(max-width:720px){
+  #koerbe .koerbe-intro{padding:18px 16px 8px}
+  #koerbe .koerbe-intro h2{max-width:none;margin:0;text-align:left;font-size:clamp(1.55rem,6vw,2rem);line-height:1.2}
+  #koerbe .koerbe-intro .order-guide-occasion{display:block;max-width:none;margin:7px 0 0;text-align:left;font-size:.95rem;line-height:1.45}
+  #koerbe .korb-picker{padding:10px 0 34px}
+  #koerbe .korb-picker .wrap{max-width:620px;padding:0 16px}
+  #koerbe .korb-picker-grid{gap:12px;margin:0;padding:0}
+  #koerbe .korb-card{grid-template-columns:118px minmax(0,1fr);gap:5px 12px;padding:10px}
+  #koerbe .korb-card-photo{grid-column:1;grid-row:1 / span 3;width:118px;align-self:start}
+  #koerbe .korb-card-photo .foto{height:148px;aspect-ratio:auto;padding:2px}
+  #koerbe .korb-card-copy{display:contents}
+  #koerbe .korb-gift-intent{grid-column:2;grid-row:1;font-size:.85rem}
+  #koerbe .korb-card-copy h3{grid-column:2;grid-row:2;font-size:clamp(1.25rem,5.2vw,1.4rem);line-height:1.2}
+  #koerbe .korb-card-copy .korb-count{grid-column:2;grid-row:3;font-size:.85rem!important}
+  #koerbe .korb-card-contents{grid-column:1/-1;grid-row:4;margin-top:4px;padding-top:9px}
+  #koerbe .korb-card-contents ul{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 14px}
+  #koerbe .korb-card-contents li{font-size:.9rem;line-height:1.4}
+  #koerbe .korb-card-buy{grid-column:1/-1;grid-row:5;display:grid;grid-template-columns:minmax(0,1fr) minmax(170px,210px);align-items:center;gap:12px;padding:10px 0 0;border-top:1px solid var(--line);border-left:0}
+  #koerbe .korb-card-price{font-size:1.2rem}
+  #koerbe .korb-card-link{min-height:48px;font-size:.9rem;white-space:normal}
+  #koerbe .korb-card-second-foto{max-width:260px}
+  #koerbe .korb-card-second-foto img{height:300px}
+}
+@media(max-width:380px){
+  #koerbe .korb-picker .wrap{padding-inline:12px}
+  #koerbe .korb-card{grid-template-columns:100px minmax(0,1fr);gap:5px 10px;padding:9px}
+  #koerbe .korb-card-photo{width:100px}
+  #koerbe .korb-card-photo .foto{height:126px}
+  #koerbe .korb-card-copy h3{font-size:1.25rem}
+  #koerbe .korb-card-contents ul{grid-template-columns:minmax(0,1fr)}
+  #koerbe .korb-card-buy{grid-template-columns:minmax(0,1fr) 172px;gap:8px}
+  #koerbe .korb-card-link{padding-inline:7px;font-size:.82rem}
+}
+
+
+/* Foto-Vergrösserung im Geschenkkorb klar erkennbar machen. */
+#koerbe .korb-card-photo .foto{position:relative}
+#koerbe .korb-card-photo .foto::after{position:absolute;right:7px;bottom:7px;left:7px;z-index:1;padding:5px 4px;border-radius:5px;background:rgba(24,20,18,.9);color:#fff;content:"Foto vergrössern";font-size:clamp(.62rem,1.2vw,.76rem);font-weight:700;line-height:1.25;text-align:center;pointer-events:none}
+#lb .x{top:calc(12px + env(safe-area-inset-top,0px));right:12px;width:56px;height:56px;border:2px solid #fff;border-radius:50%;background:#86151b;color:#fff;font-size:2rem;font-weight:700;line-height:1;box-shadow:0 2px 10px rgba(0,0,0,.45)}
+#lb>p{left:50%;right:auto;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);padding:8px 14px;border-radius:999px;background:rgba(20,16,14,.9);color:#fff;font-size:.95rem;font-weight:700;line-height:1.3}
+@media(max-width:720px){#koerbe .korb-card-photo .foto::after{right:3px;bottom:5px;left:3px;padding:4px 2px;content:"Foto öffnen";font-size:.7rem}#lb .x{top:calc(8px + env(safe-area-inset-top,0px));right:8px;width:52px;height:52px}}
+
+
+/* Produktnamen im Korbinhalt öffnen das passende Produktfoto. */
+#koerbe .korb-card-contents li .korb-product-link{display:flex;align-items:center;justify-content:flex-start;gap:6px;width:100%;min-width:0;min-height:40px;padding:7px 0;border:0;background:transparent;color:#222;font-family:inherit;font-size:inherit;font-weight:inherit;line-height:1.4;text-align:left;text-decoration-line:underline;text-decoration-style:dotted;text-underline-offset:3px;cursor:zoom-in}
+#koerbe .korb-card-contents li .korb-product-link::after{flex:0 0 auto;color:#86151b;content:"↗";font-size:.8em;font-weight:700;text-decoration:none}
+#koerbe .korb-card-contents li .korb-product-link:hover{color:#86151b}
+#koerbe .korb-card-contents li .korb-product-link:focus-visible{position:relative;z-index:1;outline:3px solid #8f1116;outline-offset:2px;border-radius:3px}
+
+
+/* Geschenkskörbe: ruhiges Zoom-Zeichen und kurze Bestellaktion. */
+#koerbe .korb-card-photo .foto::after{top:auto;right:8px;bottom:8px;left:auto;width:34px;height:34px;padding:0;border:1px solid rgba(134,21,27,.28);border-radius:50%;background:rgba(255,255,255,.97);color:#86151b;content:"+";font-size:1.55rem;font-weight:600;line-height:31px;text-align:center;box-shadow:0 1px 5px rgba(0,0,0,.16);pointer-events:none}
+#koerbe .korb-card-link{box-sizing:border-box;min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere}
+@media(max-width:720px){#koerbe .korb-card-photo .foto::after{right:6px;bottom:6px;left:auto;width:32px;height:32px;padding:0;font-size:1.45rem;line-height:29px}}
+
