@@ -140,8 +140,8 @@ try{
     await vinegarFilter.click();assert.equal(await page.locator('#shop-count').innerText(),'Zeigt 7 von 19 Produkten');assert.deepEqual(await page.locator('.shop-sizes').allTextContents(),Array(7).fill('250 ml'));assert.equal(await vinegarFilter.getAttribute('aria-pressed'),'true');checks++;
     await page.getByRole('button',{name:'Alle Produkte (19)',exact:true}).click();
     await page.goto(origin+'/index.html?kategorie=Geschenksharassen#shop');await page.locator('#shop .shop-card').first().waitFor();assert.equal(await page.locator('#shop .shop-card--gift').count(),3);await layout();
-    await page.screenshot({path:path.join(out,'geschenksharassen-'+width+'.png'),fullPage:true});
-    await page.goto(origin+'/index.html#shop');await page.locator('#shop .shop-card').first().waitFor();await page.screenshot({path:path.join(out,'sortiment-'+width+'.png'),fullPage:true});
+    await page.screenshot({path:path.join(out,'geschenksharassen-'+width+'.png')});
+    await page.goto(origin+'/index.html#shop');await page.locator('#shop .shop-card').first().waitFor();await page.screenshot({path:path.join(out,'sortiment-'+width+'.png')});
   }
   await page.goto(origin+'/warenkorb.html');await page.getByRole('button',{name:'Es Tröpfli Heimat hinzufügen',exact:true}).click();await page.getByRole('button',{name:'Guntershauser Harass hinzufügen',exact:true}).click();
   const cartPhoto=page.locator('.cart-item-photo').first();await cartPhoto.click();assert.equal(await page.locator('#lb').getAttribute('aria-hidden'),'false');assert.ok(await page.locator('#li').evaluate(img=>img.naturalWidth>0));await page.keyboard.press('Escape');assert.equal(await page.locator('#lb').getAttribute('aria-hidden'),'true');await page.waitForFunction(()=>document.activeElement?.matches('.cart-item-photo'));photoChecks++;
