@@ -145,7 +145,7 @@ var dict={"Jetzt bestellen":"Jetzt bstelle","Vorheriger Korb":"Vorige Gschänksh
 "Online im Shopify-Checkout oder bei Abholung bar oder mit TWINT. Ein Versand ist nicht möglich.":"Online im Shopify-Checkout oder bi Abholig bar oder mit TWINT. E Versand isch nöd möglich."
 };
 Object.assign(dict,{
-"Menü öffnen":"Menü öffne","Menü schliessen":"Menü schliesse",
+"Menü öffnen":"Menü öffne","Menü schliessen":"Menü schliesse","Weitere Sortimentsbereiche öffnen":"Witeri Sortimentsbereich öffne","Weitere Sortimentsbereiche schliessen":"Witeri Sortimentsbereich schliesse","Mehr":"Meh",
 "Vorherige Abholwoche":"Vorigi Abholwuche","Vorheriger Schritt":"Vorige Schritt","Nächster Schritt":"Nächste Schritt",
 "Anzahl ändern":"Aazahl ändere","← Anzahl ändern":"← Aazahl ändere",
 "Vor- und Nachname":"Vor- und Nachname","Wird übermittelt …":"Wird übermittlet …",
@@ -194,7 +194,7 @@ var st={k:K[0].id,n:1,d:"",t:"",step:"k",week:0};
 var lastOrderTrigger=null,submitting=false,lockedControls=[];
 function setSubmitting(busy){submitting=busy;if(busy){lockedControls=Array.from(document.querySelectorAll("#ov button,#ov input")).filter(function(el){return !el.disabled});lockedControls.forEach(function(el){el.disabled=true})}else{lockedControls.forEach(function(el){el.disabled=false});lockedControls=[]}}
 var siteNav=$("#siteNav"),menuToggle=$("#menuToggle"),sortimentMenu=$("#sortimentMenu"),sortimentToggle=$("#sortimentToggle");
-function setSortimentOpen(open){if(!sortimentMenu||!sortimentToggle)return;sortimentMenu.classList.toggle("is-open",open);sortimentToggle.setAttribute("aria-expanded",String(open));sortimentToggle.setAttribute("aria-label",open?"Sortiment-Untermenü schliessen":"Sortiment-Untermenü öffnen");if(window.applyBiottosLanguage)window.applyBiottosLanguage()}
+function setSortimentOpen(open){if(!sortimentMenu||!sortimentToggle)return;sortimentMenu.classList.toggle("is-open",open);sortimentToggle.setAttribute("aria-expanded",String(open));sortimentToggle.setAttribute("aria-label",open?"Weitere Sortimentsbereiche schliessen":"Weitere Sortimentsbereiche öffnen");var label=sortimentToggle.querySelector("span");if(label)label.textContent=open?"Weniger":"Mehr";if(window.applyBiottosLanguage)window.applyBiottosLanguage()}
 function setMenuOpen(open){if(!siteNav||!menuToggle)return;siteNav.classList.toggle("is-open",open);menuToggle.setAttribute("aria-expanded",String(open));menuToggle.setAttribute("aria-label",open?"Menü schliessen":"Menü öffnen");if(!open)setSortimentOpen(false);if(window.applyBiottosLanguage)window.applyBiottosLanguage()}
 if(menuToggle)menuToggle.addEventListener("click",function(){setMenuOpen(menuToggle.getAttribute("aria-expanded")!=="true")});
 if(sortimentToggle)sortimentToggle.addEventListener("click",function(){setSortimentOpen(sortimentToggle.getAttribute("aria-expanded")!=="true")});
