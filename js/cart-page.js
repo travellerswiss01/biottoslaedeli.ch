@@ -23,6 +23,7 @@ import './shopify-cart.js';
   var requested=new URLSearchParams(location.search).get('korb');
   if(requested){status.textContent=bridge.addToCart(requested,1)?'Korb hinzugefügt.':'Dieser Korb ist nicht verfügbar.';history.replaceState(null,'',location.pathname)}
   bridge.products.forEach(function(product){
+    var displayName=product.displayTitle||product.title;
     var card=node('article','','cart-choice');card.append(node('h2',displayName),node('p',money(product.unitCents)));
     var add=node('button','Zum Warenkorb hinzufügen');add.type='button';add.setAttribute('aria-label',displayName+' hinzufügen');add.addEventListener('click',function(){status.textContent=bridge.addToCart(product.key,1)?displayName+' hinzugefügt.':'Bitte Anzahl prüfen: maximal 999 pro Korb.';render()});card.append(add);choices.append(card);
   });
