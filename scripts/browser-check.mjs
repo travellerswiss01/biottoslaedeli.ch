@@ -23,7 +23,7 @@ const origin='http://127.0.0.1:'+server.address().port;
 let browser,page,checks=0,photoChecks=0;const errors=[];
 try{
   browser=await chromium.launch({headless:true,...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{})});
-  const context=await browser.newContext({timezoneId:'Europe/Zurich'});
+  const context=await browser.newContext({timezoneId:'Europe/Zurich',reducedMotion:'no-preference'});
   await context.route('**/*',route=>route.request().url().startsWith(origin)?route.continue():route.abort());
   page=await context.newPage();page.setDefaultTimeout(10000);
   page.on('pageerror',error=>errors.push(error.message));
@@ -83,7 +83,7 @@ try{
     await page.goto(origin+'/shop-vorschau.html');await page.locator('.shop-card').first().waitFor();await layout();
     assert.equal(await page.locator('h1').innerText(),'Feines aus unserem Lädeli');
     assert.equal(await page.locator('.shop-section-title').count(),6);
-    assert.equal(await page.locator('#shop-count').innerText(),'19 von 19 Produkten');
+    assert.equal(await page.locator('#shop-count').innerText(),'Zeigt 19 von 19 Produkten');
     const titleStyles=await page.locator('.shop-product-title').evaluateAll(elements=>elements.map(e=>({color:getComputedStyle(e).color,weight:getComputedStyle(e).fontWeight,size:parseFloat(getComputedStyle(e).fontSize)})));
     assert.ok(titleStyles.every(s=>s.color==='rgb(0, 0, 0)'&&Number(s.weight)>=700&&s.size>=16));checks++;
     if(width<=600){
@@ -103,14 +103,33 @@ try{
       await extra.locator('summary').click();
     }
     const first=page.locator('.shop-photo-open').first();await first.click();await page.keyboard.press('Escape');assert.equal(await page.locator('.shop-photo-viewer').evaluate(e=>e.open),false);assert.equal(await first.evaluate(e=>e===document.activeElement),true);checks++;
-    await page.getByLabel('Produkt suchen',{exact:true}).fill('himbeer');assert.equal(await page.locator('#shop-count').innerText(),'3 von 19 Produkten');
-    await page.getByLabel('Produkt suchen',{exact:true}).fill('zzzzkeinprodukt');assert.match(await page.locator('#shop-products').innerText(),/Keine passenden Produkte/);
-    await page.getByLabel('Produkt suchen',{exact:true}).fill('');await page.locator('#shop-category').selectOption('Essig & Balsamico');assert.equal(await page.locator('#shop-count').innerText(),'7 von 19 Produkten');assert.deepEqual(await page.locator('.shop-sizes').allTextContents(),Array(7).fill('250 ml'));checks++;
+    const searchField=page.getByLabel('Spezialität suchen',{exact:true});
+    await page.waitForTimeout(400);
+    const animatedPlaceholder=await searchField.getAttribute('placeholder');
+    await page.waitForTimeout(220);
+    assert.notEqual(await searchField.getAttribute('placeholder'),animatedPlaceholder);
+    assert.equal(await searchField.inputValue(),'');
+    await searchField.focus();
+    await page.waitForTimeout(180);
+    assert.equal(await searchField.inputValue(),'');
+    await searchField.fill('himbeer');assert.equal(await page.locator('#shop-count').innerText(),'Zeigt 3 von 19 Produkten');
+    await page.getByLabel('Spezialität suchen',{exact:true}).fill('zzzzkeinprodukt');assert.match(await page.locator('#shop-products').innerText(),/Keine passenden Produkte/);
+    await page.getByLabel('Spezialität suchen',{exact:true}).fill('');
+    const categoryButtons=page.locator('#shop-categories button');
+    const vinegarFilter=page.getByRole('button',{name:'Essig & Balsamico (7)',exact:true});
+    assert.equal(await categoryButtons.count(),7);
+    assert.equal(await vinegarFilter.isVisible(),true);
+    assert.ok(await page.locator('#shop-categories').evaluate(e=>e.scrollWidth<=e.clientWidth));
+    if(width<=600)assert.equal(await page.locator('.shop-category-nav').evaluate(e=>getComputedStyle(e).display),'grid');
+    await vinegarFilter.click();assert.equal(await page.locator('#shop-count').innerText(),'Zeigt 7 von 19 Produkten');assert.deepEqual(await page.locator('.shop-sizes').allTextContents(),Array(7).fill('250 ml'));assert.equal(await vinegarFilter.getAttribute('aria-pressed'),'true');checks++;
+    await page.getByRole('button',{name:'Alle Produkte (19)',exact:true}).click();
     await page.goto(origin+'/shop-vorschau.html?kategorie=Geschenksharassen');await page.locator('.shop-card').first().waitFor();assert.equal(await page.locator('.shop-card--gift').count(),3);await layout();
     await page.screenshot({path:path.join(out,'geschenksharassen-'+width+'.png'),fullPage:true});
     await page.goto(origin+'/shop-vorschau.html');await page.locator('.shop-card').first().waitFor();await page.screenshot({path:path.join(out,'sortiment-'+width+'.png'),fullPage:true});
   }
   await page.goto(origin+'/warenkorb.html');await page.getByRole('button',{name:'Es Tröpfli Heimat hinzufügen',exact:true}).click();await page.getByRole('button',{name:'Guntershauser Harass hinzufügen',exact:true}).click();
+  const cartPhoto=page.locator('.cart-item-photo').first();await cartPhoto.click();assert.equal(await page.locator('#lb').getAttribute('aria-hidden'),'false');assert.ok(await page.locator('#li').evaluate(img=>img.naturalWidth>0));await page.keyboard.press('Escape');assert.equal(await page.locator('#lb').getAttribute('aria-hidden'),'true');assert.equal(await cartPhoto.evaluate(e=>e===document.activeElement),true);photoChecks++;
+  const choicePhoto=page.locator('.cart-choice-photo').first();await choicePhoto.focus();await page.keyboard.press('Enter');assert.equal(await page.locator('#lb').getAttribute('aria-hidden'),'false');await page.getByRole('button',{name:'Foto schliessen',exact:true}).click();assert.equal(await page.locator('#lb').getAttribute('aria-hidden'),'true');assert.equal(await choicePhoto.evaluate(e=>e===document.activeElement),true);photoChecks++;
   assert.match(await page.locator('#cart-checkout').getAttribute('href'),/53868017549578:1,53868017647882:1/);assert.equal(await page.locator('#cart-total').innerText(),'Zwischensumme · CHF 103.90');checks++;
   await page.getByLabel('Anzahl Es Tröpfli Heimat',{exact:true}).fill('2');await page.getByLabel('Anzahl Es Tröpfli Heimat',{exact:true}).press('Tab');assert.equal(await page.locator('#cart-total').innerText(),'Zwischensumme · CHF 132.90');await page.reload();assert.equal(await page.getByLabel('Anzahl Es Tröpfli Heimat',{exact:true}).inputValue(),'2');checks++;
   await page.getByRole('button',{name:'Guntershauser Harass entfernen',exact:true}).click();assert.equal(await page.locator('#cart-total').innerText(),'Zwischensumme · CHF 58.00');await layout();

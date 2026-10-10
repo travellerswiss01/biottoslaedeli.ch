@@ -18,7 +18,7 @@
 .shop-variant-size,.shop-sizes{font-size:1rem;font-weight:600;color:#000;margin:6px 0}.shop-photo{aspect-ratio:1;background:#fff;border:1px solid #e0e0e0;border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden}.shop-photo picture{display:block;width:100%;height:100%}.shop-photo img{width:100%;height:100%;object-fit:contain;padding:8px;box-sizing:border-box}.shop-photo span{padding:16px;text-align:center;color:#333}
 .shop-photo-open{display:flex;width:100%;height:100%;align-items:center;justify-content:center;padding:0;border:0;border-radius:inherit;background:transparent;color:inherit;cursor:zoom-in}
 .shop-price{font-weight:700;margin:8px 0}.shop-price-pending{margin:8px 0;color:#444;font-size:1rem}.shop-extra-photos{display:grid;gap:12px;margin-top:10px}.shop-card summary{cursor:pointer;min-height:44px;padding:12px 0;font-size:1rem;font-weight:600;text-decoration:underline;text-underline-offset:4px}.shop-description{white-space:pre-line;line-height:1.6;overflow-wrap:anywhere;margin:8px 0;font-size:1rem}.shop-mobile-details{display:none}
-.shop-availability{color:#333;font-size:.95rem;font-weight:600;line-height:1.45;margin:6px 0}.shop-availability--ready{color:#14532d}.shop-add-to-cart{display:inline-flex;margin:8px 0 12px;min-height:44px;align-items:center;justify-content:center;text-align:center}
+.shop-add-to-cart{display:inline-flex;margin:8px 0 12px;min-height:44px;align-items:center;justify-content:center;text-align:center}
 .shop-contents{margin-top:16px;border-top:1px solid #ddd;padding-top:12px}.shop-contents-heading{font:700 1rem/1.4 Literata,Georgia,serif;margin:0 0 10px}.shop-contents-grid{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 12px;padding:0;margin:0}.shop-content-item{min-width:0}.shop-content-item .shop-photo img{padding:6px}.shop-content-label{font-size:1rem;font-weight:700;line-height:1.4;color:#000;margin:8px 0 0;overflow-wrap:anywhere}.shop-content-photo-placeholder{aspect-ratio:1;display:flex;align-items:center;justify-content:center;padding:8px;background:#faf7f0;border:1px dashed #777;border-radius:8px;color:#333;text-align:center;font-size:1rem}
 .shop-card--gift{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:0 24px;align-items:start}.shop-card--gift>.shop-photo{grid-column:1;grid-row:1 / span 10;aspect-ratio:4/3}.shop-card--gift>.shop-product-title,.shop-card--gift>.shop-price,.shop-card--gift>.shop-price-pending,.shop-card--gift>.shop-description,.shop-card--gift>.shop-contents,.shop-card--gift>.shop-sizes,.shop-card--gift>.shop-availability,.shop-card--gift>.shop-add-to-cart,.shop-card--gift>details{grid-column:2}.shop-card--gift .shop-contents-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.shop-card--gift .shop-content-item .shop-photo{aspect-ratio:1}
 .shop-pickup{border-top:1px solid #ddd;padding:28px 0 36px;line-height:1.6}.shop-pickup h2{font-size:1.5rem;font-weight:700}.shop-page .site-foot{background:#faf7f0;padding:20px 0;color:#000}.shop-page :focus-visible{outline:3px solid #8f1116;outline-offset:4px}
@@ -29,4 +29,97 @@
 @media(max-width:480px){.shop-grid{grid-template-columns:1fr;gap:24px}.shop-card:not(.shop-card--gift)>.shop-photo{max-width:360px}.shop-variant-row .shop-product-title{font-size:1rem}.shop-variant-row .shop-variant-size{font-size:.95rem}.shop-variant-row .shop-photo img{padding:3px}.shop-category-nav{gap:6px}.shop-category-nav button{font-size:.95rem;padding:9px 10px}.shop-category-nav button[aria-pressed="true"]{padding:8px 9px}}
 .shop-fallback article{padding:24px 0;border-top:1px solid #ddd}.shop-fallback h3{font-size:1.4rem;font-weight:700}.shop-fallback img{max-width:100%;height:auto;object-fit:contain}.shop-fallback a{display:inline-block;max-width:300px}
 .shop-fallback a{width:min(300px,100%);max-width:100%}
-@media(max-width:600px){.shop-category-nav{display:none}}
+.shop-category-title{font-size:1.2rem;font-weight:700;margin:22px 0 8px}
+.shop-controls{grid-template-columns:minmax(0,1fr)}
+.shop-controls label{max-width:520px}
+@media(max-width:600px){.shop-category-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.shop-category-nav button{width:100%;text-align:left}.shop-category-title{margin-top:18px}}
+
+
+/* Compact product cards; retain the existing warm palette and typography. */
+.shop-card{padding:12px;border:1px solid var(--line);border-radius:8px;background:var(--white)}
+.shop-card--gift{grid-column:auto;display:block;align-items:initial}
+.shop-card--gift>.shop-photo{grid-column:auto;grid-row:auto;aspect-ratio:4/3}
+.shop-card--gift>.shop-product-title,.shop-card--gift>.shop-price,.shop-card--gift>.shop-price-pending,
+.shop-card--gift>.shop-description,.shop-card--gift>.shop-contents,.shop-card--gift>.shop-sizes,
+.shop-card--gift>.shop-availability,.shop-card--gift>.shop-add-to-cart,.shop-card--gift>details{grid-column:auto}
+.shop-card .shop-product-title{text-align:left}
+.shop-card .shop-add-to-cart{display:flex;width:100%;margin:10px 0 4px}
+.shop-contents{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:10px;margin-top:12px}
+.shop-contents-preview{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:0;margin:0}
+.shop-contents-preview .shop-photo{aspect-ratio:1}
+.shop-contents-preview .shop-content-label{font-size:.84rem;line-height:1.3;margin:5px 0 0}
+.shop-contents-more{display:flex;align-items:center;justify-content:center;padding:8px;border:1px solid var(--line);border-radius:8px;background:#fff;text-align:center;font-size:.9rem;font-weight:700}
+.shop-contents-details{margin-top:8px}
+.shop-contents-details>summary,.shop-product-details>summary{min-height:42px;display:flex;align-items:center;cursor:pointer;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+
+/* Center the customer-facing shop introduction. */
+.shop-intro{margin-inline:auto;text-align:center}
+.shop-intro h1,.shop-intro>p{text-align:center}
+
+/* Compact first-screen layout for the assortment. */
+.shop-intro{padding:8px 0 0;text-align:center}
+.shop-intro h1{font-size:clamp(1.35rem,2.5vw,1.8rem);line-height:1.15;margin:0}
+.shop-category-title{font-size:1rem;margin:8px 0 4px}
+.shop-category-nav{display:flex;flex-wrap:nowrap;gap:8px;overflow-x:auto;overflow-y:hidden;margin:0 0 8px;padding:2px 1px 6px;scrollbar-width:thin;scrollbar-color:#8f1116 #faf7f0;-webkit-overflow-scrolling:touch}
+.shop-category-nav button{flex:0 0 auto;white-space:nowrap;font-size:.92rem;padding:8px 10px;min-height:40px}
+.shop-category-nav button[aria-pressed="true"]{padding:7px 9px}
+.shop-controls{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;margin:6px 0}
+.shop-controls label{display:grid;gap:5px;max-width:100%;font-weight:800}
+.shop-controls label strong{font-weight:800}
+.shop-search-field{position:relative;display:block;width:100%}
+.shop-controls .shop-search-field input{width:100%;min-height:48px;padding:10px 14px 10px 44px;border:1px solid #999;border-radius:24px;box-shadow:0 1px 3px rgba(0,0,0,.12);background:#fff}
+.shop-search-icon{position:absolute;z-index:1;left:15px;top:50%;width:20px;height:20px;transform:translateY(-50%);color:#555;pointer-events:none}
+#shop-count{margin:2px 0 4px;font-size:.85rem;line-height:1.3}
+.shop-category-section:first-child{padding:5px 0 18px;border-top:0}
+.shop-section-title{font-size:clamp(1.25rem,2vw,1.5rem);margin:0 0 10px}
+@media(max-width:760px){
+  .shop-intro{padding:6px 0 0}
+  .shop-category-title{margin-top:6px}
+  .shop-category-nav{gap:6px}
+  .shop-category-nav button{font-size:.88rem;padding:8px 9px}
+  .shop-category-nav button[aria-pressed="true"]{padding:7px 8px}
+}
+
+
+/* Direct, compact category choices that wrap instead of scrolling sideways. */
+.shop-category-title{font-size:1rem;font-weight:700;margin:6px 0 4px}
+.shop-category-nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:6px;overflow:visible;margin:0 0 8px;padding:0}
+.shop-category-nav button{width:100%;min-height:38px;padding:6px 8px;text-align:center;white-space:normal;font-size:.88rem;line-height:1.2;transition:background-color .16s ease,border-color .16s ease}
+.shop-category-nav button:hover{background:var(--paper);border-color:var(--red)}
+.shop-category-nav button[aria-pressed="true"]{border:2px solid var(--red);background:var(--paper)}
+@media(max-width:760px){.shop-category-nav{grid-template-columns:repeat(auto-fit,minmax(105px,1fr));gap:5px}}
+@media(max-width:480px){.shop-category-nav{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.shop-category-nav button{min-height:38px;padding:6px 4px;font-size:.82rem}}
+
+/* Make the search control easy to spot and give it a restrained focus response. */
+.shop-controls .shop-search-field input{border:2px solid #81786c;transition:border-color .18s ease,box-shadow .18s ease}
+.shop-controls .shop-search-field input:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(143,17,22,.14)}
+.shop-search-icon{transition:color .18s ease,transform .18s ease}
+.shop-search-field:focus-within .shop-search-icon{color:var(--red);transform:translateY(-50%) scale(1.08)}
+
+
+/* Give search clear visual priority while keeping products high on the page. */
+.shop-controls{justify-items:center;margin:8px 0 6px}
+.shop-controls label{width:min(720px,100%);max-width:720px;gap:7px}
+.shop-controls label strong{display:block;text-align:center;font-size:clamp(1.08rem,2vw,1.3rem);line-height:1.2;font-weight:800;color:var(--ink)}
+.shop-search-field{width:100%;max-width:720px}
+.shop-controls .shop-search-field input{
+  min-height:60px;
+  padding:12px 18px 12px 54px;
+  border:3px solid var(--red);
+  border-radius:32px;
+  font-size:1.15rem;
+  box-shadow:0 4px 14px rgba(0,0,0,.14);
+  transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease
+}
+.shop-controls .shop-search-field input::placeholder{color:#555;font-weight:500;opacity:1}
+.shop-search-icon{left:19px;width:24px;height:24px;color:var(--red)}
+.shop-search-field:hover .shop-search-icon{transform:translateY(-50%) scale(1.08)}
+.shop-controls .shop-search-field input:focus{border-color:#650b10;box-shadow:0 0 0 4px rgba(143,17,22,.18),0 5px 16px rgba(0,0,0,.16)}
+.shop-search-field:focus-within .shop-search-icon{color:#650b10;transform:translateY(-50%) scale(1.12)}
+@media(max-width:600px){
+  .shop-controls{margin:7px 0 5px;gap:6px}
+  .shop-controls label{gap:6px}
+  .shop-controls label strong{font-size:1.08rem}
+  .shop-controls .shop-search-field input{min-height:56px;padding:10px 15px 10px 49px;font-size:1.05rem}
+  .shop-search-icon{left:16px;width:22px;height:22px}
+}

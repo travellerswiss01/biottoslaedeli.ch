@@ -50,12 +50,11 @@ test('confirmed prices and juice sizes match the Shopify snapshot',()=>{
   for (const ingredient of ['Kirschen-Birnen-Essig (250 ml)', 'halb gedörrte Birnen (100 g)', 'Dessertzwetschgen (250 ml)', 'Tomatensauce (250 ml)', 'Birnen-Balsamico (250 ml)', 'Himbeeressig (250 ml)', 'Birnenweggen']) assert.ok(byTitle['Geschenksharass · gross'].description.includes(ingredient),ingredient);
 });
 
-test('the 19-product snapshot only enables the three published gift crates for checkout',()=>{
+test('all 19 active products are published and mapped for checkout',()=>{
   assert.equal(shopifyProducts.length,19);
   assert.equal(new Set(shopifyProducts.map(product=>product.id)).size,19);
-  assert.deepEqual(shopifyProducts.filter(product=>product.published).map(product=>product.title).sort(),[
-    'Es Tröpfli Heimat','Geschenksharass · gross','Geschenksharassli · mittel'
-  ].sort());
+  assert.ok(shopifyProducts.every(product=>product.published===true));
+  assert.ok(shopifyProducts.every(product=>product.variants.every(variant=>variant.key && variant.variantId && Number.isSafeInteger(variant.priceCents))));
 });
 
 
