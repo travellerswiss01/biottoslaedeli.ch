@@ -29,4 +29,7 @@
 @media(max-width:480px){.shop-grid{grid-template-columns:1fr;gap:24px}.shop-card:not(.shop-card--gift)>.shop-photo{max-width:360px}.shop-variant-row .shop-product-title{font-size:1rem}.shop-variant-row .shop-variant-size{font-size:.95rem}.shop-variant-row .shop-photo img{padding:3px}.shop-category-nav{gap:6px}.shop-category-nav button{font-size:.95rem;padding:9px 10px}.shop-category-nav button[aria-pressed="true"]{padding:8px 9px}}
 .shop-fallback article{padding:24px 0;border-top:1px solid #ddd}.shop-fallback h3{font-size:1.4rem;font-weight:700}.shop-fallback img{max-width:100%;height:auto;object-fit:contain}.shop-fallback a{display:inline-block;max-width:300px}
 .shop-fallback a{width:min(300px,100%);max-width:100%}
-@media(max-width:600px){.shop-category-nav{display:none}}
+.shop-category-title{font-size:1.2rem;font-weight:700;margin:22px 0 8px}
+.shop-controls{grid-template-columns:minmax(0,1fr)}
+.shop-controls label{max-width:520px}
+@media(max-width:600px){.shop-category-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.shop-category-nav button{width:100%;text-align:left}.shop-category-title{margin-top:18px}}

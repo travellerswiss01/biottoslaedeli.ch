@@ -2,7 +2,7 @@ import {productDrafts} from './product-drafts.mjs';
 import {filterProducts} from './shop-catalog.mjs';
 const grid = document.querySelector('#shop-products');
 const search = document.querySelector('#shop-search');
-const category = document.querySelector('#shop-category');
+let selectedCategory = '';
 const count = document.querySelector('#shop-count');
 function element(tag, text, className) {
   const node = document.createElement(tag);
@@ -81,7 +81,7 @@ function addToCartLink(product,variant) {
   return link;
 }
 function render() {
-  const visible = filterProducts(productDrafts, search.value, category.value);
+  const visible = filterProducts(productDrafts, search.value, selectedCategory);
   const fragment = document.createDocumentFragment();
   const groups=new Map();
   for(const type of categoryOrder) {
@@ -161,20 +161,21 @@ function render() {
   });
   if (!visible.length) fragment.append(element('p','Keine passenden Produkte gefunden.'));
   grid.replaceChildren(fragment);
-  count.textContent = visible.length + ' von ' + productDrafts.length + ' Produkten';
-  for(const button of categoryNav.querySelectorAll('button')) button.setAttribute('aria-pressed',String(button.dataset.category===category.value));
+  count.textContent = 'Zeigt ' + visible.length + ' von ' + productDrafts.length + ' Produkten';
+  for(const button of categoryNav.querySelectorAll('button')) button.setAttribute('aria-pressed',String(button.dataset.category===selectedCategory));
 }
 const categoryOrder=['Geschenksharassen','Essig & Balsamico','Säfte','Dörrfrüchte','Spezialitäten','Backwaren'];
 const categoryNav=document.querySelector('#shop-categories');
-categoryOrder.forEach(type=>category.add(new Option(type,type)));
 for(const type of ['',...categoryOrder]) {
-  const button=element('button',type||'Alles');button.type='button';button.dataset.category=type;
-  button.addEventListener('click',()=>{category.value=type;render();});categoryNav.append(button);
+  const total=type ? productDrafts.filter(product=>product.type===type).length : productDrafts.length;
+  const label=type || 'Alle Produkte';
+  const button=element('button',label+' ('+total+')');button.type='button';button.dataset.category=type;
+  button.setAttribute('aria-controls','shop-products');
+  button.addEventListener('click',()=>{selectedCategory=type;render();});categoryNav.append(button);
 }
 const requestedCategory=new URLSearchParams(location.search).get('kategorie');
-if(categoryOrder.includes(requestedCategory)) category.value=requestedCategory;
+if(categoryOrder.includes(requestedCategory)) selectedCategory=requestedCategory;
 search.addEventListener('input',render);
-category.addEventListener('change',render);
 render();
 
 
