@@ -894,3 +894,38 @@ footer .order-guide-business{font-size:1rem;color:#000;min-height:44px}
 #koerbe .korb-card-link{box-sizing:border-box;min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere}
 @media(max-width:720px){#koerbe .korb-card-photo .foto::after{right:6px;bottom:6px;left:auto;width:32px;height:32px;padding:0;font-size:1.45rem;line-height:29px}}
 
+
+
+/* Einheitlicher, ruhiger Kopfbereich für die ganze Startseite. */
+html{scroll-padding-top:92px}
+header{position:sticky;top:0;z-index:40;background:var(--paper,#faf5ea);border-bottom:1px solid var(--line,#d9ccb4);box-shadow:0 2px 8px rgba(35,22,14,.06)}
+header .bar{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:16px;min-height:72px;padding:8px 0;flex-wrap:nowrap}
+header .brand-tab{display:flex;align-items:center;min-width:0}
+header .brand-logo img{display:block;width:clamp(112px,13vw,166px);height:auto}
+header .site-nav{position:static;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:4px;width:auto;max-height:none;overflow:visible;margin:0;padding:0;background:transparent;border:0;box-shadow:none}
+header .site-nav>a{display:inline-flex;align-items:center;justify-content:center;min-width:0;min-height:44px;width:auto;padding:8px 10px;border:0!important;border-bottom:2px solid transparent!important;border-radius:5px;background:transparent!important;box-shadow:none!important;color:var(--ink,#000)!important;font-size:.98rem;font-weight:700;line-height:1.2;white-space:nowrap;text-decoration:none;transform:none!important;animation:none!important;transition:none!important}
+header .site-nav>a::before,header .site-nav>a::after{display:none!important;content:none!important;animation:none!important}
+header .site-nav>a:hover{background:var(--paper2,#f1e8d6)!important;color:var(--red,#8f1116)!important}
+header .site-nav>a[aria-current="location"]{border-bottom-color:var(--red,#8f1116)!important;color:var(--red,#8f1116)!important}
+header .menu-toggle{display:none}
+.js .view,.js .view.on{display:block;min-height:0}
+#suessmost .korb-story{display:block}
+.view{scroll-margin-top:92px}
+@media(max-width:900px){
+ html{scroll-padding-top:72px}
+ header .bar{position:relative;grid-template-columns:minmax(0,1fr) 44px auto;gap:8px;min-height:62px;padding:7px 12px}
+ header .brand-logo img{width:clamp(96px,30vw,142px)}
+ header .menu-toggle{grid-column:2;display:grid;place-items:center;width:44px;height:44px}
+ header .site-nav{position:absolute;top:100%;left:0;right:0;display:none;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:2px;width:auto;max-height:calc(100dvh - 72px);overflow:auto;margin:0;padding:8px 12px 12px;background:var(--paper,#faf5ea);border-bottom:1px solid var(--line,#d9ccb4);box-shadow:0 8px 18px rgba(35,22,14,.12)}
+ header .site-nav.is-open{display:flex}
+ header .site-nav>a{justify-content:flex-start;width:100%;min-height:46px;padding:10px 12px;border-bottom:0!important;border-radius:5px;white-space:normal}
+ header .site-nav>a[aria-current="location"]{background:var(--paper2,#f1e8d6)!important}
+ header .lang-switch{grid-column:3;justify-self:end;min-width:0}
+ .view{scroll-margin-top:72px}
+}
+@media(max-width:370px){
+ header .bar{grid-template-columns:minmax(0,1fr) 40px auto;gap:5px;padding-inline:8px}
+ header .brand-logo img{width:92px}
+ header .menu-toggle{width:40px;height:40px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
