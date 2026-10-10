@@ -8,7 +8,7 @@
 - Der verbundene Shopify-Shop ist **Biottos Lädeli**, Schweiz, CHF, Basic.
 - Die Shopify-Admin-Abfrage zu den Shop-Richtlinien liefert derzeit nur eine Datenschutzerklärung. Eine AGB-/Nutzungsbedingungen-Richtlinie und eine Rückerstattungsrichtlinie sind darin nicht vorhanden.
 - Shopify meldet für die Schweiz in den Customer-Privacy-Regeln aktuell `consentRequired: false` und `dataSaleOptOutRequired: false`. Das bestätigt nicht, ob ein Cookie-Banner oder einzelne Pixel eingerichtet sind.
-- In den geprüften Website-Dateien `index.html`, `js/app.js` und `warenkorb.html` wurde kein GA4-Mess-Tag gefunden. Die Shopify-Einstellungen für Customer Events und ein mögliches Google-Analytics-Konto konnten über die verfügbare Admin-Abfrage nicht abschliessend geprüft werden.
+- In den geprüften Website-Dateien `index.html`, `js/app.js` und `warenkorb.html` wurde kein GA4-Mess-Tag gefunden. Die Shopify-Seite **Einstellungen → Kundenereignisse** zeigt keine konfigurierten App- oder benutzerdefinierten Pixel. Ob ein separates Google-Analytics-Konto oder eine Property existiert, ist weiterhin nicht geprüft.
 - Der aktuelle Shopify-Katalog enthält 19 aktive Produkte. Die drei Geschenksharassen und verfügbare Spezialitäten sind im Codebestand abgebildet.
 - Shopify-Richtlinien und Analytics-Einstellungen wurden in diesem Arbeitsschritt nicht geändert. Für den autorisierten Test wurde Shopify Payments kurz in den Testmodus geschaltet und danach wieder deaktiviert. Eine Testbestellung wurde durchgeführt, storniert und die zwei Artikel wurden dem Bestand wieder gutgeschrieben; es wurde keine echte Zahlung verarbeitet.
 
