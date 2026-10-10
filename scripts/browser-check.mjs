@@ -27,6 +27,12 @@ try{
   await context.route('**/*',route=>route.request().url().startsWith(origin)?route.continue():route.abort());
   page=await context.newPage();page.setDefaultTimeout(10000);
   page.on('pageerror',error=>errors.push(error.message));
+  await page.goto(origin+'/index.html');
+  const seo=await page.evaluate(()=>{
+    const structured=[...document.querySelectorAll('script[type="application/ld+json"]')].map(node=>JSON.parse(node.textContent));
+    return {title:document.title,description:document.querySelector('meta[name="description"]')?.content||'',canonical:document.querySelector('link[rel="canonical"]')?.href||'',robots:document.querySelector('meta[name="robots"]')?.content||'',h1:document.querySelectorAll('h1').length,website:structured.find(item=>item['@type']==='WebSite')};
+  });
+  assert.match(seo.title,/Biottos Lädeli.*Thurgau/);assert.ok(seo.description.length>=100&&seo.description.includes('Guntershausen'));assert.equal(seo.canonical,'https://biottoslaedeli.ch/');assert.match(seo.robots,/index,follow/);assert.equal(seo.h1,1);assert.equal(seo.website?.name,'Biottos Lädeli');assert.equal(seo.website?.url,seo.canonical);checks++;
   page.on('response',response=>{if(response.url().startsWith(origin)&&response.status()>=400)errors.push(response.status()+' '+response.url())});
   async function layout(){
     console.log('Layout '+await page.url());
