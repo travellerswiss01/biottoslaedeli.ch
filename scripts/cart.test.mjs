@@ -23,12 +23,12 @@ test('all published Shopify variants use their current IDs and CHF prices',()=>{
   assert.equal(bridge.buildCartUrl('chili',1),'https://biottoslaedeli.myshopify.com/cart/53868017549578:1?storefront=true');
 });
 
-test('mixed cart retains quantities across page loads and builds one Shopify cart',()=>{
+test('mixed cart retains quantities across page loads and builds a direct Shopify checkout link',()=>{
   const a=setup();assert.equal(a.bridge.addToCart('chili',2),true);assert.equal(a.bridge.addToCart('gross',1),true);assert.equal(a.bridge.addToCart('chili',1),true);
   const b=setup(a.state.get('biottos-cart-v1'));
-  assert.equal(b.bridge.buildMixedCartUrl(b.bridge.getCart()),'https://biottoslaedeli.myshopify.com/cart/53868017549578:3,53868017647882:1?storefront=true');
+  assert.equal(b.bridge.buildMixedCartUrl(b.bridge.getCart()),'https://biottoslaedeli.myshopify.com/cart/53868017549578:3,53868017647882:1');
   assert.equal(b.bridge.setQuantity('gross',4),true);b.bridge.removeFromCart('chili');
-  assert.equal(b.bridge.buildMixedCartUrl(b.bridge.getCart()),'https://biottoslaedeli.myshopify.com/cart/53868017647882:4?storefront=true');
+  assert.equal(b.bridge.buildMixedCartUrl(b.bridge.getCart()),'https://biottoslaedeli.myshopify.com/cart/53868017647882:4');
 });
 
 test('unlisted variants, untrusted keys and invalid quantities cannot enter checkout',()=>{
