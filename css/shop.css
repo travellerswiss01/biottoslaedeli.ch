@@ -95,3 +95,31 @@
 .shop-controls .shop-search-field input:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(143,17,22,.14)}
 .shop-search-icon{transition:color .18s ease,transform .18s ease}
 .shop-search-field:focus-within .shop-search-icon{color:var(--red);transform:translateY(-50%) scale(1.08)}
+
+
+/* Give search clear visual priority while keeping products high on the page. */
+.shop-controls{justify-items:center;margin:8px 0 6px}
+.shop-controls label{width:min(720px,100%);max-width:720px;gap:7px}
+.shop-controls label strong{display:block;text-align:center;font-size:clamp(1.08rem,2vw,1.3rem);line-height:1.2;font-weight:800;color:var(--ink)}
+.shop-search-field{width:100%;max-width:720px}
+.shop-controls .shop-search-field input{
+  min-height:60px;
+  padding:12px 18px 12px 54px;
+  border:3px solid var(--red);
+  border-radius:32px;
+  font-size:1.15rem;
+  box-shadow:0 4px 14px rgba(0,0,0,.14);
+  transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease
+}
+.shop-controls .shop-search-field input::placeholder{color:#555;font-weight:500;opacity:1}
+.shop-search-icon{left:19px;width:24px;height:24px;color:var(--red)}
+.shop-search-field:hover .shop-search-icon{transform:translateY(-50%) scale(1.08)}
+.shop-controls .shop-search-field input:focus{border-color:#650b10;box-shadow:0 0 0 4px rgba(143,17,22,.18),0 5px 16px rgba(0,0,0,.16)}
+.shop-search-field:focus-within .shop-search-icon{color:#650b10;transform:translateY(-50%) scale(1.12)}
+@media(max-width:600px){
+  .shop-controls{margin:7px 0 5px;gap:6px}
+  .shop-controls label{gap:6px}
+  .shop-controls label strong{font-size:1.08rem}
+  .shop-controls .shop-search-field input{min-height:56px;padding:10px 15px 10px 49px;font-size:1.05rem}
+  .shop-search-icon{left:16px;width:22px;height:22px}
+}
