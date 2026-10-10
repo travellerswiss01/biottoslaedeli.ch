@@ -23,7 +23,7 @@ const origin='http://127.0.0.1:'+server.address().port;
 let browser,page,checks=0,photoChecks=0;const errors=[];
 try{
   browser=await chromium.launch({headless:true,...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{})});
-  const context=await browser.newContext({timezoneId:'Europe/Zurich'});
+  const context=await browser.newContext({timezoneId:'Europe/Zurich',reducedMotion:'no-preference'});
   await context.route('**/*',route=>route.request().url().startsWith(origin)?route.continue():route.abort());
   page=await context.newPage();page.setDefaultTimeout(10000);
   page.on('pageerror',error=>errors.push(error.message));
