@@ -87,7 +87,7 @@ test('makes all Shopify catalog variants available through the mixed cart', () =
   const bridge = createCartBridge(window);
   const first = cartProducts[0], second = cartProducts[1];
   assert.equal(bridge.buildMixedCartUrl([{key:first.key,quantity:2},{key:second.key,quantity:1}]),
-    'https://biottoslaedeli.myshopify.com/cart/'+first.variantId+':2,'+second.variantId+':1?storefront=true');
+    'https://biottoslaedeli.myshopify.com/cart/'+first.variantId+':2,'+second.variantId+':1');
 });
 
 test('shows the complete assortment as orderable, not as a preview', () => {
