@@ -1,15 +1,15 @@
 # Biottos Lädeli – Website
 
-Statische Website mit HTML, CSS und JavaScript, ohne Framework oder Build-Schritt. Änderungen dieses Auftrags gelten für `feat/shopify-pickup`; Produktion und Shopify-Einstellungen bleiben separat freizugeben.
+Statische Website mit HTML, CSS und JavaScript, ohne Framework oder Build-Schritt. Die aktuelle Sortiments- und Warenkorb-Überarbeitung liegt im offenen Entwurfs-PR #5 auf `codex/publish-full-shop-catalog`; sie ist noch nicht in `main` übernommen. Shopify-Einstellungen bleiben davon getrennt.
 
-## Aktueller Stand – 9. Oktober 2026
+## Stand des Website-Entwurfs – 10. Oktober 2026
 
 - Das bereitgestellte Apfellogo ist im Seitenkopf und auf der Startseite eingebunden. Die Originalupload bleibt unverändert; weisse Ränder werden nur durch den Darstellungsrahmen ausgeblendet.
-- `shop-vorschau.html` zeigt 19 Produkte in sechs Kategorieabschnitten mit Suche und Filter. Shopify-Preise und Varianten-IDs sind als schreibgeschützter Snapshot hinterlegt; drei veröffentlichte Geschenksharassen sind bestellbar, 16 noch nicht veröffentlichte Sortimentsprodukte bleiben Vorschau.
-- Neue Produkte sind noch nicht bestellbar: verbindliche Preise, vollständige Produktangaben und echte Shopify-Zuordnungen fehlen. Details: [Produktdaten](docs/produktdaten-bestaetigt.md).
-- Die drei veröffentlichten Geschenksharassen können im gemeinsamen `warenkorb.html` kombiniert werden. Der Browser speichert nur Produkt-Schlüssel und Menge. Shopify-Produktdaten liegen in `js/shopify-product-data.mjs`; `js/shopify-cart.js` übergibt die bestätigten Varianten-IDs. Shopify prüft Verfügbarkeit und Preis im Checkout.
+- `shop-vorschau.html` zeigt im aktuellen Entwurfs-PR 19 Produkte in sechs Kategorieabschnitten mit Suche und Filtern. Shopify-Preise, Fotos und Varianten-IDs liegen als schreibgeschützter Katalog-Snapshot vor; die Produkte sind im gemeinsamen Warenkorb vorgesehen. Vor der Freigabe muss der Snapshot nochmals mit Shopify abgeglichen werden.
+- Der gemeinsame Warenkorb und die Shopify-Zuordnungen werden im Entwurfs-PR geprüft. Fehlende Produktangaben und die Aktualität von Preisen/Varianten sind vor einer Freigabe anhand des Shopify-Adminstands zu kontrollieren. Details: [Produktdaten](docs/produktdaten-bestaetigt.md).
+- Alle 19 Produkte sind im gemeinsamen `warenkorb.html`-Bestellfluss vorgesehen. Der Browser speichert nur Produkt-Schlüssel und Menge. Shopify-Produktdaten liegen in `js/shopify-product-data.mjs`; `js/shopify-cart.js` übergibt die zugeordneten Varianten-IDs. Shopify prüft Verfügbarkeit und Preis im Checkout.
 - Die aktive Brücke ist `enabled:true`. Bei Browsern ohne Speicherung bleibt der direkte Shopify-Einstieg erhalten. Für den gemeinsamen Warenkorb ohne JavaScript gibt es direkte Einzelkorb-Links.
-- Native Abholung: kostenlos, Hauptstrasse 90, 8357 Guntershausen, Montag–Samstag 08:00–18:00, bereit nach Abholbestätigung. Keine verpflichtende Terminwahl. Onlinezahlung sowie Bar/TWINT bei Abholung sind historisch dokumentiert; vor Freigabe aktuell abnehmen.
+- Native Abholung: kostenlos, Hauptstrasse 90, 8357 Guntershausen. Shopify zeigt die Standortadresse im Admin vollständig einschliesslich Postleitzahl. Die genaue Darstellung im Checkout ist noch zu prüfen. Montag–Samstag 08:00–18:00 und keine verpflichtende Terminwahl sind im Website-Entwurf beschrieben. Onlinezahlung sowie Bar/TWINT bei Abholung sind dokumentiert; aktive Zahlungsarten vor Freigabe nochmals kontrollieren.
 - Formspree bleibt als bestehender Rückfallweg im Projekt. Keine App deinstalliert, kein Theme veröffentlicht, kein Verkaufskanal geändert.
 
 ## Lokal öffnen
