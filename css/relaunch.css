@@ -929,3 +929,39 @@ header .menu-toggle{display:none}
  header .menu-toggle{width:40px;height:40px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Keep the gift baskets as the clear primary navigation action. */
+header .site-nav>a.nav-gift-link{
+  gap:7px;
+  min-height:48px;
+  padding:8px 13px;
+  border:1px solid #d3b85d!important;
+  border-radius:8px;
+  background:linear-gradient(180deg,#fff3c5,#ecd27c)!important;
+  box-shadow:0 2px 5px rgba(79,57,16,.18)!important;
+  color:#3f3213!important;
+}
+header .site-nav>a.nav-gift-link:hover,
+header .site-nav>a.nav-gift-link:focus-visible{
+  background:linear-gradient(180deg,#ffefb0,#e5c55b)!important;
+  color:#30240d!important;
+}
+header .site-nav>a.nav-gift-link .nav-gift-icon{
+  flex:0 0 auto;
+  font-size:1.1em;
+  line-height:1;
+}
+header .site-nav>a.nav-gift-link .nav-gift-badge{
+  flex:0 0 auto;
+  padding:3px 5px;
+  border-radius:999px;
+  background:#991b22;
+  color:#fff;
+  font-size:.62rem;
+  font-weight:800;
+  letter-spacing:.03em;
+  line-height:1;
+}
+@media(max-width:900px){
+  header .site-nav>a.nav-gift-link{justify-content:flex-start}
+}
