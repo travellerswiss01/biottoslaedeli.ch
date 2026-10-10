@@ -7,11 +7,11 @@ import './shopify-cart.js';
   function money(cents){return 'CHF '+(cents/100).toFixed(2)}
   function render(){
     var items=bridge.getCart(),sum=0,fragment=document.createDocumentFragment();
-    if(!items.length)fragment.append(node('p','Dein Warenkorb ist leer. Wähle einen der bestellbaren Körbe unten.'));
+    if(!items.length)fragment.append(node('p','Dein Warenkorb ist leer. Wähle eine Spezialität oder Harass unten.'));
     items.forEach(function(item){
-      var product=bridge.products.find(function(p){return p.key===item.key}),displayName=product.displayTitle||product.title;sum+=product.unitCents*item.quantity;
+      var product=bridge.products.find(function(p){return p.key===item.key}),displayName=(product.displayTitle||product.title)+(product.variantLabel?' · '+product.variantLabel:'');sum+=product.unitCents*item.quantity;
       var row=node('article','','cart-item'),image=node('img');image.src=product.photo;image.alt=displayName;image.width=120;image.height=160;image.loading='lazy';
-      var copy=node('div');copy.append(node('h2',displayName),node('p',money(product.unitCents)+' pro Korb'));
+      var copy=node('div');copy.append(node('h2',displayName),node('p',money(product.unitCents)+' '+product.unitLabel));
       var label=node('label','Anzahl'),quantity=node('input');quantity.type='number';quantity.min='1';quantity.max='999';quantity.step='1';quantity.value=String(item.quantity);quantity.setAttribute('aria-label','Anzahl '+displayName);
       quantity.addEventListener('change',function(){if(!bridge.setQuantity(item.key,Number(quantity.value))){quantity.value=String(item.quantity);status.textContent='Bitte eine ganze Anzahl von 1 bis 999 eingeben.';return}status.textContent='Anzahl aktualisiert.';render();itemsNode.querySelector('[aria-label="Anzahl '+displayName+'"]')?.focus()});label.append(quantity);copy.append(label,node('p',money(product.unitCents*item.quantity),'cart-line-total'));
       var remove=node('button','Entfernen');remove.type='button';remove.setAttribute('aria-label',displayName+' entfernen');remove.addEventListener('click',function(){bridge.removeFromCart(item.key);status.textContent=displayName+' entfernt.';render();checkout.focus()});copy.append(remove);row.append(image,copy);fragment.append(row);
@@ -24,8 +24,8 @@ import './shopify-cart.js';
   if(requested){status.textContent=bridge.addToCart(requested,1)?'Korb hinzugefügt.':'Dieser Korb ist nicht verfügbar.';history.replaceState(null,'',location.pathname)}
   bridge.products.forEach(function(product){
     var displayName=product.displayTitle||product.title;
-    var card=node('article','','cart-choice');card.append(node('h2',displayName),node('p',money(product.unitCents)));
-    var add=node('button','Zum Warenkorb hinzufügen');add.type='button';add.setAttribute('aria-label',displayName+' hinzufügen');add.addEventListener('click',function(){status.textContent=bridge.addToCart(product.key,1)?displayName+' hinzugefügt.':'Bitte Anzahl prüfen: maximal 999 pro Korb.';render()});card.append(add);choices.append(card);
+    var card=node('article','','cart-choice'),choiceName=displayName+(product.variantLabel?' · '+product.variantLabel:'');card.append(node('h2',choiceName),node('p',money(product.unitCents)+' '+product.unitLabel));
+    var add=node('button','Zum Warenkorb hinzufügen');add.type='button';add.setAttribute('aria-label',displayName+' hinzufügen');add.addEventListener('click',function(){status.textContent=bridge.addToCart(product.key,1)?choiceName+' hinzugefügt.':'Bitte Anzahl prüfen: maximal 999 pro Korb.';render()});card.append(add);choices.append(card);
   });
   render();window.addEventListener('storage',render);
 })();
