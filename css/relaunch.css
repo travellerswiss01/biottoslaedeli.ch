@@ -894,3 +894,103 @@ footer .order-guide-business{font-size:1rem;color:#000;min-height:44px}
 #koerbe .korb-card-link{box-sizing:border-box;min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere}
 @media(max-width:720px){#koerbe .korb-card-photo .foto::after{right:6px;bottom:6px;left:auto;width:32px;height:32px;padding:0;font-size:1.45rem;line-height:29px}}
 
+
+
+/* Einheitlicher, ruhiger Kopfbereich für die ganze Startseite. */
+html{scroll-padding-top:92px}
+header{position:sticky;top:0;z-index:40;background:var(--paper,#faf5ea);border-bottom:1px solid var(--line,#d9ccb4);box-shadow:0 2px 8px rgba(35,22,14,.06)}
+header .bar{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:16px;min-height:72px;padding:8px 0;flex-wrap:nowrap}
+header .brand-tab{display:flex;align-items:center;min-width:0}
+header .brand-logo img{display:block;width:clamp(112px,13vw,166px);height:auto}
+header .site-nav{position:static;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:4px;width:auto;max-height:none;overflow:visible;margin:0;padding:0;background:transparent;border:0;box-shadow:none}
+header .site-nav>a{display:inline-flex;align-items:center;justify-content:center;min-width:0;min-height:44px;width:auto;padding:8px 10px;border:0!important;border-bottom:2px solid transparent!important;border-radius:5px;background:transparent!important;box-shadow:none!important;color:var(--ink,#000)!important;font-size:.98rem;font-weight:700;line-height:1.2;white-space:nowrap;text-decoration:none;transform:none!important;animation:none!important;transition:none!important}
+header .site-nav>a::before,header .site-nav>a::after{display:none!important;content:none!important;animation:none!important}
+header .site-nav>a:hover{background:var(--paper2,#f1e8d6)!important;color:var(--red,#8f1116)!important}
+header .site-nav>a[aria-current="location"]{border-bottom-color:var(--red,#8f1116)!important;color:var(--red,#8f1116)!important}
+header .menu-toggle{display:none}
+.js .view,.js .view.on{display:block;min-height:0}
+#suessmost .korb-story{display:block}
+.view{scroll-margin-top:92px}
+@media(max-width:900px){
+ html{scroll-padding-top:72px}
+ header .bar{position:relative;grid-template-columns:minmax(0,1fr) 44px auto;gap:8px;min-height:62px;padding:7px 12px}
+ header .brand-logo img{width:clamp(96px,30vw,142px)}
+ header .menu-toggle{grid-column:2;display:grid;place-items:center;width:44px;height:44px}
+ header .site-nav{position:absolute;top:100%;left:0;right:0;display:none;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:2px;width:auto;max-height:calc(100dvh - 72px);overflow:auto;margin:0;padding:8px 12px 12px;background:var(--paper,#faf5ea);border-bottom:1px solid var(--line,#d9ccb4);box-shadow:0 8px 18px rgba(35,22,14,.12)}
+ header .site-nav.is-open{display:flex}
+ header .site-nav>a{justify-content:flex-start;width:100%;min-height:46px;padding:10px 12px;border-bottom:0!important;border-radius:5px;white-space:normal}
+ header .site-nav>a[aria-current="location"]{background:var(--paper2,#f1e8d6)!important}
+ header .lang-switch{grid-column:3;justify-self:end;min-width:0}
+ .view{scroll-margin-top:72px}
+}
+@media(max-width:370px){
+ header .bar{grid-template-columns:minmax(0,1fr) 40px auto;gap:5px;padding-inline:8px}
+ header .brand-logo img{width:92px}
+ header .menu-toggle{width:40px;height:40px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Keep the gift baskets as the clear primary navigation action. */
+header .site-nav>a.nav-gift-link{
+  gap:7px;
+  min-height:48px;
+  padding:8px 13px;
+  border:1px solid #d3b85d!important;
+  border-radius:8px;
+  background:linear-gradient(180deg,#fff3c5,#ecd27c)!important;
+  box-shadow:0 2px 5px rgba(79,57,16,.18)!important;
+  color:#3f3213!important;
+}
+header .site-nav>a.nav-gift-link:hover,
+header .site-nav>a.nav-gift-link:focus-visible{
+  background:linear-gradient(180deg,#ffefb0,#e5c55b)!important;
+  color:#30240d!important;
+}
+header .site-nav>a.nav-gift-link .nav-gift-icon{
+  flex:0 0 auto;
+  font-size:1.1em;
+  line-height:1;
+}
+header .site-nav>a.nav-gift-link .nav-gift-badge{
+  flex:0 0 auto;
+  padding:3px 5px;
+  border-radius:999px;
+  background:#991b22;
+  color:#fff;
+  font-size:.62rem;
+  font-weight:800;
+  letter-spacing:.03em;
+  line-height:1;
+}
+@media(max-width:900px){
+  header .site-nav>a.nav-gift-link{justify-content:flex-start}
+}
+
+
+/* Accessible Sortiment-Dropdown in the Hauptnavigation. */
+header .site-nav .nav-dropdown{position:relative;flex:0 0 auto}
+header .site-nav .nav-dropdown-main{display:flex;align-items:center;gap:0}
+header .site-nav .nav-dropdown-link{display:inline-flex;align-items:center;justify-content:center;min-width:0;min-height:44px;padding:8px 6px 8px 10px;border:0;border-bottom:2px solid transparent;border-radius:5px 0 0 5px;background:transparent;color:var(--ink,#000);font-size:.98rem;font-weight:700;line-height:1.2;white-space:nowrap;text-decoration:none}
+header .site-nav .nav-dropdown-link{background:transparent!important;color:var(--ink,#000)!important}
+header .site-nav .nav-dropdown-link:hover,
+header .site-nav .nav-dropdown-link:focus-visible,
+header .site-nav .nav-dropdown-link[aria-current="location"]{background:var(--paper2,#f1e8d6)!important;color:var(--red,#8f1116)!important}
+header .site-nav .nav-dropdown-link:focus-visible{outline:2px solid var(--red,#8f1116);outline-offset:-2px}
+header .site-nav .nav-dropdown-toggle{display:inline-flex;align-items:center;justify-content:center;width:auto;min-width:50px;min-height:36px;padding:0 10px;border:1px solid var(--line,#d9ccb4);border-radius:999px;background:var(--paper2,#f1e8d6);color:var(--ink,#000);font:700 .74rem/1 Literata,Georgia,serif;letter-spacing:.02em;cursor:pointer}
+header .site-nav .nav-dropdown-toggle:hover,header .site-nav .nav-dropdown-toggle:focus-visible,header .site-nav .nav-dropdown.is-open .nav-dropdown-toggle{background:var(--paper2,#f1e8d6)!important;color:var(--red,#8f1116)!important}
+header .site-nav .nav-dropdown-toggle span{display:block;white-space:nowrap}
+header .site-nav .nav-submenu{position:absolute;top:calc(100% + 4px);left:0;z-index:50;display:none;min-width:260px;padding:7px;border:1px solid var(--line,#d9ccb4);border-radius:8px;background:var(--paper,#faf5ea);box-shadow:0 8px 20px rgba(35,22,14,.16)}
+header .site-nav .nav-dropdown.is-open .nav-submenu,header .site-nav .nav-dropdown:hover .nav-submenu,header .site-nav .nav-dropdown:focus-within .nav-submenu{display:flex;flex-direction:column;gap:2px}
+header .site-nav .nav-submenu a{display:flex;align-items:center;min-height:44px;padding:9px 12px;border-radius:5px;color:var(--ink,#000);font-size:.94rem;font-weight:700;line-height:1.3;text-decoration:none}
+header .site-nav .nav-submenu a:hover,header .site-nav .nav-submenu a:focus-visible{background:var(--paper2,#f1e8d6);color:var(--red,#8f1116)}
+header .site-nav .nav-dropdown-link[aria-current="location"]{border-bottom-color:var(--red,#8f1116);color:var(--red,#8f1116)}
+@media(max-width:900px){
+ header .site-nav .nav-dropdown{width:100%}
+ header .site-nav .nav-dropdown-main{width:100%}
+ header .site-nav .nav-dropdown-link{flex:1;justify-content:flex-start;width:auto;min-height:46px;padding:10px 12px;border-radius:5px 0 0 5px;white-space:normal}
+ header .site-nav .nav-dropdown-toggle{width:auto;min-width:58px;min-height:42px;margin-left:6px;border-radius:999px}
+ header .site-nav .nav-submenu{position:static;min-width:0;margin:2px 0 5px;padding:4px;border:0;border-left:2px solid #d3b85d;border-radius:0;background:transparent;box-shadow:none}
+ header .site-nav .nav-dropdown:not(.is-open) .nav-submenu{display:none}
+ header .site-nav .nav-dropdown .nav-submenu a{min-height:44px;padding:9px 12px 9px 18px}
+}
+@media(prefers-reduced-motion:reduce){header .site-nav .nav-dropdown-toggle span{transition:none}}

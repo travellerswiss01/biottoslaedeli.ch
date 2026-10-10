@@ -4,7 +4,7 @@ import './shopify-cart.js';
 var LANG_KEY="biottos-lang";
 var lang="de";
 var dict={"Jetzt bestellen":"Jetzt bstelle","Vorheriger Korb":"Vorige Gschänksharass","Nächster Korb":"Nächste Gschänksharass","Wischen oder Pfeile antippen":"Wische oder Pfeil antippe","Welcher darf's sein?":"Wele darfs sii?","Bestellen":"Bstelle","Der grosse":"De grosse","Der mittlere":"De mittlere","Der kleine":"De chliine",
-"Geschenkskörbe":"Gschänksharass","Sprache":"Sproch","Zuhause":"Dehai","wo alles beginnt":"wo alles afangt","Garten":"Garte","was bei uns wächst":"wo bi üs wachst","Küche":"Chuchi","was daraus entsteht":"was drus entstoht","Geschenk":"Gschänk","fertig zum Abholen":"fertig zum Abhole",
+"Geschenkskörbe":"Gschänksharass","Thurgauer Geschenkharassen":"Thurgauer Gschänksharass","Guntershauser Geschenkharassen":"Guntershauser Gschänksharass","Geschenk selbst zusammenstellen":"Schenk sälber zämeschtelle","Sortiment-Untermenü öffnen":"Sortiment-Untermenü öffne","Sortiment-Untermenü schliessen":"Sortiment-Untermenü schliesse","Sprache":"Sproch","Zuhause":"Dehai","wo alles beginnt":"wo alles afangt","Garten":"Garte","was bei uns wächst":"wo bi üs wachst","Küche":"Chuchi","was daraus entsteht":"was drus entstoht","Geschenk":"Gschänk","fertig zum Abholen":"fertig zum Abhole",
 "Traubensaft":"Truubesaft","Süssmost":"Süessmost","Über uns":"Über üs","Abholung":"Abholig","Kontakt":"Kontakt",
 "Geschenke aus Guntershausen.":"Guntershausenr Gschänk",
 "BIOTTOS LÄDELI · GUNTERSHAUSEN":"BIOTTOS LÄDELI · GUNTERSHAUSEN","GUNTERSHAUSEN · THURGAU":"GUNTERSHAUSEN · THURGAU","MIT SORGFALT ZUSAMMENGESTELLT":"MIT SORGFALT ZÄMEGSTELLT",
@@ -145,7 +145,7 @@ var dict={"Jetzt bestellen":"Jetzt bstelle","Vorheriger Korb":"Vorige Gschänksh
 "Online im Shopify-Checkout oder bei Abholung bar oder mit TWINT. Ein Versand ist nicht möglich.":"Online im Shopify-Checkout oder bi Abholig bar oder mit TWINT. E Versand isch nöd möglich."
 };
 Object.assign(dict,{
-"Menü öffnen":"Menü öffne","Menü schliessen":"Menü schliesse",
+"Menü öffnen":"Menü öffne","Menü schliessen":"Menü schliesse","Weitere Sortimentsbereiche öffnen":"Witeri Sortimentsbereich öffne","Weitere Sortimentsbereiche schliessen":"Witeri Sortimentsbereich schliesse","Mehr":"Meh",
 "Vorherige Abholwoche":"Vorigi Abholwuche","Vorheriger Schritt":"Vorige Schritt","Nächster Schritt":"Nächste Schritt",
 "Anzahl ändern":"Aazahl ändere","← Anzahl ändern":"← Aazahl ändere",
 "Vor- und Nachname":"Vor- und Nachname","Wird übermittelt …":"Wird übermittlet …",
@@ -193,14 +193,49 @@ var ZEITEN=[];(function(){for(var m=8*60;m<=18*60;m+=30){ZEITEN.push(("0"+Math.f
 var st={k:K[0].id,n:1,d:"",t:"",step:"k",week:0};
 var lastOrderTrigger=null,submitting=false,lockedControls=[];
 function setSubmitting(busy){submitting=busy;if(busy){lockedControls=Array.from(document.querySelectorAll("#ov button,#ov input")).filter(function(el){return !el.disabled});lockedControls.forEach(function(el){el.disabled=true})}else{lockedControls.forEach(function(el){el.disabled=false});lockedControls=[]}}
-var views=["start","koerbe","gartenprodukte","traubensaft","suessmost","essig","doerrfruechte","tee","ueber-uns","laedeli","lucia-kocht","otto-garten","abholung","faq","kontakt"];
-var siteNav=$("#siteNav"),menuToggle=$("#menuToggle");
-function setMenuOpen(open){if(!siteNav||!menuToggle)return;siteNav.classList.toggle("is-open",open);menuToggle.setAttribute("aria-expanded",String(open));menuToggle.setAttribute("aria-label",open?"Menü schliessen":"Menü öffnen");if(window.applyBiottosLanguage)window.applyBiottosLanguage()}
+var siteNav=$("#siteNav"),menuToggle=$("#menuToggle"),sortimentMenu=$("#sortimentMenu"),sortimentToggle=$("#sortimentToggle");
+function setSortimentOpen(open){if(!sortimentMenu||!sortimentToggle)return;sortimentMenu.classList.toggle("is-open",open);sortimentToggle.setAttribute("aria-expanded",String(open));sortimentToggle.setAttribute("aria-label",open?"Weitere Sortimentsbereiche schliessen":"Weitere Sortimentsbereiche öffnen");var label=sortimentToggle.querySelector("span");if(label)label.textContent=open?"Weniger":"Mehr";if(window.applyBiottosLanguage)window.applyBiottosLanguage()}
+function setMenuOpen(open){if(!siteNav||!menuToggle)return;siteNav.classList.toggle("is-open",open);menuToggle.setAttribute("aria-expanded",String(open));menuToggle.setAttribute("aria-label",open?"Menü schliessen":"Menü öffnen");if(!open)setSortimentOpen(false);if(window.applyBiottosLanguage)window.applyBiottosLanguage()}
 if(menuToggle)menuToggle.addEventListener("click",function(){setMenuOpen(menuToggle.getAttribute("aria-expanded")!=="true")});
-if(siteNav)siteNav.addEventListener("click",function(e){if(e.target.closest("a"))setMenuOpen(false)});
-document.addEventListener("keydown",function(e){if(e.key==="Escape")setMenuOpen(false)});
-function show(){var h=(location.hash||"#start").slice(1);if(views.indexOf(h)<0)h="start";views.forEach(function(v){$("#"+v).classList.toggle("on",v===h)});document.querySelectorAll("#siteNav a").forEach(function(a){a.classList.toggle("on",a.getAttribute("href")==="#"+h)});document.querySelector(".brand-tab").classList.toggle("on",h==="start");document.body.dataset.currentView=h;setMenuOpen(false);window.scrollTo(0,0)}
-window.addEventListener("hashchange",show);show();
+if(sortimentToggle)sortimentToggle.addEventListener("click",function(){setSortimentOpen(sortimentToggle.getAttribute("aria-expanded")!=="true")});
+document.addEventListener("keydown",function(event){if(event.key==="Escape"&&sortimentMenu&&sortimentMenu.classList.contains("is-open")){setSortimentOpen(false);if(sortimentToggle)sortimentToggle.focus()}});
+var sectionNavigation=[
+ ["koerbe","#koerbe"],["shop","#shop"],["traubensaft","#ueber-uns"],["suessmost","#ueber-uns"],
+ ["essig","#ueber-uns"],["doerrfruechte","#ueber-uns"],["gartenprodukte","#ueber-uns"],["tee","#ueber-uns"],
+ ["ueber-uns","#ueber-uns"],["otto-garten","#ueber-uns"],["lucia-kocht","#ueber-uns"],["laedeli","#ueber-uns"],
+ ["abholung","#abholung"],["faq","#kontakt"],["kontakt","#kontakt"]
+];
+function setActiveNavigation(target){
+ if(!siteNav)return;
+ siteNav.querySelectorAll("a[href^='#']").forEach(function(link){
+  var active=target&&link.getAttribute("href")===target;
+  link.classList.toggle("on",!!active);
+  if(active)link.setAttribute("aria-current","location");else link.removeAttribute("aria-current");
+ });
+}
+function updateNavigationFromScroll(){
+ var header=document.querySelector("header");
+ var marker=window.scrollY+(header?header.offsetHeight:0)+28;
+ var active="";
+ sectionNavigation.forEach(function(entry){
+  var section=document.getElementById(entry[0]);
+  if(section&&section.getBoundingClientRect().top+window.scrollY<=marker)active=entry[1];
+ });
+ setActiveNavigation(active);
+}
+function show(){
+ document.body.removeAttribute("data-current-view");
+ document.querySelectorAll(".view").forEach(function(section){section.classList.add("on")});
+ setMenuOpen(false);
+ var fragment=(location.hash||"").slice(1);
+ var matched=sectionNavigation.find(function(entry){return entry[0]===fragment});
+ setActiveNavigation(matched?matched[1]:"");
+}
+if(siteNav)siteNav.addEventListener("click",function(event){if(event.target.closest("a[href^='#']"))setMenuOpen(false)});
+window.addEventListener("hashchange",show);
+window.addEventListener("scroll",updateNavigationFromScroll,{passive:true});
+show();
+updateNavigationFromScroll();
 
 function fmt(x){return "CHF "+x.toFixed(2)}
 function chips(el,name,items,cur){el.innerHTML=items.map(function(i){return '<label><input type="radio" name="'+name+'" value="'+i.v+'"'+(String(i.v)===String(cur)?" checked":"")+'><span>'+i.l+"</span></label>"}).join("")}

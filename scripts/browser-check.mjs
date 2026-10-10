@@ -23,10 +23,16 @@ const origin='http://127.0.0.1:'+server.address().port;
 let browser,page,checks=0,photoChecks=0;const errors=[];
 try{
   browser=await chromium.launch({headless:true,...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{})});
-  const context=await browser.newContext({timezoneId:'Europe/Zurich'});
+  const context=await browser.newContext({timezoneId:'Europe/Zurich',reducedMotion:'no-preference'});
   await context.route('**/*',route=>route.request().url().startsWith(origin)?route.continue():route.abort());
   page=await context.newPage();page.setDefaultTimeout(10000);
   page.on('pageerror',error=>errors.push(error.message));
+  await page.goto(origin+'/index.html');
+  const seo=await page.evaluate(()=>{
+    const structured=[...document.querySelectorAll('script[type="application/ld+json"]')].map(node=>JSON.parse(node.textContent));
+    return {title:document.title,description:document.querySelector('meta[name="description"]')?.content||'',canonical:document.querySelector('link[rel="canonical"]')?.href||'',robots:document.querySelector('meta[name="robots"]')?.content||'',h1:document.querySelectorAll('h1').length,website:structured.find(item=>item['@type']==='WebSite')};
+  });
+  assert.match(seo.title,/Biottos Lädeli.*Thurgau/);assert.ok(seo.description.length>=100&&seo.description.includes('Guntershausen'));assert.equal(seo.canonical,'https://biottoslaedeli.ch/');assert.match(seo.robots,/index,follow/);assert.equal(seo.h1,1);assert.equal(seo.website?.name,'Biottos Lädeli');assert.equal(seo.website?.url,seo.canonical);checks++;
   page.on('response',response=>{if(response.url().startsWith(origin)&&response.status()>=400)errors.push(response.status()+' '+response.url())});
   async function layout(){
     console.log('Layout '+await page.url());
@@ -78,41 +84,80 @@ try{
   const views=['start','koerbe','gartenprodukte','traubensaft','suessmost','essig','doerrfruechte','tee','ueber-uns','laedeli','lucia-kocht','otto-garten','abholung','faq','kontakt'];
   for(const width of [320,360,390,768,1440]){
     await page.setViewportSize({width,height:900});await page.emulateMedia({colorScheme:'dark'});
-    for(const view of views){await page.goto(origin+'/index.html#'+view);await page.waitForFunction(v=>document.body.dataset.currentView===v,view);await layout();if(view==='koerbe')await checkBasketOverview(width)}
     for(const file of ['geschenkskoerbe.html','firmengeschenke.html','warenkorb.html','404.html']){await page.goto(origin+'/'+file);await layout()}
-    await page.goto(origin+'/shop-vorschau.html');await page.locator('.shop-card').first().waitFor();await layout();
-    assert.equal(await page.locator('h1').innerText(),'Feines aus unserem Lädeli');
-    assert.equal(await page.locator('.shop-section-title').count(),6);
-    assert.equal(await page.locator('#shop-count').innerText(),'19 von 19 Produkten');
+    await page.goto(origin+'/index.html#start');await page.waitForFunction(()=>location.hash==='#start');
+    const mainNavigationLinks=page.locator('#siteNav > a, #siteNav > .nav-dropdown > .nav-dropdown-main > a');
+    assert.equal(await mainNavigationLinks.count(),5,'Five primary navigation links');
+    assert.equal(await page.locator('#sortimentSubmenu a').count(),3,'Three Sortiment submenu links');
+    const visibleViews=await page.evaluate(ids=>ids.map(id=>{const section=document.getElementById(id);return{id,visible:!!section&&getComputedStyle(section).display!=='none'&&section.getClientRects().length>0}}),views);
+    assert.ok(visibleViews.every(section=>section.visible),'All page sections remain visible: '+JSON.stringify(visibleViews));
+    if(width<=900){assert.equal(await page.locator('#menuToggle').isVisible(),true);await page.locator('#menuToggle').click();assert.equal(await page.locator('#menuToggle').getAttribute('aria-expanded'),'true');assert.equal(await page.locator('#siteNav').isVisible(),true)}
+    const sortimentToggle=page.locator('#sortimentToggle');assert.equal(await sortimentToggle.getAttribute('aria-expanded'),'false');assert.equal(await sortimentToggle.innerText(),'Mehr','Dropdown is clearly labeled without an arrow');await sortimentToggle.click();assert.equal(await sortimentToggle.getAttribute('aria-expanded'),'true');assert.equal(await sortimentToggle.innerText(),'Weniger');assert.equal(await page.locator('#sortimentSubmenu a:visible').count(),3,'All submenu choices are visible when expanded');
+    await page.locator('.nav-dropdown-link').hover();const navColors=await page.locator('.nav-dropdown-link').evaluate(e=>({color:getComputedStyle(e).color,background:getComputedStyle(e).backgroundColor}));assert.notEqual(navColors.color,navColors.background,'Sortiment text must remain readable on hover and when active: '+JSON.stringify(navColors));
+    await sortimentToggle.click();assert.equal(await sortimentToggle.getAttribute('aria-expanded'),'false');
+    if(width<=900){await page.locator('#siteNav a[href="#shop"]').click();assert.equal(await page.locator('#menuToggle').getAttribute('aria-expanded'),'false')}
+    else{assert.equal(await page.locator('#siteNav').isVisible(),true);await page.locator('#siteNav a[href="#shop"]').click()}
+    await page.waitForFunction(()=>location.hash==='#shop');await page.locator('#shop .shop-card').first().waitFor();await layout();await checkBasketOverview(width);
+    assert.equal(await page.locator('#shop-home-title').innerText(),'Alles aus unserem Lädeli – direkt hier bestellen');
+    assert.equal(await page.locator('#shop .shop-section-title').count(),6);
+    assert.equal(await page.locator('#shop-count').innerText(),'Zeigt 19 von 19 Produkten');
     const titleStyles=await page.locator('.shop-product-title').evaluateAll(elements=>elements.map(e=>({color:getComputedStyle(e).color,weight:getComputedStyle(e).fontWeight,size:parseFloat(getComputedStyle(e).fontSize)})));
     assert.ok(titleStyles.every(s=>s.color==='rgb(0, 0, 0)'&&Number(s.weight)>=700&&s.size>=16));checks++;
-    if(width<=600){
-      for(const details of await page.locator('.shop-mobile-details').all()){
-        assert.equal(await details.isVisible(),true);await details.locator('summary').click();assert.equal(await details.locator('.shop-description').isVisible(),true);await details.locator('summary').click();checks++;
+    const categoryButtons=page.locator('#shop-categories button');
+    const vinegarFilter=page.getByRole('button',{name:'Essig & Balsamico (7)',exact:true});
+    assert.equal(await categoryButtons.count(),7);
+    assert.equal(await vinegarFilter.isVisible(),true);
+    assert.ok(await page.locator('#shop-categories').evaluate(e=>e.scrollWidth<=e.clientWidth));
+    if(width<=600)assert.equal(await page.locator('.shop-category-nav').evaluate(e=>getComputedStyle(e).display),'grid');
+    if(width===390||width===1440){
+      if(width===390){
+        for(const details of await page.locator('.shop-mobile-details').all()){
+          assert.equal(await details.isVisible(),true);await details.locator('summary').click();assert.equal(await details.locator('.shop-description').isVisible(),true);await details.locator('summary').click();checks++;
+        }
       }
+      for(const button of await page.locator('.shop-photo-open').all()){
+        if(!await button.isVisible())continue;
+        await button.click();await page.locator('.shop-photo-viewer img').evaluate(img=>Promise.race([img.decode(),new Promise((_,reject)=>setTimeout(()=>reject(new Error('Photo decode timed out: '+img.src)),5000))]));
+        assert.ok(await page.locator('.shop-photo-viewer img').evaluate(img=>img.naturalWidth>0));
+        await page.getByRole('button',{name:'Foto schliessen',exact:true}).click();photoChecks++;console.log('Photo checks: '+photoChecks);
+      }
+      for(const extra of await page.locator('.shop-card>details:not(.shop-mobile-details)').all()){
+        await extra.locator('summary').click();
+        for(const button of await extra.locator('.shop-photo-open').all()){await button.click();await page.locator('.shop-photo-viewer img').evaluate(img=>Promise.race([img.decode(),new Promise((_,reject)=>setTimeout(()=>reject(new Error('Photo decode timed out: '+img.src)),5000))]));await page.getByRole('button',{name:'Foto schliessen',exact:true}).click();photoChecks++}
+        await extra.locator('summary').click();
+      }
+      const first=page.locator('.shop-photo-open').first();await first.click();await page.keyboard.press('Escape');assert.equal(await page.locator('.shop-photo-viewer').evaluate(e=>e.open),false);assert.equal(await first.evaluate(e=>e===document.activeElement),true);checks++;
     }
-    for(const button of await page.locator('.shop-photo-open').all()){
-      if(!await button.isVisible())continue;
-      await button.click();await page.locator('.shop-photo-viewer img').evaluate(img=>Promise.race([img.decode(),new Promise((_,reject)=>setTimeout(()=>reject(new Error('Photo decode timed out: '+img.src)),5000))]));
-      assert.ok(await page.locator('.shop-photo-viewer img').evaluate(img=>img.naturalWidth>0));
-      await page.getByRole('button',{name:'Foto schliessen',exact:true}).click();photoChecks++;console.log('Photo checks: '+photoChecks);
+    if(width===390){
+      const searchField=page.getByLabel('Spezialität suchen',{exact:true});
+      await page.waitForTimeout(400);
+      const animatedPlaceholder=await searchField.getAttribute('placeholder');
+      const placeholderDeadline=Date.now()+5000;
+      let placeholderChanged=false;
+      while(Date.now()<placeholderDeadline){
+        if(await searchField.getAttribute('placeholder')!==animatedPlaceholder){placeholderChanged=true;break}
+        await page.waitForTimeout(100);
+      }
+      assert.equal(placeholderChanged,true,'Search hint should eventually rotate');
+      assert.equal(await searchField.inputValue(),'');
+      await searchField.focus();
+      await page.waitForTimeout(180);
+      assert.equal(await searchField.inputValue(),'');
+      await searchField.fill('himbeer');assert.equal(await page.locator('#shop-count').innerText(),'Zeigt 3 von 19 Produkten');
+      await page.getByLabel('Spezialität suchen',{exact:true}).fill('zzzzkeinprodukt');assert.match(await page.locator('#shop-products').innerText(),/Keine passenden Produkte/);
+      await page.getByLabel('Spezialität suchen',{exact:true}).fill('');
+      await vinegarFilter.click();assert.equal(await page.locator('#shop-count').innerText(),'Zeigt 7 von 19 Produkten');assert.deepEqual(await page.locator('.shop-sizes').allTextContents(),Array(7).fill('250 ml'));assert.equal(await vinegarFilter.getAttribute('aria-pressed'),'true');checks++;
+      await page.getByRole('button',{name:'Alle Produkte (19)',exact:true}).click();
     }
-    for(const extra of await page.locator('.shop-card>details:not(.shop-mobile-details)').all()){
-      await extra.locator('summary').click();
-      for(const button of await extra.locator('.shop-photo-open').all()){await button.click();await page.locator('.shop-photo-viewer img').evaluate(img=>Promise.race([img.decode(),new Promise((_,reject)=>setTimeout(()=>reject(new Error('Photo decode timed out: '+img.src)),5000))]));await page.getByRole('button',{name:'Foto schliessen',exact:true}).click();photoChecks++}
-      await extra.locator('summary').click();
-    }
-    const first=page.locator('.shop-photo-open').first();await first.click();await page.keyboard.press('Escape');assert.equal(await page.locator('.shop-photo-viewer').evaluate(e=>e.open),false);assert.equal(await first.evaluate(e=>e===document.activeElement),true);checks++;
-    await page.getByLabel('Produkt suchen',{exact:true}).fill('himbeer');assert.equal(await page.locator('#shop-count').innerText(),'3 von 19 Produkten');
-    await page.getByLabel('Produkt suchen',{exact:true}).fill('zzzzkeinprodukt');assert.match(await page.locator('#shop-products').innerText(),/Keine passenden Produkte/);
-    await page.getByLabel('Produkt suchen',{exact:true}).fill('');await page.locator('#shop-category').selectOption('Essig & Balsamico');assert.equal(await page.locator('#shop-count').innerText(),'7 von 19 Produkten');assert.deepEqual(await page.locator('.shop-sizes').allTextContents(),Array(7).fill('250 ml'));checks++;
-    await page.goto(origin+'/shop-vorschau.html?kategorie=Geschenksharassen');await page.locator('.shop-card').first().waitFor();assert.equal(await page.locator('.shop-card--gift').count(),3);await layout();
-    await page.screenshot({path:path.join(out,'geschenksharassen-'+width+'.png'),fullPage:true});
-    await page.goto(origin+'/shop-vorschau.html');await page.locator('.shop-card').first().waitFor();await page.screenshot({path:path.join(out,'sortiment-'+width+'.png'),fullPage:true});
+    await page.goto(origin+'/index.html?kategorie=Geschenksharassen#shop');await page.locator('#shop .shop-card').first().waitFor();assert.equal(await page.locator('#shop .shop-card--gift').count(),3);await layout();
+    await page.screenshot({path:path.join(out,'geschenksharassen-'+width+'.png')});
+    await page.goto(origin+'/index.html#shop');await page.locator('#shop .shop-card').first().waitFor();await page.screenshot({path:path.join(out,'sortiment-'+width+'.png')});
   }
   await page.goto(origin+'/warenkorb.html');await page.getByRole('button',{name:'Es Tröpfli Heimat hinzufügen',exact:true}).click();await page.getByRole('button',{name:'Guntershauser Harass hinzufügen',exact:true}).click();
+  const cartPhoto=page.locator('.cart-item-photo').first();await cartPhoto.click();assert.equal(await page.locator('#lb').getAttribute('aria-hidden'),'false');assert.ok(await page.locator('#li').evaluate(img=>img.naturalWidth>0));await page.keyboard.press('Escape');assert.equal(await page.locator('#lb').getAttribute('aria-hidden'),'true');await page.waitForFunction(()=>document.activeElement?.matches('.cart-item-photo'));photoChecks++;
+  const choicePhoto=page.locator('.cart-choice-photo').first();await choicePhoto.focus();await page.keyboard.press('Enter');assert.equal(await page.locator('#lb').getAttribute('aria-hidden'),'false');await page.getByRole('button',{name:'Foto schliessen',exact:true}).click();assert.equal(await page.locator('#lb').getAttribute('aria-hidden'),'true');photoChecks++;
   assert.match(await page.locator('#cart-checkout').getAttribute('href'),/53868017549578:1,53868017647882:1/);assert.equal(await page.locator('#cart-total').innerText(),'Zwischensumme · CHF 103.90');checks++;
-  await page.getByLabel('Anzahl Es Tröpfli Heimat',{exact:true}).fill('2');await page.getByLabel('Anzahl Es Tröpfli Heimat',{exact:true}).press('Tab');assert.equal(await page.locator('#cart-total').innerText(),'Zwischensumme · CHF 132.90');await page.reload();assert.equal(await page.getByLabel('Anzahl Es Tröpfli Heimat',{exact:true}).inputValue(),'2');checks++;
+  await page.getByRole('spinbutton',{name:'Anzahl Es Tröpfli Heimat',exact:true}).fill('2');await page.getByRole('spinbutton',{name:'Anzahl Es Tröpfli Heimat',exact:true}).press('Tab');assert.equal(await page.locator('#cart-total').innerText(),'Zwischensumme · CHF 132.90');await page.reload();assert.equal(await page.getByRole('spinbutton',{name:'Anzahl Es Tröpfli Heimat',exact:true}).inputValue(),'2');checks++;
   await page.getByRole('button',{name:'Guntershauser Harass entfernen',exact:true}).click();assert.equal(await page.locator('#cart-total').innerText(),'Zwischensumme · CHF 58.00');await layout();
   await page.screenshot({path:path.join(out,'warenkorb.png'),fullPage:true});
   await page.goto(origin+'/index.html#l-impressum');await page.locator('#lgx').waitFor({state:'visible'});await page.keyboard.press('Escape');assert.equal(await page.locator('#lg').getAttribute('aria-hidden'),'true');checks++;

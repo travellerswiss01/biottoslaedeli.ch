@@ -23,7 +23,7 @@ export function createCartBridge(targetWindow, products=cartProducts, options={}
       totals.set(item.key,(totals.get(item.key)||0)+item.quantity);
       if(!validQuantity(totals.get(item.key)))return null;
     }
-    return config.storeUrl+'/cart/'+[...totals].map(([key,quantity])=>byKey.get(key).variantId+':'+quantity).join(',')+'?storefront=true';
+    return config.storeUrl+'/cart/'+[...totals].map(([key,quantity])=>byKey.get(key).variantId+':'+quantity).join(',');
   }
   function sanitize(items){
     if(!Array.isArray(items))return [];

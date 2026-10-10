@@ -2,7 +2,55 @@ import {productDrafts} from './product-drafts.mjs';
 import {filterProducts} from './shop-catalog.mjs';
 const grid = document.querySelector('#shop-products');
 const search = document.querySelector('#shop-search');
-const category = document.querySelector('#shop-category');
+const searchExamples=['Essig','Süssmost','Birnenessig'];
+const reduceSearchMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
+let searchAnimationTimer=null,searchExampleIndex=0,searchExampleText='',searchAnimationStopped=false;
+function clearSearchAnimation(){
+  window.clearTimeout(searchAnimationTimer);
+  searchAnimationTimer=null;
+}
+function typeSearchExample(){
+  if(searchAnimationStopped||search.value||document.activeElement===search||reduceSearchMotion.matches)return;
+  const example=searchExamples[searchExampleIndex];
+  if(searchExampleText.length<example.length){
+    searchExampleText=example.slice(0,searchExampleText.length+1);
+    search.placeholder=searchExampleText;
+    searchAnimationTimer=window.setTimeout(typeSearchExample,115);
+    return;
+  }
+  searchAnimationTimer=window.setTimeout(eraseSearchExample,1100);
+}
+function eraseSearchExample(){
+  if(searchAnimationStopped||search.value||document.activeElement===search||reduceSearchMotion.matches)return;
+  if(searchExampleText.length){
+    searchExampleText=searchExampleText.slice(0,-1);
+    search.placeholder=searchExampleText;
+    searchAnimationTimer=window.setTimeout(eraseSearchExample,55);
+    return;
+  }
+  search.placeholder='z. B. Essig';
+  searchExampleIndex=(searchExampleIndex+1)%searchExamples.length;
+  searchAnimationTimer=window.setTimeout(typeSearchExample,450);
+}
+function startSearchAnimation(){
+  clearSearchAnimation();
+  if(search.value||document.activeElement===search)return;
+  searchAnimationStopped=false;
+  searchExampleText='';
+  search.placeholder=reduceSearchMotion.matches?'z. B. Essig':'';
+  if(!reduceSearchMotion.matches)searchAnimationTimer=window.setTimeout(typeSearchExample,250);
+}
+function stopSearchAnimation(){
+  searchAnimationStopped=true;
+  clearSearchAnimation();
+  search.placeholder=search.value?'':'';
+}
+search.addEventListener('focus',stopSearchAnimation);
+search.addEventListener('input',()=>{if(search.value)stopSearchAnimation();render();});
+search.addEventListener('blur',()=>{if(!search.value)searchAnimationTimer=window.setTimeout(startSearchAnimation,450);});
+reduceSearchMotion.addEventListener?.('change',startSearchAnimation);
+startSearchAnimation();
+let selectedCategory = '';
 const count = document.querySelector('#shop-count');
 function element(tag, text, className) {
   const node = document.createElement(tag);
@@ -69,10 +117,6 @@ function photo(filename, title, lazy = true) {
 function shopifyPrice(cents) {
   return element('p','CHF '+(cents/100).toFixed(2),'shop-price');
 }
-function availability(product) {
-  return element('p',product.shopifyPublished?'Im Shopify-Store bestellbar':'Preis bestätigt · Online-Bestellung folgt',
-    product.shopifyPublished?'shop-availability shop-availability--ready':'shop-availability');
-}
 function addToCartLink(product,variant) {
   if(!product.shopifyPublished||!variant?.key)return null;
   const link=element('a','In den Warenkorb','btn shop-add-to-cart');
@@ -81,7 +125,7 @@ function addToCartLink(product,variant) {
   return link;
 }
 function render() {
-  const visible = filterProducts(productDrafts, search.value, category.value);
+  const visible = filterProducts(productDrafts, search.value, selectedCategory);
   const fragment = document.createDocumentFragment();
   const groups=new Map();
   for(const type of categoryOrder) {
@@ -109,7 +153,6 @@ function render() {
           element('p',variant.label,'shop-variant-size'));
         const storeVariant=product.shopifyVariants.find(candidate=>candidate.label===variant.label);
         if(storeVariant)card.append(shopifyPrice(storeVariant.priceCents));
-        card.append(availability(product));
         const cartLink=addToCartLink(product,storeVariant);if(cartLink)card.append(cartLink);
         row.append(card);
       });
@@ -119,35 +162,48 @@ function render() {
     const article = element('article', '', 'shop-card');
     if (product.type === 'Geschenksharassen') article.classList.add('shop-card--gift');
     article.append(photo(product.photos[0],displayName,index > 2),element('h3',displayName,'shop-product-title'));
-    let mobileDetails = null;
     if (product.sizes) article.append(element('p',product.sizes.join(' · '),'shop-sizes'));
     if (product.shopifyPriceCents!=null) article.append(shopifyPrice(product.shopifyPriceCents));
-    article.append(availability(product));
-    if (product.description) {
-      article.append(element('p',product.description,'shop-description'));
-      if (product.type === 'Geschenksharassen' && product.includedProducts?.length) {
-        mobileDetails = element('details','','shop-mobile-details');
-        mobileDetails.append(element('summary','Mengen & Produktdetails'),element('p',product.description,'shop-description'));
-      }
-    }
-    if (product.includedProducts?.length) {
-      const contents = element('section','','shop-contents');
+
+    // Keep the primary order action visible before long product or gift contents.
+    const cartLink=addToCartLink(product,product.shopifyVariants[0]);
+    if(cartLink)article.append(cartLink);
+
+    if(product.includedProducts?.length) {
+      const contents=element('section','','shop-contents');
       contents.setAttribute('aria-label','Enthaltene Spezialitäten');
-      contents.append(element('h4','Enthaltene Spezialitäten','shop-contents-heading'));
-      const list = element('ul','','shop-contents-grid');
-      product.includedProducts.forEach(content => {
-        const item = element('li','','shop-content-item');
-        const includedProduct = content.productTitle && productDrafts.find(candidate => candidate.title === content.productTitle);
-        if (includedProduct?.photos?.[0]) item.append(photo(includedProduct.photos[0],content.label));
+      const preview=element('ul','','shop-contents-preview');
+      product.includedProducts.slice(0,3).forEach(content=>{
+        const item=element('li','','shop-content-item');
+        const includedProduct=content.productTitle&&productDrafts.find(candidate=>candidate.title===content.productTitle);
+        if(includedProduct?.photos?.[0])item.append(photo(includedProduct.photos[0],content.label));
+        item.append(element('p',content.label,'shop-content-label'));
+        preview.append(item);
+      });
+      if(product.includedProducts.length>3) {
+        preview.append(element('li','+'+(product.includedProducts.length-3)+' weitere','shop-contents-more'));
+      }
+      contents.append(preview);
+      const details=element('details','','shop-contents-details');
+      details.append(element('summary','Inhalt ansehen ('+product.includedProducts.length+' Produkte)'));
+      if(product.description)details.append(element('p',product.description,'shop-description'));
+      const list=element('ul','','shop-contents-grid');
+      product.includedProducts.forEach(content=>{
+        const item=element('li','','shop-content-item');
+        const includedProduct=content.productTitle&&productDrafts.find(candidate=>candidate.title===content.productTitle);
+        if(includedProduct?.photos?.[0])item.append(photo(includedProduct.photos[0],content.label));
         else item.append(element('div','Foto folgt','shop-content-photo-placeholder'));
         item.append(element('p',content.label,'shop-content-label'));
         list.append(item);
       });
-      contents.append(list);
+      details.append(list);
+      contents.append(details);
       article.append(contents);
+    } else if(product.description) {
+      const details=element('details','','shop-product-details');
+      details.append(element('summary','Produktdetails ansehen'),element('p',product.description,'shop-description'));
+      article.append(details);
     }
-    const cartLink=addToCartLink(product,product.shopifyVariants[0]);if(cartLink)article.append(cartLink);
-    if (mobileDetails) article.append(mobileDetails);
     if (product.photos.length > 1) {
       const details = element('details');
       const images = element('div','','shop-extra-photos');
@@ -161,20 +217,20 @@ function render() {
   });
   if (!visible.length) fragment.append(element('p','Keine passenden Produkte gefunden.'));
   grid.replaceChildren(fragment);
-  count.textContent = visible.length + ' von ' + productDrafts.length + ' Produkten';
-  for(const button of categoryNav.querySelectorAll('button')) button.setAttribute('aria-pressed',String(button.dataset.category===category.value));
+  count.textContent = 'Zeigt ' + visible.length + ' von ' + productDrafts.length + ' Produkten';
+  for(const button of categoryNav.querySelectorAll('button')) button.setAttribute('aria-pressed',String(button.dataset.category===selectedCategory));
 }
 const categoryOrder=['Geschenksharassen','Essig & Balsamico','Säfte','Dörrfrüchte','Spezialitäten','Backwaren'];
 const categoryNav=document.querySelector('#shop-categories');
-categoryOrder.forEach(type=>category.add(new Option(type,type)));
 for(const type of ['',...categoryOrder]) {
-  const button=element('button',type||'Alles');button.type='button';button.dataset.category=type;
-  button.addEventListener('click',()=>{category.value=type;render();});categoryNav.append(button);
+  const total=type ? productDrafts.filter(product=>product.type===type).length : productDrafts.length;
+  const label=type || 'Alle Produkte';
+  const button=element('button',label+' ('+total+')');button.type='button';button.dataset.category=type;
+  button.setAttribute('aria-controls','shop-products');
+  button.addEventListener('click',()=>{selectedCategory=type;render();});categoryNav.append(button);
 }
 const requestedCategory=new URLSearchParams(location.search).get('kategorie');
-if(categoryOrder.includes(requestedCategory)) category.value=requestedCategory;
-search.addEventListener('input',render);
-category.addEventListener('change',render);
+if(categoryOrder.includes(requestedCategory)) selectedCategory=requestedCategory;
 render();
 
 
