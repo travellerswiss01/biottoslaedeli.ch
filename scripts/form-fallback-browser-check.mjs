@@ -168,7 +168,7 @@ fs.mkdirSync(out, { recursive: true });
     'false',
   );
   count++;
-  await p.waitForFunction(() => document.body.dataset.currentView === 'koerbe');
+  await p.waitForFunction(() => location.hash === '#koerbe' && document.getElementById('koerbe')?.getClientRects().length > 0);
   const original = await p.locator('main').innerText();
   await p.locator('#menuToggle').click();
   await p.locator('#langSwitch').click();
