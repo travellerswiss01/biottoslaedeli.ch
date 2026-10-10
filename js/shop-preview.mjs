@@ -2,6 +2,54 @@ import {productDrafts} from './product-drafts.mjs';
 import {filterProducts} from './shop-catalog.mjs';
 const grid = document.querySelector('#shop-products');
 const search = document.querySelector('#shop-search');
+const searchExamples=['Essig','Süssmost','Birnenessig'];
+const reduceSearchMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
+let searchAnimationTimer=null,searchExampleIndex=0,searchExampleText='',searchAnimationStopped=false;
+function clearSearchAnimation(){
+  window.clearTimeout(searchAnimationTimer);
+  searchAnimationTimer=null;
+}
+function typeSearchExample(){
+  if(searchAnimationStopped||search.value||document.activeElement===search||reduceSearchMotion.matches)return;
+  const example=searchExamples[searchExampleIndex];
+  if(searchExampleText.length<example.length){
+    searchExampleText=example.slice(0,searchExampleText.length+1);
+    search.placeholder=searchExampleText;
+    searchAnimationTimer=window.setTimeout(typeSearchExample,115);
+    return;
+  }
+  searchAnimationTimer=window.setTimeout(eraseSearchExample,1100);
+}
+function eraseSearchExample(){
+  if(searchAnimationStopped||search.value||document.activeElement===search||reduceSearchMotion.matches)return;
+  if(searchExampleText.length){
+    searchExampleText=searchExampleText.slice(0,-1);
+    search.placeholder=searchExampleText||' ';
+    searchAnimationTimer=window.setTimeout(eraseSearchExample,55);
+    return;
+  }
+  search.placeholder='z. B. Essig';
+  searchExampleIndex=(searchExampleIndex+1)%searchExamples.length;
+  searchAnimationTimer=window.setTimeout(typeSearchExample,450);
+}
+function startSearchAnimation(){
+  clearSearchAnimation();
+  if(search.value||document.activeElement===search)return;
+  searchAnimationStopped=false;
+  searchExampleText='';
+  search.placeholder=reduceSearchMotion.matches?'z. B. Essig':'';
+  if(!reduceSearchMotion.matches)searchAnimationTimer=window.setTimeout(typeSearchExample,250);
+}
+function stopSearchAnimation(){
+  searchAnimationStopped=true;
+  clearSearchAnimation();
+  search.placeholder=search.value?'':'';
+}
+search.addEventListener('focus',stopSearchAnimation);
+search.addEventListener('input',()=>{if(search.value)stopSearchAnimation();render();});
+search.addEventListener('blur',()=>{if(!search.value)searchAnimationTimer=window.setTimeout(startSearchAnimation,450);});
+reduceSearchMotion.addEventListener?.('change',startSearchAnimation);
+startSearchAnimation();
 let selectedCategory = '';
 const count = document.querySelector('#shop-count');
 function element(tag, text, className) {
@@ -183,7 +231,6 @@ for(const type of ['',...categoryOrder]) {
 }
 const requestedCategory=new URLSearchParams(location.search).get('kategorie');
 if(categoryOrder.includes(requestedCategory)) selectedCategory=requestedCategory;
-search.addEventListener('input',render);
 render();
 
 
