@@ -98,11 +98,11 @@ Vorgeschlagener Mischwarenkorb: **1 × Es Tröpfli Heimat (CHF 29.00) und 1 × B
 
 ### Testablauf nach Bestätigung
 
-1. Im Shopify-Admin prüfen, ob der Checkout privat/testbereit ist und welche Zahlungsarten aktuell aktiv sind.
-2. Einen Shopify-Zahlungstestmodus verwenden; keine echte Karte und keine reale TWINT-Zahlung verwenden. Shopify warnt, dass während des Testmodus keine regulären Kreditkartenzahlungen angenommen werden. Beim Test-Zahlungs-Gateway muss der aktive Kartenanbieter möglicherweise vorübergehend deaktiviert werden. Testbestellungen sind laut Shopify erst nach Wahl eines kostenpflichtigen Plans möglich.
+1. **Geprüft:** Shopify Payments nimmt Zahlungen an; als manuelle Zahlungsmethode ist «Bar oder TWINT bei Abholung» eingerichtet. PayPal zeigt «Setup unvollständig». Ein Testmodus wurde nicht aktiviert; keine Zahlungsmethode wurde geändert.
+2. Einen Shopify-Zahlungstestmodus verwenden; keine echte Karte und keine reale TWINT-Zahlung verwenden. Shopify warnt, dass während des Testmodus keine regulären Kreditkartenzahlungen angenommen werden. Das Umschalten könnte deshalb Live-Zahlungen vorübergehend unterbrechen; erst für einen abgesprochenen Testzeitpunkt erwägen. Testbestellungen sind laut Shopify erst nach Wahl eines kostenpflichtigen Plans möglich.
 3. Eine vom Betreiber kontrollierte E-Mail-Adresse einsetzen. Keine echte Kundschaft als Testkontakt verwenden.
 4. Abholung auswählen und Bestellung nur im Testmodus abschliessen.
-5. Prüfen: angezeigte Produkte/Preise, Abholort, Bestelleingang in Shopify, Bestellbestätigungs-E-Mail, Status «Bereit zur Abholung» und Abholbestätigung.
+5. Prüfen: angezeigte Produkte/Preise, Abholort, Bestelleingang in Shopify, Bestellbestätigungs-E-Mail, Status «Bereit zur Abholung» und Abholbestätigung. Die Shopify-Admin-Vorschau für «Bereit zur lokalen Abholung» zeigt derzeit Beispieldaten (Example Shop/Example Street/Ottawa); erst eine Test-E-Mail belegt die echten Angaben.
 6. Danach die Testbestellung stornieren, Bestand wiederherstellen und den Testmodus deaktivieren bzw. ursprüngliche Zahlungsarten wiederherstellen. Den Checkout anschliessend erneut kontrollieren.
 
 Shopify-Quellen:
@@ -111,4 +111,4 @@ Shopify-Quellen:
 - [Shopify: Test-Zahlungs-Gateway aktivieren](https://help.shopify.com/de/manual/checkout-settings/test-orders/payments-test-mode)
 - [Shopify: Testbestellungen](https://help.shopify.com/de/manual/checkout-settings/test-orders)
 
-**Status:** Testfall und Prüfschritte sind vorbereitet; keine Bestellung wurde aufgegeben. Die vom Betreiber angegebene Testadresse ist biottoslaedeli@gmail.com; es wurde keine E-Mail gesendet. Ein verfügbarer, nicht abrechnender Testzahlungsweg muss vor dem Abschluss des Testkaufs noch geprüft werden.
+**Status:** Testfall und Prüfschritte sind vorbereitet; keine Bestellung wurde aufgegeben. Die vom Betreiber angegebene Testadresse ist biottoslaedeli@gmail.com; es wurde keine E-Mail gesendet. Das Vorhandensein eines nicht abrechnenden Testzahlungswegs ist nicht bestätigt. Shopify Payments ist aktiv; deshalb müsste ein Testmodus vorübergehend Live-Zahlungen unterbrechen.
