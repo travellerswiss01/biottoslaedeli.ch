@@ -14,7 +14,7 @@
 
 ## 1. AGB vorbereiten
 
-**Aktualisierung gemäss Betreiberangabe vom 10. Oktober 2026:** Es bestehen keine offizielle Rechtsform und keine offizielle Firmenbezeichnung. Der Anbieter muss im Onlinehandel dennoch klar und vollständig identifizierbar sein. Der Shopname allein wird deshalb nicht als ausreichende Anbieterangabe vorausgesetzt; die Darstellung mit Josef Ignaz Zehnder ist vor Veröffentlichung rechtlich zu prüfen. genuiturn65search0turn65search1
+**Aktualisierung gemäss Betreiberangabe vom 10. Oktober 2026:** Es bestehen keine offizielle Rechtsform und keine offizielle Firmenbezeichnung. Der Anbieter muss im Onlinehandel dennoch klar und vollständig identifizierbar sein. Der Shopname allein wird deshalb nicht als ausreichende Anbieterangabe vorausgesetzt; die Darstellung mit Josef Ignaz Zehnder ist vor Veröffentlichung rechtlich zu prüfen. [SECO: Onlinehandel](https://www.seco.admin.ch/de/onlinehandel); [KMU-Portal: Rechtsform Einzelunternehmen](https://www.kmu.admin.ch/de/rechtsform-einzelunternehmen)
 
 ### Schweizer E-Commerce-Anforderungen
 
