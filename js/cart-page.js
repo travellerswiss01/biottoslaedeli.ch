@@ -76,7 +76,19 @@ import './shopify-cart.js';
       actions.append(quantityControl,node('p',money(product.unitCents*item.quantity),'cart-line-total'));
 
       var remove=node('button','Entfernen','cart-remove');remove.type='button';remove.setAttribute('aria-label',displayName+' entfernen');
-      remove.addEventListener('click',function(){bridge.removeFromCart(item.key);status.textContent=displayName+' entfernt.';render()});
+      remove.addEventListener('click',function(){
+        bridge.removeFromCart(item.key);
+        status.textContent=displayName+' entfernt.';
+        if(!bridge.getCart().length){
+          search.value='';
+          activeCategory='harassen';
+          categoryFilter.querySelectorAll('button[data-category]').forEach(function(button){
+            button.setAttribute('aria-pressed',String(button.dataset.category===activeCategory));
+          });
+        }
+        render();
+        visibleChoices();
+      });
       copy.append(remove);row.append(image,copy,actions);fragment.append(row);
     });
 
