@@ -971,9 +971,13 @@ header .site-nav>a.nav-gift-link .nav-gift-badge{
 header .site-nav .nav-dropdown{position:relative;flex:0 0 auto}
 header .site-nav .nav-dropdown-main{display:flex;align-items:center;gap:0}
 header .site-nav .nav-dropdown-link{display:inline-flex;align-items:center;justify-content:center;min-width:0;min-height:44px;padding:8px 6px 8px 10px;border:0;border-bottom:2px solid transparent;border-radius:5px 0 0 5px;background:transparent;color:var(--ink,#000);font-size:.98rem;font-weight:700;line-height:1.2;white-space:nowrap;text-decoration:none}
-header .site-nav .nav-dropdown-link:hover{background:var(--paper2,#f1e8d6);color:var(--red,#8f1116)}
+header .site-nav .nav-dropdown-link{background:transparent!important;color:var(--ink,#000)!important}
+header .site-nav .nav-dropdown-link:hover,
+header .site-nav .nav-dropdown-link:focus-visible,
+header .site-nav .nav-dropdown-link[aria-current="location"]{background:var(--paper2,#f1e8d6)!important;color:var(--red,#8f1116)!important}
+header .site-nav .nav-dropdown-link:focus-visible{outline:2px solid var(--red,#8f1116);outline-offset:-2px}
 header .site-nav .nav-dropdown-toggle{display:inline-flex;align-items:center;justify-content:center;width:32px;min-width:32px;min-height:44px;padding:0 8px 2px 3px;border:0;border-bottom:2px solid transparent;border-radius:0 5px 5px 0;background:transparent;color:var(--ink,#000);font:700 1.15rem/1 Georgia,serif;cursor:pointer}
-header .site-nav .nav-dropdown-toggle:hover,header .site-nav .nav-dropdown-toggle:focus-visible{background:var(--paper2,#f1e8d6);color:var(--red,#8f1116)}
+header .site-nav .nav-dropdown-toggle:hover,header .site-nav .nav-dropdown-toggle:focus-visible,header .site-nav .nav-dropdown.is-open .nav-dropdown-toggle{background:var(--paper2,#f1e8d6)!important;color:var(--red,#8f1116)!important}
 header .site-nav .nav-dropdown-toggle span{display:block;transition:transform .18s ease}
 header .site-nav .nav-dropdown.is-open .nav-dropdown-toggle span{transform:rotate(180deg)}
 header .site-nav .nav-submenu{position:absolute;top:calc(100% + 4px);left:0;z-index:50;display:none;min-width:260px;padding:7px;border:1px solid var(--line,#d9ccb4);border-radius:8px;background:var(--paper,#faf5ea);box-shadow:0 8px 20px rgba(35,22,14,.16)}
