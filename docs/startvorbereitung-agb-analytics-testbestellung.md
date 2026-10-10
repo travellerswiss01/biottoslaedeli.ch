@@ -48,7 +48,7 @@ Quellen:
 ### AGB-Gerüst für die nächste Fassung (intern, nicht veröffentlichen)
 
 - **Vertragspartner und Kontakt:** Shopname «Biottos Lädeli»; Betreiber Josef Ignaz Zehnder; laut Betreiber bestehen keine offizielle Rechtsform und keine offizielle Firmenbezeichnung; UID nicht bestätigt. Hauptstrasse 90, 8357 Guntershausen; biottoslaedeli@gmail.com; +41 76 255 22 56. Die gesetzlich klare Anbieteridentität für Impressum und AGB muss vor Veröffentlichung geprüft werden.
-- **Sortiment, Bestellung und Preis:** konkrete Produkte, Varianten und angezeigte Preise gemäss Shopify. Betreiberangabe: Es werden keine Steuern angewandt. Vor einem definitiven Steuerhinweis ist die MWST-Pflicht/Registerlage zu prüfen.
+- **Sortiment, Bestellung und Preis:** konkrete Produkte, Varianten und angezeigte Preise gemäss Shopify. Der Betreiber gibt an, nicht MWST-registriert zu sein und keine Steuern anzuwenden. Ob eine Registrierungspflicht besteht, ist wegen der noch fehlenden Umsatzangabe offen; bis zur Klärung keine definitive Steuerformulierung veröffentlichen.
 - **Zahlung:** Onlinezahlung oder Barzahlung/TWINT bei Abholung gemäss bestätigtem Ablauf; vor Veröffentlichung mit den tatsächlich aktiven Shopify-Zahlungsarten abgleichen.
 - **Abholung:** kein Versand; Abholung am angegebenen Standort. Bereitstellung wird per Abholbestätigung mitgeteilt. Abholung innerhalb einer Woche ab dieser Bestätigung.
 - **Nichtabholung:** nach Ablauf der Wochenfrist wird die Bestellung storniert; eine bereits eingegangene Zahlung wird zurückerstattet.
