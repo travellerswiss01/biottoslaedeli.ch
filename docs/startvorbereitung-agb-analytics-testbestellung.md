@@ -45,6 +45,28 @@ Quellen:
 4. **Preis-/Steuerangabe:** Der Betreiber gibt an, nicht MWST-registriert zu sein und keine Steuern anzuwenden. Das allein bestätigt keine Befreiung von der MWST-Pflicht. Die ESTV nennt für die meisten Unternehmen eine massgebende Umsatzgrenze von CHF 100'000; entscheidend sind die nach MWST-Recht massgebenden Leistungen im In- und Ausland sowie die absehbare Umsatzentwicklung. Der Betreiber bestätigt CHF 0 Onlineumsatz, da online noch nichts verkauft wurde. Der gesamte massgebende Umsatz aus Verkäufen über sämtliche Kanäle ist nach Betreiberangabe derzeit nicht bekannt; auch eine Umsatzprognose liegt nicht vor; bis dahin wird weder eine Steuerbefreiung behauptet noch eine definitive Steuerangabe veröffentlicht. [ESTV: MWST-Steuerpflicht](https://www.estv.admin.ch/de/mwst-steuerpflicht)
 
 
+### AGB-Arbeitsentwurf (unvollständig, intern, nicht veröffentlichen)
+
+**Dieser Text ist eine Arbeitsfassung.** Die markierten offenen Punkte müssen geklärt und die Anbieterangaben rechtlich geprüft werden, bevor er im Shop verwendet wird.
+
+#### 1. Anbieter und Geltungsbereich
+Diese Bedingungen sollen für Bestellungen über den Onlineshop «Biottos Lädeli» gelten. Als Betreiber ist Josef Ignaz Zehnder bestätigt. Kontakt: Hauptstrasse 90, 8357 Guntershausen, Schweiz; biottoslaedeli@gmail.com; +41 76 255 22 56. **Vor Veröffentlichung ist zu prüfen, ob die Anbieterangabe den gesetzlichen Anforderungen eindeutig entspricht.**
+
+#### 2. Produkte, Preise und Bestellung
+Massgebend sind die im Onlineshop gezeigten Produkte, Varianten und Preise. **Die definitive Steuerangabe bleibt offen, bis MWST-Pflicht und Umsatzlage geklärt sind.** Die genaue Formulierung zu Vertragsschluss und Bestellbestätigung muss mit dem tatsächlichen Shopify-Checkout abgeglichen werden.
+
+#### 3. Zahlung und Abholung
+Es ist kein Versand vorgesehen; Bestellungen werden am Standort Hauptstrasse 90, 8357 Guntershausen abgeholt. Die Kundschaft wird benachrichtigt, sobald eine Bestellung bereitsteht. Die Bestellung soll innerhalb einer Woche nach dieser Abholbestätigung abgeholt werden. Als vorgesehene Zahlungsarten wurden Onlinezahlung sowie Barzahlung oder TWINT bei Abholung genannt; **vor Verwendung im Shop sind diese mit den tatsächlich aktiven Zahlungsarten abzugleichen.**
+
+#### 4. Nichtabholung
+Wird eine bereitgestellte Bestellung nicht innerhalb einer Woche nach der Abholbestätigung abgeholt, wird sie storniert. Eine bereits eingegangene Zahlung wird zurückerstattet. **Der konkrete Ablauf und Zeitpunkt der Rückerstattung ist vor Veröffentlichung mit Shopify abzugleichen.**
+
+#### 5. Änderungen, Mängel und Haftung
+**Noch offen:** ob und bis wann Bestellungen vor der Bereitstellung geändert oder storniert werden können sowie wie beschädigte oder mangelhafte Ware gemeldet und behandelt wird. Ein Haftungsausschluss ist gewünscht; er darf nicht pauschal formuliert werden. Haftung für rechtswidrige Absicht oder grobe Fahrlässigkeit kann nicht im Voraus ausgeschlossen werden. Eine konkrete Klausel muss rechtlich geprüft werden.
+
+#### 6. Datenschutz
+Für die Bearbeitung von Personendaten gilt die separate Datenschutzerklärung des Shops. **Diese Arbeitsfassung ergänzt oder ersetzt die Datenschutzerklärung nicht.**
+
 ### AGB-Gerüst für die nächste Fassung (intern, nicht veröffentlichen)
 
 - **Vertragspartner und Kontakt:** Shopname «Biottos Lädeli»; Betreiber Josef Ignaz Zehnder; laut Betreiber bestehen keine offizielle Rechtsform und keine offizielle Firmenbezeichnung; UID nicht bestätigt. Hauptstrasse 90, 8357 Guntershausen; biottoslaedeli@gmail.com; +41 76 255 22 56. Die gesetzlich klare Anbieteridentität für Impressum und AGB muss vor Veröffentlichung geprüft werden.
