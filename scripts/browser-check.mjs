@@ -78,11 +78,11 @@ try{
   const views=['start','koerbe','gartenprodukte','traubensaft','suessmost','essig','doerrfruechte','tee','ueber-uns','laedeli','lucia-kocht','otto-garten','abholung','faq','kontakt'];
   for(const width of [320,360,390,768,1440]){
     await page.setViewportSize({width,height:900});await page.emulateMedia({colorScheme:'dark'});
-    for(const view of views){await page.goto(origin+'/index.html#'+view);await page.waitForFunction(v=>document.body.dataset.currentView===v,view);await layout();if(view==='koerbe')await checkBasketOverview(width)}
+    for(const view of views){await page.goto(origin+'/index.html#'+view);await page.waitForFunction(v=>location.hash==='#'+v&&document.getElementById(v)?.getClientRects().length>0,view);assert.equal(await page.locator('#siteNav a').count(),5,'One consistent five-link navigation on every section');assert.equal(await page.locator('#siteNav').isVisible(),true);await layout();if(view==='koerbe')await checkBasketOverview(width)}
     for(const file of ['geschenkskoerbe.html','firmengeschenke.html','warenkorb.html','404.html']){await page.goto(origin+'/'+file);await layout()}
-    await page.goto(origin+'/shop-vorschau.html');await page.locator('.shop-card').first().waitFor();await layout();
-    assert.equal(await page.locator('h1').innerText(),'Feines aus unserem Lädeli');
-    assert.equal(await page.locator('.shop-section-title').count(),6);
+    await page.goto(origin+'/index.html#shop');await page.locator('#shop .shop-card').first().waitFor();await layout();
+    assert.equal(await page.locator('#shop-home-title').innerText(),'Alles aus unserem Lädeli – direkt hier bestellen');
+    assert.equal(await page.locator('#shop .shop-section-title').count(),6);
     assert.equal(await page.locator('#shop-count').innerText(),'Zeigt 19 von 19 Produkten');
     const titleStyles=await page.locator('.shop-product-title').evaluateAll(elements=>elements.map(e=>({color:getComputedStyle(e).color,weight:getComputedStyle(e).fontWeight,size:parseFloat(getComputedStyle(e).fontSize)})));
     assert.ok(titleStyles.every(s=>s.color==='rgb(0, 0, 0)'&&Number(s.weight)>=700&&s.size>=16));checks++;
@@ -128,9 +128,9 @@ try{
     if(width<=600)assert.equal(await page.locator('.shop-category-nav').evaluate(e=>getComputedStyle(e).display),'grid');
     await vinegarFilter.click();assert.equal(await page.locator('#shop-count').innerText(),'Zeigt 7 von 19 Produkten');assert.deepEqual(await page.locator('.shop-sizes').allTextContents(),Array(7).fill('250 ml'));assert.equal(await vinegarFilter.getAttribute('aria-pressed'),'true');checks++;
     await page.getByRole('button',{name:'Alle Produkte (19)',exact:true}).click();
-    await page.goto(origin+'/shop-vorschau.html?kategorie=Geschenksharassen');await page.locator('.shop-card').first().waitFor();assert.equal(await page.locator('.shop-card--gift').count(),3);await layout();
+    await page.goto(origin+'/index.html#shop?kategorie=Geschenksharassen');await page.locator('#shop .shop-card').first().waitFor();assert.equal(await page.locator('#shop .shop-card--gift').count(),3);await layout();
     await page.screenshot({path:path.join(out,'geschenksharassen-'+width+'.png'),fullPage:true});
-    await page.goto(origin+'/shop-vorschau.html');await page.locator('.shop-card').first().waitFor();await page.screenshot({path:path.join(out,'sortiment-'+width+'.png'),fullPage:true});
+    await page.goto(origin+'/index.html#shop');await page.locator('#shop .shop-card').first().waitFor();await page.screenshot({path:path.join(out,'sortiment-'+width+'.png'),fullPage:true});
   }
   await page.goto(origin+'/warenkorb.html');await page.getByRole('button',{name:'Es Tröpfli Heimat hinzufügen',exact:true}).click();await page.getByRole('button',{name:'Guntershauser Harass hinzufügen',exact:true}).click();
   const cartPhoto=page.locator('.cart-item-photo').first();await cartPhoto.click();assert.equal(await page.locator('#lb').getAttribute('aria-hidden'),'false');assert.ok(await page.locator('#li').evaluate(img=>img.naturalWidth>0));await page.keyboard.press('Escape');assert.equal(await page.locator('#lb').getAttribute('aria-hidden'),'true');await page.waitForFunction(()=>document.activeElement?.matches('.cart-item-photo'));photoChecks++;
