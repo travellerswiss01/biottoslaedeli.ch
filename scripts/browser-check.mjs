@@ -89,7 +89,7 @@ try{
     assert.equal(await page.locator('#siteNav a').count(),5,'One consistent five-link navigation');
     const visibleViews=await page.evaluate(ids=>ids.map(id=>{const section=document.getElementById(id);return{id,visible:!!section&&getComputedStyle(section).display!=='none'&&section.getClientRects().length>0}}),views);
     assert.ok(visibleViews.every(section=>section.visible),'All page sections remain visible: '+JSON.stringify(visibleViews));
-    if(width<=600){assert.equal(await page.locator('#menuToggle').isVisible(),true);await page.locator('#menuToggle').click();assert.equal(await page.locator('#menuToggle').getAttribute('aria-expanded'),'true');assert.equal(await page.locator('#siteNav').isVisible(),true);await page.locator('#siteNav a[href="#shop"]').click();assert.equal(await page.locator('#menuToggle').getAttribute('aria-expanded'),'false')}
+    if(width<=900){assert.equal(await page.locator('#menuToggle').isVisible(),true);await page.locator('#menuToggle').click();assert.equal(await page.locator('#menuToggle').getAttribute('aria-expanded'),'true');assert.equal(await page.locator('#siteNav').isVisible(),true);await page.locator('#siteNav a[href="#shop"]').click();assert.equal(await page.locator('#menuToggle').getAttribute('aria-expanded'),'false')}
     else{assert.equal(await page.locator('#siteNav').isVisible(),true);await page.locator('#siteNav a[href="#shop"]').click()}
     await page.waitForFunction(()=>location.hash==='#shop');await page.locator('#shop .shop-card').first().waitFor();await layout();await checkBasketOverview(width);
     assert.equal(await page.locator('#shop-home-title').innerText(),'Alles aus unserem Lädeli – direkt hier bestellen');
