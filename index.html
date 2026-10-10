@@ -23,6 +23,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Wann kann ich meinen Korb abholen?","acceptedAnswer":{"@type":"Answer","text":"Nach Ihrer Bestellung zeigt Shopify den Abholort und die erwartete Bereitstellung. Sobald Ihr Korb bereit ist, erhalten Sie die Abholbestätigung."}},{"@type":"Question","name":"Kann ich auch mehrere Körbe bestellen?","acceptedAnswer":{"@type":"Answer","text":"Ja. Im Shopify-Warenkorb können Sie mehrere verfügbare Körbe und verschiedene Sorten bestellen. Bei grösseren Mengen oder Firmenbestellungen melden Sie sich am besten direkt bei uns."}},{"@type":"Question","name":"Wie bezahle ich?","acceptedAnswer":{"@type":"Answer","text":"Sie können im Shopify-Checkout online bezahlen oder bei der Abholung vor Ort – bar oder mit TWINT."}},{"@type":"Question","name":"Ist Versand möglich?","acceptedAnswer":{"@type":"Answer","text":"Nein. Die Geschenkskörbe werden im Biottos Lädeli zur Abholung bereitgestellt."}},{"@type":"Question","name":"Was ist in den Körben?","acceptedAnswer":{"@type":"Answer","text":"Die genaue Zusammenstellung sehen Sie direkt bei jedem Korb. Unsere Auswahl umfasst hausgemachte Spezialitäten wie Sirup, Saucen, Essige, Balsamicos und Dörrfrüchte."}}]}</script>
 <link rel="stylesheet" href="css/style.css?v=5c1d3a4273ee57e1cadb6945d5f1efd55413dc39">
 <link rel="stylesheet" href="css/relaunch.css">
+<link rel="stylesheet" href="css/shop.css">
 <script>document.documentElement.classList.add("js")</script>
 <noscript><style>
 .wa{display:none}
@@ -36,7 +37,7 @@
 <body>
 <header><div class="wrap bar">
 <a class="brand-tab" href="#start"><span class="brand-logo"><img src="img/biottos-apfellogo.webp" width="1254" height="1254" alt="Biottos Lädeli – zur Startseite" decoding="async"></span></a>
-<nav class="site-nav" id="siteNav" aria-label="Menü"><a class="basket-tab" href="#koerbe"><span class="basket-gift" aria-hidden="true"><svg viewBox="0 0 32 32" focusable="false"><path d="M7 14h18v14H7z" fill="#fff1a6" stroke="#8f1116" stroke-width="1.8" stroke-linejoin="round"/><path d="M5 10h22v5H5z" fill="#c4161c" stroke="#8f1116" stroke-width="1.8" stroke-linejoin="round"/><path d="M16 15v13" fill="none" stroke="#c4161c" stroke-width="2"/><path d="M16 10C9 10 7 7 9 4c3-1 6 1 7 6Z" fill="#fff" stroke="#8f1116" stroke-width="1.5" stroke-linejoin="round"/><path d="M16 10c7 0 9-3 7-6-3-1-6 1-7 6Z" fill="#ffe27a" stroke="#8f1116" stroke-width="1.5" stroke-linejoin="round"/><circle cx="16" cy="10" r="1.5" fill="#8f1116"/></svg></span><span>Geschenkskörbe</span><span class="nav-badge" aria-label="Neu">NEU</span></a><div class="nav-group"><a class="nav-products" href="#gartenprodukte">Aus unserem Garten</a><div class="nav-submenu" aria-label="Produkte aus unserem Garten"><a href="#traubensaft">Traubensaft</a><a href="#suessmost">Süssmost</a><a href="#essig">Essig</a><a href="#doerrfruechte">Dörrfrüchte</a><a href="#tee">Tee</a></div></div><a href="#laedeli">Lädeli</a><a href="#ueber-uns">Über uns</a><div class="nav-group"><a class="nav-products" href="#lucia-kocht">Dienstleistungen</a><div class="nav-submenu" aria-label="Dienstleistungen"><a href="#lucia-kocht">Lucia · Privatköchin</a><a href="#otto-garten">Otto · Garten</a></div></div><a href="#abholung">Abholung</a><a href="#kontakt">Kontakt</a><a href="#faq">FAQ</a></nav><button type="button" class="menu-toggle" id="menuToggle" aria-controls="siteNav" aria-expanded="false" aria-label="Menü öffnen"><span aria-hidden="true"></span><b class="menu-caption">Menü</b></button><button type="button" class="lang-switch" id="langSwitch" aria-label="Sprache wechseln" aria-pressed="false" title="Sprache wechseln">
+<nav class="site-nav" id="siteNav" aria-label="Menü"><a class="basket-tab" href="#koerbe"><span class="basket-gift" aria-hidden="true"><svg viewBox="0 0 32 32" focusable="false"><path d="M7 14h18v14H7z" fill="#fff1a6" stroke="#8f1116" stroke-width="1.8" stroke-linejoin="round"/><path d="M5 10h22v5H5z" fill="#c4161c" stroke="#8f1116" stroke-width="1.8" stroke-linejoin="round"/><path d="M16 15v13" fill="none" stroke="#c4161c" stroke-width="2"/><path d="M16 10C9 10 7 7 9 4c3-1 6 1 7 6Z" fill="#fff" stroke="#8f1116" stroke-width="1.5" stroke-linejoin="round"/><path d="M16 10c7 0 9-3 7-6-3-1-6 1-7 6Z" fill="#ffe27a" stroke="#8f1116" stroke-width="1.5" stroke-linejoin="round"/><circle cx="16" cy="10" r="1.5" fill="#8f1116"/></svg></span><span>Geschenkskörbe</span><span class="nav-badge" aria-label="Neu">NEU</span></a><a href="#shop">Sortiment</a><div class="nav-group"><a class="nav-products" href="#gartenprodukte">Aus unserem Garten</a><div class="nav-submenu" aria-label="Produkte aus unserem Garten"><a href="#traubensaft">Traubensaft</a><a href="#suessmost">Süssmost</a><a href="#essig">Essig</a><a href="#doerrfruechte">Dörrfrüchte</a><a href="#tee">Tee</a></div></div><a href="#laedeli">Lädeli</a><a href="#ueber-uns">Über uns</a><div class="nav-group"><a class="nav-products" href="#lucia-kocht">Dienstleistungen</a><div class="nav-submenu" aria-label="Dienstleistungen"><a href="#lucia-kocht">Lucia · Privatköchin</a><a href="#otto-garten">Otto · Garten</a></div></div><a href="#abholung">Abholung</a><a href="#kontakt">Kontakt</a><a href="#faq">FAQ</a></nav><button type="button" class="menu-toggle" id="menuToggle" aria-controls="siteNav" aria-expanded="false" aria-label="Menü öffnen"><span aria-hidden="true"></span><b class="menu-caption">Menü</b></button><button type="button" class="lang-switch" id="langSwitch" aria-label="Sprache wechseln" aria-pressed="false" title="Sprache wechseln">
 <span class="lang-caption" aria-hidden="true">Sprache</span>
 <span class="lang-de lang-option"><span class="lang-flag flag-de" aria-hidden="true"><svg viewBox="0 0 30 18" focusable="false"><path fill="#000" d="M0 0h30v6H0z"/><path fill="#d00" d="M0 6h30v6H0z"/><path fill="#ffce00" d="M0 12h30v6H0z"/></svg></span><span class="lang-name">Deutsch</span><span class="lang-short">DE</span></span>
 <span class="lang-exchange" aria-hidden="true">↔</span>
@@ -55,7 +56,7 @@
   <p class="hero-lead">Hausgemacht, persönlich und direkt bei uns zusammengestellt.</p>
   <div class="homepage-start-links">
     <a class="btn" href="#koerbe">Geschenkskörbe</a>
-    <a class="btn" href="shop-vorschau.html">Sortiment ansehen</a>
+    <a class="btn" href="#shop">Spezialitäten bestellen</a>
     <a class="btn" href="#laedeli">Ins Lädeli</a>
   </div>
   <div class="homepage-pickup">
@@ -147,6 +148,24 @@
 </div></section>
 
 </div>
+
+<section class="blk view shop-home" id="shop" aria-labelledby="shop-home-title">
+  <div class="wrap">
+    <div class="shop-intro shop-home-intro">
+      <div class="hand">Spezialitäten und Geschenksharassen</div>
+      <h2 id="shop-home-title">Alles aus unserem Lädeli – direkt hier bestellen</h2>
+      <p>Fotos, Preise und Inhalte auf einen Blick. Zur Abholung im Lädeli.</p>
+    </div>
+    <h3 class="shop-category-title">Was suchst du?</h3>
+    <div id="shop-categories" class="shop-category-nav" role="group" aria-label="Produkte nach Kategorie filtern"></div>
+    <div id="shop-controls" class="shop-controls">
+      <label for="shop-search"><strong>Spezialität suchen</strong><span class="shop-search-field"><svg class="shop-search-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.8" cy="10.8" r="6.3" fill="none" stroke="currentColor" stroke-width="2"></circle><path d="m15.5 15.5 4.2 4.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg><input id="shop-search" type="search" placeholder="z. B. Essig" autocomplete="off"></span></label>
+    </div>
+    <p id="shop-count" role="status" aria-live="polite"></p>
+    <div id="shop-products" class="shop-assortment" aria-label="Alle Spezialitäten und Geschenksharassen"></div>
+    <noscript><p>Für die Produktauswahl und Bestellung braucht es JavaScript. <a href="shop-vorschau.html">Zur separaten Sortimentseite</a></p></noscript>
+  </div>
+</section>
 
 <section class="blk view" id="traubensaft">
 <div class="wrap two produce">
@@ -461,7 +480,8 @@
 <a class="btn wa" href="#kontakt" data-open="gross">Grosse Harasse bestellen</a>
 
 <div class="lb" id="lb" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Vergrössertes Foto"><button class="x" id="lx" aria-label="Foto schliessen">×</button><img id="li" alt="" decoding="async"><p>Mit X schliessen · Bild antippen zum Zoomen</p></div>
-<script type="module" src="js/app.js?v=shopify-final-qa-20261008"></script>
+<script type="module" src="js/app.js?v=shopify-final-qa-20261008">
+<script type="module" src="js/shop-preview.mjs"></script></script>
 </body>
 </html>
 
