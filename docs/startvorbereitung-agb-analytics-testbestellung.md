@@ -31,12 +31,13 @@ Quellen:
 - Kontakt: biottoslaedeli@gmail.com; +41 76 255 22 56.
 - Verkauf über Shopify; Abholung im Lädeli, kein Versand.
 - Es wurde bestätigt, dass Onlinezahlung sowie Barzahlung oder TWINT bei der Abholung angeboten werden sollen.
-- Die Website beschreibt, dass Shopify den Abholort und die erwartete Bereitstellung anzeigt und Biottos Lädeli nach der Vorbereitung eine Abholbestätigung sendet. Ein fixer Abholtag wird nicht versprochen.
+- Die Website beschreibt, dass Shopify den Abholort und die erwartete Bereitstellung anzeigt und Biottos Lädeli nach der Vorbereitung eine Abholbestätigung sendet.
+- Vom Betreiber bestätigt: Die bereitgestellte Bestellung soll innerhalb einer Woche nach der Abholbestätigung abgeholt werden.
 
 ### Vor dem AGB-Text zu bestätigen
 
 1. **Vertragspartner:** Josef Ignaz Zehnder ist bestätigt. Noch zu klären ist, ob «Biottos Lädeli» als Geschäftsbezeichnung ergänzt werden soll und ob eine eingetragene Rechtsform oder UID aufzuführen ist.
-2. **Abholung und Nichtabholung:** Wie lange bleibt eine bereitgestellte Bestellung reserviert? Gibt es eine Frist und was soll nach deren Ablauf geschehen?
+2. **Abholung und Nichtabholung:** Die Abholfrist von einer Woche nach der Abholbestätigung ist bestätigt. Noch offen ist, was nach Ablauf dieser Woche geschieht.
 3. **Änderung, Stornierung, Mängel:** Bis wann kann storniert/geändert werden? Wie soll mit bereits bezahlten Bestellungen und fehlerhaften oder beschädigten Produkten umgegangen werden?
 4. **Preis-/Steuerangabe:** Sind die angezeigten Endpreise inklusive aller anwendbaren Steuern? Das wird in den AGB und im Checkout nicht geraten.
 
