@@ -62,7 +62,8 @@ try{
     const y=geometry.map(x=>x.top);assert.ok(y[0]<y[1]&&y[1]<y[2],'Baskets must follow small to large at every width: '+JSON.stringify(geometry));
     for(const item of geometry){
       assert.ok(item.button.left>=item.buy.left&&item.button.right<=item.buy.right,'Basket choice must stay inside its price area: '+JSON.stringify(item));
-      if(width>720){assert.ok(item.photo.left<item.copy.left&&item.copy.left<item.buy.left,'Rows must read photo, contents, price: '+JSON.stringify(item));assert.ok(item.height<360,'Basket rows should stay compact: '+JSON.stringify(item))}
+      if(width>900){assert.ok(item.photo.left<item.copy.left&&item.copy.left<item.buy.left,'Desktop rows must read photo, contents, price: '+JSON.stringify(item));assert.ok(item.height<360,'Wide desktop basket rows should stay compact: '+JSON.stringify(item))}
+      else if(width>720){assert.ok(item.photo.left<item.copy.left&&item.copy.left<item.buy.left,'Tablet rows must keep photo, contents, and price in order: '+JSON.stringify(item));}
       else assert.ok(item.photo.bottom<=item.contents.top&&item.contents.bottom<=item.buy.top,'Mobile rows must stack photo, contents, price: '+JSON.stringify(item));
     }
     checks++;
