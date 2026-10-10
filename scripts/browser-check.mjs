@@ -84,9 +84,14 @@ try{
   const views=['start','koerbe','gartenprodukte','traubensaft','suessmost','essig','doerrfruechte','tee','ueber-uns','laedeli','lucia-kocht','otto-garten','abholung','faq','kontakt'];
   for(const width of [320,360,390,768,1440]){
     await page.setViewportSize({width,height:900});await page.emulateMedia({colorScheme:'dark'});
-    for(const view of views){await page.goto(origin+'/index.html#'+view);await page.waitForFunction(v=>location.hash==='#'+v&&document.getElementById(v)?.getClientRects().length>0,view);assert.equal(await page.locator('#siteNav a').count(),5,'One consistent five-link navigation on every section');if(width<=600){assert.equal(await page.locator('#menuToggle').isVisible(),true);await page.locator('#menuToggle').click();assert.equal(await page.locator('#menuToggle').getAttribute('aria-expanded'),'true');assert.equal(await page.locator('#siteNav').isVisible(),true);await page.locator('#menuToggle').click();assert.equal(await page.locator('#menuToggle').getAttribute('aria-expanded'),'false')}else assert.equal(await page.locator('#siteNav').isVisible(),true);await layout();if(view==='koerbe')await checkBasketOverview(width)}
     for(const file of ['geschenkskoerbe.html','firmengeschenke.html','warenkorb.html','404.html']){await page.goto(origin+'/'+file);await layout()}
-    await page.goto(origin+'/index.html#shop');await page.locator('#shop .shop-card').first().waitFor();await layout();
+    await page.goto(origin+'/index.html#start');await page.waitForFunction(()=>location.hash==='#start');
+    assert.equal(await page.locator('#siteNav a').count(),5,'One consistent five-link navigation');
+    const visibleViews=await page.evaluate(ids=>ids.map(id=>{const section=document.getElementById(id);return{id,visible:!!section&&getComputedStyle(section).display!=='none'&&section.getClientRects().length>0}}),views);
+    assert.ok(visibleViews.every(section=>section.visible),'All page sections remain visible: '+JSON.stringify(visibleViews));
+    if(width<=600){assert.equal(await page.locator('#menuToggle').isVisible(),true);await page.locator('#menuToggle').click();assert.equal(await page.locator('#menuToggle').getAttribute('aria-expanded'),'true');assert.equal(await page.locator('#siteNav').isVisible(),true);await page.locator('#siteNav a[href="#shop"]').click();assert.equal(await page.locator('#menuToggle').getAttribute('aria-expanded'),'false')}
+    else{assert.equal(await page.locator('#siteNav').isVisible(),true);await page.locator('#siteNav a[href="#shop"]').click()}
+    await page.waitForFunction(()=>location.hash==='#shop');await page.locator('#shop .shop-card').first().waitFor();await layout();await checkBasketOverview(width);
     assert.equal(await page.locator('#shop-home-title').innerText(),'Alles aus unserem Lädeli – direkt hier bestellen');
     assert.equal(await page.locator('#shop .shop-section-title').count(),6);
     assert.equal(await page.locator('#shop-count').innerText(),'Zeigt 19 von 19 Produkten');
