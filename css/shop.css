@@ -80,15 +80,12 @@
   .shop-category-nav button[aria-pressed="true"]{padding:7px 8px}
 }
 
-/* Compact, keyboard-accessible category chooser without horizontal scrolling. */
-.shop-category-filter{margin:8px 0 6px;border:1px solid var(--line);border-radius:8px;background:#fff}
-.shop-category-filter>summary{display:flex;align-items:center;gap:10px;min-height:44px;padding:8px 12px;cursor:pointer;list-style:none;font-size:1rem;font-weight:700;text-decoration:none;border-radius:8px}
-.shop-category-filter>summary::-webkit-details-marker{display:none}
-#shop-category-current{margin-left:auto;color:#444;font-size:.9rem;font-weight:600}
-.shop-category-chevron{width:20px;height:20px;flex:none;transition:transform .18s ease}
-.shop-category-filter[open] .shop-category-chevron{transform:rotate(180deg)}
-.shop-category-filter .shop-category-nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:6px;overflow:visible;margin:0;padding:0 10px 10px}
-.shop-category-filter .shop-category-nav button{width:100%;min-height:40px;text-align:left;white-space:normal}
-.shop-category-filter .shop-category-nav button[aria-pressed="true"]{border:2px solid #8f1116;background:#faf7f0}
-.shop-category-filter :focus-visible{outline:3px solid #8f1116;outline-offset:2px}
-@media(max-width:480px){.shop-category-filter .shop-category-nav{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Direct, compact category choices that wrap instead of scrolling sideways. */
+.shop-category-title{font-size:1rem;font-weight:700;margin:6px 0 4px}
+.shop-category-nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:6px;overflow:visible;margin:0 0 8px;padding:0}
+.shop-category-nav button{width:100%;min-height:38px;padding:6px 8px;text-align:center;white-space:normal;font-size:.88rem;line-height:1.2;transition:background-color .16s ease,border-color .16s ease}
+.shop-category-nav button:hover{background:var(--paper);border-color:var(--red)}
+.shop-category-nav button[aria-pressed="true"]{border:2px solid var(--red);background:var(--paper)}
+@media(max-width:760px){.shop-category-nav{grid-template-columns:repeat(auto-fit,minmax(105px,1fr));gap:5px}}
+@media(max-width:480px){.shop-category-nav{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.shop-category-nav button{min-height:38px;padding:6px 4px;font-size:.82rem}}
