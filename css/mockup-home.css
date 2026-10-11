@@ -5,10 +5,11 @@ header{border-bottom:0;box-shadow:0 2px 12px rgba(18,59,45,.08)}
 header .top-notice{min-height:42px;background:var(--home-green-dark);color:#fff}
 header .top-notice>a{display:flex;min-height:42px;align-items:center;justify-content:center;gap:10px;padding:6px 14px;color:#fff;text-decoration:none;text-align:center;font-size:.9rem;font-weight:600;line-height:1.25}
 header .top-notice svg{width:23px;height:23px;flex:0 0 23px}
-header .header-bar{display:grid!important;grid-template-columns:minmax(190px,245px) minmax(0,1fr) auto;grid-template-areas:"brand nav actions";align-items:center;gap:clamp(10px,1.4vw,22px);width:100%;max-width:1680px;min-height:94px;padding:10px clamp(18px,3.8vw,64px);margin:0 auto}
+header .header-bar{display:grid!important;grid-template-columns:minmax(190px,245px) minmax(0,1fr) auto auto;grid-template-areas:"brand nav actions language";align-items:center;gap:clamp(10px,1.4vw,22px);width:100%;max-width:1680px;min-height:94px;padding:10px clamp(18px,3.8vw,64px);margin:0 auto}
 header .header-bar>.brand-tab{grid-area:brand}
 header .header-bar>.site-nav{grid-area:nav;min-width:0;flex-wrap:nowrap;justify-content:center;gap:clamp(0px,.35vw,6px)}
 header .header-bar>.header-actions{grid-area:actions}
+header .header-bar>.lang-switch{grid-area:language;justify-self:end}
 header .header-bar>.menu-toggle{grid-area:menu;display:none}
 
 header .brand-tab{padding:6px 0}
@@ -77,7 +78,7 @@ header .menu-toggle:focus-visible,header .lang-switch:focus-visible{outline:3px 
 #koerbe .korb-card-custom h3{text-align:left}
 #koerbe .korb-custom-link{margin:auto 16px 16px;width:calc(100% - 32px);font-size:.88rem}
 @media(max-width:1180px) and (min-width:901px){
- header .header-bar{grid-template-columns:minmax(168px,205px) minmax(0,1fr) auto;gap:9px;padding-inline:18px}
+ header .header-bar{grid-template-columns:minmax(168px,205px) minmax(0,1fr) auto auto;gap:9px;padding-inline:18px}
  header .brand-logo{width:205px}
  header .site-nav>a,header .site-nav .nav-dropdown-main>a{padding-inline:6px;font-size:.87rem}
  header .site-nav .nav-dropdown-toggle{min-width:52px;padding-inline:6px;font-size:.76rem}
@@ -93,7 +94,7 @@ header .menu-toggle:focus-visible,header .lang-switch:focus-visible{outline:3px 
 }
 @media(max-width:900px){
  html{scroll-padding-top:128px}
- header .header-bar{grid-template-columns:minmax(0,1fr) auto 40px;grid-template-areas:"brand actions menu";gap:6px;min-height:70px;padding:7px 12px}
+ header .header-bar{grid-template-columns:minmax(0,1fr) auto 40px auto;grid-template-areas:"brand actions menu language";gap:6px;min-height:70px;padding:7px 12px}
  header .brand-logo{width:min(230px,100%)}
  header .brand-logo img{width:clamp(96px,25vw,145px)}
  header .header-actions{gap:0}
@@ -125,12 +126,14 @@ header .menu-toggle:focus-visible,header .lang-switch:focus-visible{outline:3px 
  header .top-notice>a{min-height:38px;padding:5px 10px;font-size:.76rem}
  header .top-notice{min-height:38px}
  header .top-notice svg{width:20px;height:20px;flex-basis:20px}
- header .header-bar{grid-template-columns:minmax(0,1fr) auto 40px auto;gap:3px;padding-inline:8px}
+ header .header-bar{position:relative;grid-template-columns:minmax(0,1fr) 40px 40px;grid-template-areas:"brand actions menu";gap:3px;padding:7px 59px 7px 8px}
  header .brand-logo{width:min(205px,100%)}
  header .brand-logo img{width:clamp(92px,30vw,128px)}
+ header .header-bar>.lang-switch{position:absolute;top:50%;right:8px;z-index:3;transform:translateY(-50%);width:43px;height:38px;padding:2px}
  header .header-action{width:35px;height:38px}
+ header .header-search-link{display:none}
  header .header-action svg{width:23px;height:23px}
- header .lang-switch{width:43px;height:38px;padding:2px}
+
  header .lang-switch .lang-name,header .lang-switch .lang-caption,header .lang-switch .lang-exchange{display:none}
  header .lang-switch .lang-short{display:inline;font-size:.68rem}
  .homepage-hero{grid-template-columns:minmax(0,1fr);padding-bottom:24px!important}
@@ -151,11 +154,11 @@ header .menu-toggle:focus-visible,header .lang-switch:focus-visible{outline:3px 
  #koerbe .korb-custom-link{margin:0 16px 16px;width:calc(100% - 32px)}
 }
 @media(max-width:370px){
- header .header-bar{grid-template-columns:minmax(0,1fr) auto 38px;gap:2px;padding-inline:7px}
+ header .header-bar{grid-template-columns:minmax(0,1fr) 38px 38px;gap:2px;padding:7px 54px 7px 7px}
  header .brand-logo img{width:clamp(88px,29vw,112px)}
- header .header-actions{width:auto;gap:2px}
+ header .header-actions{width:38px;gap:0}
  header .header-action{width:36px}
- header .lang-switch{width:40px}
+ header .header-bar>.lang-switch{right:7px;width:40px}
  .home-hero-copy{padding-inline:18px}
  #koerbe .korb-picker-grid{padding-inline:12px}
  #koerbe .korb-card-photo,#koerbe .korb-card-custom-art{height:196px;flex-basis:196px}
