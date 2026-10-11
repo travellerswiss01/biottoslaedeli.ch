@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="css/style.css?v=5c1d3a4273ee57e1cadb6945d5f1efd55413dc39">
 <link rel="stylesheet" href="css/relaunch.css">
 <link rel="stylesheet" href="css/shop.css">
+<link rel="stylesheet" href="css/mockup-home.css">
 <script>document.documentElement.classList.add("js")</script>
 <noscript><style>
 .wa{display:none}
@@ -35,9 +36,23 @@
 </style></noscript>
 </head>
 <body>
-<header><div class="wrap bar">
+<header>
+<div class="top-notice"><a href="#abholung"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.5 3.5C12 3.5 5 7.2 5 13.2c0 3.2 2.3 5.3 5.4 5.3 6.2 0 10.1-7 10.1-15Z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 21c3.5-5.3 7.6-8.8 13.2-12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>Abholung in Guntershausen <span aria-hidden="true">·</span> Regional im Thurgau</span></a></div>
+<div class="wrap bar header-bar">
 <a class="brand-tab" href="#start"><span class="brand-logo"><img src="img/biottos-apfellogo.webp" width="1254" height="1254" alt="Biottos Lädeli – zur Startseite" decoding="async"></span></a>
-<nav class="site-nav" id="siteNav" aria-label="Hauptnavigation"><a class="nav-gift-link" href="#koerbe"><span class="nav-gift-icon" aria-hidden="true">🎁</span><span>Geschenkskörbe</span><span class="nav-gift-badge">NEU</span></a><div class="nav-dropdown" id="sortimentMenu"><div class="nav-dropdown-main"><a class="nav-dropdown-link" href="#shop">Sortiment</a><button type="button" class="nav-dropdown-toggle" id="sortimentToggle" aria-expanded="false" aria-controls="sortimentSubmenu" aria-label="Weitere Sortimentsbereiche öffnen"><span>Mehr</span></button></div><div class="nav-submenu" id="sortimentSubmenu" aria-label="Sortiment-Unterseiten"><a href="#koerbe">Thurgauer Geschenkharassen</a><a href="#korb-guntershauser">Guntershauser Geschenkharassen</a><a href="#kontakt">Geschenk selbst zusammenstellen</a></div></div><a href="#ueber-uns">Über uns</a><a href="#abholung">Abholung</a><a href="#kontakt">Kontakt</a></nav><button type="button" class="menu-toggle" id="menuToggle" aria-controls="siteNav" aria-expanded="false" aria-label="Menü öffnen"><span aria-hidden="true"></span><b class="menu-caption">Menü</b></button><button type="button" class="lang-switch" id="langSwitch" aria-label="Sprache wechseln" aria-pressed="false" title="Sprache wechseln">
+<nav class="site-nav" id="siteNav" aria-label="Hauptnavigation">
+<a href="#start">Startseite</a>
+<div class="nav-dropdown" id="sortimentMenu"><div class="nav-dropdown-main"><a class="nav-dropdown-link" href="#shop">Sortiment</a><button type="button" class="nav-dropdown-toggle" id="sortimentToggle" aria-expanded="false" aria-controls="sortimentSubmenu" aria-label="Weitere Sortimentsbereiche öffnen"><span>Mehr</span></button></div><div class="nav-submenu" id="sortimentSubmenu" aria-label="Sortiment-Unterseiten"><a href="#koerbe">Thurgauer Geschenkharassen</a><a href="#korb-guntershauser">Guntershauser Geschenkharassen</a><a href="#kontakt">Geschenk selbst zusammenstellen</a></div></div>
+<a class="nav-gift-link" href="#koerbe">Geschenkkörbe</a>
+<a href="#ueber-uns">Über uns</a>
+<a href="#kontakt">Kontakt</a>
+</nav>
+<div class="header-actions">
+<a class="header-action header-search-link" href="#shop-search" data-focus-search aria-label="Sortiment durchsuchen" title="Sortiment durchsuchen"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.8" cy="10.8" r="6.3" fill="none" stroke="currentColor" stroke-width="2"/><path d="m15.5 15.5 4.2 4.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
+<a class="header-action header-cart-link" href="warenkorb.html" aria-label="Warenkorb"><svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M3 5h4l3.2 16.5h14.2L28 10H9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="13" cy="26" r="1.8" fill="currentColor"/><circle cx="24" cy="26" r="1.8" fill="currentColor"/></svg><span class="header-cart-count" id="headerCartCount" data-cart-count aria-live="polite">0</span></a>
+</div>
+<button type="button" class="menu-toggle" id="menuToggle" aria-controls="siteNav" aria-expanded="false" aria-label="Menü öffnen"><span aria-hidden="true"></span><b class="menu-caption">Menü</b></button>
+<button type="button" class="lang-switch" id="langSwitch" aria-label="Sprache wechseln" aria-pressed="false" title="Sprache wechseln">
 <span class="lang-caption" aria-hidden="true">Sprache</span>
 <span class="lang-de lang-option"><span class="lang-flag flag-de" aria-hidden="true"><svg viewBox="0 0 30 18" focusable="false"><path fill="#000" d="M0 0h30v6H0z"/><path fill="#d00" d="M0 6h30v6H0z"/><path fill="#ffce00" d="M0 12h30v6H0z"/></svg></span><span class="lang-name">Deutsch</span><span class="lang-short">DE</span></span>
 <span class="lang-exchange" aria-hidden="true">↔</span>
@@ -46,30 +61,17 @@
 </div></header>
 
 <main>
-<section class="hero view homepage-hero" id="start">
-<div class="wrap">
-  <div class="homepage-brand homepage-apple-logo">
-    <img src="img/biottos-apfellogo.webp" width="1254" height="1254" alt="Biottos Lädeli" loading="eager" fetchpriority="high" decoding="async">
-  </div>
-  <div class="hero-kicker">Hausgemacht in Guntershausen · Thurgau</div>
-  <h1 class="hero-title">Geschenkskörbe<br>aus unserem Garten.</h1>
-  <p class="hero-lead">Hausgemacht, persönlich und direkt bei uns zusammengestellt.</p>
-  <div class="homepage-start-links">
-    <a class="btn" href="#koerbe">Geschenkskörbe</a>
-    <a class="btn" href="#shop">Spezialitäten bestellen</a>
-    <a class="btn" href="#laedeli">Ins Lädeli</a>
-  </div>
-  <div class="homepage-pickup">
-    <strong>Abholung · Mo–Sa, 8–18 Uhr</strong>
-    <a href="#abholung">Details zur Abholung →</a>
-  </div>
+<section class="hero view homepage-hero" id="start" aria-labelledby="home-title">
+<div class="home-hero-copy">
+<h1 class="hero-title" id="home-title"><span>Geschenke aus</span><span>dem Thurgau</span></h1>
+<a class="btn home-hero-cta" href="#koerbe"><span>Geschenkkörbe entdecken</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 </div>
-
+<div class="home-hero-photo"><img src="img/laedeli-angebot-hero.webp" width="1050" height="310" alt="Äpfel, Birnen, Trauben und Tomaten am Marktstand von Biottos Lädeli" loading="eager" fetchpriority="high" decoding="async"></div>
 </section>
 
 <div class="view" id="koerbe">
 <section class="koerbe-intro"><div class="wrap">
-<h2>Ein Stück Thurgau zum Verschenken</h2>
+<h2 class="visually-hidden">Ein Stück Thurgau zum Verschenken</h2>
 
 </div></section>
 
@@ -82,16 +84,16 @@
   <div class="korb-card-copy">
     <div class="korb-gift-intent">Ein kleines Mitbringsel</div><h3>Es Tröpfli Heimat</h3>
     <p class="korb-count">3 Fläschchen à 250 ml</p>
-    <section class="korb-card-contents" aria-label="Inhalt von Es Tröpfli Heimat">
+    <details class="korb-card-details"><summary>Inhalt ansehen</summary><section class="korb-card-contents" aria-label="Inhalt von Es Tröpfli Heimat">
       <h4>Das ist im Korb</h4>
       <ul>
         <li><button type="button" class="korb-product-link" data-product-photo="img/Himbeeressig.png.webp" data-product-alt="Biottos Himbeeressig" aria-label="Produktfoto ansehen: Biottos Himbeeressig" aria-haspopup="dialog" title="Produktfoto ansehen">Himbeeressig · 250 ml</button></li>
         <li><button type="button" class="korb-product-link" data-product-photo="img/Birnen-Balsamico.png.webp" data-product-alt="Biottos Birnen-Balsamico" aria-label="Produktfoto ansehen: Biottos Birnen-Balsamico" aria-haspopup="dialog" title="Produktfoto ansehen">Birnen-Balsamico · 250 ml</button></li>
         <li><button type="button" class="korb-product-link" data-product-photo="img/Kirschessig.png.webp" data-product-alt="Biottos Kirschessig" aria-label="Produktfoto ansehen: Biottos Kirschessig" aria-haspopup="dialog" title="Produktfoto ansehen">Kirschessig · 250 ml</button></li>
       </ul>
-    </section>
+    </section></details>
   </div>
-  <div class="korb-card-buy"><div class="korb-card-price">CHF 29.00</div><button class="korb-card-link" type="button" data-open="chili">Korb wählen</button></div>
+  <div class="korb-card-buy"><div class="korb-card-price">CHF 29.00</div><button class="korb-card-link" type="button" data-open="chili"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2.5 4h3l2.1 11.5h11.6L22 8H6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.5" cy="19.5" r="1.2" fill="currentColor"/><circle cx="18" cy="19.5" r="1.2" fill="currentColor"/></svg><span>In den Warenkorb</span></button></div>
 </article>
 
 <article class="korb-card k2">
@@ -101,7 +103,7 @@
   <div class="korb-card-copy">
     <div class="korb-gift-intent">Ein herzliches Dankeschön</div><h3>Maischhauser Harass</h3>
     <p class="korb-count">5 Spezialitäten</p>
-    <section class="korb-card-contents" aria-label="Inhalt von Maischhauser Harass">
+    <details class="korb-card-details"><summary>Inhalt ansehen</summary><section class="korb-card-contents" aria-label="Inhalt von Maischhauser Harass">
       <h4>Das ist im Korb</h4>
       <ul>
         <li><button type="button" class="korb-product-link" data-product-photo="img/Tomatensauce.png.webp" data-product-alt="Biottos Tomatensauce" aria-label="Produktfoto ansehen: Biottos Tomatensauce" aria-haspopup="dialog" title="Produktfoto ansehen">Tomatensauce · 250 ml</button></li>
@@ -110,9 +112,9 @@
         <li><button type="button" class="korb-product-link" data-product-photo="img/Dessertzwetschgen.png.webp" data-product-alt="Biottos Dessertzwetschgen" aria-label="Produktfoto ansehen: Biottos Dessertzwetschgen" aria-haspopup="dialog" title="Produktfoto ansehen">Dessertzwetschgen · 250 ml</button></li>
         <li><button type="button" class="korb-product-link" data-product-photo="img/Gedörrte Birnen halb Becher.jpg.webp" data-product-alt="Biottos halb gedörrte Birnen" aria-label="Produktfoto ansehen: Biottos halb gedörrte Birnen" aria-haspopup="dialog" title="Produktfoto ansehen">Halb gedörrte Birnen · 100 g</button></li>
       </ul>
-    </section>
+    </section></details>
   </div>
-  <div class="korb-card-buy"><div class="korb-card-price">CHF 39.00</div><button class="korb-card-link" type="button" data-open="fein">Korb wählen</button></div>
+  <div class="korb-card-buy"><div class="korb-card-price">CHF 39.00</div><button class="korb-card-link" type="button" data-open="fein"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2.5 4h3l2.1 11.5h11.6L22 8H6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.5" cy="19.5" r="1.2" fill="currentColor"/><circle cx="18" cy="19.5" r="1.2" fill="currentColor"/></svg><span>In den Warenkorb</span></button></div>
 </article>
 
 <article class="korb-card k1">
@@ -122,7 +124,7 @@
   <div class="korb-card-copy">
     <div class="korb-gift-intent" id="korb-guntershauser">Ein grosszügiges Geschenk</div><h3>Guntershauser Harass</h3>
     <p class="korb-count">7 Spezialitäten</p>
-    <section class="korb-card-contents" aria-label="Inhalt von Guntershauser Harass">
+    <details class="korb-card-details"><summary>Inhalt ansehen</summary><section class="korb-card-contents" aria-label="Inhalt von Guntershauser Harass">
       <h4>Das ist im Korb</h4>
       <ul>
         <li><button type="button" class="korb-product-link" data-product-photo="img/Kirschen-Birnen-Essig.png.webp" data-product-alt="Biottos Kirschen-Birnen-Essig" aria-label="Produktfoto ansehen: Biottos Kirschen-Birnen-Essig" aria-haspopup="dialog" title="Produktfoto ansehen">Kirschen-Birnen-Essig · 250 ml</button></li>
@@ -133,10 +135,15 @@
         <li><button type="button" class="korb-product-link" data-product-photo="img/Birnenweggen.png.webp" data-product-alt="Biottos Birnenweggen" aria-label="Produktfoto ansehen: Biottos Birnenweggen" aria-haspopup="dialog" title="Produktfoto ansehen">Birnenweggen · 360 g</button></li>
         <li><button type="button" class="korb-product-link" data-product-photo="img/Himbeeressig.png.webp" data-product-alt="Biottos Himbeeressig" aria-label="Produktfoto ansehen: Biottos Himbeeressig" aria-haspopup="dialog" title="Produktfoto ansehen">Himbeeressig · 250 ml</button></li>
       </ul>
-    </section>
+    </section></details>
   </div>
-  <div class="korb-card-buy"><div class="korb-card-price">CHF 74.90</div><button class="korb-card-link" type="button" data-open="gross">Korb wählen</button></div>
+  <div class="korb-card-buy"><div class="korb-card-price">CHF 74.90</div><button class="korb-card-link" type="button" data-open="gross"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2.5 4h3l2.1 11.5h11.6L22 8H6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.5" cy="19.5" r="1.2" fill="currentColor"/><circle cx="18" cy="19.5" r="1.2" fill="currentColor"/></svg><span>In den Warenkorb</span></button></div>
 </article>
+<aside class="korb-card-custom" aria-labelledby="custom-gift-title">
+<div class="korb-card-custom-art"><svg viewBox="0 0 88 88" aria-hidden="true" focusable="false"><path d="M12 39h64v39H12zM8 29h72v12H8zM44 29v49M44 29H24c-12 0-13-17-2-19 13-2 22 19 22 19Zm0 0h20c12 0 13-17 2-19-13-2-22 19-22 19Z" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<div class="korb-card-custom-copy"><h3 id="custom-gift-title">Geschenk selbst zusammenstellen</h3></div>
+<a class="korb-custom-link" href="#kontakt"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 5h18v14H3zM4 6l8 7 8-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span>Individuell anfragen</span></a>
+</aside>
 
 </div>
 
@@ -485,6 +492,7 @@
 <div class="lb" id="lb" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Vergrössertes Foto"><button class="x" id="lx" aria-label="Foto schliessen">×</button><img id="li" alt="" decoding="async"><p>Mit X schliessen · Bild antippen zum Zoomen</p></div>
 <script type="module" src="js/app.js?v=shopify-final-qa-20261008"></script>
 <script type="module" src="js/shop-preview.mjs"></script>
+<script type="module" src="js/header-cart.js"></script>
 </body>
 </html>
 

@@ -47,31 +47,36 @@ try{
   async function checkBasketOverview(width){
     const cards=page.locator('#koerbe .korb-card');
     assert.equal(await cards.count(),3);
-    assert.equal(await page.getByRole('heading',{name:'Ein Stück Thurgau zum Verschenken',exact:true}).innerText(),'Ein Stück Thurgau zum Verschenken');
+    assert.equal((await page.locator('#koerbe .korb-picker h2').textContent()).trim(),'Ein Stück Thurgau zum Verschenken');
     const expected=[['Es Tröpfli Heimat',3,'CHF 29.00','chili'],['Maischhauser Harass',5,'CHF 39.00','fein'],['Guntershauser Harass',7,'CHF 74.90','gross']];
     for(let i=0;i<expected.length;i++){
       const card=cards.nth(i),[name,count,price,variant]=expected[i];
       assert.equal(await card.locator('h3').innerText(),name);
       assert.equal(await card.locator('.korb-card-contents li').count(),count);
-      assert.equal(await card.locator('.korb-card-contents').isVisible(),true);
+      const details=card.locator('.korb-card-details');assert.equal(await details.isVisible(),true);assert.equal(await details.locator('summary').innerText(),'Inhalt ansehen');await details.locator('summary').click();assert.equal(await card.locator('.korb-card-contents').isVisible(),true);await details.locator('summary').click();
       assert.equal((await card.locator('.korb-card-price').innerText()).trim(),price);
       const choice=card.locator('.korb-card-link');
-      assert.equal(await choice.innerText(),'Korb wählen');
+      assert.equal((await choice.innerText()).trim(),'In den Warenkorb');
       assert.equal(await choice.getAttribute('data-open'),variant);
       assert.ok(await choice.evaluate(e=>e.getBoundingClientRect().height>=44));
       assert.equal(await card.locator('.korb-card-photo img').getAttribute('tabindex'),'0');
       const headingStyle=await card.locator('h3').evaluate(e=>({color:getComputedStyle(e).color,weight:Number(getComputedStyle(e).fontWeight),size:parseFloat(getComputedStyle(e).fontSize)}));
-      assert.equal(headingStyle.color,'rgb(0, 0, 0)');assert.ok(headingStyle.weight>=700&&headingStyle.size>=20);
+      assert.equal(headingStyle.color,'rgb(21, 60, 47)');assert.ok(headingStyle.weight>=700&&headingStyle.size>=20);
       const listStyle=await card.locator('.korb-card-contents li').first().evaluate(e=>parseFloat(getComputedStyle(e).fontSize));assert.ok(listStyle>=14);
     }
-    const geometry=await cards.evaluateAll(es=>es.map(e=>{const r=e.getBoundingClientRect(),rect=s=>e.querySelector(s).getBoundingClientRect();return{left:r.left,top:r.top,height:r.height,photo:rect('.korb-card-photo'),copy:rect('.korb-card-copy'),buy:rect('.korb-card-buy'),button:rect('.korb-card-link'),contents:rect('.korb-card-contents')}}));
-    const y=geometry.map(x=>x.top);assert.ok(y[0]<y[1]&&y[1]<y[2],'Baskets must follow small to large at every width: '+JSON.stringify(geometry));
+    const geometry=await cards.evaluateAll(es=>es.map(e=>{const r=e.getBoundingClientRect(),rect=s=>e.querySelector(s).getBoundingClientRect();return{left:r.left,top:r.top,height:r.height,photo:rect('.korb-card-photo'),copy:rect('.korb-card-copy'),buy:rect('.korb-card-buy'),button:rect('.korb-card-link')}}));
+    const columns=await page.locator('#koerbe .korb-picker-grid').evaluate(e=>getComputedStyle(e).gridTemplateColumns.split(' ').length);
+    assert.equal(columns,width>1100?4:width>720?2:1,'Basket cards must adapt to the viewport');
     for(const item of geometry){
+      assert.ok(item.photo.top<item.copy.top&&item.copy.top<item.buy.top,'Basket cards must stack photo, details and order action: '+JSON.stringify(item));
       assert.ok(item.button.left>=item.buy.left&&item.button.right<=item.buy.right,'Basket choice must stay inside its price area: '+JSON.stringify(item));
-      if(width>900){assert.ok(item.photo.left<item.copy.left&&item.copy.left<item.buy.left,'Desktop rows must read photo, contents, price: '+JSON.stringify(item));assert.ok(item.height<360,'Wide desktop basket rows should stay compact: '+JSON.stringify(item))}
-      else if(width>720){assert.ok(item.photo.left<item.copy.left&&item.copy.left<item.buy.left,'Tablet rows must keep photo, contents, and price in order: '+JSON.stringify(item));}
-      else assert.ok(item.photo.bottom<=item.contents.top&&item.contents.bottom<=item.buy.top,'Mobile rows must stack photo, contents, price: '+JSON.stringify(item));
+      assert.ok(item.height<520,'Basket card should stay compact with its content disclosure closed: '+JSON.stringify(item));
+      assert.ok(item.button.height>=44,'Basket buttons must remain touch friendly');
     }
+    const custom=page.locator('#koerbe .korb-card-custom');assert.equal(await custom.locator('h3').innerText(),'Geschenk selbst zusammenstellen');assert.equal(await custom.locator('a').getAttribute('href'),'#kontakt');
+    assert.equal(await custom.locator('a').innerText(),'Individuell anfragen');
+    const outline=await custom.evaluate(e=>({color:getComputedStyle(e).borderTopColor,radius:getComputedStyle(e).borderTopLeftRadius}));
+    assert.equal(outline.color,'rgb(212, 0, 24)');assert.ok(parseFloat(outline.radius)>=10);
     checks++;
     if(width===390){
       const photo=cards.first().locator('.korb-card-photo img');

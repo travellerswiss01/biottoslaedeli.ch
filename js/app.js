@@ -144,6 +144,7 @@ var dict={"Jetzt bestellen":"Jetzt bstelle","Vorheriger Korb":"Vorige Gschänksh
 "Online bezahlen oder im Lädeli – bar oder mit TWINT.":"Online zahle oder im Lädeli – bar oder mit TWINT.",
 "Online im Shopify-Checkout oder bei Abholung bar oder mit TWINT. Ein Versand ist nicht möglich.":"Online im Shopify-Checkout oder bi Abholig bar oder mit TWINT. E Versand isch nöd möglich."
 };
+Object.assign(dict,{"Startseite":"Startsiite","Geschenke aus":"Gschänk us","dem Thurgau":"em Thurgau","Geschenkkörbe entdecken":"Gschänksharass entdecke","Abholung in Guntershausen":"Abholig z Guntershuse","Regional im Thurgau":"Regional im Thurgau","Inhalt ansehen":"Inhalt aluege","In den Warenkorb":"I de Warechorb","Individuell anfragen":"Individuell afrage"});
 Object.assign(dict,{
 "Menü öffnen":"Menü öffne","Menü schliessen":"Menü schliesse","Weitere Sortimentsbereiche öffnen":"Witeri Sortimentsbereich öffne","Weitere Sortimentsbereiche schliessen":"Witeri Sortimentsbereich schliesse","Mehr":"Meh",
 "Vorherige Abholwoche":"Vorigi Abholwuche","Vorheriger Schritt":"Vorige Schritt","Nächster Schritt":"Nächste Schritt",
