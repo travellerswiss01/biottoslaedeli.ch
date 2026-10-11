@@ -35,7 +35,7 @@ header .menu-toggle:focus-visible,header .lang-switch:focus-visible{outline:3px 
 .view{scroll-margin-top:150px}
 .homepage-hero{display:grid!important;grid-template-columns:minmax(0,40%) minmax(0,60%);align-items:stretch;gap:0;min-height:clamp(240px,17vw,292px);padding:0 0 38px!important;background:var(--paper,#faf5ea);overflow:visible}
 .home-hero-copy{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:22px;min-width:0;padding:26px clamp(26px,5.6vw,96px);background:var(--paper,#faf5ea)}
-.homepage-hero .hero-title{max-width:620px;margin:0;color:var(--home-green);font-family:"Young Serif",Georgia,serif;font-size:clamp(2.55rem,4.15vw,4.2rem);font-weight:400;line-height:.99;text-align:left}
+.homepage-hero .hero-title{max-width:620px;margin:0;color:var(--home-green);font-family:"Young Serif",Georgia,serif;font-size:clamp(2.45rem,3.4vw,3.5rem);font-weight:400;line-height:.99;text-align:left}
 .homepage-hero .hero-title span{display:block}
 .home-hero-cta{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:54px;margin:0;padding:12px 24px;border-radius:10px;background:var(--home-red);color:#fff;font-size:1rem;font-weight:700;text-decoration:none}
 .home-hero-cta:hover,.home-hero-cta:focus-visible{background:#b90017;color:#fff;filter:none}
@@ -62,7 +62,7 @@ header .menu-toggle:focus-visible,header .lang-switch:focus-visible{outline:3px 
 #koerbe .korb-card-contents{margin:0;padding:8px 0 0;border-top:1px solid #e6eae7}
 #koerbe .korb-card-contents h4{margin:0 0 4px;font-size:.86rem;color:var(--home-green)}
 #koerbe .korb-card-contents ul{display:grid;grid-template-columns:1fr;gap:2px;margin:0;padding:0;list-style:none}
-#koerbe .korb-card-contents li{position:relative;padding:1px 0 1px 15px;color:#26352e;font-size:.78rem;line-height:1.42;text-align:left}
+#koerbe .korb-card-contents li{position:relative;padding:1px 0 1px 15px;color:#26352e;font-size:.875rem;line-height:1.42;text-align:left}
 #koerbe .korb-card-contents li::before{position:absolute;left:0;color:var(--home-red);font-weight:700;content:"✓"}
 #koerbe .korb-card-contents .korb-product-link{padding:0;color:inherit;font-size:inherit;text-align:left}
 #koerbe .korb-card-buy{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-end;gap:8px;margin-top:auto;padding:0 16px 16px;border:0}
