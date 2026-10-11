@@ -49,7 +49,9 @@ export function createCartBridge(targetWindow, products=cartProducts, options={}
   function saveCart(items){
     memoryCart=sanitize(items);
     try{if(targetWindow.localStorage)targetWindow.localStorage.setItem(storageKey,JSON.stringify({version:1,items:memoryCart}));else storageAvailable=false}catch{storageAvailable=false}
-    return getCart();
+    const saved=getCart();
+    if(targetWindow.dispatchEvent&&typeof targetWindow.CustomEvent==='function')targetWindow.dispatchEvent(new targetWindow.CustomEvent('biottos:cart-updated',{detail:{items:saved}}));
+    return saved;
   }
   function addToCart(key,quantity){
     const count=Number(quantity);
