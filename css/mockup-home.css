@@ -129,7 +129,7 @@ header .menu-toggle:focus-visible,header .lang-switch:focus-visible{outline:3px 
  header .header-bar{grid-template-columns:minmax(112px,1fr) 40px 40px 43px;grid-template-areas:"brand actions menu language";gap:3px;padding:7px 8px}
  header .brand-logo{width:min(205px,100%)}
  header .brand-logo img{width:clamp(92px,30vw,128px)}
- header .lang-switch{width:43px;height:38px;padding:2px}
+ header .lang-switch{position:relative;z-index:2;width:43px;height:38px;padding:2px}
  header .header-action{width:35px;height:38px}
  header .header-search-link{display:none}
  header .header-action svg{width:23px;height:23px}
